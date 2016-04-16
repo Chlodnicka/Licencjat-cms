@@ -1,0 +1,61 @@
+@import "fonts";
+@import "variables";
+@import "mixins";
+
+
+body {
+    margin: 0;
+    background: #fff;
+    color: $brandBlack;
+    font-family: $sans-serif;
+    a {
+      color: $brandOrange;
+      &:hover, &:focus, &:active {
+        color: $brandGray;
+        text-decoration: none;
+        //font-weight: 700;
+      }
+    }
+    header {
+      background-color: $brandBlue;
+      color: $brandWhite;
+      position: fixed;
+      top: 0;
+      width: 100%;
+      p {
+        margin: 0;
+      }
+      nav {
+        width: 100%;
+        max-width: 1170px;
+        margin: 20px auto;
+        position: relative;
+        div {
+          display: inline-block;
+          vertical-align: middle;
+          ul {
+            list-style-type: none;
+            padding: 0;
+            li {
+              display: inline-block;
+              padding: 0 20px;
+            }
+          }
+        }
+        .side-menu {
+          position: absolute;
+          right: 0;
+          top: calc(50% - 13px);
+          &-search {
+            input {
+              display: inline-block;
+              vertical-align: middle;
+            }
+          }
+        }
+      }
+    }
+    article {
+      margin-top: 130px;
+    }
+}
