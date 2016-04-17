@@ -1,3 +1,4 @@
+@import "fonts/font-awesome";
 @import "fonts";
 @import "variables";
 @import "mixins";
@@ -10,11 +11,26 @@ body {
     font-family: $sans-serif;
     a {
       color: $brandOrange;
+      text-decoration: none;
       &:hover, &:focus, &:active {
         color: $brandGray;
         text-decoration: none;
         //font-weight: 700;
       }
+    }
+    .clearfix:after {
+       content: " "; /* Older browser do not support empty content */
+       visibility: hidden;
+       display: block;
+       height: 0;
+       clear: both;
+    }
+    .container {
+      width: 100%;
+      max-width: 1170px;
+      padding: 0 20px;
+      margin: 0 auto;
+      display: block;
     }
     header {
       background-color: $brandBlue;
@@ -30,6 +46,13 @@ body {
         max-width: 1170px;
         margin: 20px auto;
         position: relative;
+        .logo {
+          font-family: $serif;
+          font-size: 44px;
+        }
+        .main-menu {
+          padding: 0 40px;
+        }
         div {
           display: inline-block;
           vertical-align: middle;
@@ -45,17 +68,219 @@ body {
         .side-menu {
           position: absolute;
           right: 0;
-          top: calc(50% - 13px);
+          top: calc(50% - 18px);
           &-search {
             input {
               display: inline-block;
               vertical-align: middle;
+            }
+            .btn-search {
+              position: relative;
+              width: 35px;
+              input[type=submit] {
+                width: 100%;
+                cursor: pointer;
+                background: url('../img/lupa.png');
+                background-position: center center;
+                background-size: 16px;
+                background-repeat: no-repeat;
+                background-color: white;
+              }
             }
           }
         }
       }
     }
     article {
-      margin-top: 130px;
+      padding: 30px 20px;
+      max-width: 1170px;
+      width: 100%;
+      margin: 0 auto;
+      margin-top: 93px;
+      .content {
+        text-align: center;
+      }
+      .lead {
+        @include lead;
+      }
+      .date {
+        font-style: italic;
+        color: $brandBlueMedium;
+      }
+      .author {
+        font-style: italic;
+        text-align: right;
+      }
+      h1, h2, h3, h4, h5, h6 {
+        font-family: $serif;
+        text-align: left;
+      }
+      h1 {
+        font-size: 36px;
+      }
+      h2 {
+        font-size: 32px;
+      }
+      h3 {
+        font-size: 28px;
+      }
+      h4 {
+        font-size: 24px;
+      }
+      h5 {
+        font-size: 20px;
+      }
+      h6 {
+        font-size: 16px;
+      }
+      p {
+        font-size: 14px;
+        text-align: left;
+      }
+      .news {
+        text-align: left;
+        margin: 0 -20px;
+        .title {
+          margin-bottom: 10px;
+        }
+        .btn-back {
+          @include btn;
+          float: none;
+          i {
+            padding: 0 20px 0 0;
+          }
+        }
+      }
+      .course {
+        text-align: left;
+        width: 70%;
+        .lead {
+          width: 100%;
+        }
+        .lectures, .exercises {
+           width: 49.7%;
+           display: inline-block;
+        }
+        .btn-back {
+          @include btn;
+          float: none;
+          i {
+            padding: 0 20px 0 0;
+          }
+        }
+        .btn-more {
+          @include btn;
+          background-color: white;
+          color: $brandOrange;
+        }
+      }
+      .lecture {
+        .lead {
+          width: 100%;
+        }
+        .btn {
+          @include btn;
+          float: none;
+        }
+        .btn-back {
+          i {
+            padding: 0 20px 0 0;
+          }
+        }
+        .btn-more {
+          i {
+            padding: 0 0 0 20px;
+          }
+        }
+      }
+      .exercises {
+        width: 70%;
+        display: inline-block;
+        .btn {
+          @include btn;
+          float: none;
+        }
+      }
+      .list {
+        width: 70%;
+        display: inline-block;
+        .lead {
+          width: 100%;
+        }
+        .list-item {
+          @include list;
+          text-align: left;
+          .btn {
+            float: none;
+          }
+        }
+      }
+      aside {
+        display: inline-block;
+        width: 29%;
+        vertical-align: top;
+        //position: fixed;
+        ul {
+          padding: 0 0 50px 50px;
+          list-style-type: none;
+          li {
+            background-color: $brandOrange;
+            color: white;
+            padding: 10px 20px;
+            margin-bottom: 1px;
+            &:hover, &:active, &:focus {
+              opacity: 0.7;
+            }
+          }
+        }
+      }
+      .box-item {
+        @include box;
+      }
+      .single-page {
+        @include single-page;
+      }
+    }
+    footer {
+      width: 100%;
+      border-top: 1px solid $brandOrange;
+      .container {
+        padding: 20px;
+      }
+      div {
+        display: inline-block;
+        vertical-align: top;
+      }
+      .sitemap {
+        width: 66%;
+        div {
+          width: 49.7%;
+          ul {
+            padding: 0;
+            margin: 0;
+            list-style-type: none;
+            li {
+
+            }
+          }
+        }
+      }
+      .copyrights {
+        width: 33%;
+      }
+    }
+    form {
+      input, select {
+        border: 1px solid $brandBlueMedium;
+        outline: none;
+        padding: 10px;
+        margin: 0 20px 0 10px;
+      }
+      .form-tags {
+        margin-top: 20px;
+        input {
+          margin: 0 0 0 20px;
+        }
+      }
     }
 }
