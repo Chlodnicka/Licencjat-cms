@@ -20,8 +20,8 @@
       </select>
       <div class="form-tags">
         <label>Tagi</label>
-        <input type="checkbox" name="vehicle" value="Bike"> I have a bike
-        <input type="checkbox" name="vehicle" value="Car" checked> I have a car
+        <input type="checkbox" name="vehicle" id="vehicle" value="Bike"><label for="vehicle"><span></span>I have a bike</label>
+        <input type="checkbox" name="vehicle2" id="vehicle2" value="Car"><label for="vehicle2"><span></span>I have a car</label>
         <input type="submit" value="Submit">
       </div>
     </form>
@@ -57,4 +57,5 @@
     <div class="clearfix"></div>
   </div>
   </div>
+  @yield('aside')
 @stop

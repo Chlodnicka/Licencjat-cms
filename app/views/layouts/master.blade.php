@@ -63,5 +63,7 @@
         </div>
       </div>
     </footer>
+    <script src="{{ URL::asset('/assets/js/jquery-2.2.3.min.js') }}"></script>
+    <script src="{{ URL::asset('/assets/js/app.js') }}"></script>
   </body>
 </html>

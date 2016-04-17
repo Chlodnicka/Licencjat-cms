@@ -38,6 +38,7 @@ body {
       position: fixed;
       top: 0;
       width: 100%;
+      z-index: 100;
       p {
         margin: 0;
       }
@@ -80,11 +81,8 @@ body {
               input[type=submit] {
                 width: 100%;
                 cursor: pointer;
-                background: url('../img/lupa.png');
-                background-position: center center;
                 background-size: 16px;
-                background-repeat: no-repeat;
-                background-color: white;
+                background: white url('../img/lupa.png') no-repeat center center;
               }
             }
           }
@@ -200,6 +198,94 @@ body {
           @include btn;
           float: none;
         }
+        form {
+          //background-color: $brandGray;
+          border: 1px solid $brandBlueLight;
+          padding: 20px;
+          input[type="submit"] {
+            background-color: $brandBlue;
+            text-transform: uppercase;
+            color: white;
+            border: none;
+            display: block;
+            margin: 20px 0 0 0;
+            cursor: pointer;
+            @include hover;
+          }
+          input[type="checkbox"] {
+            display: none;
+          }
+          input[type="checkbox"] + label span {
+            display: inline-block;
+            width: 19px;
+            height: 19px;
+            margin: -1px 10px 0 20px;
+            vertical-align: middle;
+          //  background: url('../img/checkbox-checked.png') left top no-repeat;
+            cursor: pointer;
+            border: 1px solid $brandBlueLight;
+          }
+          input[type="checkbox"]:checked + label span {
+            background:url('../img/checkbox-checked.png') -19px top no-repeat;
+            background-position: center center;
+            background-size: contain;
+          }
+        }
+      }
+      .exercise {
+        width: 70%;
+        .properties p {
+          font-size: 16px;
+          font-weight: 600;
+        }
+        .tags {
+          text-align: left;
+          p {
+            display: inline-block;
+            margin-right: 10px;
+            padding: 10px 20px;
+            font-weight: 400;
+            font-size: 14px;
+            background-color: $brandOrange;
+            a {
+              color: white;
+            }
+          }
+        }
+        &-solution {
+          h3 {
+            background-color: $brandBlueLight;
+            color: white;
+            padding: 10px 20px;
+            cursor: pointer;
+            i {
+              float: right;
+              padding-top: 3px;
+            }
+          }
+          p {
+            display: none;
+          }
+        }
+        .display {
+          display: block;
+        }
+      }
+      .student-form {
+        width: 100%;
+        max-width: 700px;
+        padding: 20px;
+        margin: 0 auto;
+        input[type="submit"] {
+          background-color: $brandBlue;
+          text-transform: uppercase;
+          color: white;
+          border: none;
+          display: block;
+          margin: 20px auto;
+          cursor: pointer;
+          @include hover;
+        }
       }
       .list {
         width: 70%;
@@ -271,7 +357,7 @@ body {
     }
     form {
       input, select {
-        border: 1px solid $brandBlueMedium;
+        border: 1px solid $brandBlueLight;
         outline: none;
         padding: 10px;
         margin: 0 20px 0 10px;
@@ -283,4 +369,50 @@ body {
         }
       }
     }
+  .form-group {
+    display: block;
+    padding-bottom: 20px;
+    div {
+      display: inline-block;
+      width: 49.7%;
+      min-width: 340px;
+      position: relative;
+      height: 37px;
+      input, select {
+        width: 220px;
+        margin: 0;
+        position: absolute;
+        right: 20px;
+      }
+      select {
+        width: 242px;
+      }
+      label {
+        display: inline-block;
+        position: absolute;
+        left: 0;
+        top: calc(50% - 11px);
+      }
+    }
+  }
+  .btn {
+    @include btn;
+    float: none;
+  }
+  .delete {
+    .lead {
+      border-left: none;
+      padding: 0;
+    }
+    .btn-back {
+      float: none;
+      background-color: $brandBlue;
+      i {
+        padding: 0 20px 0 0;
+      }
+    }
+    .btn-delete {
+      background-color: $brandRed;
+    }
+  }
 }

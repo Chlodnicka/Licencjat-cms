@@ -44,8 +44,8 @@ Route::get('/news/edit/{id}', ['as' => 'news', 'uses' => 'NewsController@edit'])
 Route::get('/news/edit/{id}/', ['as' => 'news', 'uses' => 'NewsController@edit']);
 Route::get('/news/new', ['as' => 'news', 'uses' => 'NewsController@newOne']);
 Route::get('/news/new/', ['as' => 'news', 'uses' => 'NewsController@newOne']);
-Route::get('/news/delete', ['as' => 'news', 'uses' => 'NewsController@index']);
-Route::get('/news/delete/', ['as' => 'news', 'uses' => 'NewsController@index']);
+Route::get('/news/delete', ['as' => 'news', 'uses' => 'NewsController@delete']);
+Route::get('/news/delete/', ['as' => 'news', 'uses' => 'NewsController@delete']);
 Route::get('/news/delete/{id}', ['as' => 'news', 'uses' => 'NewsController@delete']);
 Route::get('/news/delete/{id}/', ['as' => 'news', 'uses' => 'NewsController@delete']);
 
@@ -66,8 +66,8 @@ Route::get('/course/edit/{id}', ['as' => 'course', 'uses' => 'CourseController@e
 Route::get('/course/edit/{id}/', ['as' => 'course', 'uses' => 'CourseController@edit']);
 Route::get('/course/new', ['as' => 'course', 'uses' => 'CourseController@newOne']);
 Route::get('/course/new/', ['as' => 'course', 'uses' => 'CourseController@newOne']);
-Route::get('/course/delete', ['as' => 'course', 'uses' => 'CourseController@index']);
-Route::get('/course/delete/', ['as' => 'course', 'uses' => 'CourseController@index']);
+Route::get('/course/delete', ['as' => 'course', 'uses' => 'CourseController@delete']);
+Route::get('/course/delete/', ['as' => 'course', 'uses' => 'CourseController@delete']);
 Route::get('/course/delete/{id}', ['as' => 'course', 'uses' => 'CourseController@delete']);
 Route::get('/course/delete/{id}/', ['as' => 'course', 'uses' => 'CourseController@delete']);
 
@@ -88,8 +88,8 @@ Route::get('/lecture/edit/{id}', ['as' => 'lecture', 'uses' => 'LectureControlle
 Route::get('/lecture/edit/{id}/', ['as' => 'lecture', 'uses' => 'LectureController@edit']);
 Route::get('/lecture/new', ['as' => 'lecture', 'uses' => 'LectureController@newOne']);
 Route::get('/lecture/new/', ['as' => 'lecture', 'uses' => 'LectureController@newOne']);
-Route::get('/lecture/delete', ['as' => 'lecture', 'uses' => 'LectureController@index']);
-Route::get('/lecture/delete/', ['as' => 'lecture', 'uses' => 'LectureController@index']);
+Route::get('/lecture/delete', ['as' => 'lecture', 'uses' => 'LectureController@delete']);
+Route::get('/lecture/delete/', ['as' => 'lecture', 'uses' => 'LectureController@delete']);
 Route::get('/lecture/delete/{id}', ['as' => 'lecture', 'uses' => 'LectureController@delete']);
 Route::get('/lecture/delete/{id}/', ['as' => 'lecture', 'uses' => 'LectureController@delete']);
 
@@ -100,8 +100,8 @@ Route::get('/exercise', ['as' => 'exercise', 'uses' => 'ExerciseController@index
 Route::get('/exercise', ['as' => 'exercise', 'uses' => 'ExerciseController@index']);
 Route::get('/exercise/index', ['as' => 'exercise', 'uses' => 'ExerciseController@index']);
 Route::get('/exercise/index/', ['as' => 'exercise', 'uses' => 'ExerciseController@index']);
-Route::get('/exercise/view', ['as' => 'exercise', 'uses' => 'ExerciseController@index']);
-Route::get('/exercise/view/', ['as' => 'exercise', 'uses' => 'ExerciseController@index']);
+Route::get('/exercise/view', ['as' => 'exercise', 'uses' => 'ExerciseController@view']);//do poprawy
+Route::get('/exercise/view/', ['as' => 'exercise', 'uses' => 'ExerciseController@view']);//do poprawy
 Route::get('/exercise/view/{id}', ['as' => 'exercise', 'uses' => 'ExerciseController@view']);
 Route::get('/exercise/view/{id}/', ['as' => 'exercise', 'uses' => 'ExerciseController@view']);
 Route::get('/exercise/edit', ['as' => 'exercise', 'uses' => 'ExerciseController@index']);
@@ -110,8 +110,8 @@ Route::get('/exercise/edit/{id}', ['as' => 'exercise', 'uses' => 'ExerciseContro
 Route::get('/exercise/edit/{id}/', ['as' => 'exercise', 'uses' => 'ExerciseController@edit']);
 Route::get('/exercise/new', ['as' => 'exercise', 'uses' => 'ExerciseController@newOne']);
 Route::get('/exercise/new/', ['as' => 'exercise', 'uses' => 'ExerciseController@newOne']);
-Route::get('/exercise/delete', ['as' => 'exercise', 'uses' => 'ExerciseController@index']);
-Route::get('/exercise/delete/', ['as' => 'exercise', 'uses' => 'ExerciseController@index']);
+Route::get('/exercise/delete', ['as' => 'exercise', 'uses' => 'ExerciseController@delete']);
+Route::get('/exercise/delete/', ['as' => 'exercise', 'uses' => 'ExerciseController@delete']);
 Route::get('/exercise/delete/{id}', ['as' => 'exercise', 'uses' => 'ExerciseController@delete']);
 Route::get('/exercise/delete/{id}/', ['as' => 'exercise', 'uses' => 'ExerciseController@delete']);
 Route::get('/exercise/generateExam', ['as' => 'exercise', 'uses' => 'ExerciseController@index']);
@@ -136,8 +136,8 @@ Route::get('/attachment/edit/{id}', ['as' => 'attachment', 'uses' => 'Attachment
 Route::get('/attachment/edit/{id}/', ['as' => 'attachment', 'uses' => 'AttachmentController@edit']);
 Route::get('/attachment/new', ['as' => 'attachment', 'uses' => 'AttachmentController@newOne']);
 Route::get('/attachment/new/', ['as' => 'attachment', 'uses' => 'AttachmentController@newOne']);
-Route::get('/attachment/delete', ['as' => 'attachment', 'uses' => 'AttachmentController@index']);
-Route::get('/attachment/delete/', ['as' => 'attachment', 'uses' => 'AttachmentController@index']);
+Route::get('/attachment/delete', ['as' => 'attachment', 'uses' => 'AttachmentController@delete']);
+Route::get('/attachment/delete/', ['as' => 'attachment', 'uses' => 'AttachmentController@delete']);
 Route::get('/attachment/delete/{id}', ['as' => 'attachment', 'uses' => 'AttachmentController@delete']);
 Route::get('/attachment/delete/{id}/', ['as' => 'attachment', 'uses' => 'AttachmentController@delete']);
 
@@ -152,14 +152,8 @@ Route::get('/student/view', ['as' => 'student', 'uses' => 'StudentController@ind
 Route::get('/student/view/', ['as' => 'student', 'uses' => 'StudentController@index']);
 Route::get('/student/view/{id}', ['as' => 'student', 'uses' => 'StudentController@view']);
 Route::get('/student/view/{id}/', ['as' => 'student', 'uses' => 'StudentController@view']);
-Route::get('/student/edit', ['as' => 'student', 'uses' => 'StudentController@index']);
-Route::get('/student/edit/', ['as' => 'student', 'uses' => 'StudentController@index']);
-Route::get('/student/edit/{id}', ['as' => 'student', 'uses' => 'StudentController@edit']);
-Route::get('/student/edit/{id}/', ['as' => 'student', 'uses' => 'StudentController@edit']);
-Route::get('/student/new', ['as' => 'student', 'uses' => 'StudentController@newOne']);
-Route::get('/student/new/', ['as' => 'student', 'uses' => 'StudentController@newOne']);
-Route::get('/student/delete', ['as' => 'student', 'uses' => 'StudentController@index']);
-Route::get('/student/delete/', ['as' => 'student', 'uses' => 'StudentController@index']);
+Route::get('/student/delete', ['as' => 'student', 'uses' => 'StudentController@delete']); //do poprawy
+Route::get('/student/delete/', ['as' => 'student', 'uses' => 'StudentController@delete']);//do poprawy
 Route::get('/student/delete/{id}', ['as' => 'student', 'uses' => 'StudentController@delete']);
 Route::get('/student/delete/{id}/', ['as' => 'student', 'uses' => 'StudentController@delete']);
 
@@ -180,7 +174,7 @@ Route::get('/tag/edit/{id}', ['as' => 'tag', 'uses' => 'TagController@edit']);
 Route::get('/tag/edit/{id}/', ['as' => 'tag', 'uses' => 'TagController@edit']);
 Route::get('/tag/new', ['as' => 'tag', 'uses' => 'TagController@newOne']);
 Route::get('/tag/new/', ['as' => 'tag', 'uses' => 'TagController@newOne']);
-Route::get('/tag/delete', ['as' => 'tag', 'uses' => 'TagController@index']);
-Route::get('/tag/delete/', ['as' => 'tag', 'uses' => 'TagController@index']);
+Route::get('/tag/delete', ['as' => 'tag', 'uses' => 'TagController@delete']);
+Route::get('/tag/delete/', ['as' => 'tag', 'uses' => 'TagController@delete']);
 Route::get('/tag/delete/{id}', ['as' => 'tag', 'uses' => 'TagController@delete']);
 Route::get('/tag/delete/{id}/', ['as' => 'tag', 'uses' => 'TagController@delete']);
