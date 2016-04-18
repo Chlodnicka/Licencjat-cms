@@ -13,10 +13,10 @@
           <div class="logo"><p>Adam Kowalski</p></div>
           <div class="main-menu">
             <ul>
-              <a href=""><li>Kontakt</li></a>
-              <a href=""><li>Aktualności</li></a>
-              <a href=""><li>Kursy</li></a>
-              <a href=""><li>Rejestracja</li></a>
+              <li>{{ HTML::linkRoute('owner.index', 'kontakt', array(), array('class' => 'btn btn-menu')) }}</li>
+              <li>{{ HTML::linkRoute('news.index', 'aktualności', array(), array('class' => 'btn btn-menu')) }}</li>
+              <li>{{ HTML::linkRoute('course.index', 'kursy', array(), array('class' => 'btn btn-menu')) }}</li>
+              <li>{{ HTML::linkRoute('student.new', 'rejestracja', array(), array('class' => 'btn btn-menu')) }}</li>
             </ul>
           </div>
 

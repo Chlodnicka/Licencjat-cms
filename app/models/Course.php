@@ -1,15 +1,19 @@
 <?php
 
+
   /**
    *
    */
   class Course extends Eloquent
   {
+    /**
+     * Get the lectures for course
+     */
 
-    function __construct(argument)
-    {
-      # code...
-    }
+      public function lectures()
+      {
+          return $this->hasMany('Lecture');
+      }
   }
 
 

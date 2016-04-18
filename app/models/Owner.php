@@ -5,11 +5,8 @@
    */
   class Owner extends Eloquent
   {
+   // protected $table = 'Owner';
 
-    function __construct(argument)
-    {
-      # code...
-    }
   }
 
 

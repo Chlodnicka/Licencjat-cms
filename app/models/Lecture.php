@@ -1,15 +1,19 @@
 <?php
 
+
   /**
    *
    */
   class Lecture extends Eloquent
   {
 
-    function __construct(argument)
-    {
-      # code...
-    }
+      /**
+       * Get the course that owns the lecture.
+       */
+      public function course()
+      {
+          return $this->belongsTo('App\Course');
+      }
   }
 
 

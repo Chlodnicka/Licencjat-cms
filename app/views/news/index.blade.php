@@ -6,31 +6,31 @@
       <h2 class="title">Lorem ipsum</h2>
       <p class="date">21-01-2016, 08.24</p>
       <p class="item-lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.//do 250</p>
-      <a href="#" class="btn btn-more">Zobacz więcej <i class="fa fa-long-arrow-right"></i></a>
+      <a href="{{ URL::route('news.view') }}" class="btn btn-more">Zobacz więcej <i class="fa fa-long-arrow-right"></i></a>
     </div>
     <div class="box-item">
       <h2 class="title">Lorem ipsum</h2>
       <p class="date">21-01-2016, 08.24</p>
       <p class="item-lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-      <a href="#" class="btn btn-more">Zobacz więcej <i class="fa fa-long-arrow-right"></i></a>
+      <a href="{{ URL::route('news.view') }}" class="btn btn-more">Zobacz więcej <i class="fa fa-long-arrow-right"></i></a>
     </div>
     <div class="box-item">
       <h2 class="title">Lorem ipsum</h2>
       <p class="date">21-01-2016, 08.24</p>
       <p class="item-lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-      <a href="#" class="btn btn-more">Zobacz więcej <i class="fa fa-long-arrow-right"></i></a>
+      <a href="{{ URL::route('news.view') }}" class="btn btn-more">Zobacz więcej <i class="fa fa-long-arrow-right"></i></a>
     </div>
     <div class="box-item">
       <h2 class="title">Lorem ipsum</h2>
       <p class="date">21-01-2016, 08.24</p>
       <p class="item-lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-      <a href="#" class="btn btn-more">Zobacz więcej <i class="fa fa-long-arrow-right"></i></a>
+      <a href="{{ URL::route('news.view') }}" class="btn btn-more">Zobacz więcej <i class="fa fa-long-arrow-right"></i></a>
     </div>
     <div class="box-item">
       <h2 class="title">Lorem ipsum</h2>
       <p class="date">21-01-2016, 08.24</p>
       <p class="item-lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-      <a href="#" class="btn btn-more">Zobacz więcej <i class="fa fa-long-arrow-right"></i></a>
+      <a href="{{ URL::route('news.view') }}" class="btn btn-more">Zobacz więcej <i class="fa fa-long-arrow-right"></i></a>
     </div>
   </div>
 @stop

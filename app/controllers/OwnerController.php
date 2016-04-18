@@ -1,20 +1,21 @@
 <?php
 
+
 /**
  *
  */
+
+//use Model\Owner;
+
 class OwnerController extends BaseController
 {
-    /**
-    * Routing settings
-    */
-
-
 
     protected $layout = 'layouts.master';
     public function index()
     {
-        $this->layout->content = View::make('owner.index');
+        $owner = Owner::find(1);
+        $this->layout->content = View::make('owner.index', array('owner' => $owner));
+
     }
 
     public function edit()
