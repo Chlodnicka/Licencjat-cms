@@ -10,13 +10,13 @@
     <header>
       <nav>
 
-          <div class="logo"><p>Adam Kowalski</p></div>
+          <div class="logo"><a href="/"></a><p>Adam Kowalski</p></div>
           <div class="main-menu">
             <ul>
-              <li>{{ HTML::linkRoute('owner.index', 'kontakt', array(), array('class' => 'btn btn-menu')) }}</li>
-              <li>{{ HTML::linkRoute('news.index', 'aktualności', array(), array('class' => 'btn btn-menu')) }}</li>
-              <li>{{ HTML::linkRoute('course.index', 'kursy', array(), array('class' => 'btn btn-menu')) }}</li>
-              <li>{{ HTML::linkRoute('student.new', 'rejestracja', array(), array('class' => 'btn btn-menu')) }}</li>
+              <li>{{ HTML::linkRoute('owner.index', 'kontakt', array(), array()) }}</li>
+              <li>{{ HTML::linkRoute('news.index', 'aktualności', array(), array()) }}</li>
+              <li>{{ HTML::linkRoute('course.index', 'kursy', array(), array()) }}</li>
+              <li>{{ HTML::linkRoute('student.new', 'rejestracja', array(), array()) }}</li>
             </ul>
           </div>
 

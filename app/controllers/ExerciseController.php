@@ -13,6 +13,15 @@ class ExerciseController extends BaseController
         $this->layout->content = View::make('exercise.index');
     }
 
+    public function indexExerciseByCourse($id)
+    {
+        $exercises = Course::with('exercises')->find($id)->exercises;
+        $this->layout->content = View::make('exercise.index', array(
+            'exercises' => $exercises
+        ));
+    }
+
+
     public function edit()
     {
         $this->layout->content = View::make('exercise.edit');
@@ -28,9 +37,12 @@ class ExerciseController extends BaseController
         $this->layout->content = View::make('exercise.create');
     }
 
-    public function view()
+    public function view($id)
     {
-        $this->layout->content = View::make('exercise.view');
+        $exercise = Exercise::findOrFail($id);
+        $this->layout->content = View::make('exercise.view', array(
+            'exercise' => $exercise,
+        ));
     }
 
     public function delete()

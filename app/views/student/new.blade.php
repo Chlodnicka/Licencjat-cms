@@ -2,20 +2,20 @@
   <h1>Student! New</h1>
   <p class="lead">Po zarejestrowaniu na kurs będziesz otrzymywał powiadomienia z nim związane - nowe wykłady, materiały, ogłoszenia dotyczące zajęć.</p>
   <div class="student-form">
-    <form>
+    <form action="{{ URL::route('student.create') }}" method="post">
       <div class="form-group">
-        <div><label for="name">Imię</label><input type="text" name="name" id="name"></div>
-        <div><label for="surname">Nazwisko</label><input type="text" name="surname" id="surname"></div>
+        <div><label for="fistnamename">Imię</label><input type="text" name="firstname" id="firstname"></div>
+        <div><label for="lastname">Nazwisko</label><input type="text" name="lastname" id="lastname"></div>
       </div>
       <div class="form-group">
         <div><label for="email">E-mail</label><input type="email" name="email" id="email"></div>
         <div>
           <label for="course">Kurs</label>
           <select name="course" id="course">
-            <option value="volvo">Volvo</option>
-            <option value="saab">Saab</option>
-            <option value="mercedes">Mercedes</option>
-            <option value="audi">Audi</option>
+            <option value="1">Volvo</option>
+            <option value="2">Saab</option>
+            <option value="3">Mercedes</option>
+            <option value="4">Audi</option>
           </select>
         </div>
       </div>

@@ -25,37 +25,14 @@
         <input type="submit" value="Submit">
       </div>
     </form>
+    @foreach( $exercises as $exercise)
     <div class="list-item">
-      <h2 class="title">Lorem ipsum</h2>
-      <p class="item-lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.//do 250</p>
-      <a href="{{ URL::route('exercise.view') }}" class="btn btn-more">Zobacz więcej <i class="fa fa-long-arrow-right"></i></a>
+      <h2 class="title">{{ $exercise->title }}</h2>
+      <p class="item-lead">{{ $exercise->content }}</p>
+      <a href="{{ URL::route('exercise.view', $exercise->id) }}" class="btn btn-more">Zobacz więcej <i class="fa fa-long-arrow-right"></i></a>
     </div>
     <div class="clearfix"></div>
-    <div class="list-item">
-      <h2 class="title">Lorem ipsum</h2>
-      <p class="item-lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-      <a href="{{ URL::route('exercise.view') }}" class="btn btn-more">Zobacz więcej <i class="fa fa-long-arrow-right"></i></a>
-    </div>
-    <div class="clearfix"></div>
-    <div class="list-item">
-      <h2 class="title">Lorem ipsum</h2>
-      <p class="item-lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-      <a href="{{ URL::route('exercise.view') }}" class="btn btn-more">Zobacz więcej <i class="fa fa-long-arrow-right"></i></a>
-    </div>
-    <div class="clearfix"></div>
-    <div class="list-item">
-      <h2 class="title">Lorem ipsum</h2>
-      <p class="item-lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-      <a href="{{ URL::route('exercise.view') }}" class="btn btn-more">Zobacz więcej <i class="fa fa-long-arrow-right"></i></a>
-    </div>
-    <div class="clearfix"></div>
-    <div class="list-item">
-      <h2 class="title">Lorem ipsum</h2>
-      <p class="item-lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-      <a href="{{ URL::route('exercise.view') }}" class="btn btn-more">Zobacz więcej <i class="fa fa-long-arrow-right"></i></a>
-    </div>
-    <div class="clearfix"></div>
-  </div>
+    @endforeach
   </div>
   @yield('aside')
 @stop

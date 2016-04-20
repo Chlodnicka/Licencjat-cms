@@ -9,10 +9,10 @@
       <h2>Wykłady</h2>
       <ul>
         @foreach($lectures as $lecture)
-          <a href="{{ URL::route('lecture.view', $lecture->id) }}"><li>{{ $lecture->name }}</li></a>
+          <a href="{{ URL::route('lecture.view', $lecture->id) }}"><li>{{ $lecture->title }}</li></a>
         @endforeach
       </ul>
-      <a href="{{ URL::route('lecture.index') }}" class="btn btn-more">Więcej <i class="fa fa-long-arrow-right"></i></a><!--dopisać index do lectures dla różnych kursów-->
+      <a href="{{ URL::route('lecture.indexCourse', $course->id) }}" class="btn btn-more">Więcej <i class="fa fa-long-arrow-right"></i></a><!--dopisać index do lectures dla różnych kursów-->
     </div>
     <div class="exercises">
       <h2>Zadania</h2><!--dopisać index w zaleźności od wykładu, przypiwania itd!-- BW!-->
@@ -24,8 +24,8 @@
         <a href="{{ URL::route('exercise.view') }}"><li>Trudne</li></a>
         <a href="{{ URL::route('exercise.view') }}"><li>Łatwe</li></a>
       </ul>
-      <a href="{{ URL::route('exercise.index') }}" class="btn btn-more">Więcej <i class="fa fa-long-arrow-right"></i></a>
+      <a href="{{ URL::route('exercise.indexCourse', $course->id) }}" class="btn btn-more">Więcej <i class="fa fa-long-arrow-right"></i></a>
     </div>
-    <a href="{{ URL::route('course.index') }}" class="btn btn-back"><i class="fa fa-long-arrow-left"></i>Wroć</i></a>
+    <a href="{{ URL::route('course.index') }}" class="btn btn-back"><i class="fa fa-long-arrow-left"></i>Wroć</a>
   </div>
 @stop

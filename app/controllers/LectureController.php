@@ -9,7 +9,18 @@ class LectureController extends BaseController
     protected $layout = 'layouts.master';
     public function index()
     {
-        $this->layout->content = View::make('lecture.index');
+        $lectures = Lecture::all();
+        $this->layout->content = View::make('lecture.index', array(
+            'lectures' => $lectures
+        ));
+    }
+
+    public function indexLecturesByCourses($id)
+    {
+        $lectures = Course::with('lectures')->find($id)->lectures;
+        $this->layout->content = View::make('lecture.index', array(
+            'lectures' => $lectures
+        ));
     }
 
     public function edit()
@@ -27,9 +38,12 @@ class LectureController extends BaseController
         $this->layout->content = View::make('lecture.create');
     }
 
-    public function view()
+    public function view($id)
     {
-        $this->layout->content = View::make('lecture.view');
+        $lecture = Lecture::findOrFail($id);
+        $this->layout->content = View::make('lecture.view', array(
+            'lecture' => $lecture,
+        ));
     }
 
     public function delete()

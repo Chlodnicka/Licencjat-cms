@@ -5,8 +5,6 @@
  *
  */
 
-//use Model\Owner;
-
 class OwnerController extends BaseController
 {
 

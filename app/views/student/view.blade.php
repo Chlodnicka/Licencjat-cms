@@ -1,10 +1,9 @@
 @section('content')
   <h1>Student! View</h1>
-  <h2>Imię i nazwisko</h2>
-  <p class="email"><a href="mailto:mail@mail.pl">Adres@email.com</a></p>
+  <h2>{{ $student->firstname }} {{ $student->lastname }}</h2>
+  <p class="email"><a href="mailto:{{ $student->email }}">{{ $student->email }}</a></p>
   <p class="courses">Kursy</p>
   <ul>
-    <li>Kurs 1</li>
-    <li>Kurs 2</li>
+    <li>{{ $student->course->name }}</li>
   </ul>
 @stop

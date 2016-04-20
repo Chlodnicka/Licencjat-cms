@@ -62,7 +62,15 @@ body {
             padding: 0;
             li {
               display: inline-block;
-              padding: 0 20px;
+              //padding: 0 20px;
+              a {
+                background-color: $brandBlue;
+                color: white;
+                padding: 5px 20px;
+                &:hover {
+                  color: $brandBlueLight;
+                }
+              }
             }
           }
         }
@@ -74,6 +82,8 @@ body {
             input {
               display: inline-block;
               vertical-align: middle;
+              margin: 0;
+              margin-right: -5px;
             }
             .btn-search {
               position: relative;
@@ -81,8 +91,9 @@ body {
               input[type=submit] {
                 width: 100%;
                 cursor: pointer;
-                background-size: 16px;
+                margin: 0;
                 background: white url('../img/lupa.png') no-repeat center center;
+                background-size: 16px;
               }
             }
           }

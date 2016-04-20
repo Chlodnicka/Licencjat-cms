@@ -9,7 +9,8 @@ class NewsController extends BaseController
     protected $layout = 'layouts.master';
     public function index()
     {
-        $this->layout->content = View::make('news.index');
+        $news = News::all();
+        $this->layout->content = View::make('news.index', array('news' => $news));
     }
 
     public function edit()
@@ -27,9 +28,12 @@ class NewsController extends BaseController
         $this->layout->content = View::make('news.create');
     }
 
-    public function view()
+    public function view($id)
     {
-        $this->layout->content = View::make('news.view');
+        $news = News::findOrFail($id);
+        $this->layout->content = View::make('news.view',array(
+            'news' => $news,
+        ));
     }
 
     public function delete()
