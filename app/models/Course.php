@@ -26,6 +26,11 @@
           return $this->hasMany('Student');
       }
 
+      public function news()
+      {
+          return $this->hasMany('News');
+      }
+
   }
 
 

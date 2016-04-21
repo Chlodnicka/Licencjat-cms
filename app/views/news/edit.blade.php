@@ -1,39 +1,40 @@
 @section('content')
   <h1>News! Edit</h1>
   <div class="new news">
-    <form>
+    <form action="{{  URL::route('news.update', $news->id)  }}" method="post">
       <div class="form-cluster">
         <div class="form-group">
           <label for="title">Tytuł</label>
-          <input type="text" name="title" id="title">
+          <input type="text" name="title" id="title" value="{{ $news->title }}">
         </div>
         <div class="form-group">
           <label for="lead">Lead</label>
-          <input type="text" name="lead" id="lead">
+          <input type="text" name="lead" id="lead" value="{{ $news->lead }}">
         </div>
         <div class="form-group">
           <label for="content">Treść wiadomości</label>
-          <textarea name="content" id="content" rows="10" cols="30"></textarea>
+          <textarea name="content" id="content" rows="10" cols="30" value="{{ $news->content }}"></textarea>
         </div>
         <div class="form-group">
           <label for="date">Data</label>
-          <input type="date" name="date" id="date">
+          <input type="date" name="date" id="date" value="{{ $news->date }}">
         </div>
         <div class="form-group">
           <label for="course">Kurs</label>
           <select name="course" id="course">
-            <option value="volvo">Volvo</option>
-            <option value="saab">Saab</option>
-            <option value="fiat">Fiat</option>
-            <option value="audi">Audi</option>
+            <option value="1">Volvo</option>
+            <option value="2">Saab</option>
+            <option value="3">Fiat</option>
+            <option value="4">Audi</option>
           </select>
         </div>
-        <div class="form-tags">
+       <!-- <div class="form-tags">
           <label>Tagi</label>
           <input type="checkbox" name="vehicle" id="vehicle" value="Bike"><label for="vehicle"><span></span>I have a bike</label>
           <input type="checkbox" name="vehicle2" id="vehicle2" value="Car"><label for="vehicle2"><span></span>I have a car</label>
-          <input type="submit" value="Submit">
-        </div>
+
+        </div>-->
+        <input type="submit" value="Submit">
       </div>
     </form>
   </div>

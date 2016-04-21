@@ -23,31 +23,40 @@ Route::get('/', 'HomeController@showMainPage');
 Route::get('/owner', ['as' => 'owner.index', 'uses' => 'OwnerController@index']);
 Route::get('/owner/index', ['uses' => 'OwnerController@index']);
 Route::get('/owner/index/', ['uses' => 'OwnerController@index']);
-Route::match(array('GET','POST'), '/owner/edit', ['as' => 'owner.edit', 'uses' => 'OwnerController@edit']);
-Route::match(array('GET','POST'), '/owner/edit/', ['uses' => 'OwnerController@edit']);
-Route::match(array('GET','POST'), '/owner/new', ['as' => 'owner.new', 'uses' => 'OwnerController@newOne']);
-Route::match(array('GET','POST'), '/owner/new/', ['uses' => 'OwnerController@newOne']);
+Route::get('/owner/edit', ['as' => 'owner.edit', 'uses' => 'OwnerController@edit']);
+Route::get('/owner/edit/', ['uses' => 'OwnerController@edit']);
+Route::post('/owner/edit', ['as' => 'owner.update', 'uses' => 'OwnerController@update']);
+Route::post('/owner/edit/', ['uses' => 'OwnerController@update']);
 
 /**
 * News routing
 */
 Route::get('/news', ['as' => 'news.index', 'uses' => 'NewsController@index']);
+Route::get('/news/', ['uses' => 'NewsController@index']);
 Route::get('/news/index', ['uses' => 'NewsController@index']);
 Route::get('/news/index/', ['uses' => 'NewsController@index']);
-Route::get('/news/view', ['uses' => 'NewsController@view']);//do poprawy
-Route::get('/news/view/', ['uses' => 'NewsController@view']);//do poprawy
+Route::get('/news/index/{id}', ['uses' => 'NewsController@indexByCourses']);
+Route::get('/news/index/{id}/', ['uses' => 'NewsController@indexByCourses']);
+Route::get('/news/view', ['uses' => 'NewsController@index']);
+Route::get('/news/view/', ['uses' => 'NewsController@index']);
 Route::get('/news/view/{id}', ['as' => 'news.view', 'uses' => 'NewsController@view']);
 Route::get('/news/view/{id}/', ['uses' => 'NewsController@view']);
-Route::get('/news/edit', ['uses' => 'NewsController@edit']);//do poprawy
-Route::get('/news/edit/', ['uses' => 'NewsController@edit']); //do poprawy
-Route::match(array('GET','POST'),'/news/edit/{id}', ['as' => 'news.edit', 'uses' => 'NewsController@edit']);
-Route::match(array('GET','POST'),'/news/edit/{id}/', ['uses' => 'NewsController@edit']);
-Route::match(array('GET','POST'),'/news/new', ['as' => 'news.new', 'uses' => 'NewsController@newOne']);
-Route::match(array('GET','POST'),'/news/new/', ['uses' => 'NewsController@newOne']);
-Route::get('/news/delete', ['uses' => 'NewsController@delete']);
-Route::get('/news/delete/', ['uses' => 'NewsController@delete']);
-Route::match(array('GET','POST'),'/news/delete/{id}', ['as' => 'news.delete', 'uses' => 'NewsController@delete']);
-Route::match(array('GET','POST'),'/news/delete/{id}/', ['uses' => 'NewsController@delete']);
+Route::get('/news/edit', ['uses' => 'NewsController@index']);
+Route::get('/news/edit/', ['uses' => 'NewsController@index']);
+Route::get('/news/edit/{id}', ['as' => 'news.edit', 'uses' => 'NewsController@edit']);
+Route::get('/news/edit/{id}/', ['uses' => 'NewsController@edit']);
+Route::post('/news/edit/{id}', ['as' => 'news.update', 'uses' => 'NewsController@update']);
+Route::post('/news/edit/{id}/', ['uses' => 'NewsController@update']);
+Route::get('/news/new', ['as' => 'news.new', 'uses' => 'NewsController@newOne']);
+Route::get('/news/new/', ['uses' => 'NewsController@newOne']);
+Route::post('/news/new', ['as' => 'news.create', 'uses' => 'NewsController@create']);
+Route::post('/news/new/', ['uses' => 'NewsController@create']);
+Route::get('/news/delete', ['uses' => 'NewsController@index']);
+Route::get('/news/delete/', ['uses' => 'NewsController@index']);
+Route::get('/news/delete/{id}', ['as' => 'news.delete', 'uses' => 'NewsController@delete']);
+Route::get('/news/delete/{id}/', ['uses' => 'NewsController@delete']);
+Route::post('/news/delete/{id}', ['as' => 'news.destroy', 'uses' => 'NewsController@destroy']);
+Route::post('/news/delete/{id}/', ['uses' => 'NewsController@destroy']);
 
 /**
 * Course routing

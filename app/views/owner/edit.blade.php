@@ -1,20 +1,20 @@
 @section('content')
   <h1>Owner! Edit</h1>
-  <div class="edit owner">
-    <form>
+  <div class="new owner">
+    <form action="{{ URL::route('owner.update')  }}" method="post">
       <div class="form-cluster">
         <div class="form-group">
-          <label for="name">Imię</label>
-          <input type="text" name="name" id="name">
+          <label for="firstname">Imię</label>
+          <input type="text" name="firstname" id="firstname">
         </div>
         <div class="form-group">
-          <label for="surname">Nazwisko</label>
-          <input type="text" name="surname" id="surname">
+          <label for="lastname">Nazwisko</label>
+          <input type="text" name="lastname" id="lastname">
         </div>
-        <div class="form-group">
+        <!--<div class="form-group">
           <label for="password">Hasło</label>
           <input type="text" name="password" id="password">
-        </div>
+        </div>-->
         <div class="form-group">
           <label for="email">Adres e-mail</label>
           <input type="email" name="email" id="email">
@@ -26,8 +26,8 @@
       </div>
       <div class="form-cluster">
         <div class="form-group">
-          <label for="title">Tytuł naukowy</label>
-          <select name="title" id="title">
+          <label for="position">Tytuł naukowy</label>
+          <select name="position" id="position">
             <option value="volvo">Volvo</option>
             <option value="saab">Saab</option>
             <option value="fiat">Fiat</option>
@@ -57,12 +57,14 @@
           <textarea name="tutorshipHours" id="tutorshipHours" rows="10" cols="30"></textarea>
         </div>
       </div>
-      <div class="form-cluster">
+      <!--<div class="form-cluster">
         <div class="form-group">
           <label for="attachments">Publikacje</label>
           <input type="file" id="attachments" name="attachments">
-        </div>
+        </div>-->
       </div>
+      <input type="submit" value="Submit">
     </form>
   </div>
 @stop
+

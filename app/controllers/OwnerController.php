@@ -18,17 +18,28 @@ class OwnerController extends BaseController
 
     public function edit()
     {
-        $this->layout->content = View::make('owner.edit');
+        $id = 1;
+        $owner = Owner::findOrFail($id);
+        $this->layout->content = View::make('owner.edit', array (
+            'owner' => $owner,
+        ));
     }
 
-    public function newOne()
+    public function update()
     {
-        $this->layout->content = View::make('owner.new');
-    }
+        $id = 1;
+        $owner = Owner::findOrFail($id);
+        $owner->firstname = Input::get('firstname');
+        $owner->lastname = Input::get('lastname');
+        $owner->email = Input::get('email');
+        $owner->position = Input::get('position');
+        $owner->phone = Input::get('phone');
+        $owner->tutorshipHours = Input::get('tutorshipHours');
+        $owner->content = Input::get('content');
+        $owner->institute = Input::get('institute');
+        $owner->save();
 
-    public function create()
-    {
-        $this->layout->content = View::make('owner.create');
+        return Redirect::route('owner.index');
     }
 
 }

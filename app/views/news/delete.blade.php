@@ -3,6 +3,8 @@
   <div class="delete">
     <p class="lead">Czy na pewno chcesz usunąć wiadomość?</p>
     <a href="#" class="btn btn-back">Wróć</a>
-    <a href="#" class="btn btn-delete">Usuń</a>
+    <form action="{{ URL::route('news.destroy', $news->id) }}" method="post">
+      <input type="submit" class="btn btn-delete" value="Usuń">
+    </form>
   </div>
 @stop
