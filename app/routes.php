@@ -122,6 +122,10 @@ Route::post('/lecture/delete/{id}/', ['uses' => 'LectureController@destroy']);
 /**
 * Exercise routing
 */
+Route::get('/exercise/new', ['as' => 'exercise.new', 'uses' => 'ExerciseController@newOne']);
+Route::get('/exercise/new/', ['uses' => 'ExerciseController@newOne']);
+Route::post('/exercise/new/', ['as'=> 'exercise.create', 'uses' => 'ExerciseController@create']);
+Route::post('/exercise/new/', ['uses' => 'ExerciseController@create']);
 Route::get('/exercise', ['as' => 'exercise.index', 'uses' => 'ExerciseController@index']);
 Route::get('/exercise', ['uses' => 'ExerciseController@index']);
 Route::get('/exercise/index', ['uses' => 'ExerciseController@index']);
@@ -130,20 +134,22 @@ Route::get('/exercise/{id}', ['as'=>'exercise.indexCourse', 'uses' => 'ExerciseC
 Route::get('/exercise/{id}/', ['uses' => 'ExerciseController@indexExerciseByCourse']);
 Route::get('/exercise/index/{id}', ['uses' => 'ExerciseController@indexExerciseByCourse']);
 Route::get('/exercise/index/{id}/', ['uses' => 'ExerciseController@indexExerciseByCourse']);
-Route::get('/exercise/view', ['uses' => 'ExerciseController@view']);//do poprawy
-Route::get('/exercise/view/', ['uses' => 'ExerciseController@view']);//do poprawy
+Route::get('/exercise/view', ['uses' => 'ExerciseController@index']);//do poprawy
+Route::get('/exercise/view/', ['uses' => 'ExerciseController@index']);//do poprawy
 Route::get('/exercise/view/{id}', ['as' => 'exercise.view', 'uses' => 'ExerciseController@view']);
 Route::get('/exercise/view/{id}/', ['uses' => 'ExerciseController@view']);
-Route::get('/exercise/edit', ['uses' => 'ExerciseController@edit']);
-Route::get('/exercise/edit/', ['uses' => 'ExerciseController@edit']);
+Route::get('/exercise/edit', ['uses' => 'ExerciseController@index']);
+Route::get('/exercise/edit/', ['uses' => 'ExerciseController@index']);
 Route::get('/exercise/edit/{id}', ['as' => 'exercise.edit', 'uses' => 'ExerciseController@edit']);
 Route::get('/exercise/edit/{id}/', ['uses' => 'ExerciseController@edit']);
-Route::get('/exercise/new', ['as' => 'exercise.new', 'uses' => 'ExerciseController@newOne']);
-Route::get('/exercise/new/', ['uses' => 'ExerciseController@newOne']);
+Route::post('/exercise/edit/{id}/', ['as'=> 'exercise.update','uses' => 'ExerciseController@update']);
+Route::post('/exercise/edit/{id}/', ['uses' => 'ExerciseController@update']);
 Route::get('/exercise/delete', ['uses' => 'ExerciseController@delete']);
 Route::get('/exercise/delete/', ['uses' => 'ExerciseController@delete']);
 Route::get('/exercise/delete/{id}', ['as' => 'exercise.delete', 'uses' => 'ExerciseController@delete']);
 Route::get('/exercise/delete/{id}/', ['uses' => 'ExerciseController@delete']);
+Route::post('/exercise/delete/{id}', ['as' => 'exercise.destroy', 'uses' => 'ExerciseController@destroy']);
+Route::post('/exercise/delete/{id}/', ['uses' => 'ExerciseController@destroy']);
 Route::get('/exercise/generateExam', ['uses' => 'ExerciseController@index']);
 Route::get('/exercise/generateExam/', ['uses' => 'ExerciseController@index']);
 Route::get('/exercise/generateExam/{id}', ['as' => 'exercise.generate', 'uses' => 'ExerciseController@generateExam']);
