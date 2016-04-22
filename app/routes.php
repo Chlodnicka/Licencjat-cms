@@ -69,20 +69,30 @@ Route::get('/course/view', ['uses' => 'CourseController@index']);
 Route::get('/course/view/', ['uses' => 'CourseController@index']);
 Route::get('/course/view/{id}', ['as' => 'course.view', 'uses' => 'CourseController@view']);
 Route::get('/course/view/{id}/', ['uses' => 'CourseController@view']);
-Route::get('/course/edit', ['uses' => 'CourseController@edit']);
-Route::get('/course/edit/', ['uses' => 'CourseController@edit']);
+Route::get('/course/edit', ['uses' => 'CourseController@index']);
+Route::get('/course/edit/', ['uses' => 'CourseController@index']);
 Route::get('/course/edit/{id}', ['as' => 'course.edit', 'uses' => 'CourseController@edit']);
 Route::get('/course/edit/{id}/', ['uses' => 'CourseController@edit']);
-Route::get('/course/new', ['as' => 'course', 'uses.new' => 'CourseController@newOne']);
+Route::post('/course/edit/{id}/', ['as' => 'course.update', 'uses' => 'CourseController@update']);
+Route::post('/course/edit/{id}/', ['uses' => 'CourseController@update']);
+Route::get('/course/new', ['as' => 'course.new', 'uses' => 'CourseController@newOne']);
 Route::get('/course/new/', ['uses' => 'CourseController@newOne']);
+Route::post('/course/new', ['as' => 'course.create', 'uses' => 'CourseController@create']);
+Route::post('/course/new/', ['uses' => 'CourseController@create']);
 Route::get('/course/delete', ['uses' => 'CourseController@delete']);
 Route::get('/course/delete/', ['uses' => 'CourseController@delete']);
 Route::get('/course/delete/{id}', ['as' => 'course.delete', 'uses' => 'CourseController@delete']);
 Route::get('/course/delete/{id}/', ['uses' => 'CourseController@delete']);
+Route::post('/course/delete/{id}', ['as' => 'course.destroy', 'uses' => 'CourseController@destroy']);
+Route::post('/course/delete/{id}/', ['uses' => 'CourseController@destroy']);
 
 /**
 * Lecture routing
 */
+Route::get('/lecture/new', ['as' => 'lecture.new', 'uses' => 'LectureController@newOne']);
+Route::get('/lecture/new/', ['uses' => 'LectureController@newOne']);
+Route::post('/lecture/new', ['as' => 'lecture.create', 'uses' => 'LectureController@create']);
+Route::post('/lecture/new/', ['uses' => 'LectureController@create']);
 Route::get('/lecture', ['as' => 'lecture.index', 'uses' => 'LectureController@index']);
 Route::get('/lecture', ['uses' => 'LectureController@index']);
 Route::get('/lecture/index', ['uses' => 'LectureController@index']);
@@ -95,16 +105,19 @@ Route::get('/lecture/view', ['uses' => 'LectureController@index']);//do poprawy
 Route::get('/lecture/view/', ['uses' => 'LectureController@index']);//do poprawy
 Route::get('/lecture/view/{id}', ['as' => 'lecture.view', 'uses' => 'LectureController@view']);//id
 Route::get('/lecture/view/{id}/', ['uses' => 'LectureController@view']);
-Route::get('/lecture/edit', ['uses' => 'LectureController@edit']);
-Route::get('/lecture/edit/', ['uses' => 'LectureController@edit']);
+Route::get('/lecture/edit', ['uses' => 'LectureController@index']);
+Route::get('/lecture/edit/', ['uses' => 'LectureController@index']);
 Route::get('/lecture/edit/{id}', ['as' => 'lecture.edit', 'uses' => 'LectureController@edit']);
 Route::get('/lecture/edit/{id}/', ['uses' => 'LectureController@edit']);
-Route::get('/lecture/new', ['as' => 'lecture.new', 'uses' => 'LectureController@newOne']);
-Route::get('/lecture/new/', ['uses' => 'LectureController@newOne']);
-Route::get('/lecture/delete', ['uses' => 'LectureController@delete']);
-Route::get('/lecture/delete/', ['uses' => 'LectureController@delete']);
+Route::post('/lecture/edit/{id}', ['as' => 'lecture.update', 'uses' => 'LectureController@update']);
+Route::post('/lecture/edit/{id}/', ['uses' => 'LectureController@update']);
+Route::get('/lecture/delete', ['uses' => 'LectureController@index']);
+Route::get('/lecture/delete/', ['uses' => 'LectureController@index']);
 Route::get('/lecture/delete/{id}', ['as' => 'lecture.delete', 'uses' => 'LectureController@delete']);
 Route::get('/lecture/delete/{id}/', ['uses' => 'LectureController@delete']);
+Route::post('/lecture/delete/{id}', ['as' => 'lecture.destroy', 'uses' => 'LectureController@destroy']);
+Route::post('/lecture/delete/{id}/', ['uses' => 'LectureController@destroy']);
+
 
 /**
 * Exercise routing

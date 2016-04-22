@@ -23,9 +23,12 @@ class LectureController extends BaseController
         ));
     }
 
-    public function edit()
+    public function edit($id)
     {
-        $this->layout->content = View::make('lecture.edit');
+        $lecture = Lecture::findOrFail($id);
+        $this->layout->content = View::make('lecture.edit', array(
+            'lecture' => $lecture,
+        ));
     }
 
     public function newOne()
@@ -33,9 +36,30 @@ class LectureController extends BaseController
         $this->layout->content = View::make('lecture.new');
     }
 
+    public function update($id)
+    {
+        $lecture = Lecture::findOrFail($id);
+        $lecture->title = Input::get('title');
+        $lecture->lead = Input::get('lead');
+        $lecture->content = Input::get('content');
+        $lecture->course_id = Input::get('course');
+        $lecture->save();
+
+        return Redirect::route('lecture.view', $lecture->id);
+    }
+
     public function create()
     {
-        $this->layout->content = View::make('lecture.create');
+        $lecture = new Lecture();
+        $lecture->title = Input::get('title');
+        $lecture->lead = Input::get('lead');
+        $lecture->content = Input::get('content');
+        $lecture->course_id = Input::get('course');
+        $lecture->owner_id = 1;
+        $lecture->owner_role_id = 1;
+        $lecture->save();
+
+        return Redirect::route('lecture.view', $lecture->id);
     }
 
     public function view($id)
@@ -46,9 +70,20 @@ class LectureController extends BaseController
         ));
     }
 
-    public function delete()
+    public function delete($id)
     {
-        $this->layout->content = View::make('lecture.delete');
+        $lecture = Lecture::findOrFail($id);
+        $this->layout->content = View::make('lecture.delete', array(
+            'lecture' => $lecture,
+        ));
+    }
+
+    public function destroy($id)
+    {
+        $lecture = Lecture::findOrFail($id);
+        $course_id = $lecture->course->id;
+        $lecture->delete();
+        return Redirect::route('lecture.indexCourse', $course_id);
     }
 
 }

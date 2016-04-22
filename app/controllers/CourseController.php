@@ -13,9 +13,23 @@ class CourseController extends BaseController
         $this->layout->content = View::make('course.index', array('courses' => $courses));
     }
 
-    public function edit()
+    public function edit($id)
     {
-        $this->layout->content = View::make('course.edit');
+        $course = Course::findOrFail($id);
+        $this->layout->content = View::make('course.edit', array(
+            'course' => $course,
+        ));
+    }
+
+    public function update($id)
+    {
+        $course = Course::findOrFail($id);
+        $course->name = Input::get('name');
+        $course->lead = Input::get('lead');
+        $course->description = Input::get('description');
+        $course->save();
+
+        return Redirect::route('course.view', $course->id);
     }
 
     public function newOne()
@@ -25,7 +39,16 @@ class CourseController extends BaseController
 
     public function create()
     {
-        $this->layout->content = View::make('course.create');
+        $course = new Course();
+        $course->name = Input::get('name');
+        $course->lead = Input::get('lead');
+        $course->description = Input::get('description');
+        $course->owner_id = 1;
+        $course->owner_role_id = 1;
+        $course->save();
+
+        return Redirect::route('course.view', $course->id);
+        
     }
 
     public function view($id)
@@ -38,12 +61,20 @@ class CourseController extends BaseController
         ));
     }
 
-    public function delete()
+    public function delete($id)
     {
-        $this->layout->content = View::make('course.delete');
+        $course = Course::findOrFail($id);
+        $this->layout->content = View::make('course.delete', array(
+            'course' => $course,
+        ));
+    }
+
+    public function destroy($id)
+    {
+        $course = Course::findOrFail($id);
+        $course->delete();
+        return Redirect::route('course.index');
     }
 
 }
-
-
- ?>
+?>
