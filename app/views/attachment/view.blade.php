@@ -1,3 +1,4 @@
 @section('content')
-  <h1>Attachment! View</h1>
+  <h1>{{ $attachment->name }}</h1>
+  {{ HTML::image($attachment->url) }}
 @stop

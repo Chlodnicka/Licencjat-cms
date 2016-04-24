@@ -158,26 +158,30 @@ Route::get('/exercise/generateExam/{id}/', ['uses' => 'ExerciseController@genera
 /**
 * Attachment routing
 */
-Route::get('/attachment', ['as' => 'attachment', 'uses' => 'AttachmentController@index']);
-Route::get('/attachment', ['as' => 'attachment', 'uses' => 'AttachmentController@index']);
-Route::get('/attachment/index', ['as' => 'attachment', 'uses' => 'AttachmentController@index']);
-Route::get('/attachment/index/', ['as' => 'attachment', 'uses' => 'AttachmentController@index']);
-Route::get('/attachment/view', ['as' => 'attachment', 'uses' => 'AttachmentController@index']);
+Route::get('/attachment', ['as' => 'attachment.index', 'uses' => 'AttachmentController@index']);
+Route::get('/attachment', ['uses' => 'AttachmentController@index']);
+Route::get('/attachment/index', ['uses' => 'AttachmentController@index']);
+Route::get('/attachment/index/', ['uses' => 'AttachmentController@index']);
+Route::get('/attachment/view', ['uses' => 'AttachmentController@index']);
 Route::get('/attachment/view/', ['as' => 'attachment', 'uses' => 'AttachmentController@index']);
-Route::get('/attachment/view/{id}', ['as' => 'attachment', 'uses' => 'AttachmentController@view']);
-Route::get('/attachment/view/{id}/', ['as' => 'attachment', 'uses' => 'AttachmentController@view']);
-Route::get('/attachment/edit', ['as' => 'attachment', 'uses' => 'AttachmentController@index']);
-Route::get('/attachment/edit/', ['as' => 'attachment', 'uses' => 'AttachmentController@index']);
-Route::get('/attachment/edit/{id}', ['as' => 'attachment', 'uses' => 'AttachmentController@edit']);
-Route::get('/attachment/edit/{id}/', ['as' => 'attachment', 'uses' => 'AttachmentController@edit']);
+Route::get('/attachment/view/{id}', ['as' => 'attachment.view', 'uses' => 'AttachmentController@view']);
+Route::get('/attachment/view/{id}/', ['uses' => 'AttachmentController@view']);
+Route::get('/attachment/edit', ['uses' => 'AttachmentController@index']);
+Route::get('/attachment/edit/', ['uses' => 'AttachmentController@index']);
+Route::get('/attachment/edit/{id}', ['as' => 'attachment.edit', 'uses' => 'AttachmentController@edit']);
+Route::get('/attachment/edit/{id}/', ['uses' => 'AttachmentController@edit']);
+Route::post('/attachment/edit/{id}', ['as' => 'attachment.update', 'uses' => 'AttachmentController@update']);
+Route::post('/attachment/edit/{id}/', ['uses' => 'AttachmentController@update']);
 Route::get('/attachment/new', ['as' => 'attachment.new', 'uses' => 'AttachmentController@newOne']);
-Route::get('/attachment/new/', ['as' => 'attachment', 'uses' => 'AttachmentController@newOne']);
+Route::get('/attachment/new/', ['uses' => 'AttachmentController@newOne']);
 Route::post('/attachment/new', ['as' => 'attachment.create', 'uses' => 'AttachmentController@create']);
-Route::post('/attachment/new/', ['as' => 'attachment', 'uses' => 'AttachmentController@create']);
-Route::get('/attachment/delete', ['as' => 'attachment', 'uses' => 'AttachmentController@delete']);
-Route::get('/attachment/delete/', ['as' => 'attachment', 'uses' => 'AttachmentController@delete']);
-Route::get('/attachment/delete/{id}', ['as' => 'attachment', 'uses' => 'AttachmentController@delete']);
-Route::get('/attachment/delete/{id}/', ['as' => 'attachment', 'uses' => 'AttachmentController@delete']);
+Route::post('/attachment/new/', ['uses' => 'AttachmentController@create']);
+Route::get('/attachment/delete', ['uses' => 'AttachmentController@index']);
+Route::get('/attachment/delete/', ['uses' => 'AttachmentController@index']);
+Route::get('/attachment/delete/{id}', ['as' => 'attachment.delete', 'uses' => 'AttachmentController@delete']);
+Route::get('/attachment/delete/{id}/', ['uses' => 'AttachmentController@delete']);
+Route::post('/attachment/delete/{id}', ['as' => 'attachment.destroy', 'uses' => 'AttachmentController@destroy']);
+Route::post('/attachment/delete/{id}/', ['uses' => 'AttachmentController@destroy']);
 
 /**
 * Student routing

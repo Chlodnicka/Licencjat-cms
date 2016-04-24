@@ -14,14 +14,35 @@ class AttachmentController extends BaseController
         ));
     }
 
-    public function edit()
+    public function edit($id)
     {
-        $this->layout->content = View::make('attachment.edit');
+        $attachment = Attachment::findOrFail($id);
+        $this->layout->content = View::make('attachment.edit', array(
+            'attachment' => $attachment,
+        ));
     }
 
     public function newOne()
     {
         $this->layout->content = View::make('attachment.new');
+    }
+
+    public function update($id)
+    {
+        //do ogarnięcia 
+        $file = Attachment::findOrFail($id);
+        $image = Input::file('image');
+        $destinationPath = 'uploads/';
+        $filename = $image->getClientOriginalName();
+        $url = $destinationPath . $filename;
+
+        $file->url = $url;
+        $file->name = $filename;
+
+
+        Input::file('image')->move($destinationPath, $filename);
+        $file->save();
+        return Redirect::route('attachment.view', $file->id);
     }
 
     public function create()
@@ -39,11 +60,15 @@ class AttachmentController extends BaseController
 
         Input::file('image')->move($destinationPath, $filename);
         $file->save();
+        return Redirect::route('attachment.view', $file->id);
     }
 
-    public function view()
+    public function view($id)
     {
-        $this->layout->content = View::make('attachment.view');
+        $attachment = Attachment::findOrFail($id);
+        $this->layout->content = View::make('attachment.view', array(
+            'attachment' => $attachment,
+        ));
     }
 
     public function delete()
