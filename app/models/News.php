@@ -10,6 +10,11 @@
       {
           return $this->belongsTo('Owner', 'owner_id');
       }
+
+      public function tags()
+      {
+          return $this->belongsToMany('Tag');
+      }
   }
 
 

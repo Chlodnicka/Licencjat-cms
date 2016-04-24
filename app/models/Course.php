@@ -31,6 +31,11 @@
           return $this->hasMany('News');
       }
 
+      public function tags()
+      {
+          return $this->belongsToMany('Tag');
+      }
+
   }
 
 

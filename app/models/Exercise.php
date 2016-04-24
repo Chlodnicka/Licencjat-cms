@@ -15,6 +15,11 @@
       {
           return $this->belongsTo('Lecture');
       }
+
+      public function tags()
+      {
+          return $this->belongsToMany('Tag');
+      }
   }
 
 

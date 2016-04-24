@@ -14,7 +14,11 @@
       {
           return $this->belongsTo('Course');
       }
-      
+
+      public function tags()
+      {
+          return $this->belongsToMany('Tag');
+      }
       
   }
 

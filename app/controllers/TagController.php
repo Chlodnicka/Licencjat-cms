@@ -9,12 +9,18 @@ class TagController extends BaseController
     protected $layout = 'layouts.master';
     public function index()
     {
-        $this->layout->content = View::make('tag.index');
+        $tags = Tag::all();
+        $this->layout->content = View::make('tag.index', array(
+            'tags' => $tags,
+        ));
     }
 
-    public function edit()
+    public function edit($id)
     {
-        $this->layout->content = View::make('tag.edit');
+        $tag = Tag::findOrFail($id);
+        $this->layout->content = View::make('tag.edit', array(
+            'tag' => $tag,
+        ));
     }
 
     public function newOne()
@@ -22,22 +28,59 @@ class TagController extends BaseController
         $this->layout->content = View::make('tag.new');
     }
 
+    public function update($id)
+    {
+        $tag = Tag::findOrFail($id);
+        $tag->name = Input::get('name');
+        $tag->save();
+
+        return Redirect::route('tag.view', $tag->id);
+    }
+
     public function create()
     {
-        $this->layout->content = View::make('tag.create');
+        $tag = new Tag();
+        $tag->name = Input::get('name');
+        $tag->save();
+
+        return Redirect::route('tag.view', $tag->id);
     }
 
-    public function view()
+    public function view($id)
     {
-        $this->layout->content = View::make('tag.view');
+        $tag = Tag::findOrFail($id);
+        //$courses = $tag->courses();
+        $courses = Tag::find($id)->courses()->orderBy('name')->get();
+        $exercises = Tag::find($id)->exercises()->orderBy('title')->get();
+        $lectures = Tag::find($id)->lectures()->orderBy('title')->get();
+        $news = Tag::find($id)->news()->orderBy('title')->get();
+        $this->layout->content = View::make('tag.view', array(
+            'tag' => $tag,
+            'courses' => $courses,
+            'exercises' => $exercises,
+            'lectures' => $lectures,
+            'news' => $news,
+        ));
     }
 
-    public function delete()
+    public function delete($id)
     {
-        $this->layout->content = View::make('tag.delete');
+        $tag = Tag::findOrFail($id);
+        $this->layout->content = View::make('tag.delete', array(
+            'tag' => $tag
+        ));
     }
 
+    public function destroy($id)
+    {
+        $tag = Tag::findOrFail($id);
+        $tag->courses()->detach();
+        $tag->lectures()->detach();
+        $tag->exercises()->detach();
+        $tag->news()->detach();
+        $tag->delete();
+        return Redirect::route('tag.index');
+    }
 }
-
 
  ?>
