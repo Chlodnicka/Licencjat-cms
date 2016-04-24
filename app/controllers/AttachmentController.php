@@ -8,7 +8,10 @@ class AttachmentController extends BaseController
     protected $layout = 'layouts.master';
     public function index()
     {
-        $this->layout->content = View::make('attachment.index');
+        $attachments = Attachment::all();
+        $this->layout->content = View::make('attachment.index', array(
+            'attachments' => $attachments
+        ));
     }
 
     public function edit()
@@ -23,7 +26,19 @@ class AttachmentController extends BaseController
 
     public function create()
     {
-        $this->layout->content = View::make('attachment.create');
+        $image = Input::file('image');
+
+        $destinationPath = 'uploads/';
+        $filename = $image->getClientOriginalName();
+        $url = $destinationPath . $filename;
+
+        $file = new Attachment();
+        $file->url = $url;
+        $file->name = $filename;
+
+
+        Input::file('image')->move($destinationPath, $filename);
+        $file->save();
     }
 
     public function view()

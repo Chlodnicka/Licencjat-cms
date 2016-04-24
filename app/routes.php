@@ -170,8 +170,10 @@ Route::get('/attachment/edit', ['as' => 'attachment', 'uses' => 'AttachmentContr
 Route::get('/attachment/edit/', ['as' => 'attachment', 'uses' => 'AttachmentController@index']);
 Route::get('/attachment/edit/{id}', ['as' => 'attachment', 'uses' => 'AttachmentController@edit']);
 Route::get('/attachment/edit/{id}/', ['as' => 'attachment', 'uses' => 'AttachmentController@edit']);
-Route::get('/attachment/new', ['as' => 'attachment', 'uses' => 'AttachmentController@newOne']);
+Route::get('/attachment/new', ['as' => 'attachment.new', 'uses' => 'AttachmentController@newOne']);
 Route::get('/attachment/new/', ['as' => 'attachment', 'uses' => 'AttachmentController@newOne']);
+Route::post('/attachment/new', ['as' => 'attachment.create', 'uses' => 'AttachmentController@create']);
+Route::post('/attachment/new/', ['as' => 'attachment', 'uses' => 'AttachmentController@create']);
 Route::get('/attachment/delete', ['as' => 'attachment', 'uses' => 'AttachmentController@delete']);
 Route::get('/attachment/delete/', ['as' => 'attachment', 'uses' => 'AttachmentController@delete']);
 Route::get('/attachment/delete/{id}', ['as' => 'attachment', 'uses' => 'AttachmentController@delete']);
