@@ -16,8 +16,10 @@ class CourseController extends BaseController
     public function edit($id)
     {
         $course = Course::findOrFail($id);
+        $tags = Tag::all()->lists('name','id');
         $this->layout->content = View::make('course.edit', array(
             'course' => $course,
+            'tags' => $tags,
         ));
     }
 
@@ -28,13 +30,17 @@ class CourseController extends BaseController
         $course->lead = Input::get('lead');
         $course->description = Input::get('description');
         $course->save();
+        $course->tags()->sync(Input::get('tags'));
 
         return Redirect::route('course.view', $course->id);
     }
 
     public function newOne()
     {
-        $this->layout->content = View::make('course.new');
+        $tags = Tag::all()->lists('name','id');
+        $this->layout->content = View::make('course.new', array(
+            'tags' => $tags,
+        ));
     }
 
     public function create()
@@ -46,6 +52,7 @@ class CourseController extends BaseController
         $course->owner_id = 1;
         $course->owner_role_id = 1;
         $course->save();
+        $course->tags()->sync(Input::get('tags'));
 
         return Redirect::route('course.view', $course->id);
         
@@ -55,9 +62,13 @@ class CourseController extends BaseController
     {
         $course = Course::findOrFail($id);
         $lectures = Course::find($id)->lectures;
+        $tags = Course::find($id)->tags;
+        $exercises = Course::find($id)->exercises;
         $this->layout->content = View::make('course.view', array(
             'course' => $course,
-            'lectures' => $lectures
+            'lectures' => $lectures,
+            'exercises' => $exercises,
+            'tags' => $tags,
         ));
     }
 
@@ -72,6 +83,9 @@ class CourseController extends BaseController
     public function destroy($id)
     {
         $course = Course::findOrFail($id);
+        $course->lectures()->detach();
+        $course->exercises()->detach();
+        $course->tags()->detach();
         $course->delete();
         return Redirect::route('course.index');
     }

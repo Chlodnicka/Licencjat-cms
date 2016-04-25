@@ -186,6 +186,10 @@ Route::post('/attachment/delete/{id}/', ['uses' => 'AttachmentController@destroy
 /**
 * Student routing
 */
+Route::get('/student/new', ['as' => 'student.new', 'uses' => 'StudentController@newOne']);
+Route::get('/student/new/', ['uses' => 'StudentController@newOne']);
+Route::post('/student/new', ['as' => 'student.create', 'uses' => 'StudentController@create']);
+Route::post('/student/new/', ['uses' => 'StudentController@create']);
 Route::get('/student', ['as' => 'student.index', 'uses' => 'StudentController@index']);
 Route::get('/student', ['uses' => 'StudentController@index']);
 Route::get('/student/index', ['uses' => 'StudentController@index']);
@@ -196,10 +200,6 @@ Route::get('/student/view', ['uses' => 'StudentController@index']); //do poprawy
 Route::get('/student/view/', ['uses' => 'StudentController@index']); //do poprawy
 Route::get('/student/view/{id}', ['as' => 'student.view', 'uses' => 'StudentController@view']);
 Route::get('/student/view/{id}/', ['uses' => 'StudentController@view']);
-Route::get('/student/new', ['as' => 'student.new', 'uses' => 'StudentController@newOne']);
-Route::get('/student/new/', ['uses' => 'StudentController@newOne']);
-Route::post('/student/new', ['as' => 'student.create', 'uses' => 'StudentController@create']);
-Route::post('/student/new/', ['uses' => 'StudentController@create']);
 Route::get('/student/edit', ['uses' => 'StudentController@index']);
 Route::get('/student/edit/', ['uses' => 'StudentController@index']);
 Route::post('/student/edit', ['uses' => 'StudentController@index']);

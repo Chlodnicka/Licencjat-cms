@@ -3,6 +3,8 @@
   <div class="delete">
     <p class="lead">Czy na pewno chcesz usunąć załącznik?</p>
     <a href="#" class="btn btn-back">Wróć</a>
-    <a href="#" class="btn btn-delete">Usuń</a>
+    {{ Form::open(array('route' => array('attachment.destroy', $attachment->id))) }}
+    {{ Form::submit('Usuń', array('class' => 'btn btn-delete')) }}
+    {{ Form::close() }}
   </div>
 @stop

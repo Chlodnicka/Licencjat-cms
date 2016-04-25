@@ -33,7 +33,12 @@ class LectureController extends BaseController
 
     public function newOne()
     {
-        $this->layout->content = View::make('lecture.new');
+        $courses = Course::all()->lists('name', 'id');
+        $tags = Tag::all()->lists('name','id');
+        $this->layout->content = View::make('lecture.new', array(
+            'courses' => $courses,
+            'tags' => $tags,
+        ));
     }
 
     public function update($id)
@@ -42,7 +47,7 @@ class LectureController extends BaseController
         $lecture->title = Input::get('title');
         $lecture->lead = Input::get('lead');
         $lecture->content = Input::get('content');
-        $lecture->course_id = Input::get('course');
+        $lecture->course_id = Input::get('courses');
         $lecture->save();
 
         return Redirect::route('lecture.view', $lecture->id);

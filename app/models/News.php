@@ -15,6 +15,11 @@
       {
           return $this->belongsToMany('Tag');
       }
+
+      public function attachments()
+      {
+          return $this->belongsToMany('Tag');
+      }
   }
 
 
