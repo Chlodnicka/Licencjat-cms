@@ -26,8 +26,14 @@ class LectureController extends BaseController
     public function edit($id)
     {
         $lecture = Lecture::findOrFail($id);
+        $courses = Course::all()->lists('name', 'id');
+        $tags = Tag::all()->lists('name','id');
+        $lecture_tags = $lecture->tags()->lists('tag_id');
         $this->layout->content = View::make('lecture.edit', array(
             'lecture' => $lecture,
+            'courses' => $courses,
+            'tags' => $tags,
+            'lecture_tags' => $lecture_tags,
         ));
     }
 
@@ -49,6 +55,7 @@ class LectureController extends BaseController
         $lecture->content = Input::get('content');
         $lecture->course_id = Input::get('courses');
         $lecture->save();
+        $lecture->tags()->sync(Input::get('tags'));
 
         return Redirect::route('lecture.view', $lecture->id);
     }
@@ -59,10 +66,11 @@ class LectureController extends BaseController
         $lecture->title = Input::get('title');
         $lecture->lead = Input::get('lead');
         $lecture->content = Input::get('content');
-        $lecture->course_id = Input::get('course');
+        $lecture->course_id = Input::get('courses');
         $lecture->owner_id = 1;
         $lecture->owner_role_id = 1;
         $lecture->save();
+        $lecture->tags()->sync(Input::get('tags'));
 
         return Redirect::route('lecture.view', $lecture->id);
     }
@@ -87,6 +95,7 @@ class LectureController extends BaseController
     {
         $lecture = Lecture::findOrFail($id);
         $course_id = $lecture->course->id;
+        $lecture->tags()->detach();
         $lecture->delete();
         return Redirect::route('lecture.indexCourse', $course_id);
     }

@@ -1,64 +1,38 @@
 @section('content')
   <h1>Exercise! Edit</h1>
-    <div class="new lecture">
-      <form action="{{ URL::route('exercise.update', $exercise->id) }}" method="post">
+    <div class="edit exercise">
+        {{ Form::open(array('route' => array('exercise.update'))) }}
         <div class="form-cluster">
           <div class="form-group">
-            <label for="title">Tytuł</label>
-            <input type="text" id="title" name="title" value="{{ $exercise->title }}">
+            {{ Form::label('title', 'Tytuł')}}
+            {{ Form::text('title', $exercise->title) }}
           </div>
           <div class="form-group">
-            <label for="difficulty">Trudność</label>
-            <select name="difficulty" id="difficulty">
-              <option value="1">Volvo</option>
-              <option value="2">Saab</option>
-              <option value="3">Fiat</option>
-            </select>
+            {{ Form::label('content', 'Treść')}}
+            {{ Form::textarea('content',$exercise->content) }}
           </div>
           <div class="form-group">
-            <label for="content">Treść zadania</label>
-            <textarea name="content" id="content" rows="10" cols="30" value="{{ $exercise->content }}"></textarea>
+            {{ Form::label('solution', 'Rozwiązanie')}}
+            {{ Form::textarea('solution', $exercise->solution) }}
           </div>
           <div class="form-group">
-            <label for="solution">Rozwiązanie</label>
-            <textarea name="solution" id="solution" rows="10" cols="30" value="{{ $exercise->solution }}"></textarea>
+            {{ Form::label('solutionAccess', 'Dostępność rozwiązania dla studentów')}}
+            {{ Form::checkbox('solution_access', $exercise->solution_access, true) }}
           </div>
-          <div class="form-group">
-            <label for="solution_access">Dostępność rozwiązania</label>
-            <select name="solution_access" id="solution_access">
-              <option value="1">Dla prowadzącego</option>
-              <option value="2">Dla studentów</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="course">Kurs</label>
-            <select name="course" id="course">
-              <option value="1">Volvo</option>
-              <option value="2">Saab</option>
-              <option value="3">Fiat</option>
-              <option value="4">Audi</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="lecture">Lecture</label>
-            <select name="lecture" id="lecture">
-              <option value="1">Volvo</option>
-              <option value="2">Saab</option>
-              <option value="3">Fiat</option>
-              <option value="4">Audi</option>
-            </select>
-          </div>
-          <!--<div class="form-tags">
-            <label>Tagi</label>
-            <input type="checkbox" name="vehicle" id="vehicle" value="Bike"><label for="vehicle"><span></span>I have a bike</label>
-            <input type="checkbox" name="vehicle2" id="vehicle2" value="Car"><label for="vehicle2"><span></span>I have a car</label>
-          </div>
-          <div class="form-attachments">
-            <label for="attachments">Załączniki</label>
-            <input type="file" id="attachments" name="attachments">
-          </div>-->
+          {{ Form::label('difficulty','Trudność:') }}
+          {{ Form::select('difficulty', $difficulty, $exercise->difficulty) }}
+<!--brak wartości poprzedniej!-->
+          {{ Form::label('courses','Select Course:') }}
+          {{ Form::select('courses', $courses, $exercise->course_id) }}
+
+          {{ Form::label('lectures','Select Course:') }}
+          {{ Form::select('lectures', $lectures, $exercise->lecture_id) }}
+
+          {{ Form::label('tags','Select Category:') }}
+          {{ Form::select('tags[]', ($tags), null, ['multiple'=>true,'class' => 'form-control margin']) }}
+                  <!--tagi-->
+          {{ Form::submit('Submit') }}
         </div>
-        <input type="submit" value="Submit">
-      </form>
+        {{ Form::close() }}
     </div>
 @stop

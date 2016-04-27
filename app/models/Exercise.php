@@ -25,6 +25,16 @@
       {
           return $this->belongsToMany('Tag');
       }
+
+      public function difficulty()
+      {
+        $difficulty = array(
+            '1' => 'easy',
+            '2' => 'medium',
+            '3' => 'hard'
+        );
+        return $difficulty;
+      }
   }
 
 

@@ -28,8 +28,19 @@ class ExerciseController extends BaseController
     public function edit($id)
     {
         $exercise = Exercise::findOrFail($id);
+        $courses = Course::all()->lists('name', 'id');
+        $lectures = Lecture::all()->lists('title', 'id');
+        $tags = Tag::all()->lists('name','id');
+        $exercise_tags = $exercise->tags()->lists('tag_id');
+        $exercise_difficulty = new Exercise();
+        $difficulty = $exercise_difficulty->difficulty();
         $this->layout->content = View::make('exercise.edit', array(
             'exercise' => $exercise,
+            'courses' => $courses,
+            'tags' => $tags,
+            'exercise_tags' => $exercise_tags,
+            'lectures' => $lectures,
+            'difficulty' => $difficulty,
         ));
     }
 
@@ -41,9 +52,11 @@ class ExerciseController extends BaseController
         $exercise->solution = Input::get('solution');
         $exercise->solution_access = Input::get('solution_access');
         $exercise->difficulty = Input::get('difficulty');
-        $exercise->lecture_id = Input::get('lecture');
-        $exercise->course_id = Input::get('course');
+        $exercise->lecture_id = Input::get('lectures');
+        $exercise->course_id = Input::get('courses');
         $exercise->save();
+
+        $exercise->tags()->sync(Input::get('tags'));
 
         return Redirect::route('exercise.view', $exercise->id);
 
@@ -51,7 +64,17 @@ class ExerciseController extends BaseController
 
     public function newOne()
     {
-        $this->layout->content = View::make('exercise.new');
+        $courses = Course::all()->lists('name', 'id');
+        $lectures = Lecture::all()->lists('title', 'id');
+        $tags = Tag::all()->lists('name','id');
+        $exercise = new Exercise();
+        $difficulty = $exercise->difficulty();
+        $this->layout->content = View::make('exercise.new', array(
+            'courses' => $courses,
+            'lectures' => $lectures,
+            'tags' => $tags,
+            'difficulty' => $difficulty,
+        ));
     }
 
     public function create()
@@ -62,12 +85,14 @@ class ExerciseController extends BaseController
         $exercise->solution = Input::get('solution');
         $exercise->solution_access = Input::get('solution_access');
         $exercise->difficulty = Input::get('difficulty');
-        $exercise->lecture_id = Input::get('lecture');
-        $exercise->course_id = Input::get('course');
+        $exercise->lecture_id = Input::get('lectures');
+        $exercise->course_id = Input::get('courses');
         $exercise->owner_id = 1;
         $exercise->owner_role_id = 1;
 
         $exercise->save();
+
+        $exercise->tags()->sync(Input::get('tags'));
 
         return Redirect::route('exercise.view', $exercise->id);
     }
