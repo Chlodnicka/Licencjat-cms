@@ -1,7 +1,7 @@
 @section('content')
   <h1>Exercise! Edit</h1>
     <div class="edit exercise">
-        {{ Form::open(array('route' => array('exercise.update'))) }}
+        {{ Form::open(array('route' => array('exercise.update', $exercise->id))) }}
         <div class="form-cluster">
           <div class="form-group">
             {{ Form::label('title', 'Tytuł')}}
@@ -21,7 +21,6 @@
           </div>
           {{ Form::label('difficulty','Trudność:') }}
           {{ Form::select('difficulty', $difficulty, $exercise->difficulty) }}
-<!--brak wartości poprzedniej!-->
           {{ Form::label('courses','Select Course:') }}
           {{ Form::select('courses', $courses, $exercise->course_id) }}
 

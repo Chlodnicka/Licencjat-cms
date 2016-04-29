@@ -3,8 +3,9 @@
   <h1>Informacje</h1>
   <div class="info">
     <div class="personal">
-      <h2 class="name">{{ $owner->position }} {{ $owner->firstname }} {{ $owner->lastname }}</h2>
+      <h2 class="name">{{ $position }} {{ $owner->firstname }} {{ $owner->lastname }}</h2>
       <p class="institute">{{ $owner->institute }}</p>
+      <p class="department">{{ $owner->department }}</p>
       <p class="university">{{ $owner->university }}</p>
       <p class="email"><a href="mailto:{{ $owner->email }}">{{ $owner->email }}</a></p>
       <p class="phone"><a href="tel:+48 {{ $owner->phone }}">+48 {{ $owner->phone }}</a></p>

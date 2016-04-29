@@ -83,8 +83,8 @@ class CourseController extends BaseController
     public function destroy($id)
     {
         $course = Course::findOrFail($id);
-        $course->lectures()->detach();
-        $course->exercises()->detach();
+        $course->lectures()->delete();
+        $course->exercises()->delete();
         $course->tags()->detach();
         $course->delete();
         return Redirect::route('course.index');

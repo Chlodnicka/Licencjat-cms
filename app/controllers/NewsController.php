@@ -24,14 +24,25 @@ class NewsController extends BaseController
     public function edit($id)
     {
         $news = News::findOrFail($id);
+        $courses = Course::all()->lists('name', 'id');
+        $tags = Tag::all()->lists('name','id');
+        $news_tags = $news->tags()->lists('tag_id');
         $this->layout->content = View::make('news.edit', array(
-            'news' => $news
+            'news' => $news,
+            'courses' => $courses,
+            'tags' => $tags,
+            'news_tags' => $news_tags,
         ));
     }
 
     public function newOne()
     {
-        $this->layout->content = View::make('news.new');
+        $courses = Course::all()->lists('name', 'id');
+        $tags = Tag::all()->lists('name', 'id');
+        $this->layout->content = View::make('news.new', array(
+            'courses' => $courses,
+            'tags' => $tags
+        ));
     }
 
     public function update($id)
@@ -41,8 +52,9 @@ class NewsController extends BaseController
         $news->lead = Input::get('lead');
         $news->date = Input::get('date');
         $news->content = Input::get('content');
-        $news->course_id = Input::get('course');
+        $news->course_id = Input::get('courses');
         $news->save();
+        $news->tags()->sync(Input::get('tags'));
 
         return Redirect::route('news.view', $news->id);
     }
@@ -54,10 +66,11 @@ class NewsController extends BaseController
         $news->lead = Input::get('lead');
         $news->date = Input::get('date');
         $news->content = Input::get('content');
-        $news->course_id = Input::get('course');
+        $news->course_id = Input::get('courses');
         $news->owner_id = 1;
         $news->owner_role_id = 1;
         $news->save();
+        $news->tags()->sync(Input::get('tags'));
 
         return Redirect::route('news.view', $news->id);
     }
@@ -81,6 +94,7 @@ class NewsController extends BaseController
     public function destroy($id)
     {
         $news = News::findOrFail($id);
+        $news->tags()->detach();
         $news->delete();
 
         return Redirect::route('news.index');

@@ -24,7 +24,12 @@
       {
           return $this->belongsToMany('Tag');
       }
-      
+
+      public function exercises()
+      {
+          return $this->hasMany('Exercise');
+      }
+
   }
 
 

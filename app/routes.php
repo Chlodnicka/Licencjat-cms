@@ -134,8 +134,18 @@ Route::get('/exercise/{id}', ['as'=>'exercise.indexCourse', 'uses' => 'ExerciseC
 Route::get('/exercise/{id}/', ['uses' => 'ExerciseController@indexExerciseByCourse']);
 Route::get('/exercise/index/{id}', ['uses' => 'ExerciseController@indexExerciseByCourse']);
 Route::get('/exercise/index/{id}/', ['uses' => 'ExerciseController@indexExerciseByCourse']);
-Route::get('/exercise/view', ['uses' => 'ExerciseController@index']);//do poprawy
-Route::get('/exercise/view/', ['uses' => 'ExerciseController@index']);//do poprawy
+Route::post('/exercise/search', ['as'=>'exercise.search', 'uses' => 'ExerciseController@search']);
+Route::post('/exercise/search/', ['uses' => 'ExerciseController@search']);
+Route::get('/exercise/lecture', ['uses' => 'ExerciseController@index']);
+Route::get('/exercise/lecture/', ['uses' => 'ExerciseController@index']);
+Route::get('/exercise/lecture/{id}', ['as'=>'exercise.indexLecture', 'uses' => 'ExerciseController@indexExerciseByLecture']);
+Route::get('/exercise/lecture/{id}/', ['uses' => 'ExerciseController@indexExerciseByLecture']);
+Route::get('/exercise/difficulty', ['uses' => 'ExerciseController@index']);
+Route::get('/exercise/difficulty/', ['uses' => 'ExerciseController@index']);
+Route::get('/exercise/difficulty/{id}', ['as'=>'exercise.indexDifficulty', 'uses' => 'ExerciseController@indexExerciseByDifficulty']);
+Route::get('/exercise/difficulty/{id}/', ['uses' => 'ExerciseController@indexExerciseByDifficulty']);
+Route::get('/exercise/view', ['uses' => 'ExerciseController@index']);
+Route::get('/exercise/view/', ['uses' => 'ExerciseController@index']);
 Route::get('/exercise/view/{id}', ['as' => 'exercise.view', 'uses' => 'ExerciseController@view']);
 Route::get('/exercise/view/{id}/', ['uses' => 'ExerciseController@view']);
 Route::get('/exercise/edit', ['uses' => 'ExerciseController@index']);
@@ -244,3 +254,15 @@ Route::get('/tag/delete/{id}', ['as' => 'tag.delete', 'uses' => 'TagController@d
 Route::get('/tag/delete/{id}/', ['uses' => 'TagController@delete']);
 Route::post('/tag/delete/{id}/', ['as' => 'tag.destroy', 'uses' => 'TagController@destroy']);
 Route::post('/tag/delete/{id}/', ['uses' => 'TagController@destroy']);
+
+
+/*
+ * Ajax routes helpers
+ */
+
+Route::get('api/dropdown', function(){
+    $id = Input::get('courses');
+    $course = Course::findOrFail($id);
+    $lectures = DB::table('lectures')->where('course_id', '=', $id)->get();
+    return $lectures;
+});

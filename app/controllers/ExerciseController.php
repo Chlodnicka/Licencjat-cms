@@ -11,19 +11,62 @@ class ExerciseController extends BaseController
     public function index()
     {
         $exercises = Exercise::all();
+        $exercise_difficulty = new Exercise();
+        $difficulty = $exercise_difficulty->difficulty();
         $this->layout->content = View::make('exercise.index', array(
             'exercises' => $exercises,
+            'difficulty' => $difficulty,
         ));
     }
 
     public function indexExerciseByCourse($id)
     {
         $exercises = Course::with('exercises')->find($id)->exercises;
+        $exercise_difficulty = new Exercise();
+        $difficulty = $exercise_difficulty->difficulty();
         $this->layout->content = View::make('exercise.index', array(
-            'exercises' => $exercises
+            'exercises' => $exercises,
+            'difficulty' => $difficulty,
         ));
     }
 
+    public function search()
+    {
+        $searchParams = array(
+            'content' => Input::get('content'),
+            'solution' => Input::get('solution_access'),
+            'difficulty' => Input::get('difficulty'),
+        );
+        $exercises = DB::table('exercises')->join('exercise_tag', 'exercises.id', '=', 'exercise_tag.exercise_id')->where('solution_access', '=', $searchParams['solution'])->where('difficulty', '=', $searchParams['difficulty'])->where('content', 'LIKE', '%' . $searchParams['content'] . '%')->get();
+        $exercise_difficulty = new Exercise();
+        $difficulty = $exercise_difficulty->difficulty();
+        $this->layout->content = View::make('exercise.index', array(
+            'exercises' => $exercises,
+            'difficulty' => $difficulty,
+        ));
+    }
+
+    public function indexExerciseByLecture($id)
+    {
+        $exercises = Lecture::with('exercises')->find($id)->exercises;
+        $exercise_difficulty = new Exercise();
+        $difficulty = $exercise_difficulty->difficulty();
+        $this->layout->content = View::make('exercise.index', array(
+            'exercises' => $exercises,
+            'difficulty' => $difficulty,
+        ));
+    }
+
+    public function indexExerciseByDifficulty($id)
+    {
+        $exercises = DB::table('exercises')->where('difficulty', '=', $id)->get();
+        $exercise_difficulty = new Exercise();
+        $difficulty = $exercise_difficulty->difficulty();
+        $this->layout->content = View::make('exercise.index', array(
+            'exercises' => $exercises,
+            'difficulty' => $difficulty,
+        ));
+    }
 
     public function edit($id)
     {
@@ -116,6 +159,7 @@ class ExerciseController extends BaseController
     public function destroy($id) {
         $exercise = Exercise::findOrFail($id);
         $course_id = $exercise->course->id;
+        $exercise->tags()->detach();
         $exercise->delete();
         return Redirect::route('exercise.indexCourse', $course_id);
     }

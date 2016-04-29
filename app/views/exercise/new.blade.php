@@ -21,10 +21,10 @@
       </div>
       {{ Form::label('difficulty','Trudność:') }}
       {{ Form::select('difficulty', $difficulty) }}
-      {{ Form::label('courses','Select Course:') }}
+      {{ Form::label('courses','Select Course:', ['id' => 'courses'], ['class' => 'select']) }}
       {{ Form::select('courses', $courses) }}
       {{ Form::label('lectures','Select Course:') }}
-      {{ Form::select('lectures', $lectures) }}
+      {{ Form::select('lectures', ['Najpierw wybierz kurs']) }}
       {{ Form::label('tags','Select Category:') }}
       {{ Form::select('tags[]', ($tags), null, ['multiple'=>true,'class' => 'form-control margin']) }}
               <!--tagi-->

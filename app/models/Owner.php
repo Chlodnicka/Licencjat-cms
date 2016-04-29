@@ -35,6 +35,22 @@
       {
           return $this->belongsToMany('Tag');
       }
+
+      public function  position()
+      {
+          $positions = array(
+              '1' => 'mgr',
+              '2' => 'inż.',
+              '3' => 'mgr inż.',
+              '4' => 'dr',
+              '5' => 'dr inż.',
+              '6' => 'dr hab.',
+              '7' => 'prof.'
+          );
+
+          return $positions;
+      }
+
   }
 
 

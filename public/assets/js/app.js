@@ -1,5 +1,6 @@
 $(document).ready( function () {
-    dropdown(); 
+    dropdown();
+    dropdownLectures();
 });
 
 function dropdown() {
@@ -12,5 +13,19 @@ function dropdown() {
             $('.dropdown i').removeClass('fa-chevron-up');
             $('.dropdown i').addClass('fa-chevron-down');
         }
+    });
+}
+function dropdownLectures() {
+    $( "select[name='courses']" ).change(function () {
+        $.get("/api/dropdown",
+            { courses: $(this).val() },
+            function(data) {
+                var model = $("select[name='lectures']");
+                model.empty();
+
+                $.each(data, function(index, element) {
+                    model.append("<option value='"+ element.id +"'>" + element.title + "</option>");
+                });
+            });
     });
 }

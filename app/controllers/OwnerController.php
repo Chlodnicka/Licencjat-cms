@@ -12,7 +12,12 @@ class OwnerController extends BaseController
     public function index()
     {
         $owner = Owner::find(1);
-        $this->layout->content = View::make('owner.index', array('owner' => $owner));
+        $positions = $owner->position();
+        $position = $positions[$owner->position];
+        $this->layout->content = View::make('owner.index', array(
+            'owner' => $owner,
+            'position' => $position,
+        ));
 
     }
 
@@ -20,8 +25,10 @@ class OwnerController extends BaseController
     {
         $id = 1;
         $owner = Owner::findOrFail($id);
+        $positions = $owner->position();
         $this->layout->content = View::make('owner.edit', array (
             'owner' => $owner,
+            'positions' => $positions,
         ));
     }
 
@@ -34,6 +41,7 @@ class OwnerController extends BaseController
         $owner->email = Input::get('email');
         $owner->position = Input::get('position');
         $owner->phone = Input::get('phone');
+        $owner->university = Input::get('university');
         $owner->tutorshipHours = Input::get('tutorshipHours');
         $owner->content = Input::get('content');
         $owner->institute = Input::get('institute');
