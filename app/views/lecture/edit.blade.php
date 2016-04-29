@@ -1,7 +1,7 @@
 @section('content')
   <h1>Lecture! Edit</h1>
   <div class="edit lecture">
-    {{ Form::open(array('route' => array('lecture.update'))) }}
+    {{ Form::open(array('route' => array('lecture.update', $lecture->id))) }}
     <div class="form-cluster">
       <div class="form-group">
         {{ Form::label('title', 'Tytuł')}}
@@ -13,7 +13,7 @@
       </div>
       <div class="form-group">
         {{ Form::label('content', 'Treść')}}
-        {{ Form::textarea('content', $lecture->content) }}
+        {{ Form::textarea('content', $lecture->content, array('id'=>'editor')) }}
       </div>
       {{ Form::label('courses','Select Course:') }}
       {{ Form::select('courses', $courses, $lecture->course_id) }}

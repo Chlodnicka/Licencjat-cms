@@ -32,12 +32,12 @@
         {{ Form::text('institute', $owner->institute) }}
       </div>
       <div class="form-group">
-        {{ Form::label('tutorshipHours', 'Lead')}}
-        {{ Form::textarea('tutorshipHours',$owner->tutorshipHours) }}
+        {{ Form::label('tutorshipHours', 'Godziny konsultacji')}}<!--trzzeba to jakoś inaczaj ogarnąć -->
+        {{ Form::textarea('tutorshipHours', $owner->tutorshipHours) }}
       </div>
       <div class="form-group">
         {{ Form::label('content', 'Opis')}}
-        {{ Form::textarea('content', $owner->content) }}
+        {{ Form::textarea('content', $owner->content, array('id'=>'editor')) }}
       </div>
 
       {{ Form::label('position','Select Course:') }}

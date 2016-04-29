@@ -9,11 +9,11 @@
       </div>
       <div class="form-group">
         {{ Form::label('content', 'Treść')}}
-        {{ Form::textarea('content') }}
+        {{ Form::textarea('content', null, array('id'=>'editor')) }}
       </div>
-      <div class="form-group">
+      <div class="form-group"><!--trzeba zrobić odrębne dodawanie rozwiązania!-->
         {{ Form::label('solution', 'Rozwiązanie')}}
-        {{ Form::textarea('solution') }}
+        {{ Form::textarea('solution', null, array('id'=>'editor')) }}}
       </div>
       <div class="form-group">
         {{ Form::label('solutionAccess', 'Dostępność rozwiązania dla studentów')}}
@@ -21,7 +21,7 @@
       </div>
       {{ Form::label('difficulty','Trudność:') }}
       {{ Form::select('difficulty', $difficulty) }}
-      {{ Form::label('courses','Select Course:', ['id' => 'courses'], ['class' => 'select']) }}
+      {{ Form::label('courses','Select Course:') }}
       {{ Form::select('courses', $courses) }}
       {{ Form::label('lectures','Select Course:') }}
       {{ Form::select('lectures', ['Najpierw wybierz kurs']) }}

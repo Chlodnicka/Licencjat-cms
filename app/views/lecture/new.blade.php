@@ -13,7 +13,7 @@
       </div>
       <div class="form-group">
         {{ Form::label('content', 'Treść')}}
-        {{ Form::textarea('content') }}
+        {{ Form::textarea('content', null, array('id'=>'editor')) }}
       </div>
       {{ Form::label('courses','Select Course:') }}
       {{ Form::select('courses', $courses) }}

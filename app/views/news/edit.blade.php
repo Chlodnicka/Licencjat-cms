@@ -9,11 +9,11 @@
       </div>
       <div class="form-group">
         {{ Form::label('lead', 'Lead')}}
-        {{ Form::textarea('lead',$news->lead) }}
+        {{ Form::text('lead', $news->lead) }}
       </div>
       <div class="form-group">
         {{ Form::label('content', 'Treść')}}
-        {{ Form::textarea('content', $news->content) }}
+        {{ Form::textarea('content', $news->content, array('id'=>'editor')) }}
       </div>
       <div class="form-group">
         {{ Form::label('date', 'Data')}}

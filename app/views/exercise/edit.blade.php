@@ -9,11 +9,11 @@
           </div>
           <div class="form-group">
             {{ Form::label('content', 'Treść')}}
-            {{ Form::textarea('content',$exercise->content) }}
+            {{ Form::textarea('content', $exercise->content, array('id'=>'editor')) }}
           </div>
           <div class="form-group">
             {{ Form::label('solution', 'Rozwiązanie')}}
-            {{ Form::textarea('solution', $exercise->solution) }}
+            {{ Form::textarea('solution', $exercise->solution, array('id'=>'editor')) }}
           </div>
           <div class="form-group">
             {{ Form::label('solutionAccess', 'Dostępność rozwiązania dla studentów')}}
@@ -25,7 +25,7 @@
           {{ Form::select('courses', $courses, $exercise->course_id) }}
 
           {{ Form::label('lectures','Select Course:') }}
-          {{ Form::select('lectures', $lectures, $exercise->lecture_id) }}
+          {{ Form::select('lectures', ['Najpierw wybierz kurs']) }}
 
           {{ Form::label('tags','Select Category:') }}
           {{ Form::select('tags[]', ($tags), null, ['multiple'=>true,'class' => 'form-control margin']) }}

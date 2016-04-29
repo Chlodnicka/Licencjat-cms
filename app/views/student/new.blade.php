@@ -9,15 +9,8 @@
       </div>
       <div class="form-group">
         <div><label for="email">E-mail</label><input type="email" name="email" id="email"></div>
-        <div>
-          <label for="course">Kurs</label>
-          <select name="course" id="course">
-            <option value="1">Volvo</option>
-            <option value="2">Saab</option>
-            <option value="3">Mercedes</option>
-            <option value="4">Audi</option>
-          </select>
-        </div>
+        {{ Form::label('courses','Select Course:') }}
+        {{ Form::select('courses', $courses) }}
       </div>
       <input type="submit" value="Submit">
     </form>

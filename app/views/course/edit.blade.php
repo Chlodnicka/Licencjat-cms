@@ -13,7 +13,7 @@
       </div>
       <div class="form-group">
         {{ Form::label('description', 'Opis')}}
-        {{ Form::textarea('description', $course->description) }}
+        {{ Form::textarea('description', $course->description, array('id'=>'editor')) }}
       </div>
       {{ Form::label('tags','Select Category:') }}
       {{ Form::select('tags[]', ($tags), null, ['multiple'=>true,'class' => 'form-control margin']) }}

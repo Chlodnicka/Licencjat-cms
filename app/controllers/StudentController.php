@@ -38,7 +38,10 @@ class StudentController extends BaseController
 
     public function newOne()
     {
-        $this->layout->content = View::make('student.new');
+        $courses = Course::all()->lists('name', 'id');
+        $this->layout->content = View::make('student.new', array(
+            'courses' => $courses,
+        ));
     }
 
     public function update($id)
@@ -47,7 +50,7 @@ class StudentController extends BaseController
         $student->firstname = Input::get('firstname');
         $student->lastname = Input::get('lastname');
         $student->email = Input::get('email');
-        $student->course_id = Input::get('course');
+        $student->course_id = Input::get('courses');
         $student->save();
 
         return Redirect::route('course.view', $student->course_id);
@@ -59,7 +62,7 @@ class StudentController extends BaseController
         $student->firstname = Input::get('firstname');
         $student->lastname = Input::get('lastname');
         $student->email = Input::get('email');
-        $student->course_id = Input::get('course');
+        $student->course_id = Input::get('courses');
         $student->role_id = 3;
         $student->owner_id = 1;
         $student->owner_role_id = 1;
