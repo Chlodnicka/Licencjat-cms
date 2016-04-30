@@ -10,16 +10,20 @@ class LectureController extends BaseController
     public function index()
     {
         $lectures = Lecture::all();
+        $lecture_lead = Tree::findOrFail(5);
         $this->layout->content = View::make('lecture.index', array(
-            'lectures' => $lectures
+            'lectures' => $lectures,
+            'lecture_lead' => $lecture_lead
         ));
     }
 
     public function indexLecturesByCourses($id)
     {
         $lectures = Course::with('lectures')->find($id)->lectures;
+        $lecture_lead = Tree::findOrFail(5);
         $this->layout->content = View::make('lecture.index', array(
-            'lectures' => $lectures
+            'lectures' => $lectures,
+            'lecture_lead' => $lecture_lead
         ));
     }
 

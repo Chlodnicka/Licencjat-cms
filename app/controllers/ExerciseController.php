@@ -11,27 +11,32 @@ class ExerciseController extends BaseController
     public function index()
     {
         $exercises = Exercise::all();
+        $exercise_lead = Tree::findOrFail(6);
         $exercise_difficulty = new Exercise();
         $difficulty = $exercise_difficulty->difficulty();
         $this->layout->content = View::make('exercise.index', array(
             'exercises' => $exercises,
             'difficulty' => $difficulty,
+            'exercise_lead' => $exercise_lead,
         ));
     }
 
     public function indexExerciseByCourse($id)
     {
         $exercises = Course::with('exercises')->find($id)->exercises;
+        $exercise_lead = Tree::findOrFail(6);
         $exercise_difficulty = new Exercise();
         $difficulty = $exercise_difficulty->difficulty();
         $this->layout->content = View::make('exercise.index', array(
             'exercises' => $exercises,
             'difficulty' => $difficulty,
+            'exercise_lead' => $exercise_lead,
         ));
     }
 
     public function search()
     {
+        $exercise_lead = Tree::findOrFail(6);
         $searchParams = array(
             'content' => Input::get('content'),
             'solution' => Input::get('solution_access'),
@@ -40,31 +45,37 @@ class ExerciseController extends BaseController
         $exercises = DB::table('exercises')->join('exercise_tag', 'exercises.id', '=', 'exercise_tag.exercise_id')->where('solution_access', '=', $searchParams['solution'])->where('difficulty', '=', $searchParams['difficulty'])->where('content', 'LIKE', '%' . $searchParams['content'] . '%')->get();
         $exercise_difficulty = new Exercise();
         $difficulty = $exercise_difficulty->difficulty();
+
         $this->layout->content = View::make('exercise.index', array(
             'exercises' => $exercises,
             'difficulty' => $difficulty,
+            'exercise_lead' => $exercise_lead,
         ));
     }
 
     public function indexExerciseByLecture($id)
     {
+        $exercise_lead = Tree::findOrFail(6);
         $exercises = Lecture::with('exercises')->find($id)->exercises;
         $exercise_difficulty = new Exercise();
         $difficulty = $exercise_difficulty->difficulty();
         $this->layout->content = View::make('exercise.index', array(
             'exercises' => $exercises,
             'difficulty' => $difficulty,
+            'exercise_lead' => $exercise_lead,
         ));
     }
 
     public function indexExerciseByDifficulty($id)
     {
+        $exercise_lead = Tree::findOrFail(6);
         $exercises = DB::table('exercises')->where('difficulty', '=', $id)->get();
         $exercise_difficulty = new Exercise();
         $difficulty = $exercise_difficulty->difficulty();
         $this->layout->content = View::make('exercise.index', array(
             'exercises' => $exercises,
             'difficulty' => $difficulty,
+            'exercise_lead' => $exercise_lead,
         ));
     }
 

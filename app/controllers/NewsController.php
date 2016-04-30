@@ -10,14 +10,20 @@ class NewsController extends BaseController
     public function index()
     {
         $news = News::all();
-        $this->layout->content = View::make('news.index', array('news' => $news));
+        $news_lead = Tree::findOrFail(4);
+        $this->layout->content = View::make('news.index', array(
+            'news' => $news,
+            'news_lead' => $news_lead,
+        ));
     }
 
     public function indexByCourses($id)
     {
         $news = Course::with('news')->find($id)->news;
+        $news_lead = Tree::findOrFail(4);
         $this->layout->content = View::make('news.index', array(
-            'news' => $news
+            'news' => $news,
+            'news_lead' => $news_lead
         ));
     }
 

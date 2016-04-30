@@ -255,6 +255,45 @@ Route::get('/tag/delete/{id}/', ['uses' => 'TagController@delete']);
 Route::post('/tag/delete/{id}/', ['as' => 'tag.destroy', 'uses' => 'TagController@destroy']);
 Route::post('/tag/delete/{id}/', ['uses' => 'TagController@destroy']);
 
+/*
+ * Search
+ */
+
+Route::post('/search', ['as' => 'search.index', 'uses' => 'SearchController@index']);
+Route::post('/search/', ['uses' => 'SearchController@index']);
+
+
+/*
+ * Tree structure of service
+ */
+
+Route::get('/tree', ['as' => 'tree.index', 'uses' => 'TreeController@index']);
+Route::get('/tree/', ['uses' => 'TreeController@index']);
+Route::get('/tree/owner/{id}', ['as' => 'tree.owner', 'uses' => 'TreeController@show']);
+Route::get('/tree/owner/{id}/', ['uses' => 'TreeController@show']);
+Route::post('/tree/owner/{id}', ['as' => 'tree.owner', 'uses' => 'TreeController@edit']);
+Route::post('/tree/owner/{id}/', ['uses' => 'TreeController@edit']);
+Route::get('/tree/students/{id}', ['as' => 'tree.students', 'uses' => 'TreeController@show']);
+Route::get('/tree/students/{id}/', ['uses' => 'TreeController@show']);
+Route::post('/tree/students/{id}', ['as' => 'tree.students', 'uses' => 'TreeController@edit']);
+Route::post('/tree/students/{id}/', ['uses' => 'TreeController@edit']);
+Route::get('/tree/courses/{id}', ['as' => 'tree.courses', 'uses' => 'TreeController@show']);
+Route::get('/tree/courses/{id}/', ['uses' => 'TreeController@show']);
+Route::post('/tree/courses/{id}', ['as' => 'tree.courses', 'uses' => 'TreeController@edit']);
+Route::post('/tree/courses/{id}/', ['uses' => 'TreeController@edit']);
+Route::get('/tree/news/{id}', ['as' => 'tree.news', 'uses' => 'TreeController@show']);
+Route::get('/tree/news/{id}/', ['uses' => 'TreeController@show']);
+Route::post('/tree/news/{id}', ['as' => 'tree.news', 'uses' => 'TreeController@edit']);
+Route::post('/tree/news/{id}/', ['uses' => 'TreeController@edit']);
+Route::get('/tree/lectures/{id}', ['as' => 'tree.lectures', 'uses' => 'TreeController@show']);
+Route::get('/tree/lectures/{id}/', ['uses' => 'TreeController@show']);
+Route::post('/tree/lectures/{id}', ['as' => 'tree.lectures', 'uses' => 'TreeController@edit']);
+Route::post('/tree/lectures/{id}/', ['uses' => 'TreeController@edit']);
+Route::get('/tree/exercises/{id}', ['as' => 'tree.exercises', 'uses' => 'TreeController@show']);
+Route::get('/tree/exercises/{id}/', ['uses' => 'TreeController@show']);
+Route::post('/tree/exercises/{id}', ['as' => 'tree.exercises', 'uses' => 'TreeController@edit']);
+Route::post('/tree/exercises/{id}/', ['uses' => 'TreeController@edit']);
+
 
 /*
  * Ajax routes helpers
@@ -262,7 +301,6 @@ Route::post('/tag/delete/{id}/', ['uses' => 'TagController@destroy']);
 
 Route::get('api/dropdown', function(){
     $id = Input::get('courses');
-    $course = Course::findOrFail($id);
     $lectures = DB::table('lectures')->where('course_id', '=', $id)->get();
     return $lectures;
 });

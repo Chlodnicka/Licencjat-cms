@@ -1,6 +1,6 @@
 @section('content')
   <h1>Student! New</h1>
-  <p class="lead">Po zarejestrowaniu na kurs będziesz otrzymywał powiadomienia z nim związane - nowe wykłady, materiały, ogłoszenia dotyczące zajęć.</p>
+  <p class="lead">{{ $students_lead->lead }}</p>
   <div class="student-form">
     <form action="{{ URL::route('student.create') }}" method="post">
       <div class="form-group">

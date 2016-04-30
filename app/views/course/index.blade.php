@@ -1,7 +1,7 @@
 @section('content')
 <div class="list">
   <h1>Course! Index</h1>
-  <p class="lead">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.</p>
+  <p class="lead">{{ $courses_lead->lead }}</p>
   <div class="content course">
     @foreach( $courses as $course)
       <div class="list-item">

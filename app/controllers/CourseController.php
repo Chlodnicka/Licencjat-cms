@@ -10,16 +10,22 @@ class CourseController extends BaseController
     public function index()
     {
         $courses = Course::all();
-        $this->layout->content = View::make('course.index', array('courses' => $courses));
+        $courses_lead = Tree::findOrFail(3);
+        $this->layout->content = View::make('course.index', array(
+            'courses' => $courses,
+            'courses_lead' => $courses_lead,
+        ));
     }
 
     public function edit($id)
     {
         $course = Course::findOrFail($id);
+        $courses_lead = Tree::findOrFail(3);
         $tags = Tag::all()->lists('name','id');
         $this->layout->content = View::make('course.edit', array(
             'course' => $course,
             'tags' => $tags,
+            'courses_lead' => $courses_lead,
         ));
     }
 

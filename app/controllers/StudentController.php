@@ -14,7 +14,7 @@ class StudentController extends BaseController
         $course->name = "Wszystkie kursy";
         $this->layout->content = View::make('student.index', array(
             'students' => $students,
-            'course' => $course
+            'course' => $course,
         ));
     }
 
@@ -39,8 +39,10 @@ class StudentController extends BaseController
     public function newOne()
     {
         $courses = Course::all()->lists('name', 'id');
+        $students_lead = Tree::findOrFail(2);
         $this->layout->content = View::make('student.new', array(
             'courses' => $courses,
+            'students_lead' => $students_lead,
         ));
     }
 

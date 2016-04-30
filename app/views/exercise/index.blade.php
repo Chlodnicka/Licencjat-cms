@@ -1,5 +1,6 @@
 @section('content')
   <h1>Exercise! Index</h1>
+  <p class="lead">{{ $exercise_lead->lead }}</p>
   <div class="exercises">
     <h2>Filtruj</h2>
     {{ Form::open(array('route' => array('exercise.search'))) }}
