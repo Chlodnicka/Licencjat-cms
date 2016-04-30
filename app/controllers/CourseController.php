@@ -37,6 +37,7 @@ class CourseController extends BaseController
         $course->description = Input::get('description');
         $course->save();
         $course->tags()->sync(Input::get('tags'));
+        //$course->sendMail($id);
 
         return Redirect::route('course.view', $course->id);
     }
@@ -96,5 +97,6 @@ class CourseController extends BaseController
         return Redirect::route('course.index');
     }
 
+    
 }
 ?>

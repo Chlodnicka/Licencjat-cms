@@ -1,6 +1,7 @@
 @section('content')
 <div class="single-page">
   <h1>Informacje</h1>
+  <a href="{{ URL::route('owner.edit') }}">Edytuj</a>
   <div class="info">
     <div class="personal">
       <h2 class="name">{{ $position }} {{ $owner->firstname }} {{ $owner->lastname }}</h2>

@@ -1,5 +1,6 @@
 @section('content')
   <h1>Tag! Index</h1>
+  <a href="{{ URL::route('tag.new') }}">Nowy</a>
   <div class="tags">
     @foreach( $tags as $tag)
       <div class="tag">

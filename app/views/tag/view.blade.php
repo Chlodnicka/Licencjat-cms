@@ -1,4 +1,7 @@
 @section('content')
+  <a href="{{ URL::route('tag.new') }}">Nowy</a>
+  <a href="{{ URL::route('tag.edit', $tag->id) }}">Edytuj</a>
+  <a href="{{ URL::route('tag.delete', $tag->id) }}">Usuń</a>
   <h1>{{ $tag->name }}</h1>
   <ul>
     @foreach($courses as $course)

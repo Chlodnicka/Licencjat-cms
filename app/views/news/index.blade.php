@@ -1,6 +1,7 @@
 @section('content')
   <h1>News! Index</h1>
   <p class="lead">{{ $news_lead->lead }}</p>
+  <a href="{{ URL::route('news.new') }}">Nowy</a>
   <div class="content news">
     @foreach ($news as $newsItem)
     <div class="box-item">

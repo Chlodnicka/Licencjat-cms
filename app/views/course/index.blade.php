@@ -2,6 +2,7 @@
 <div class="list">
   <h1>Course! Index</h1>
   <p class="lead">{{ $courses_lead->lead }}</p>
+    <a href="{{ URL::route('course.new') }}">Nowy</a>
   <div class="content course">
     @foreach( $courses as $course)
       <div class="list-item">

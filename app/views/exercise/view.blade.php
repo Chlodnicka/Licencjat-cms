@@ -1,6 +1,9 @@
 @section('content')
   <h1>{{ $exercise->title }}</h1>
   <h2>{{ $exercise->course->name }}</h2>
+  <a href="{{ URL::route('exercise.new') }}">Nowy</a>
+  <a href="{{ URL::route('exercise.edit', $exercise->id) }}">Edytuj</a>
+  <a href="{{ URL::route('exercise.delete', $exercise->id) }}">Usuń</a>
   <div class="content exercise">
     <div class="properties">
       <p>{{ $exercise->difficulty }} | {{ $exercise->lecture->title }}</p>

@@ -2,6 +2,9 @@
   <div class="content course">
     <h1 class="title">{{ $course->name }}</h1>
     <p class="lead">{{$course->lead}}</p>
+    <a href="{{ URL::route('course.edit', $course->id) }}">Edytuj</a>
+    <a href="{{ URL::route('course.delete', $course->id) }}">Usuń</a>
+    <a href="{{ URL::route('course.new') }}">Nowy</a>
     <div class="richtext">
       <div>{{ $course->description }}</div>
     </div>
@@ -13,6 +16,7 @@
         @endforeach
       </ul>
       <a href="{{ URL::route('lecture.indexCourse', $course->id) }}" class="btn btn-more">Więcej <i class="fa fa-long-arrow-right"></i></a><!--dopisać index do lectures dla różnych kursów-->
+
     </div>
     <div class="exercises">
       <h2>Zadania</h2><!--dopisać index w zaleźności od wykładu, przypiwania itd!-- BW!-->

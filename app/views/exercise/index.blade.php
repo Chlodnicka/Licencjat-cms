@@ -1,6 +1,7 @@
 @section('content')
   <h1>Exercise! Index</h1>
   <p class="lead">{{ $exercise_lead->lead }}</p>
+  <a href="{{ URL::route('exercise.new') }}">Nowy</a>
   <div class="exercises">
     <h2>Filtruj</h2>
     {{ Form::open(array('route' => array('exercise.search'))) }}

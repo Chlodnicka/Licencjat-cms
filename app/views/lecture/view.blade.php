@@ -2,6 +2,9 @@
 <div class="lecture single-page">
   <h1>{{ $lecture->title }}</h1>
   <p class="lead">{{ $lecture->lead }}</p>
+  <a href="{{ URL::route('lecture.new') }}">Nowy</a>
+  <a href="{{ URL::route('lecture.edit', $lecture->id) }}">Edytuj</a>
+  <a href="{{ URL::route('lecture.delete', $lecture->id) }}">Usuń</a>
   <div class="richtext">
     {{ $lecture->content }}
   </div>
