@@ -93,7 +93,7 @@ class LectureController extends BaseController
             if( $tree_students->active == 1) {
                 $lecture->sendMail($lecture->course_id, $action);
             }
-
+            Session::flash('message', 'OK');
             return Redirect::route('lecture.view', $lecture->id);
         } else {
             return Redirect::route('homepage');
@@ -120,7 +120,7 @@ class LectureController extends BaseController
             if( $tree_students->active == 1) {
                 $lecture->sendMail($lecture->course_id, $action);
             }
-
+            Session::flash('message', 'OK');
             return Redirect::route('lecture.view', $lecture->id);
         } else {
             return Redirect::route('homepage');
@@ -164,6 +164,7 @@ class LectureController extends BaseController
             $course_id = $lecture->course->id;
             $lecture->tags()->detach();
             $lecture->delete();
+            Session::flash('message', 'OK');
             return Redirect::route('lecture.indexCourse', $course_id);
         } else {
             return Redirect::route('homepage');

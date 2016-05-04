@@ -89,7 +89,7 @@ class NewsController extends BaseController
             if( $tree_students->active == 1) {
                 $news->sendMail($news->course_id, $action);
             }
-            
+            Session::flash('message', 'OK');
             return Redirect::route('news.view', $news->id);
         } else {
             return Redirect::route('homepage');
@@ -116,7 +116,7 @@ class NewsController extends BaseController
             if( $tree_students->active == 1) {
                 $news->sendMail($news->course_id, $action);
             }
-
+            Session::flash('message', 'OK');
             return Redirect::route('news.view', $news->id);
         } else {
             return Redirect::route('homepage');
@@ -156,7 +156,7 @@ class NewsController extends BaseController
             $news = News::findOrFail($id);
             $news->tags()->detach();
             $news->delete();
-
+            Session::flash('message', 'OK');
             return Redirect::route('news.index');
         } else {
             return Redirect::route('homepage');

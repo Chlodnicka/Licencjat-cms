@@ -33,7 +33,7 @@ class TagController extends BaseController
         $tag = Tag::findOrFail($id);
         $tag->name = Input::get('name');
         $tag->save();
-
+        Session::flash('message', 'OK');
         return Redirect::route('tag.view', $tag->id);
     }
 
@@ -42,7 +42,7 @@ class TagController extends BaseController
         $tag = new Tag();
         $tag->name = Input::get('name');
         $tag->save();
-
+        Session::flash('message', 'OK');
         return Redirect::route('tag.view', $tag->id);
     }
 
@@ -79,6 +79,7 @@ class TagController extends BaseController
         $tag->exercises()->detach();
         $tag->news()->detach();
         $tag->delete();
+        Session::flash('message', 'OK');
         return Redirect::route('tag.index');
     }
 }

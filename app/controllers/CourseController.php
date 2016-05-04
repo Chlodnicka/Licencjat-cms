@@ -53,6 +53,7 @@ class CourseController extends BaseController
             if ( $tree_students->active == 1) {
                 $course->sendMail($id);
             }
+            Session::flash('message', 'OK');
             return Redirect::route('course.view', $course->id);
         } else {
             return Redirect::route('homepage');
@@ -84,7 +85,7 @@ class CourseController extends BaseController
             $course->owner_role_id = 1;
             $course->save();
             $course->tags()->sync(Input::get('tags'));
-
+            Session::flash('message', 'OK');
             return Redirect::route('course.view', $course->id);
         } else {
             return Redirect::route('homepage');
@@ -134,6 +135,7 @@ class CourseController extends BaseController
             $course->tags()->detach();
             $course->delete();
             return Redirect::route('course.index');
+            Session::flash('message', 'OK');
         } else {
             return Redirect::route('homepage');
         }

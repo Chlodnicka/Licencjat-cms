@@ -29,7 +29,7 @@ class TreeController extends BaseController
         $tree->active = Input::get('active');
         $tree->lead = Input::get('lead');
         $tree->save();
-
+        Session::flash('message', 'OK');
         return Redirect::route('tree.'.$tree->name, $tree->id);
     }
 

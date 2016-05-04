@@ -33,6 +33,9 @@
     </header>
 
     <article>
+      @if (Session::has('message'))
+        <div class="alert">{{ Session::get('message') }}</div>
+      @endif
       @yield('content')
     </article>
 

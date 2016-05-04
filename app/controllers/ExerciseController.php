@@ -156,7 +156,7 @@ class ExerciseController extends BaseController
             if( $tree_students->active == 1) {
                 $exercise->sendMail($exercise->course_id, $action);
             }
-
+            Session::flash('message', 'OK');
             return Redirect::route('exercise.view', $exercise->id);
         } else {
             return Redirect::route('homepage');
@@ -209,6 +209,7 @@ class ExerciseController extends BaseController
             if( $tree_students->active == 1) {
                 $exercise->sendMail($exercise->course_id, $action);
             }
+            Session::flash('message', 'OK');
             return Redirect::route('exercise.view', $exercise->id);
         } else {
             return Redirect::route('homepage');
@@ -251,9 +252,18 @@ class ExerciseController extends BaseController
             $course_id = $exercise->course->id;
             $exercise->tags()->detach();
             $exercise->delete();
+            Session::flash('message', 'OK');
             return Redirect::route('exercise.indexCourse', $course_id);
         } else {
             return Redirect::route('homepage');
+        }
+    }
+
+    public function generateExam() {
+        $tree = Tree::findOrFail(3);
+        $tree_exercise = Tree::findOrFail(6);
+        if ( $tree->active == 1 && $tree_exercise->active == 1 ) {
+
         }
     }
 

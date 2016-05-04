@@ -160,10 +160,8 @@ Route::get('/exercise/delete/{id}', ['as' => 'exercise.delete', 'uses' => 'Exerc
 Route::get('/exercise/delete/{id}/', ['uses' => 'ExerciseController@delete']);
 Route::post('/exercise/delete/{id}', ['as' => 'exercise.destroy', 'uses' => 'ExerciseController@destroy']);
 Route::post('/exercise/delete/{id}/', ['uses' => 'ExerciseController@destroy']);
-Route::get('/exercise/generateExam', ['uses' => 'ExerciseController@index']);
-Route::get('/exercise/generateExam/', ['uses' => 'ExerciseController@index']);
-Route::get('/exercise/generateExam/{id}', ['as' => 'exercise.generate', 'uses' => 'ExerciseController@generateExam']);
-Route::get('/exercise/generateExam/{id}/', ['uses' => 'ExerciseController@generateExam']);
+Route::get('/exercise/generatePDF', ['as' => 'exercise.generate', 'uses' => 'ExerciseController@generateExam']);
+Route::get('/exercise/generatePDF/', ['uses' => 'ExerciseController@generateExam']);
 
 /**
 * Attachment routing

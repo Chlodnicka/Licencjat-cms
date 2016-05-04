@@ -50,7 +50,7 @@ class OwnerController extends BaseController
         $owner->content = Input::get('content');
         $owner->institute = Input::get('institute');
         $owner->save();
-
+        Session::flash('message', 'OK');
         $tree = Tree::findOrFail(1);
         if ( $tree->active == 1) {
             return Redirect::route('owner.index');
