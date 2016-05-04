@@ -6,7 +6,7 @@
   <a href="{{ URL::route('exercise.delete', $exercise->id) }}">Usuń</a>
   <div class="content exercise">
     <div class="properties">
-      <p>{{ $exercise->difficulty }} | {{ $exercise->lecture->title }}</p>
+      <p>{{ $exercise->difficulty }} | <!--#{# #$exercise->lecture->title }}--></p>
       <div class="tags"><!--ogarnąć tagi!-->
         <p><a href="#">tag 1</a></p>
         <p><a href="#">tag 2</a></p>

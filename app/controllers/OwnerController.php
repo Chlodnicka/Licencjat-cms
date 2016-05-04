@@ -11,14 +11,18 @@ class OwnerController extends BaseController
     protected $layout = 'layouts.master';
     public function index()
     {
-        $owner = Owner::find(1);
-        $positions = $owner->position();
-        $position = $positions[$owner->position];
-        $this->layout->content = View::make('owner.index', array(
-            'owner' => $owner,
-            'position' => $position,
-        ));
-
+        $tree = Tree::findOrFail(1);
+        if ( $tree->active == 1) {
+            $owner = Owner::find(1);
+            $positions = $owner->position();
+            $position = $positions[$owner->position];
+            $this->layout->content = View::make('owner.index', array(
+                'owner' => $owner,
+                'position' => $position,
+            ));
+        } else {
+            return Redirect::route('homepage');
+        }
     }
 
     public function edit()
@@ -47,7 +51,12 @@ class OwnerController extends BaseController
         $owner->institute = Input::get('institute');
         $owner->save();
 
-        return Redirect::route('owner.index');
+        $tree = Tree::findOrFail(1);
+        if ( $tree->active == 1) {
+            return Redirect::route('owner.index');
+        } else {
+            return Redirect::route('homepage');
+        }
     }
 
 }

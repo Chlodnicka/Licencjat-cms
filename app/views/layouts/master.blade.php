@@ -10,7 +10,7 @@
     <header>
       <nav>
 
-          <div class="logo"><a href="/"></a><p>Adam Kowalski</p></div>
+          <div class="logo"><a href="/"></a><p>Strona domowa</p></div>
           <div class="main-menu">
             <ul>
               <li>{{ HTML::linkRoute('owner.index', 'kontakt', array(), array()) }}</li>
@@ -58,8 +58,8 @@
           </div>
         </div>
         <div class="copyrights">
-          <p class="content">copyright by Adam Kowalski</p>
-          <p class="powered">powered by Maja Chłodnicka</p>
+          <p class="content">copyright by Author</p>
+          <p class="powered">powered by </p>
         </div>
       </div>
     </footer>

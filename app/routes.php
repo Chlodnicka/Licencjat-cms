@@ -14,7 +14,7 @@
 /**
 * Main page
 */
-Route::get('/', 'HomeController@showMainPage');
+Route::get('/', ['as' => 'homepage', 'uses' => 'HomeController@showMainPage']);
 
 
 /**

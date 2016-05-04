@@ -385,12 +385,18 @@ body {
   .form-group {
     display: block;
     padding-bottom: 20px;
+    #cke_editor, .cke_inner, .cke_reset {
+      display: block;
+      width: 100%;
+      position: static;
+      height: auto;
+    }
     div {
-      //display: inline-block;
-      //width: 49.7%;
-      //min-width: 340px;
-      //position: relative;
-     // height: 37px;
+      display: inline-block;
+      width: 49.7%;
+      min-width: 340px;
+      position: relative;
+      height: 37px;
       input, select {
         width: 220px;
         margin: 0;
