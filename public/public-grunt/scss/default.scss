@@ -226,9 +226,9 @@ body {
             @include hover;
           }
           input[type="checkbox"] {
-            display: none;
+           // display: none;
           }
-          input[type="checkbox"] + label span {
+          input[type="checkbox"] + label:before {
             display: inline-block;
             width: 19px;
             height: 19px;

@@ -16,9 +16,28 @@ class HomeController extends BaseController {
 	|
 	*/
 
+	protected $layout = 'layouts.master';
+	
 	public function showMainPage()
 	{
-		return View::make('hello');
+		$tree_owner = Tree::findOrFail(1);
+		if ( $tree_owner->active == 1) {
+			$owner = Owner::findOrFail(1);
+		}
+		$tree_news = Tree::findOrFail(4);
+		if ( $tree_news->active == 1) {
+			$news = News::orderby('updated_at', 'desc')->take(3)->get();
+		}
+		$tree_courses = Tree::findOrFail(3);
+		if ( $tree_courses->active == 1) {
+			$courses = Course::take(2)->get();
+		}
+		$this->layout->content = View::make('home', array(
+			'courses' => $courses,
+			'news' => $news,
+			'owner' => $owner,
+		));
+
 	}
 
 }

@@ -126,14 +126,12 @@ Route::get('/exercise/new', ['as' => 'exercise.new', 'uses' => 'ExerciseControll
 Route::get('/exercise/new/', ['uses' => 'ExerciseController@newOne']);
 Route::post('/exercise/new/', ['as'=> 'exercise.create', 'uses' => 'ExerciseController@create']);
 Route::post('/exercise/new/', ['uses' => 'ExerciseController@create']);
-Route::get('/exercise', ['as' => 'exercise.index', 'uses' => 'ExerciseController@index']);
-Route::get('/exercise', ['uses' => 'ExerciseController@index']);
-Route::get('/exercise/index', ['uses' => 'ExerciseController@index']);
-Route::get('/exercise/index/', ['uses' => 'ExerciseController@index']);
-Route::get('/exercise/{id}', ['as'=>'exercise.indexCourse', 'uses' => 'ExerciseController@indexExerciseByCourse']);
-Route::get('/exercise/{id}/', ['uses' => 'ExerciseController@indexExerciseByCourse']);
-Route::get('/exercise/index/{id}', ['uses' => 'ExerciseController@indexExerciseByCourse']);
-Route::get('/exercise/index/{id}/', ['uses' => 'ExerciseController@indexExerciseByCourse']);
+Route::get('/exercise/generate/{id}', ['as' => 'exercise.generate', 'uses' => 'ExerciseController@generate']);
+Route::get('/exercise/generate/{id}/', ['uses' => 'ExerciseController@generate']);
+Route::post('/exercise/generate/{id}', ['as' => 'exercise.generate', 'uses' => 'ExerciseController@generate']);
+Route::post('/exercise/generate/{id}/', ['uses' => 'ExerciseController@generate']);
+Route::post('/exercise/generateByInput', ['as' => 'exercise.generateByInput', 'uses' => 'ExerciseController@generateByInput']);
+Route::post('/exercise/generateByInput/', ['uses' => 'ExerciseController@generateByInput']);
 Route::post('/exercise/search', ['as'=>'exercise.search', 'uses' => 'ExerciseController@search']);
 Route::post('/exercise/search/', ['uses' => 'ExerciseController@search']);
 Route::get('/exercise/lecture', ['uses' => 'ExerciseController@index']);
@@ -160,8 +158,14 @@ Route::get('/exercise/delete/{id}', ['as' => 'exercise.delete', 'uses' => 'Exerc
 Route::get('/exercise/delete/{id}/', ['uses' => 'ExerciseController@delete']);
 Route::post('/exercise/delete/{id}', ['as' => 'exercise.destroy', 'uses' => 'ExerciseController@destroy']);
 Route::post('/exercise/delete/{id}/', ['uses' => 'ExerciseController@destroy']);
-Route::get('/exercise/generatePDF', ['as' => 'exercise.generate', 'uses' => 'ExerciseController@generateExam']);
-Route::get('/exercise/generatePDF/', ['uses' => 'ExerciseController@generateExam']);
+Route::get('/exercise', ['as' => 'exercise.index', 'uses' => 'ExerciseController@index']);
+Route::get('/exercise', ['uses' => 'ExerciseController@index']);
+Route::get('/exercise/index', ['uses' => 'ExerciseController@index']);
+Route::get('/exercise/index/', ['uses' => 'ExerciseController@index']);
+Route::get('/exercise/{id}', ['as'=>'exercise.indexCourse', 'uses' => 'ExerciseController@indexExerciseByCourse']);
+Route::get('/exercise/{id}/', ['uses' => 'ExerciseController@indexExerciseByCourse']);
+Route::get('/exercise/index/{id}', ['uses' => 'ExerciseController@indexExerciseByCourse']);
+Route::get('/exercise/index/{id}/', ['uses' => 'ExerciseController@indexExerciseByCourse']);
 
 /**
 * Attachment routing
@@ -292,6 +296,8 @@ Route::get('/tree/exercises/{id}/', ['uses' => 'TreeController@show']);
 Route::post('/tree/exercises/{id}', ['as' => 'tree.exercises', 'uses' => 'TreeController@edit']);
 Route::post('/tree/exercises/{id}/', ['uses' => 'TreeController@edit']);
 
+
+Route::get('/print', ['as'=> 'print', 'uses' => 'PrintController@index']);
 
 /*
  * Ajax routes helpers

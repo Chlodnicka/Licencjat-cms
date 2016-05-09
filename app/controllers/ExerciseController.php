@@ -71,6 +71,55 @@ class ExerciseController extends BaseController
         }
     }
 
+    public function generate($id)
+    {
+        $tree = Tree::findOrFail(3);
+        $tree_exercise = Tree::findOrFail(6);
+        if ( $tree->active == 1 && $tree_exercise->active == 1) {
+            $searchParams = array(
+                'content' => Input::get('content'),
+                'number' => Input::get('number'),
+                'difficulty' => Input::get('difficulty'),
+                'exercise_tags' => Input::get('exercise_tags'),
+                'exercise_lecture' => Input::get('exercise_lecture'),
+            );
+            $course_id = $id;
+            $exercises = DB::table('exercises')->join('exercise_tag', 'exercises.id', '=', 'exercise_tag.exercise_id')->where('course_id', '=', $id)->where('difficulty', '=', $searchParams['difficulty'])->where('lecture_id', '=', $searchParams['exercise_lecture'])->where('tag_id', '=', $searchParams['exercise_tags'])->where('content', 'LIKE', '%' . $searchParams['content'] . '%')->limit($searchParams['number'])->get();
+            $exercise_tags = DB::table('exercise_tag')->join('exercises', 'exercises.id', '=', 'exercise_tag.exercise_id')->where('course_id', '=', $id)->distinct()->lists('tag_id');
+            $exercise_lectures = DB::table('exercises')->where('course_id', '=', $id)->whereNotNull('lecture_id')->distinct()->lists('lecture_id');
+            $exercise_difficulty = new Exercise();
+            $difficulty = $exercise_difficulty->difficulty();
+            $this->layout->content = View::make('exercise.generate', array(
+                'exercises' => $exercises,
+                'difficulty' => $difficulty,
+                'exercise_lectures' => $exercise_lectures,
+                'exercise_tags' =>$exercise_tags,
+                'course_id' => $course_id,
+            ));
+        } else {
+            return Redirect::route('homepage');
+        }
+    }
+
+
+    public function generateByInput(){
+        $exercises_checked = Input::get('exercises');
+        $checked = array_map( create_function('$value', 'return (int)$value;'),
+            $exercises_checked);
+
+        if(is_array($checked))
+        {
+            $exercises['exercises'] = DB::table('exercises')->whereIn('id', $checked)->get();
+        }
+        $answers = Input::get('answers');
+        if($answers != 'on'){
+            $pdf = PDF::loadView('exercise.generated', $exercises)->download();
+        } else {
+            $pdf = PDF::loadView('exercise.generatedAnswers', $exercises)->download();
+        }
+        return $pdf;
+    }
+
     public function indexExerciseByLecture($id)
     {
         $tree = Tree::findOrFail(3);
