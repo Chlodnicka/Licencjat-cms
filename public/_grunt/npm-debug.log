@@ -1,0 +1,145 @@
+info it worked if it ends with ok
+verbose cli [ 'node', '/usr/bin/npm', 'install' ]
+info using npm@1.1.16
+info using node@v0.6.15
+verbose /usr/bin/node node symlink
+verbose config file /home/epi/13_chlodnicka/.npmrc
+verbose config file /usr/etc/npmrc
+verbose config file /usr/lib/nodejs/npm/npmrc
+verbose caching /home/epi/13_chlodnicka/projekt/public/_grunt/package.json
+verbose loadDefaults vcms25front@0.0.1
+verbose readDependencies: using package.json deps
+verbose where, deps [ '/home/epi/13_chlodnicka/projekt/public/_grunt',
+verbose where, deps   [ 'grunt',
+verbose where, deps     'grunt-autoprefixer',
+verbose where, deps     'grunt-contrib-uglify',
+verbose where, deps     'grunt-contrib-watch',
+verbose where, deps     'grunt-sass',
+verbose where, deps     'grunt-spritesmith' ] ]
+verbose from cache /home/epi/13_chlodnicka/projekt/public/_grunt/package.json
+info preinstall vcms25front@0.0.1
+verbose from cache /home/epi/13_chlodnicka/projekt/public/_grunt/package.json
+verbose readDependencies: using package.json deps
+verbose cache add [ 'grunt@^0.4.5', null ]
+silly cache add: name, spec, args [ undefined, 'grunt@^0.4.5', [ 'grunt@^0.4.5', null ] ]
+verbose parsed url { pathname: 'grunt@^0.4.5',
+verbose parsed url   path: 'grunt@^0.4.5',
+verbose parsed url   href: 'grunt@^0.4.5' }
+silly cache add: name, spec, args [ 'grunt', '^0.4.5', [ 'grunt', '^0.4.5' ] ]
+verbose parsed url { pathname: '^0.4.5', path: '^0.4.5', href: '^0.4.5' }
+verbose addNamed [ 'grunt', '^0.4.5' ]
+verbose addNamed [ null, null ]
+info addNameTag [ 'grunt', '^0.4.5' ]
+verbose cache add [ 'grunt-autoprefixer@^2.2.0', null ]
+silly cache add: name, spec, args [ undefined,
+silly cache add: name, spec, args   'grunt-autoprefixer@^2.2.0',
+silly cache add: name, spec, args   [ 'grunt-autoprefixer@^2.2.0', null ] ]
+verbose parsed url { pathname: 'grunt-autoprefixer@^2.2.0',
+verbose parsed url   path: 'grunt-autoprefixer@^2.2.0',
+verbose parsed url   href: 'grunt-autoprefixer@^2.2.0' }
+silly cache add: name, spec, args [ 'grunt-autoprefixer',
+silly cache add: name, spec, args   '^2.2.0',
+silly cache add: name, spec, args   [ 'grunt-autoprefixer', '^2.2.0' ] ]
+verbose parsed url { pathname: '^2.2.0', path: '^2.2.0', href: '^2.2.0' }
+verbose addNamed [ 'grunt-autoprefixer', '^2.2.0' ]
+verbose addNamed [ null, null ]
+info addNameTag [ 'grunt-autoprefixer', '^2.2.0' ]
+verbose cache add [ 'grunt-contrib-uglify@^0.7.0', null ]
+silly cache add: name, spec, args [ undefined,
+silly cache add: name, spec, args   'grunt-contrib-uglify@^0.7.0',
+silly cache add: name, spec, args   [ 'grunt-contrib-uglify@^0.7.0', null ] ]
+verbose parsed url { pathname: 'grunt-contrib-uglify@^0.7.0',
+verbose parsed url   path: 'grunt-contrib-uglify@^0.7.0',
+verbose parsed url   href: 'grunt-contrib-uglify@^0.7.0' }
+silly cache add: name, spec, args [ 'grunt-contrib-uglify',
+silly cache add: name, spec, args   '^0.7.0',
+silly cache add: name, spec, args   [ 'grunt-contrib-uglify', '^0.7.0' ] ]
+verbose parsed url { pathname: '^0.7.0', path: '^0.7.0', href: '^0.7.0' }
+verbose addNamed [ 'grunt-contrib-uglify', '^0.7.0' ]
+verbose addNamed [ null, null ]
+info addNameTag [ 'grunt-contrib-uglify', '^0.7.0' ]
+verbose raw, before any munging grunt
+verbose url resolving [ 'https://registry.npmjs.org/', './grunt' ]
+verbose url resolved https://registry.npmjs.org/grunt
+http GET https://registry.npmjs.org/grunt
+verbose raw, before any munging grunt-autoprefixer
+verbose url resolving [ 'https://registry.npmjs.org/', './grunt-autoprefixer' ]
+verbose url resolved https://registry.npmjs.org/grunt-autoprefixer
+http GET https://registry.npmjs.org/grunt-autoprefixer
+verbose raw, before any munging grunt-contrib-uglify
+verbose url resolving [ 'https://registry.npmjs.org/', './grunt-contrib-uglify' ]
+verbose url resolved https://registry.npmjs.org/grunt-contrib-uglify
+http GET https://registry.npmjs.org/grunt-contrib-uglify
+verbose cache add [ 'grunt-contrib-watch@^0.6.1', null ]
+silly cache add: name, spec, args [ undefined,
+silly cache add: name, spec, args   'grunt-contrib-watch@^0.6.1',
+silly cache add: name, spec, args   [ 'grunt-contrib-watch@^0.6.1', null ] ]
+verbose parsed url { pathname: 'grunt-contrib-watch@^0.6.1',
+verbose parsed url   path: 'grunt-contrib-watch@^0.6.1',
+verbose parsed url   href: 'grunt-contrib-watch@^0.6.1' }
+silly cache add: name, spec, args [ 'grunt-contrib-watch',
+silly cache add: name, spec, args   '^0.6.1',
+silly cache add: name, spec, args   [ 'grunt-contrib-watch', '^0.6.1' ] ]
+verbose parsed url { pathname: '^0.6.1', path: '^0.6.1', href: '^0.6.1' }
+verbose addNamed [ 'grunt-contrib-watch', '^0.6.1' ]
+verbose addNamed [ null, null ]
+info addNameTag [ 'grunt-contrib-watch', '^0.6.1' ]
+verbose cache add [ 'grunt-sass@^1.0.0', null ]
+silly cache add: name, spec, args [ undefined, 'grunt-sass@^1.0.0', [ 'grunt-sass@^1.0.0', null ] ]
+verbose parsed url { pathname: 'grunt-sass@^1.0.0',
+verbose parsed url   path: 'grunt-sass@^1.0.0',
+verbose parsed url   href: 'grunt-sass@^1.0.0' }
+silly cache add: name, spec, args [ 'grunt-sass', '^1.0.0', [ 'grunt-sass', '^1.0.0' ] ]
+verbose parsed url { pathname: '^1.0.0', path: '^1.0.0', href: '^1.0.0' }
+verbose addNamed [ 'grunt-sass', '^1.0.0' ]
+verbose addNamed [ null, null ]
+info addNameTag [ 'grunt-sass', '^1.0.0' ]
+verbose cache add [ 'grunt-spritesmith@^3.5.0', null ]
+silly cache add: name, spec, args [ undefined,
+silly cache add: name, spec, args   'grunt-spritesmith@^3.5.0',
+silly cache add: name, spec, args   [ 'grunt-spritesmith@^3.5.0', null ] ]
+verbose parsed url { pathname: 'grunt-spritesmith@^3.5.0',
+verbose parsed url   path: 'grunt-spritesmith@^3.5.0',
+verbose parsed url   href: 'grunt-spritesmith@^3.5.0' }
+silly cache add: name, spec, args [ 'grunt-spritesmith',
+silly cache add: name, spec, args   '^3.5.0',
+silly cache add: name, spec, args   [ 'grunt-spritesmith', '^3.5.0' ] ]
+verbose parsed url { pathname: '^3.5.0', path: '^3.5.0', href: '^3.5.0' }
+verbose addNamed [ 'grunt-spritesmith', '^3.5.0' ]
+verbose addNamed [ null, null ]
+info addNameTag [ 'grunt-spritesmith', '^3.5.0' ]
+verbose raw, before any munging grunt-contrib-watch
+verbose url resolving [ 'https://registry.npmjs.org/', './grunt-contrib-watch' ]
+verbose url resolved https://registry.npmjs.org/grunt-contrib-watch
+http GET https://registry.npmjs.org/grunt-contrib-watch
+verbose raw, before any munging grunt-sass
+verbose url resolving [ 'https://registry.npmjs.org/', './grunt-sass' ]
+verbose url resolved https://registry.npmjs.org/grunt-sass
+http GET https://registry.npmjs.org/grunt-sass
+verbose raw, before any munging grunt-spritesmith
+verbose url resolving [ 'https://registry.npmjs.org/', './grunt-spritesmith' ]
+verbose url resolved https://registry.npmjs.org/grunt-spritesmith
+http GET https://registry.npmjs.org/grunt-spritesmith
+ERR! Error: SSL Error: CERT_UNTRUSTED
+ERR!     at ClientRequest.<anonymous> (/usr/lib/nodejs/npm/node_modules/request/main.js:483:26)
+ERR!     at ClientRequest.emit (events.js:67:17)
+ERR!     at HTTPParser.onIncoming (http.js:1261:11)
+ERR!     at HTTPParser.onHeadersComplete (http.js:102:31)
+ERR!     at CleartextStream.ondata (http.js:1150:24)
+ERR!     at CleartextStream._push (tls.js:375:27)
+ERR!     at SecurePair.cycle (tls.js:734:20)
+ERR!     at EncryptedStream.write (tls.js:130:13)
+ERR!     at Socket.ondata (stream.js:38:26)
+ERR!     at Socket.emit (events.js:67:17)
+ERR! You may report this log at:
+ERR!     <http://github.com/isaacs/npm/issues>
+ERR! or email it to:
+ERR!     <npm-@googlegroups.com>
+ERR! 
+ERR! System Linux 3.2.0-77-generic
+ERR! command "node" "/usr/bin/npm" "install"
+ERR! cwd /home/epi/13_chlodnicka/projekt/public/_grunt
+ERR! node -v v0.6.15
+ERR! npm -v 1.1.16
+ERR! message SSL Error: CERT_UNTRUSTED
+verbose exit [ 1, true ]
