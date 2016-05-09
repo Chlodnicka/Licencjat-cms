@@ -1,5 +1,6 @@
 @section('content')
   <h1>Exercise! Edit</h1>
+  @if(!empty($exercise))
     <div class="edit exercise">
         {{ Form::open(array('route' => array('exercise.update', $exercise->id))) }}
         <div class="form-cluster">
@@ -34,4 +35,7 @@
         </div>
         {{ Form::close() }}
     </div>
+  @else
+    <p class="no-result">Dane ćwiczenie nie istnieje</p>
+  @endif
 @stop

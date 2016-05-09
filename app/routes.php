@@ -299,6 +299,17 @@ Route::post('/tree/exercises/{id}/', ['uses' => 'TreeController@edit']);
 
 Route::get('/print', ['as'=> 'print', 'uses' => 'PrintController@index']);
 
+View::composer('layouts.master', function($view){
+    $tree = Tree::menu();
+    $courses = Course::all_courses();
+    $owner = Owner::findOrFail(1);
+    $view->with(array(
+        'tree' => $tree,
+        'courses' => $courses,
+        'owner' => $owner,
+    ));
+});
+
 /*
  * Ajax routes helpers
  */

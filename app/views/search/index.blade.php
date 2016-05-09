@@ -3,11 +3,20 @@
         <h1>Search! Index</h1>
         <div class="search-list">
             <div class="categories">
-                <a href="#courses"><p class="search-category">Kursy</p></a>
-                <a href="#lectures"><p class="search-category">Wykłady</p></a>
-                <a href="#exercises"><p class="search-category">Zadania</p></a>
-                <a href="#news"><p class="search-category">Aktualności</p></a>
+                @if(!empty($courses))
+                    <a href="#courses"><p class="search-category">Kursy</p></a>
+                @endif
+                @if(!empty($lectures))
+                    <a href="#lectures"><p class="search-category">Wykłady</p></a>
+                @endif
+                @if(!empty($exercises))
+                    <a href="#exercises"><p class="search-category">Zadania</p></a>
+                @endif
+                @if(!empty($news))
+                    <a href="#news"><p class="search-category">Aktualności</p></a>
+                @endif
             </div>
+            @if(!empty($courses))
             <div id="courses">
                 <h3>Kursy</h3>
                 @foreach($courses as $course)
@@ -20,6 +29,8 @@
                     <div class="clearfix"></div>
                 @endforeach
             </div>
+            @endif
+            @if(!empty($lectures))
             <div id="lectures">
                 <h3>Wykłady</h3>
                 @foreach($lectures as $lecture)
@@ -31,6 +42,8 @@
                     <div class="clearfix"></div>
                 @endforeach
             </div>
+            @endif
+            @if(!empty($exercises))
             <div id="exercises">
                 <h3>Zadania</h3>
                 @foreach($exercises as $exercise)
@@ -42,6 +55,8 @@
                     <div class="clearfix"></div>
                 @endforeach
             </div>
+            @endif
+            @if(!empty($news))
             <div id="news">
                 <h3>Aktualności</h3>
                 @foreach($news as $newsItem)
@@ -53,7 +68,7 @@
                     <div class="clearfix"></div>
                 @endforeach
             </div>
-
+            @endif
         </div>
     </div>
 @stop

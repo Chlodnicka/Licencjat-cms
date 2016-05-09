@@ -7,6 +7,7 @@
 class TreeController extends BaseController
 {
     protected $layout = 'layouts.master';
+    
     public function index()
     {
         $tree = Tree::all();

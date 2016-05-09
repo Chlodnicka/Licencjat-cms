@@ -3,21 +3,16 @@
 <html lang="PL-pl">
   <head>
 	 <meta http-equiv="content-type" content="text/html; charset=utf-8">
-	 <title>Strona domowa</title>
+	 <title>@yield('title') Strona domowa</title>
    <link href="{{ URL::asset('/assets/css/default.min.css') }}" rel="stylesheet">
   </head>
   <body>
     <header>
       <nav>
 
-          <div class="logo"><a href="/"></a><p>Strona domowa</p></div>
+          <div class="logo"><a href="/"><p>{{ $owner->firstname }} {{ $owner->lastname }}</p></a></div>
           <div class="main-menu">
-            <ul>
-              <li>{{ HTML::linkRoute('owner.index', 'kontakt', array(), array()) }}</li>
-              <li>{{ HTML::linkRoute('news.index', 'aktualności', array(), array()) }}</li>
-              <li>{{ HTML::linkRoute('course.index', 'kursy', array(), array()) }}</li>
-              <li>{{ HTML::linkRoute('student.new', 'rejestracja', array(), array()) }}</li>
-            </ul>
+              @include('layouts.menu')
           </div>
 
         <div class="side-menu">
@@ -44,24 +39,15 @@
         <div class="sitemap">
           <div>
             <h4><a href="">Serwis</a></h4>
-            <ul>
-              <a href=""><li>Kontakt</li></a>
-              <a href=""><li>Aktualności</li></a>
-              <a href=""><li>Rejestracja</li></a>
-            </ul>
+            @include('layouts.menu')
           </div>
           <div>
             <h4><a href="">Kursy</a></h4>
-            <ul>
-              <a href=""><li>Kurs 1</li></a>
-              <a href=""><li>Kurs 2</li></a>
-              <a href=""><li>Kurs 3</li></a>
-              <a href=""><li>Kurs 4</li></a>
-            </ul>
+            @include('layouts.courses')
           </div>
         </div>
         <div class="copyrights">
-          <p class="content">copyright by Author</p>
+          <p class="content">copyright by {{ $owner->firstname }} {{ $owner->lastname }}</p>
           <p class="powered">powered by </p>
         </div>
       </div>
