@@ -1,28 +1,28 @@
 @section('content')
-  <h1>Course! Edit</h1>
+  <h1>{{ trans('app.edit-course') }} {{ $course->name }}</h1>
   @if (!empty($course))
     <div class="edit course">
       {{ Form::open(array('route' => array('course.update', $course->id))) }}
       <div class="form-cluster">
         <div class="form-group">
-          {{ Form::label('name', 'Nazwa')}}
+          {{ Form::label('name', Lang::get('common.name'))}}
           {{ Form::text('name', $course->name) }}
         </div>
         <div class="form-group">
-          {{ Form::label('lead', 'Lead')}}
+          {{ Form::label('lead', Lang::get('common.lead'))}}
           {{ Form::text('lead', $course->lead) }}
         </div>
         <div class="form-group">
-          {{ Form::label('description', 'Opis')}}
+          {{ Form::label('description', Lang::get('common.description'))}}
           {{ Form::textarea('description', $course->description, array('id'=>'editor')) }}
         </div>
-        {{ Form::label('tags','Select Category:') }}
+        {{ Form::label('tags', Lang::get('common.tags-category')) }}
         {{ Form::select('tags[]', ($tags), null, ['multiple'=>true,'class' => 'form-control margin']) }}
-        {{ Form::submit('Submit') }}
+        {{ Form::submit(Lang::get('common.submit')) }}
       </div>
       {{ Form::close() }}
     </div>
   @else
-    <p>Dany kurs nie istnieje</p>
+    <p class="no-result">{{ trans('app.no-such-course') }}</p>
   @endif
 @stop

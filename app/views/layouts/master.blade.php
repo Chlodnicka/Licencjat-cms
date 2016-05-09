@@ -3,7 +3,7 @@
 <html lang="PL-pl">
   <head>
 	 <meta http-equiv="content-type" content="text/html; charset=utf-8">
-	 <title>@yield('title') Strona domowa</title>
+	 <title>@yield('title') {{ trans('common.homepage') }}</title>
    <link href="{{ URL::asset('/assets/css/default.min.css') }}" rel="stylesheet">
   </head>
   <body>
@@ -38,17 +38,17 @@
       <div class="container">
         <div class="sitemap">
           <div>
-            <h4><a href="">Serwis</a></h4>
+            <h4><a href="">{{ trans('common.sitemap') }}</a></h4>
             @include('layouts.menu')
           </div>
           <div>
-            <h4><a href="">Kursy</a></h4>
+            <h4><a href="">{{ trans('app.courses') }}</a></h4>
             @include('layouts.courses')
           </div>
         </div>
         <div class="copyrights">
-          <p class="content">copyright by {{ $owner->firstname }} {{ $owner->lastname }}</p>
-          <p class="powered">powered by </p>
+          <p class="content">{{ trans('common.copy') }} {{ $owner->firstname }} {{ $owner->lastname }}</p>
+          <p class="powered">{{ trans('common.powered') }} </p>
         </div>
       </div>
     </footer>

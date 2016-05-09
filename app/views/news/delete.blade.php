@@ -1,14 +1,14 @@
 @section('content')
-  <h1>News! Delete</h1>
+  <h1>{{ trans('app.news-delete') }} {{ $news->title }}</h1>
   @if(!empty($news))
     <div class="delete news">
-      <p class="lead">Czy na pewno chcesz usunąć wiadomość?</p>
-      <a href="#" class="btn btn-back">Wróć</a>
+      <p class="lead">{{ trans('app.news-delete-message') }}</p>
+      <a href="#" class="btn btn-back">{{ trans('common.back') }}</a>
       <form action="{{ URL::route('news.destroy', $news->id) }}" method="post">
-        <input type="submit" class="btn btn-delete" value="Usuń">
+        <input type="submit" class="btn btn-delete" value="{{ trans('common.delete') }}">
       </form>
     </div>
   @else
-    <p class="no-result">Dana aktualność nie istnieje</p>
+    <p class="no-result">{{ trans('no-such-news-item') }}</p>
   @endif
 @stop

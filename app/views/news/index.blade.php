@@ -1,10 +1,10 @@
 @section('content')
-  <h1>News! Index</h1>
+  <h1>{{ trans('app.news-list') }}</h1>
   @if(!empty($news_lead->lead))
     <p class="lead">{{ $news_lead->lead }}</p>
   @endif
   <div class="action-buttons">
-    <a href="{{ URL::route('news.new') }}">Nowy</a>
+    <a href="{{ URL::route('news.new') }}">{{ trans('common.new') }}</a>
   </div>
   @if(!empty($news))
     <div class="content news">
@@ -19,7 +19,7 @@
         @if(!empty($newsItem->lead))
           <p class="item-lead">{{ $newsItem->lead }}</p>
         @endif
-        <a href="{{ URL::route('news.view', $newsItem->id) }}" class="btn btn-more">Zobacz więcej <i class="fa fa-long-arrow-right"></i></a>
+        <a href="{{ URL::route('news.view', $newsItem->id) }}" class="btn btn-more">{{ trans('see-more') }} <i class="fa fa-long-arrow-right"></i></a>
       </div>
       @endforeach
     </div>

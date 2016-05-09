@@ -1,14 +1,14 @@
 @section('content')
-  <h1>Course! Delete</h1>
+  <h1>{{ trans('course-delete') }} {{ $course->name }}</h1>
   @if (!empty($course))
     <div class="delete course">
-      <p class="lead">Czy na pewno chcesz usunąć kurs? Wraz z nim zostaną usunięte wszystkie materiały z nim powiązane: wyklady i zadania.</p>
-      <a href="#" class="btn btn-back">Wróć</a>
+      <p class="lead">{{ trans('app.course-delete-message') }}</p>
+      <a href="#" class="btn btn-back">{{ trans('common.back') }}</a>
       <form action="{{ URL::route('course.destroy', $course->id) }}" method="post">
-        <input type="submit" class="btn btn-delete" value="Usuń">
+        <input type="submit" class="btn btn-delete" value="{{ trans('common.delete') }}">
       </form>
     </div>
   @else
-    <p>Dany kurs nie istnieje</p>
+    <p class="no-result">{{ trans('app.no-such-course') }}</p>
   @endif
 @stop
