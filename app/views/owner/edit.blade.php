@@ -1,49 +1,49 @@
 @section('content')
-  <h1>Owner! Edit</h1>
+  <h1>{{ trans('app.owner-edit') }}</h1>
   <div class="new owner">
     {{ Form::open(array('route' => array('owner.update', $owner->id))) }}
     <div class="form-cluster">
       <div class="form-group">
-        {{ Form::label('firstname', 'Imię')}}
+        {{ Form::label('firstname', Lang::get('common.firstname'))}}
         {{ Form::text('firstname', $owner->firstname) }}
       </div>
       <div class="form-group">
-        {{ Form::label('lastname', 'Nazwisko')}}
+        {{ Form::label('lastname',  Lang::get('common.lastname'))}}
         {{ Form::text('lastname', $owner->lastname) }}
       </div>
       <div class="form-group">
-        {{ Form::label('email', 'E-mail')}}
+        {{ Form::label('email',  Lang::get('common.email'))}}
         {{ Form::text('email', $owner->email) }}
       </div>
       <div class="form-group">
-        {{ Form::label('phone', 'Telefon')}}
+        {{ Form::label('phone',  Lang::get('common.phone'))}}
         {{ Form::text('phone', $owner->phone) }}
       </div>
       <div class="form-group">
-        {{ Form::label('university', 'Uniwersytet')}}
+        {{ Form::label('university', Lang::get('common.university'))}}
         {{ Form::text('university', $owner->university) }}
       </div>
       <div class="form-group">
-        {{ Form::label('department', 'Wydział')}}
+        {{ Form::label('department',  Lang::get('common.department'))}}
         {{ Form::text('department', $owner->department) }}
       </div>
       <div class="form-group">
-        {{ Form::label('institute', 'Instytut / Katedra')}}
+        {{ Form::label('institute',  Lang::get('common.institute'))}}
         {{ Form::text('institute', $owner->institute) }}
       </div>
       <div class="form-group">
-        {{ Form::label('tutorshipHours', 'Godziny konsultacji')}}<!--trzzeba to jakoś inaczaj ogarnąć -->
+        {{ Form::label('tutorshipHours',  Lang::get('common.tutorship-hours'))}}<!--trzzeba to jakoś inaczaj ogarnąć -->
         {{ Form::textarea('tutorshipHours', $owner->tutorshipHours) }}
       </div>
       <div class="form-group">
-        {{ Form::label('content', 'Opis')}}
+        {{ Form::label('content',  Lang::get('common.description'))}}
         {{ Form::textarea('content', $owner->content, array('id'=>'editor')) }}
       </div>
 
-      {{ Form::label('position','Select Course:') }}
+      {{ Form::label('position', Lang::get('common.position')) }}
       {{ Form::select('position', $positions, $owner->position) }}
 
-      {{ Form::submit('Submit') }}
+      {{ Form::submit( Lang::get('common.submit')) }}
     </div>
     {{ Form::close() }}
   </div>

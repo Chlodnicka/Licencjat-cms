@@ -54,6 +54,9 @@
           });
       }
 
+      public static function all_courses() {
+          return $courses = Course::all();
+      }
   }
 
 
