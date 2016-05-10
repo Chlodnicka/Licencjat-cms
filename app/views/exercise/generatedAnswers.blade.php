@@ -3,17 +3,17 @@
 <html lang="PL-pl">
 <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
-    <title>Strona domowa</title>
+    <title>{{ trans('common.homepage') }}</title>
 </head>
 <body>
-    <h1>Exercise! Generated</h1>
+    <h1>{{ trans('app.exercises-generated-with-answers') }}</h1>
     <div class="exercises">
         @foreach( $exercises as $exercise)
         <div class="list-item">
             <h2 class="title">{{ $exercise->title }}</h2>
-            <p>Treść</p>
+            <p>{{ trans('common.content') }}</p>
             <p class="item-lead">{{ $exercise->content }}</p>
-            <p>Rozwiązanie</p>
+            <p>{{ trans('common.solution') }}</p>
             <p class="item-lead">{{ $exercise->solution }}</p>
         </div>
         <div class="clearfix"></div>

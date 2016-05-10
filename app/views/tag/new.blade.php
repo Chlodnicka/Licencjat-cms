@@ -1,8 +1,8 @@
 @section('content')
-  <h1>Tag! New</h1>
+  <h1>{{ trans('app.tag-new') }}</h1>
   <form action="{{ URL::route('tag.create') }}" method="post">
-    <label for="name">Tag</label>
+    <label for="name">{{ trans('app.tag') }}</label>
     <input type="text" id="name" name="name">
-    <input type="submit" class="btn btn-submit">
+    <input type="submit" class="btn btn-submit" value="{{ trans('common.submit') }}">
   </form>
 @stop

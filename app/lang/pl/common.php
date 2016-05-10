@@ -31,6 +31,16 @@ return array(
     "institute" => "Katedra/Instytut",
     "tutorship-hours" => "Godziny konsultacji",
     "position" => "Tytuł naukowy / zawodowy",
+    "select-courses" => "Wybierz kursy",
+    "solution-access" => "Dostępność rozwiązania dla studentów",
+    "difficulty" => "Trudność",
+    "solution" => "Rozwiązanie",
+    "select-lectures" => "Wybierz wykład",
+    "first-choose-course" => "Najpierw musisz wybrać kurs",
+    "generate-pdf" => "Generuj PDF",
+    "filter" => "Filtruj",
+    "number-of-exercises" => "Ilość zadań w arkuszu",
+
 
 
 );
