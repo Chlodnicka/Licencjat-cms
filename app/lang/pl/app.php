@@ -14,6 +14,10 @@
         "create-new-course" => "Utwórz nowy kurs",
         "edit-course" => "Edycja kursu ",
         "course-delete" => "Usuń kurs ",
+        "course-updated" => "Kurs zaktualizowany pomyślnie.",
+        "course-created" => "Kurs został utworzony poprawnie.",
+        "course-destroyed" => "Kurs został usunięty.",
+
 
         /*
          * Lectures translations

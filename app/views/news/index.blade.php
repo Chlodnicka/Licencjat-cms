@@ -22,6 +22,7 @@
         <a href="{{ URL::route('news.view', $newsItem->id) }}" class="btn btn-more">{{ trans('see-more') }} <i class="fa fa-long-arrow-right"></i></a>
       </div>
       @endforeach
+        <?php echo $news->links(); ?>
     </div>
   @endif
 @stop
