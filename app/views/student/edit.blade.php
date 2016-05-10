@@ -1,17 +1,17 @@
 @section('content')
-  <h1>Student! Edit</h1>
+  <h1>{{ trans('student-edit') }}</h1>
   @if(!empty($student))
     <div class="student-form">
       <form action="{{ URL::route('student.update', $student->id) }}" method="post">
         <div class="form-group">
-          <div><label for="fistnamename">Imię</label><input type="text" name="firstname" id="firstname"></div>
-          <div><label for="lastname">Nazwisko</label><input type="text" name="lastname" id="lastname"></div>
+          <div><label for="fistname">{{ trans('common.firstname') }}</label><input type="text" name="firstname" id="firstname"></div>
+          <div><label for="lastname">{{ trans('common.lastname') }}</label><input type="text" name="lastname" id="lastname"></div>
         </div>
         <div class="form-group">
-          <div><label for="email">E-mail</label><input type="email" name="email" id="email"></div>
+          <div><label for="email">{{ trans('common.email') }}</label><input type="email" name="email" id="email"></div>
           <div>
-            <label for="course">Kurs</label>
-            <select name="course" id="course">
+            <label for="course">{{ trans('app.course') }}</label>
+            <select name="course" id="course"><!--do wymiany!-->
               <option value="1">Volvo</option>
               <option value="2">Saab</option>
               <option value="3">Mercedes</option>
@@ -19,10 +19,10 @@
             </select>
           </div>
         </div>
-        <input type="submit" value="Submit">
+        <input type="submit" value="{{ trans('common.submit') }}">
       </form>
     </div>
   @else
-    <p class="no-result">Dany student nie istnieje</p>
+    <p class="no-result">{{ trans('app.no-such-student') }}</p>
   @endif
 @stop

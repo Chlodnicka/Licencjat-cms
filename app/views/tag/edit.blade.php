@@ -1,12 +1,12 @@
 @section('content')
-  <h1>Tag! Edit</h1>
+  <h1>{{ trans('app.tag-edit') }}</h1>
   @if(!empty($tag))
     <form action="{{ URL::route('tag.update', $tag->id) }}" method="post">
-      <label for="name">Tag</label>
+      <label for="name">{{ trans('app.tag') }}</label>
       <input type="text" id="name" name="name" value="{{ $tag->name }}">
-      <input type="submit" class="btn btn-submit">
+      <input type="submit" class="btn btn-submit" value="{{ trans('common.submit') }}">
     </form>
   @else
-    <p class="no-result">Dany tag nie istnieje</p>
+    <p class="no-result">{{ trans('app.no-such-tag') }}</p>
   @endif
 @stop

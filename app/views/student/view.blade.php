@@ -1,5 +1,5 @@
 @section('content')
-  <h1>Student! View</h1>
+  <h1>{{ trans('app.student') }}</h1>
   <div class="action-button">
     <a href="{{ URL::route('students.delete', $student->id) }}">Usuń</a>
   </div>
@@ -10,7 +10,7 @@
     @if(!empty($student->email))
       <p class="email"><a href="mailto:{{ $student->email }}">{{ $student->email }}</a></p>
     @endif
-    <p class="courses">Kursy</p>
+    <p class="courses">{{ trans('app.courses') }}</p>
     <ul>
       <li>{{ $student->course->name }}</li>
     </ul>

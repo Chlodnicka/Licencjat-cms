@@ -1,7 +1,7 @@
 @section('content')
-  <h1>Tag! Index</h1>
+  <h1>{{ trans('app.tags-list') }}</h1>
   <div class="action-buttons">
-    <a href="{{ URL::route('tag.new') }}">Nowy</a>
+    <a href="{{ URL::route('tag.new') }}">{{ trans('common.new') }}</a>
   </div>
   @if(!empty($tags))
     <div class="tags">

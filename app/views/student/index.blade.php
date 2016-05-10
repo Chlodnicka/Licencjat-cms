@@ -1,5 +1,5 @@
 @section('content')
-  <h1>Student! Index</h1>
+  <h1>{{ trans('app.students-list') }}</h1>
   @if(!empty($course->name))
       <h2>{{ $course->name }}</h2>
   @endif

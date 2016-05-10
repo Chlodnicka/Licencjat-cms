@@ -41,6 +41,7 @@
          */
         "owner-information" => "Informacje",
         "owner-edit" => "Edytuj informacje",
+        "tutorship-hours" => "Godziny konsultacji",
 
         /*
          * Search translations
@@ -50,10 +51,42 @@
         /*
          * Students translations
          */
+        "students-list" => "Lista studentów zapisanych na kursy",
+        "student" => "Student",
+        "student-edit" => "Edytuj swoje dane",
+        "no-such-student" => "Dany student nie istnieje",
+        "student-delete" => "Usuń konto",
+        "student-delete-message" => "Czy na pewno chcesz usunąć konto? Nie będziesz miał możliwości przywrócenia go.",
+        "student-new" => "Rejestracja",
 
         /*
          * Tags translations
          */
+        "tag-delete" => "Usuń tag",
+        "tag-delete-message" => "Czy na pewno chcesz usunąć tag?",
+        "no-such-tag" => "Dany tag nie istnieje",
+        "tag-edit" => "Edycja tagu",
+        "tag" => "tag",
+        "tag-new" => "Utwórz nowy tag",
+
+        /*
+         * Exercises translations
+         */
+        "exercises-list" => "Lista zadań",
+        "exercise-new" => "Utwórz nowe zadanie",
+        "exercise-content" => "Treść zadania",
+        "exercise-solution" => "Rozwiązanie zadania",
+        "no-solution" => "Brak rozwiązania",
+        "exercise-delete" => "Usuń zadanie",
+        "exercise-delete-message" => "Czy na pewno chcesz usunąć to zadanie? Nie będziesz miał możliwości przywrócenia go.",
+        "no-such-exercise" => "Dane zadanie nie istnieje",
+        "exercise-edit" => "Edytuj zadanie",
+        "no-exercises-results" => "Brak zadań odpowiadającym wybranym kryteriom. Spróbuj jeszcze raz",
+        "generate-with-answers" => "Generuj PDF z odpowiedziami",
+        "exercise-generate" => "Generuj arkusz zadań",
+        "exercises-generated" => "Arkusz zadań",
+        "exercises-generated-with-answers" => "Arkusz z odpowiedziami",
+
     );
 
 ?>

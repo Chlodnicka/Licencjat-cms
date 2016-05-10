@@ -1,14 +1,14 @@
 @section('content')
-  <h1>Tag! Delete</h1>
+  <h1>{{ trans('app.tag-delete') }}</h1>
   @if(!empty($tag))
     <div class="delete">
-      <p class="lead">Czy na pewno chcesz usunąć tag?</p>
-      <a href="#" class="btn btn-back">Wróć</a>
+      <p class="lead">{{ trans('app.tag-delete-message') }}</p>
+      <a href="#" class="btn btn-back">{{ trans('common.back') }}</a>
       <form action="{{ URL::route('tag.destroy', $tag->id) }}" method="post">
-        <input type="submit" class="btn btn-delete" value="Usuń">
+        <input type="submit" class="btn btn-delete" value="{{ trans('common.delete') }}">
       </form>
     </div>
   @else
-    <p class="no-result">Dany tag nie istnieje</p>
+    <p class="no-result">{{ trans('app.no-such-tag') }}</p>
   @endif
 @stop

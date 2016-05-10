@@ -3,10 +3,10 @@
 <html lang="PL-pl">
 <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
-    <title>Strona domowa</title>
+    <title>{{ trans('common.homepage') }}</title>
 </head>
 <body>
-    <h1>Exercise! Generated</h1>
+    <h1>{{ trans('app.exercises-generated') }}</h1>
     <div class="exercises">
         @foreach( $exercises as $exercise)
         <div class="list-item">
