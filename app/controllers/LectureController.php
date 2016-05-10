@@ -93,9 +93,10 @@ class LectureController extends BaseController
             if( $tree_students->active == 1) {
                 $lecture->sendMail($lecture->course_id, $action);
             }
-            Session::flash('message', 'OK');
+            Session::flash('message', Lang::get('app.lecture-updated'));
             return Redirect::route('lecture.view', $lecture->id);
         } else {
+            Session::flash('message', Lang::get('common.no-such-site'));
             return Redirect::route('homepage');
         }
     }
@@ -120,9 +121,10 @@ class LectureController extends BaseController
             if( $tree_students->active == 1) {
                 $lecture->sendMail($lecture->course_id, $action);
             }
-            Session::flash('message', 'OK');
+            Session::flash('message', Lang::get('app.lecture-created'));
             return Redirect::route('lecture.view', $lecture->id);
         } else {
+            Session::flash('message', Lang::get('common.no-such-site'));
             return Redirect::route('homepage');
         }
     }
@@ -164,9 +166,10 @@ class LectureController extends BaseController
             $course_id = $lecture->course->id;
             $lecture->tags()->detach();
             $lecture->delete();
-            Session::flash('message', 'OK');
+            Session::flash('message', Lang::get('app.lecture-destroyed'));
             return Redirect::route('lecture.indexCourse', $course_id);
         } else {
+            Session::flash('message', Lang::get('common.no-such-site'));
             return Redirect::route('homepage');
         }
     }

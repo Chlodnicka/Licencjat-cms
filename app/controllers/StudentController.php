@@ -76,7 +76,7 @@ class StudentController extends BaseController
             $student->email = Input::get('email');
             $student->course_id = Input::get('courses');
             $student->save();
-            Session::flash('message', 'OK');
+            Session::flash('message', Lang::get('app.student-updated'));
             return Redirect::route('course.view', $student->course_id);
         } else {
             return Redirect::route('homepage');
@@ -96,7 +96,7 @@ class StudentController extends BaseController
             $student->owner_id = 1;
             $student->owner_role_id = 1;
             $student->save();
-            Session::flash('message', 'OK');
+            Session::flash('message', Lang::get('app.student-created'));
             return Redirect::route('course.view', $student->course_id);
         } else {
             return Redirect::route('homepage');
@@ -137,7 +137,7 @@ class StudentController extends BaseController
             $student->delete();
 
             // redirect
-            Session::flash('message', 'OK');
+            Session::flash('message', Lang::get('app.student-destroyed'));
             return Redirect::route('student.index');
         } else {
             return Redirect::route('homepage');

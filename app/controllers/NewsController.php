@@ -11,7 +11,7 @@ class NewsController extends BaseController
     {
         $tree = Tree::findOrFail(4);
         if ( $tree->active == 1) {
-            $news = News::all();
+            $news = News::paginate(6);
             $news_lead = Tree::findOrFail(4);
             $this->layout->content = View::make('news.index', array(
                 'news' => $news,
@@ -89,9 +89,10 @@ class NewsController extends BaseController
             if( $tree_students->active == 1) {
                 $news->sendMail($news->course_id, $action);
             }
-            Session::flash('message', 'OK');
+            Session::flash('message', Lang::get('app.news-updated'));
             return Redirect::route('news.view', $news->id);
         } else {
+            Session::flash('message', Lang::get('common.no-such-site'));
             return Redirect::route('homepage');
         }
     }
@@ -116,9 +117,10 @@ class NewsController extends BaseController
             if( $tree_students->active == 1) {
                 $news->sendMail($news->course_id, $action);
             }
-            Session::flash('message', 'OK');
+            Session::flash('message', Lang::get('app.news-created'));
             return Redirect::route('news.view', $news->id);
         } else {
+            Session::flash('message', Lang::get('common.no-such-site'));
             return Redirect::route('homepage');
         }
     }
@@ -156,9 +158,10 @@ class NewsController extends BaseController
             $news = News::findOrFail($id);
             $news->tags()->detach();
             $news->delete();
-            Session::flash('message', 'OK');
+            Session::flash('message', Lang::get('app.news-destroyed'));
             return Redirect::route('news.index');
         } else {
+            Session::flash('message', Lang::get('common.no-such-site'));
             return Redirect::route('homepage');
         }
     }

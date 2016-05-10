@@ -53,9 +53,10 @@ class CourseController extends BaseController
             if ( $tree_students->active == 1) {
                 $course->sendMail($id);
             }
-            Session::flash('message', 'OK');
+            Session::flash('message', Lang::get('app.course-updated'));
             return Redirect::route('course.view', $course->id);
         } else {
+            Session::flash('message', Lang::get('common.no-such-site'));
             return Redirect::route('homepage');
         }
     }
@@ -85,9 +86,10 @@ class CourseController extends BaseController
             $course->owner_role_id = 1;
             $course->save();
             $course->tags()->sync(Input::get('tags'));
-            Session::flash('message', 'OK');
+            Session::flash('message', Lang::get('app.course-created'));
             return Redirect::route('course.view', $course->id);
         } else {
+            Session::flash('message', Lang::get('common.no-such-site'));
             return Redirect::route('homepage');
         }
     }
@@ -134,9 +136,10 @@ class CourseController extends BaseController
             $course->students()->delete();
             $course->tags()->detach();
             $course->delete();
+            Session::flash('message', Lang::get('app.course-destroyed'));
             return Redirect::route('course.index');
-            Session::flash('message', 'OK');
         } else {
+            Session::flash('message', Lang::get('common.no-such-site'));
             return Redirect::route('homepage');
         }
     }
