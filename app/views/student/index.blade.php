@@ -8,6 +8,7 @@
           @foreach($students as $student)
             <li>{{ $student->firstname }} {{ $student->lastname }}, {{ $student->email }}</li>
           @endforeach
+              <?php echo $students->links(); ?>
       </ul>
    @endif
 @stop

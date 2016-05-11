@@ -18,13 +18,10 @@
       </div>
       <div class="clearfix"></div>
     @endforeach
+      <?php echo $courses->links(); ?>
   </div>
 </div>
 <aside>
-  <ul>
-    @foreach( $courses as $course)
-      <a href="{{ URL::route('course.view', $course->id) }}"><li>{{ $course->name }}</li></a>
-    @endforeach
-  </ul>
+  @include('layouts.aside')
 </aside>
 @stop

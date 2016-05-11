@@ -3,6 +3,23 @@
   background-color: $brandOrange;
   color: $brandWhite;
   display: inline-block;
+  margin: 0 auto;
+  text-transform: uppercase;
+  border-radius: 20px;
+  i {
+    padding-left: 10px;
+  }
+  &:hover, &:active, &:focus {
+    opacity: 0.7;
+    color: white;
+  }
+}
+
+@mixin btn-more {
+  padding: 10px 0 0 0;
+  color: $brandOrange;
+  background-color: transparent;
+  display: inline-block;
   float: right;
   text-transform: uppercase;
   i {
@@ -28,20 +45,33 @@
 
 @mixin box {
   width: 33%;
-  max-width: 345px;
+  max-width: 300px;
   min-width: 250px;
   display: inline-block;
   vertical-align: top;
-  margin: 20px;
+  margin: 10px 30px ;
+  border: 1px solid #eeeeee;
+  border-radius: 4px;
+  padding: 20px;
+  .box-img {
+    margin: -20px -20px 0 -20px;
+    img {
+      max-width: 100%;
+      border-top-left-radius: 4px;
+      border-top-right-radius: 4px;
+    }
+  }
   .title {
+    margin-top: 10px;
+    font-size: 20px;
+    color: $brandOrange;
     margin-bottom: 10px;
   }
   .date {
-    font-style: italic;
-    color: $brandBlueMedium;
+    color: $brandBlue;
   }
   .btn {
-    @include btn;
+    @include btn-more;
   }
 }
 

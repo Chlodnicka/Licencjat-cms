@@ -1,7 +1,10 @@
 @section('content')
 <div class="single-page">
   <h1>{{ trans('app.owner-information') }}</h1>
-  <a href="{{ URL::route('owner.edit') }}">{{ trans('common.edit') }}</a>
+
+  <div class="action-buttons">
+    <a href="{{ URL::route('owner.edit') }}">{{ trans('common.edit') }}</a>
+  </div>
   <div class="info">
     <div class="personal">
       <h2 class="name">{{ $position }} {{ $owner->firstname }} {{ $owner->lastname }}</h2>

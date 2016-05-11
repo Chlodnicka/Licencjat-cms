@@ -1,12 +1,29 @@
 <?php
-
+/**
+ * Search controller.
+ *
+ * @copyright (c) 2016 Maja Chłodnicka
+ * @link http://leszczyna.wzks.uj.edu.pl/~13_chlodnicka/projekt
+ */
 
 /**
+ * Class SearchController.
  *
+ * @package Controller
+ * @author Maja Chłodnicka
  */
 class SearchController extends BaseController
 {
+    /**
+     * @param $layout Base layout
+     */
     protected $layout = 'layouts.master';
+
+    /**
+     * Index search results action.
+     *
+     * @return \Illuminate\View\View
+     */
     public function index()
     {
         $searchQuery = Input::get('searchQuery');

@@ -17,6 +17,7 @@
       </div>
       <div class="clearfix"></div>
       @endforeach
+          <?php echo $lectures->links(); ?>
     </div>
   @endif
 </div>

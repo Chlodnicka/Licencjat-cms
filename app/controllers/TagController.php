@@ -9,7 +9,7 @@ class TagController extends BaseController
     protected $layout = 'layouts.master';
     public function index()
     {
-        $tags = Tag::all();
+        $tags = Tag::paginate(20);
         $this->layout->content = View::make('tag.index', array(
             'tags' => $tags,
         ));
