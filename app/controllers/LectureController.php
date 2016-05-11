@@ -1,18 +1,35 @@
 <?php
-
+/**
+ * Lecture controller.
+ *
+ * @copyright (c) 2016 Maja Chłodnicka
+ * @link http://leszczyna.wzks.uj.edu.pl/~13_chlodnicka/projekt
+ */
 
 /**
+ * Class LectureController.
  *
+ * @package Controller
+ * @author Maja Chłodnicka
  */
 class LectureController extends BaseController
 {
+    /**
+     * @param $layout Base layout
+     */
     protected $layout = 'layouts.master';
+
+    /**
+     * Index lectures action.
+     *
+     * @return \Illuminate\View\View
+     */
     public function index()
     {
         $tree = Tree::findOrFail(3);
         $tree_lecture = Tree::findOrFail(5);
         if ( $tree->active == 1 && $tree_lecture->active == 1) {
-            $lectures = Lecture::all();
+            $lectures = Lecture::paginate(6);
             $lecture_lead = Tree::findOrFail(5);
             $this->layout->content = View::make('lecture.index', array(
                 'lectures' => $lectures,
@@ -23,12 +40,18 @@ class LectureController extends BaseController
         }
     }
 
+    /**
+     * Index lectures by course id action.
+     *
+     * @param $id Id of course
+     * @return \Illuminate\View\View
+     */
     public function indexLecturesByCourses($id)
     {
         $tree = Tree::findOrFail(3);
         $tree_lecture = Tree::findOrFail(5);
         if ( $tree->active == 1 && $tree_lecture->active == 1) {
-            $lectures = Course::with('lectures')->find($id)->lectures;
+            $lectures = DB::table('lectures')->where('course_id', '=', $id)->paginate(6);
             $lecture_lead = Tree::findOrFail(5);
             $this->layout->content = View::make('lecture.index', array(
                 'lectures' => $lectures,
@@ -39,6 +62,12 @@ class LectureController extends BaseController
         }
     }
 
+    /**
+     * Edit lecture action.
+     *
+     * @param $id Id of lecture
+     * @return \Illuminate\View\View
+     */
     public function edit($id)
     {
         $tree = Tree::findOrFail(3);
@@ -59,6 +88,11 @@ class LectureController extends BaseController
         }
     }
 
+    /**
+     * New lecture action.
+     *
+     * @return \Illuminate\View\View
+     */
     public function newOne()
     {
         $tree = Tree::findOrFail(3);
@@ -75,6 +109,12 @@ class LectureController extends BaseController
         }
     }
 
+    /**
+     * Update lectures action.
+     *
+     * @param $id Id of lecture
+     * @return \Illuminate\View\View
+     */
     public function update($id)
     {
         $tree = Tree::findOrFail(3);
@@ -101,6 +141,11 @@ class LectureController extends BaseController
         }
     }
 
+    /**
+     * Create lecture action.
+     *
+     * @return \Illuminate\View\View
+     */
     public function create()
     {
         $tree = Tree::findOrFail(3);
@@ -129,6 +174,12 @@ class LectureController extends BaseController
         }
     }
 
+    /**
+     * View lecture action.
+     *
+     * @param $id Id of lecture
+     * @return \Illuminate\View\View
+     */
     public function view($id)
     {
         $tree = Tree::findOrFail(3);
@@ -143,6 +194,12 @@ class LectureController extends BaseController
         }
     }
 
+    /**
+     * Delete lecture action.
+     *
+     * @param $id Id of lecture
+     * @return \Illuminate\View\View
+     */
     public function delete($id)
     {
         $tree = Tree::findOrFail(3);
@@ -157,6 +214,12 @@ class LectureController extends BaseController
         }
     }
 
+    /**
+     * Destroy lectures action.
+     *
+     * @param $id Id of lecture
+     * @return \Illuminate\View\View
+     */
     public function destroy($id)
     {
         $tree = Tree::findOrFail(3);

@@ -1,17 +1,35 @@
 <?php
-
+/**
+ * Course controller.
+ *
+ * @copyright (c) 2016 Maja Chłodnicka
+ * @link http://leszczyna.wzks.uj.edu.pl/~13_chlodnicka/projekt
+ */
 
 /**
+ * Class CourseController.
  *
+ * @package Controller
+ * @author Maja Chłodnicka
  */
+
 class CourseController extends BaseController
 {
+    /**
+     * @param $layout Base layout
+     */
     protected $layout = 'layouts.master';
+
+    /**
+     * Index courses action.
+     *
+     * @return \Illuminate\View\View
+     */
     public function index()
     {
         $tree = Tree::findOrFail(3);
         if ( $tree->active == 1) {
-            $courses = Course::all();
+            $courses = Course::paginate(3);
             $courses_lead = Tree::findOrFail(3);
             $this->layout->content = View::make('course.index', array(
                 'courses' => $courses,
@@ -22,6 +40,12 @@ class CourseController extends BaseController
         }
     }
 
+    /**
+     * Edit course action.
+     *
+     * @param $id Id of course
+     * @return \Illuminate\View\View
+     */
     public function edit($id)
     {
         $tree = Tree::findOrFail(3);
@@ -39,6 +63,12 @@ class CourseController extends BaseController
         }
     }
 
+    /**
+     * Update course action.
+     *
+     * @param $id Id of course
+     * @return \Illuminate\View\View
+     */
     public function update($id)
     {
         $tree = Tree::findOrFail(3);
@@ -61,6 +91,11 @@ class CourseController extends BaseController
         }
     }
 
+    /**
+     * New course action.
+     *
+     * @return \Illuminate\View\View
+     */
     public function newOne()
     {
         $tree = Tree::findOrFail(3);
@@ -74,6 +109,11 @@ class CourseController extends BaseController
         }
     }
 
+    /**
+     * Create course action.
+     *
+     * @return \Illuminate\View\View
+     */
     public function create()
     {
         $tree = Tree::findOrFail(3);
@@ -94,6 +134,12 @@ class CourseController extends BaseController
         }
     }
 
+    /**
+     * View course action.
+     *
+     * @param $id Id of course
+     * @return \Illuminate\View\View
+     */
     public function view($id)
     {
         $tree = Tree::findOrFail(3);
@@ -113,6 +159,12 @@ class CourseController extends BaseController
         }
     }
 
+    /**
+     * Delete course action.
+     *
+     * @param $id Id of course
+     * @return \Illuminate\View\View
+     */
     public function delete($id)
     {
         $tree = Tree::findOrFail(3);
@@ -126,6 +178,12 @@ class CourseController extends BaseController
         }
     }
 
+    /**
+     * Destroy course action.
+     * 
+     * @param $id Id of course
+     * @return \Illuminate\View\View
+     */
     public function destroy($id)
     {
         $tree = Tree::findOrFail(3);

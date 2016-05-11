@@ -1,14 +1,30 @@
 <?php
-
-
 /**
+ * Owner controller.
  *
+ * @copyright (c) 2016 Maja Chłodnicka
+ * @link http://leszczyna.wzks.uj.edu.pl/~13_chlodnicka/projekt
  */
 
+/**
+ * Class OwnerController.
+ *
+ * @package Controller
+ * @author Maja Chłodnicka
+ */
 class OwnerController extends BaseController
 {
 
+    /**
+     * @param $layout Base layout
+     */
     protected $layout = 'layouts.master';
+
+    /**
+     * Index Owner action.
+     *
+     * @return \Illuminate\View\View
+     */
     public function index()
     {
         $tree = Tree::findOrFail(1);
@@ -25,6 +41,11 @@ class OwnerController extends BaseController
         }
     }
 
+    /**
+     * Edit Owner action.
+     *
+     * @return \Illuminate\View\View
+     */
     public function edit()
     {
         $id = 1;
@@ -36,6 +57,11 @@ class OwnerController extends BaseController
         ));
     }
 
+    /**
+     * Update Owner action.
+     *
+     * @return \Illuminate\View\View
+     */
     public function update()
     {
         $id = 1;

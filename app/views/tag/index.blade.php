@@ -10,6 +10,7 @@
           <h2><a href="{{ URL::route('tag.view', $tag->id) }}">{{ $tag->name }}</a></h2>
         </div>
       @endforeach
+        <?php echo $tags->links(); ?>
     </div>
   @endif
 @stop

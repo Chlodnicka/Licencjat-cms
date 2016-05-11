@@ -9,6 +9,10 @@
               ->get();
           return $tree;
       }
+
+      public  static function contentTree() {
+          
+      }
   }
 
 

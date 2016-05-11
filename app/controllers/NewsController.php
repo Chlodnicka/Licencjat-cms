@@ -1,12 +1,29 @@
 <?php
-
+/**
+ * News controller.
+ *
+ * @copyright (c) 2016 Maja Chłodnicka
+ * @link http://leszczyna.wzks.uj.edu.pl/~13_chlodnicka/projekt
+ */
 
 /**
+ * Class NewsController.
  *
+ * @package Controller
+ * @author Maja Chłodnicka
  */
 class NewsController extends BaseController
 {
+    /**
+     * @param $layout Base layout
+     */
     protected $layout = 'layouts.master';
+
+    /**
+     * Index news action.
+     *
+     * @return \Illuminate\View\View
+     */
     public function index()
     {
         $tree = Tree::findOrFail(4);
@@ -22,11 +39,17 @@ class NewsController extends BaseController
         }
     }
 
+    /**
+     * Index news by courses action.
+     *
+     * @param $id Id of course
+     * @return \Illuminate\View\View
+     */
     public function indexByCourses($id)
     {
         $tree = Tree::findOrFail(4);
         if ( $tree->active == 1) {
-            $news = Course::with('news')->find($id)->news;
+            $news = DB::table('news')->where('course_id', "=", $id)->paginate(6);
             $news_lead = Tree::findOrFail(4);
             $this->layout->content = View::make('news.index', array(
                 'news' => $news,
@@ -37,6 +60,12 @@ class NewsController extends BaseController
         }
     }
 
+    /**
+     * Edit news item action.
+     *
+     * @param $id Id of news item
+     * @return \Illuminate\View\View
+     */
     public function edit($id)
     {
         $tree = Tree::findOrFail(4);
@@ -56,6 +85,11 @@ class NewsController extends BaseController
         }
     }
 
+    /**
+     * New news item action.
+     *
+     * @return \Illuminate\View\View
+     */
     public function newOne()
     {
         $tree = Tree::findOrFail(4);
@@ -71,6 +105,12 @@ class NewsController extends BaseController
         }
     }
 
+    /**
+     * Update news item action.
+     *
+     * @param $id Id of news item
+     * @return \Illuminate\View\View
+     */
     public function update($id)
     {
         $tree = Tree::findOrFail(4);
@@ -97,6 +137,11 @@ class NewsController extends BaseController
         }
     }
 
+    /**
+     * Create news item action.
+     *
+     * @return \Illuminate\View\View
+     */
     public function create()
     {
         $tree = Tree::findOrFail(4);
@@ -125,6 +170,12 @@ class NewsController extends BaseController
         }
     }
 
+    /**
+     * View news item action.
+     *
+     * @param $id Id of news item
+     * @return \Illuminate\View\View
+     */
     public function view($id)
     {
         $tree = Tree::findOrFail(4);
@@ -138,6 +189,12 @@ class NewsController extends BaseController
         }
     }
 
+    /**
+     * Delete news item action.
+     *
+     * @param $id Id of news item
+     * @return \Illuminate\View\View
+     */
     public function delete($id)
     {
         $tree = Tree::findOrFail(4);
@@ -151,6 +208,12 @@ class NewsController extends BaseController
         }
     }
 
+    /**
+     * Destroy news item action.
+     *
+     * @param $id Id of news item
+     * @return \Illuminate\View\View
+     */
     public function destroy($id)
     {
         $tree = Tree::findOrFail(4);

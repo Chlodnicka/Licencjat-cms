@@ -17,7 +17,7 @@
         "course-updated" => "Kurs zaktualizowany pomyślnie.",
         "course-created" => "Kurs został utworzony poprawnie.",
         "course-destroyed" => "Kurs został usunięty.",
-
+        "all-courses" => "Wszystkie kursy",
 
         /*
          * Lectures translations
@@ -90,6 +90,7 @@
         "exercise-generate" => "Generuj arkusz zadań",
         "exercises-generated" => "Arkusz zadań",
         "exercises-generated-with-answers" => "Arkusz z odpowiedziami",
+        "filter" => "Filtruj",
 
     );
 

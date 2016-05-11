@@ -40,6 +40,7 @@
         </div>
         <div class="clearfix"></div>
       @endforeach
+      <?php echo $exercises->links(); ?>
     @endif
   </div>
   @yield('aside')

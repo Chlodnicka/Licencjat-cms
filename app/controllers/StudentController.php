@@ -1,19 +1,36 @@
 <?php
-
+/**
+ * Student controller.
+ *
+ * @copyright (c) 2016 Maja Chłodnicka
+ * @link http://leszczyna.wzks.uj.edu.pl/~13_chlodnicka/projekt
+ */
 
 /**
+ * Class StudentController.
  *
+ * @package Controller
+ * @author Maja Chłodnicka
  */
 class StudentController extends BaseController
 {
+    /**
+     * @param $layout Base layout
+     */
     protected $layout = 'layouts.master';
+
+    /**
+     * Index students action.
+     *
+     * @return \Illuminate\View\View
+     */
     public function index()
     {
         $tree = Tree::findOrFail(2);
         if ( $tree->active == 1 ) {
-            $students = Student::all();
+            $students = Student::paginate(10);
             $course = new Course;
-            $course->name = "Wszystkie kursy";
+            $course->name = Lang::get('app.all-courses');
             $this->layout->content = View::make('student.index', array(
                 'students' => $students,
                 'course' => $course,
@@ -23,11 +40,17 @@ class StudentController extends BaseController
         }
     }
 
+    /**
+     * Index students by courses action.
+     *
+     * @param $id Id of course
+     * @return \Illuminate\View\View
+     */
     public function indexByCourses($id)
     {
         $tree = Tree::findOrFail(2);
         if ( $tree->active == 1 ) {
-            $students = Course::with('students')->find($id)->students;
+            $students = DB::table('students')->where('course')->paginate(10);
             $course = Course::findOrFail($id);
             $this->layout->content = View::make('student.index', array(
                 'students' => $students,
@@ -38,6 +61,12 @@ class StudentController extends BaseController
         }
     }
 
+    /**
+     * Edit student action.
+     *
+     * @param $id Id of student
+     * @return \Illuminate\View\View
+     */
     public function edit($id)
     {
         $tree = Tree::findOrFail(2);
@@ -51,6 +80,11 @@ class StudentController extends BaseController
         }
     }
 
+    /**
+     * New student action.
+     *
+     * @return \Illuminate\View\View
+     */
     public function newOne()
     {
         $tree = Tree::findOrFail(2);
@@ -66,6 +100,12 @@ class StudentController extends BaseController
         }
     }
 
+    /**
+     * Update student action.
+     *
+     * @param $id Id of student
+     * @return \Illuminate\View\View
+     */
     public function update($id)
     {
         $tree = Tree::findOrFail(2);
@@ -83,6 +123,11 @@ class StudentController extends BaseController
         }
     }
 
+    /**
+     * Create student action.
+     *
+     * @return \Illuminate\View\View
+     */
     public function create()
     {
         $tree = Tree::findOrFail(2);
@@ -103,6 +148,12 @@ class StudentController extends BaseController
         }
     }
 
+    /**
+     * View student action.
+     *
+     * @param $id Id of student
+     * @return \Illuminate\View\View
+     */
     public function view($id)
     {
         $tree = Tree::findOrFail(2);
@@ -116,6 +167,12 @@ class StudentController extends BaseController
         }
     }
 
+    /**
+     * Delete student action.
+     *
+     * @param $id Id of student
+     * @return \Illuminate\View\View
+     */
     public function delete($id)
     {
         $tree = Tree::findOrFail(2);
@@ -129,6 +186,12 @@ class StudentController extends BaseController
         }
     }
 
+    /**
+     * Destroy student action.
+     *
+     * @param $id Id of student
+     * @return \Illuminate\View\View
+     */
     public function destroy($id)
     {
         $tree = Tree::findOrFail(2);

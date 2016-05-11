@@ -8,13 +8,8 @@
   </head>
   <body>
     <header>
-      <nav>
-
-          <div class="logo"><a href="/"><p>{{ $owner->firstname }} {{ $owner->lastname }}</p></a></div>
-          <div class="main-menu">
-              @include('layouts.menu')
-          </div>
-
+      <div class="top-nav">
+        <div class="logo"><a href="/"><p>kursy i materiały</p></a></div>
         <div class="side-menu">
           <div class="side-menu-search">
             <form action="{{ URL::route('search.index') }}" method="post">
@@ -24,6 +19,12 @@
           </div>
           <div class="side-menu-login"></div>
         </div>
+      </div>
+
+      <nav>
+          <div class="main-menu">
+              @include('layouts.menu')
+          </div>
       </nav>
     </header>
 

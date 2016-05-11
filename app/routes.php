@@ -1,15 +1,8 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Application Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register all of the routes for an application.
-| It's a breeze. Simply tell Laravel the URIs it should respond to
-| and give it the Closure to execute when that URI is requested.
-|
-*/
+/**
+ * Routing for application
+ */
 
 /**
 * Main page
@@ -230,7 +223,7 @@ Route::post('/student/destroy/{id}', ['as' => 'student.destroy', 'uses' => 'Stud
 Route::post('/student/destroy/{id}/', ['uses' => 'StudentController@destroy']);
 
 /**
-* tag routing
+* Tag routing
 */
 Route::get('/tag', ['as' => 'tag.index', 'uses' => 'TagController@index']);
 Route::get('/tag', ['uses' => 'TagController@index']);
@@ -258,7 +251,7 @@ Route::post('/tag/delete/{id}/', ['as' => 'tag.destroy', 'uses' => 'TagControlle
 Route::post('/tag/delete/{id}/', ['uses' => 'TagController@destroy']);
 
 /*
- * Search
+ * Search routing
  */
 
 Route::post('/search', ['as' => 'search.index', 'uses' => 'SearchController@index']);
@@ -266,7 +259,7 @@ Route::post('/search/', ['uses' => 'SearchController@index']);
 
 
 /*
- * Tree structure of service
+ * Tree structure of service routing
  */
 
 Route::get('/tree', ['as' => 'tree.index', 'uses' => 'TreeController@index']);
@@ -296,13 +289,15 @@ Route::get('/tree/exercises/{id}/', ['uses' => 'TreeController@show']);
 Route::post('/tree/exercises/{id}', ['as' => 'tree.exercises', 'uses' => 'TreeController@edit']);
 Route::post('/tree/exercises/{id}/', ['uses' => 'TreeController@edit']);
 
-
-Route::get('/print', ['as'=> 'print', 'uses' => 'PrintController@index']);
+/**
+ * Dynamically loading menu settings
+ */
 
 View::composer('layouts.master', function($view){
     $tree = Tree::menu();
     $courses = Course::all_courses();
     $owner = Owner::findOrFail(1);
+    $menu = Tree::contentTree();
     $view->with(array(
         'tree' => $tree,
         'courses' => $courses,

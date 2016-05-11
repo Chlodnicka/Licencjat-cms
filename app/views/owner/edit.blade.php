@@ -1,6 +1,6 @@
 @section('content')
   <h1>{{ trans('app.owner-edit') }}</h1>
-  <div class="new owner">
+  <div class="edit owner">
     {{ Form::open(array('route' => array('owner.update', $owner->id))) }}
     <div class="form-cluster">
       <div class="form-group">

@@ -1,19 +1,35 @@
 <?php
-
-
+/**
+ * Exercise controller.
+ *
+ * @copyright (c) 2016 Maja Chłodnicka
+ * @link http://leszczyna.wzks.uj.edu.pl/~13_chlodnicka/projekt
+ */
 
 /**
+ * Class ExerciseController.
  *
+ * @package Controller
+ * @author Maja Chłodnicka
  */
 class ExerciseController extends BaseController
 {
+    /**
+     * @param $layout Base layout
+     */
     protected $layout = 'layouts.master';
+
+    /**
+     * Index exercises action.
+     *
+     * @return \Illuminate\View\View
+     */
     public function index()
     {
         $tree = Tree::findOrFail(3);
         $tree_exercise = Tree::findOrFail(6);
         if ( $tree->active == 1 && $tree_exercise->active == 1) {
-            $exercises = Exercise::all();
+            $exercises = Exercise::paginate(6);
             $exercise_lead = Tree::findOrFail(6);
             $exercise_difficulty = new Exercise();
             $difficulty = $exercise_difficulty->difficulty();
@@ -27,12 +43,18 @@ class ExerciseController extends BaseController
         }
     }
 
+    /**
+     * Index exercises by course id action.
+     *
+     * @param $id Id of course
+     * @return \Illuminate\View\View
+     */
     public function indexExerciseByCourse($id)
     {
         $tree = Tree::findOrFail(3);
         $tree_exercise = Tree::findOrFail(6);
         if ( $tree->active == 1 && $tree_exercise->active == 1) {
-            $exercises = Course::with('exercises')->find($id)->exercises;
+            $exercises = DB::table('exercises')->where('course_id', "=", $id)->paginate(6);
             $exercise_lead = Tree::findOrFail(6);
             $exercise_difficulty = new Exercise();
             $difficulty = $exercise_difficulty->difficulty();
@@ -46,6 +68,11 @@ class ExerciseController extends BaseController
         }
     }
 
+    /**
+     * Search for exercises action.
+     *
+     * @return \Illuminate\View\View
+     */
     public function search()
     {
         $tree = Tree::findOrFail(3);
@@ -57,7 +84,7 @@ class ExerciseController extends BaseController
                 'solution' => Input::get('solution_access'),
                 'difficulty' => Input::get('difficulty'),
             );
-            $exercises = DB::table('exercises')->join('exercise_tag', 'exercises.id', '=', 'exercise_tag.exercise_id')->where('solution_access', '=', $searchParams['solution'])->where('difficulty', '=', $searchParams['difficulty'])->where('content', 'LIKE', '%' . $searchParams['content'] . '%')->get();
+            $exercises = DB::table('exercises')->join('exercise_tag', 'exercises.id', '=', 'exercise_tag.exercise_id')->where('solution_access', '=', $searchParams['solution'])->where('difficulty', '=', $searchParams['difficulty'])->where('content', 'LIKE', '%' . $searchParams['content'] . '%')->paginate(6);
             $exercise_difficulty = new Exercise();
             $difficulty = $exercise_difficulty->difficulty();
 
@@ -71,6 +98,12 @@ class ExerciseController extends BaseController
         }
     }
 
+    /**
+     * Generate list of exercises by course to save in PDF action.
+     *
+     * @param $id Id of course
+     * @return \Illuminate\View\View
+     */
     public function generate($id)
     {
         $tree = Tree::findOrFail(3);
@@ -101,7 +134,11 @@ class ExerciseController extends BaseController
         }
     }
 
-
+    /**
+     * Generate PDF by checked exercises action.
+     *
+     * @return \Illuminate\View\View
+     */
     public function generateByInput(){
         $exercises_checked = Input::get('exercises');
         $checked = array_map( create_function('$value', 'return (int)$value;'),
@@ -120,13 +157,19 @@ class ExerciseController extends BaseController
         return $pdf;
     }
 
+    /**
+     * Index exercise by lecture id action.
+     *
+     * @param  $id Id of lecture
+     * @return \Illuminate\View\View
+     */
     public function indexExerciseByLecture($id)
     {
         $tree = Tree::findOrFail(3);
         $tree_exercise = Tree::findOrFail(6);
         if ( $tree->active == 1 && $tree_exercise->active == 1) {
             $exercise_lead = Tree::findOrFail(6);
-            $exercises = Lecture::with('exercises')->find($id)->exercises;
+            $exercises = DB::table('exercises')->where('course', '=', $id)->paginate(6);
             $exercise_difficulty = new Exercise();
             $difficulty = $exercise_difficulty->difficulty();
             $this->layout->content = View::make('exercise.index', array(
@@ -139,13 +182,19 @@ class ExerciseController extends BaseController
         }
     }
 
+    /**
+     * Index exercise by difficulty id action.
+     *
+     * @param  $id Id of difficulty level
+     * @return \Illuminate\View\View
+     */
     public function indexExerciseByDifficulty($id)
     {
         $tree = Tree::findOrFail(3);
         $tree_exercise = Tree::findOrFail(6);
         if ( $tree->active == 1 && $tree_exercise->active == 1) {
             $exercise_lead = Tree::findOrFail(6);
-            $exercises = DB::table('exercises')->where('difficulty', '=', $id)->get();
+            $exercises = DB::table('exercises')->where('difficulty', '=', $id)->paginate(6);
             $exercise_difficulty = new Exercise();
             $difficulty = $exercise_difficulty->difficulty();
             $this->layout->content = View::make('exercise.index', array(
@@ -158,6 +207,12 @@ class ExerciseController extends BaseController
         }
     }
 
+    /**
+     * Edit exercise action.
+     *
+     * @param  $id Id of exercise
+     * @return \Illuminate\View\View
+     */
     public function edit($id)
     {
         $tree = Tree::findOrFail(3);
@@ -183,6 +238,12 @@ class ExerciseController extends BaseController
         }
     }
 
+    /**
+     * Update exercise action.
+     *
+     * @param  $id Id of exercise
+     * @return \Illuminate\View\View
+     */
     public function update($id)
     {
         $tree = Tree::findOrFail(3);
@@ -213,6 +274,11 @@ class ExerciseController extends BaseController
         }
     }
 
+    /**
+     * New exercise action.
+     *
+     * @return \Illuminate\View\View
+     */
     public function newOne()
     {
         $tree = Tree::findOrFail(3);
@@ -234,6 +300,11 @@ class ExerciseController extends BaseController
         }
     }
 
+    /**
+     * Create new exercise action.
+     *
+     * @return \Illuminate\View\View
+     */
     public function create()
     {
         $tree = Tree::findOrFail(3);
@@ -267,6 +338,12 @@ class ExerciseController extends BaseController
         }
     }
 
+    /**
+     * View exercise action.
+     *
+     * @param  $id Id of exercise
+     * @return \Illuminate\View\View
+     */
     public function view($id)
     {
         $tree = Tree::findOrFail(3);
@@ -281,6 +358,12 @@ class ExerciseController extends BaseController
         }
     }
 
+    /**
+     * Delete exercise action.
+     *
+     * @param  $id Id of exercise
+     * @return \Illuminate\View\View
+     */
     public function delete($id)
     {
         $tree = Tree::findOrFail(3);
@@ -295,6 +378,12 @@ class ExerciseController extends BaseController
         }
     }
 
+    /**
+     * Destroy exercise action.
+     *
+     * @param  $id Id of exercise
+     * @return \Illuminate\View\View
+     */
     public function destroy($id) {
         $tree = Tree::findOrFail(3);
         $tree_exercise = Tree::findOrFail(6);
