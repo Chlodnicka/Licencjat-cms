@@ -43,5 +43,4 @@
       <?php echo $exercises->links(); ?>
     @endif
   </div>
-  @yield('aside')
 @stop

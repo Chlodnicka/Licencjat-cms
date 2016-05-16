@@ -295,12 +295,13 @@ Route::post('/tree/exercises/{id}/', ['uses' => 'TreeController@edit']);
 
 View::composer('layouts.master', function($view){
     $tree = Tree::menu();
-    $courses = Course::all_courses();
+    $courses = Course::all();
+    $coursesSide = $courses;
     $owner = Owner::findOrFail(1);
-    $menu = Tree::contentTree();
     $view->with(array(
         'tree' => $tree,
         'courses' => $courses,
+        'coursesSide' => $coursesSide,
         'owner' => $owner,
     ));
 });

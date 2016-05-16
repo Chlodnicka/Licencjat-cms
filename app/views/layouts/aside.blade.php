@@ -1,9 +1,11 @@
  <ul>
-    <a href="#"><li>Kurs 1</li></a>
-    <a href="#"><li>Kurs 2</li></a>
-    <a href="#"><li>Kurs 3</li></a>
-    <a href="#"><li>Kurs 4</li></a>
-    <a href="#"><li>Kurs 5</li></a>
+     @foreach($courses as $course)
+        <a href="{{ URL::route('course.view', $course->id) }}">
+            <li>
+                {{ $course->name }}
+            </li>
+        </a>
+     @endforeach
   </ul>
 
 
