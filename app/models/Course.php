@@ -1,46 +1,85 @@
 <?php
+/**
+ * Course model.
+ *
+ * @copyright (c) 2016 Maja Chłodnicka
+ * @link http://leszczyna.wzks.uj.edu.pl/~13_chlodnicka/projekt
+ */
 
-
-  /**
-   *
-   */
+/**
+ * Class Course.
+ *
+ * @package Model
+ * @author Maja Chłodnicka
+ */
   class Course extends Eloquent
   {
 
     /**
-     * Get the lectures for course
+     * Gets the lectures for course
+     *
+     * @return object
      */
-
       public function lectures()
       {
           return $this->hasMany('Lecture');
       }
 
+      /**
+       * Gets the exercises for course
+       *
+       * @return object
+       */
       public function exercises()
       {
           return $this->hasMany('Exercise');
       }
 
+      /**
+       * Gets the students for course
+       *
+       * @return object
+       */
       public function students()
       {
           return $this->hasMany('Student');
       }
 
+      /**
+       * Get the news for course
+       *
+       * @return object
+       */
       public function news()
       {
           return $this->hasMany('News');
       }
 
+      /**
+       * Get the tags for course
+       *
+       * @return object
+       */
       public function tags()
       {
           return $this->belongsToMany('Tag');
       }
 
+      /**
+       * Get the attachments for course
+       *
+       * @return object
+       */
       public function attachments()
       {
           return $this->belongsToMany('Tag');
       }
 
+      /**
+       * Sends mail after introducing changes in course
+       *
+       * @return object
+       */
       public function sendMail($id) {
           $email = DB::table('students')->where('course_id', '=', $id)->lists('email');
           $course = Course::findOrFail($id);
@@ -54,6 +93,11 @@
           });
       }
 
+      /**
+       * Gets all courses for menu
+       *
+       * @return object
+       */
       public static function all_courses() {
           return $courses = Course::all();
       }

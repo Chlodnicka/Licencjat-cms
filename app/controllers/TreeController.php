@@ -1,13 +1,29 @@
 <?php
-
+/**
+ * Tree controller.
+ *
+ * @copyright (c) 2016 Maja Chłodnicka
+ * @link http://leszczyna.wzks.uj.edu.pl/~13_chlodnicka/projekt
+ */
 
 /**
+ * Class TreeController.
  *
+ * @package Controller
+ * @author Maja Chłodnicka
  */
 class TreeController extends BaseController
 {
+    /**
+     * @param $layout Base layout
+     */
     protected $layout = 'layouts.master';
-    
+
+    /**
+     * Index trees action.
+     *
+     * @return \Illuminate\View\View
+     */
     public function index()
     {
         $tree = Tree::all();
@@ -16,6 +32,12 @@ class TreeController extends BaseController
         ));
     }
 
+    /**
+     * Show tree action.
+     *
+     * @param $id Id of tree
+     * @return \Illuminate\View\View
+     */
     public function show($id)
     {
         $tree = Tree::findOrFail($id);
@@ -24,6 +46,12 @@ class TreeController extends BaseController
         ));
     }
 
+    /**
+     * Edit tree action.
+     *
+     * @param $id Id of tree
+     * @return \Illuminate\View\View
+     */
     public function edit($id)
     {
         $tree = Tree::findOrFail($id);

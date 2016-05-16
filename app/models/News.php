@@ -1,26 +1,54 @@
 <?php
+/**
+ * News model.
+ *
+ * @copyright (c) 2016 Maja Chłodnicka
+ * @link http://leszczyna.wzks.uj.edu.pl/~13_chlodnicka/projekt
+ */
 
-
-  /**
-   *
-   */
+/**
+ * Class News.
+ *
+ * @package Model
+ * @author Maja Chłodnicka
+ */
   class News extends Eloquent
   {
+      /**
+       * Gets author connected with news item
+       *
+       * @return object
+       */
       public function author()
       {
           return $this->belongsTo('Owner', 'owner_id');
       }
 
+      /**
+       * Gets tags connected with news item
+       *
+       * @return object
+       */
       public function tags()
       {
           return $this->belongsToMany('Tag');
       }
 
+      /**
+       * Gets attachments connected with news item
+       *
+       * @return object
+       */
       public function attachments()
       {
           return $this->belongsToMany('Tag');
       }
 
+      /**
+       * Sends mail after introducing changes in news item
+       *
+       * @return object
+       */
       public function sendMail($id, $action) {
           $email = DB::table('students')->where('course_id', '=', $id)->lists('email');
           $course = Course::findOrFail($id);

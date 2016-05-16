@@ -1,17 +1,17 @@
 <?php
 
 /**
- * Routing for application
+ * App routing settings.
  */
 
 /**
-* Main page
+* Main page routing settings.
 */
 Route::get('/', ['as' => 'homepage', 'uses' => 'HomeController@showMainPage']);
 
 
 /**
-* Owner routing
+* Owner routing settings.
 */
 Route::get('/owner', ['as' => 'owner.index', 'uses' => 'OwnerController@index']);
 Route::get('/owner/index', ['uses' => 'OwnerController@index']);
@@ -22,7 +22,7 @@ Route::post('/owner/edit', ['as' => 'owner.update', 'uses' => 'OwnerController@u
 Route::post('/owner/edit/', ['uses' => 'OwnerController@update']);
 
 /**
-* News routing
+* News routing settings.
 */
 Route::get('/news', ['as' => 'news.index', 'uses' => 'NewsController@index']);
 Route::get('/news/', ['uses' => 'NewsController@index']);
@@ -52,7 +52,7 @@ Route::post('/news/delete/{id}', ['as' => 'news.destroy', 'uses' => 'NewsControl
 Route::post('/news/delete/{id}/', ['uses' => 'NewsController@destroy']);
 
 /**
-* Course routing
+* Course routing settings.
 */
 Route::get('/course', ['as' => 'course.index', 'uses' => 'CourseController@index']);
 Route::get('/course', ['uses' => 'CourseController@index']);
@@ -80,7 +80,7 @@ Route::post('/course/delete/{id}', ['as' => 'course.destroy', 'uses' => 'CourseC
 Route::post('/course/delete/{id}/', ['uses' => 'CourseController@destroy']);
 
 /**
-* Lecture routing
+* Lecture routing settings.
 */
 Route::get('/lecture/new', ['as' => 'lecture.new', 'uses' => 'LectureController@newOne']);
 Route::get('/lecture/new/', ['uses' => 'LectureController@newOne']);
@@ -113,7 +113,7 @@ Route::post('/lecture/delete/{id}/', ['uses' => 'LectureController@destroy']);
 
 
 /**
-* Exercise routing
+* Exercise routing settings.
 */
 Route::get('/exercise/new', ['as' => 'exercise.new', 'uses' => 'ExerciseController@newOne']);
 Route::get('/exercise/new/', ['uses' => 'ExerciseController@newOne']);
@@ -161,7 +161,7 @@ Route::get('/exercise/index/{id}', ['uses' => 'ExerciseController@indexExerciseB
 Route::get('/exercise/index/{id}/', ['uses' => 'ExerciseController@indexExerciseByCourse']);
 
 /**
-* Attachment routing
+* Attachment routing settings.
 */
 Route::get('/attachment', ['as' => 'attachment.index', 'uses' => 'AttachmentController@index']);
 Route::get('/attachment', ['uses' => 'AttachmentController@index']);
@@ -189,7 +189,7 @@ Route::post('/attachment/delete/{id}', ['as' => 'attachment.destroy', 'uses' => 
 Route::post('/attachment/delete/{id}/', ['uses' => 'AttachmentController@destroy']);
 
 /**
-* Student routing
+* Student routing settings.
 */
 Route::get('/student/new', ['as' => 'student.new', 'uses' => 'StudentController@newOne']);
 Route::get('/student/new/', ['uses' => 'StudentController@newOne']);
@@ -223,7 +223,7 @@ Route::post('/student/destroy/{id}', ['as' => 'student.destroy', 'uses' => 'Stud
 Route::post('/student/destroy/{id}/', ['uses' => 'StudentController@destroy']);
 
 /**
-* Tag routing
+* Tag routing settings.
 */
 Route::get('/tag', ['as' => 'tag.index', 'uses' => 'TagController@index']);
 Route::get('/tag', ['uses' => 'TagController@index']);
@@ -251,7 +251,7 @@ Route::post('/tag/delete/{id}/', ['as' => 'tag.destroy', 'uses' => 'TagControlle
 Route::post('/tag/delete/{id}/', ['uses' => 'TagController@destroy']);
 
 /*
- * Search routing
+ * Search routing settings.
  */
 
 Route::post('/search', ['as' => 'search.index', 'uses' => 'SearchController@index']);
@@ -259,7 +259,7 @@ Route::post('/search/', ['uses' => 'SearchController@index']);
 
 
 /*
- * Tree structure of service routing
+ * Tree structure routing settings.
  */
 
 Route::get('/tree', ['as' => 'tree.index', 'uses' => 'TreeController@index']);
@@ -295,7 +295,7 @@ Route::post('/tree/exercises/{id}/', ['uses' => 'TreeController@edit']);
 
 View::composer('layouts.master', function($view){
     $tree = Tree::menu();
-    $courses = Course::all();
+    $courses = Course::all_courses();
     $coursesSide = $courses;
     $owner = Owner::findOrFail(1);
     $view->with(array(
@@ -307,7 +307,7 @@ View::composer('layouts.master', function($view){
 });
 
 /*
- * Ajax routes helpers
+ * Ajax routes helpers settings.
  */
 
 Route::get('api/dropdown', function(){

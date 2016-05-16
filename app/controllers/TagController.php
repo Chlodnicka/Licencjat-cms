@@ -1,12 +1,29 @@
 <?php
-
+/**
+ * Tag controller.
+ *
+ * @copyright (c) 2016 Maja Chłodnicka
+ * @link http://leszczyna.wzks.uj.edu.pl/~13_chlodnicka/projekt
+ */
 
 /**
+ * Class TagController.
  *
+ * @package Controller
+ * @author Maja Chłodnicka
  */
 class TagController extends BaseController
 {
+    /**
+     * @param $layout Base layout
+     */
     protected $layout = 'layouts.master';
+
+    /**
+     * Index tags action.
+     *
+     * @return \Illuminate\View\View
+     */
     public function index()
     {
         $tags = Tag::paginate(20);
@@ -15,6 +32,12 @@ class TagController extends BaseController
         ));
     }
 
+    /**
+     * Edit tag action.
+     *
+     * @param $id Id of tag
+     * @return \Illuminate\View\View
+     */
     public function edit($id)
     {
         $tag = Tag::findOrFail($id);
@@ -23,11 +46,22 @@ class TagController extends BaseController
         ));
     }
 
+    /**
+     * New tag action.
+     *
+     * @return \Illuminate\View\View
+     */
     public function newOne()
     {
         $this->layout->content = View::make('tag.new');
     }
 
+    /**
+     * Update tag action.
+     *
+     * @param $id Id of tag
+     * @return \Illuminate\Support\Facades\Redirect
+     */
     public function update($id)
     {
         $tag = Tag::findOrFail($id);
@@ -37,6 +71,11 @@ class TagController extends BaseController
         return Redirect::route('tag.view', $tag->id);
     }
 
+    /**
+     * Create tag action.
+     *
+     * @return \Illuminate\View\View
+     */
     public function create()
     {
         $tag = new Tag();
@@ -46,6 +85,12 @@ class TagController extends BaseController
         return Redirect::route('tag.view', $tag->id);
     }
 
+    /**
+     * View tag action.
+     *
+     * @param $id Id of tag
+     * @return \Illuminate\View\View
+     */
     public function view($id)
     {
         $tag = Tag::findOrFail($id);
@@ -63,6 +108,12 @@ class TagController extends BaseController
         ));
     }
 
+    /**
+     * Delete tag action.
+     *
+     * @param $id Id of tag
+     * @return \Illuminate\View\View
+     */
     public function delete($id)
     {
         $tag = Tag::findOrFail($id);
@@ -71,6 +122,12 @@ class TagController extends BaseController
         ));
     }
 
+    /**
+     * Destroy tag action.
+     *
+     * @param $id Id of tag
+     * @return \Illuminate\View\View
+     */
     public function destroy($id)
     {
         $tag = Tag::findOrFail($id);
