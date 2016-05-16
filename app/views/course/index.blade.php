@@ -4,7 +4,9 @@
   @if (!empty($courses_lead))
     <p class="lead">{{ $courses_lead->lead }}</p>
   @endif
-  <a href="{{ URL::route('course.new') }}">{{ trans('common.new') }}</a>
+  <div class="action-buttons">
+    <a href="{{ URL::route('course.new') }}">{{ trans('common.new') }}</a>
+  </div>
   <div class="content course">
     @foreach( $courses as $course)
       <div class="list-item">
@@ -21,7 +23,4 @@
       <?php echo $courses->links(); ?>
   </div>
 </div>
-<aside>
-  @include('layouts.aside')
-</aside>
 @stop

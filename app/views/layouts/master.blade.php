@@ -56,11 +56,15 @@
       </div>
     </footer>
     <script src="{{ URL::asset('/assets/js/jquery-2.2.3.min.js') }}"></script>
+    <script src="{{ URL::asset('/assets/js/jquery.validate.min.js') }}"></script>
     <script src="{{ URL::asset('/assets/js/app.js') }}"></script>
     <script src="{{ URL::asset('/packages/ckeditor/ckeditor.js') }}"></script>
     <script type="text/javascript">
       CKEDITOR.replace( 'editor' );
       CKEDITOR.add;
+    </script>
+    <script>
+      $("form").validate();
     </script>
   </body>
 </html>
