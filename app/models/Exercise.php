@@ -1,31 +1,65 @@
 <?php
+/**
+ * Exercise model.
+ *
+ * @copyright (c) 2016 Maja Chłodnicka
+ * @link http://leszczyna.wzks.uj.edu.pl/~13_chlodnicka/projekt
+ */
 
-
-  /**
-   *
-   */
+/**
+ * Class Exercise.
+ *
+ * @package Model
+ * @author Maja Chłodnicka
+ */
   class Exercise extends Eloquent
   {
+
+      /**
+       * Gets the course connected with exercise
+       *
+       * @return object
+       */
       public function course()
       {
           return $this->belongsTo('Course');
       }
 
+      /**
+       * Gets the lecture connected with exercise
+       *
+       * @return object
+       */
       public function lecture()
       {
           return $this->belongsTo('Lecture');
       }
 
+      /**
+       * Gets tags connected with exercise
+       *
+       * @return object
+       */
       public function tags()
       {
           return $this->belongsToMany('Tag');
       }
 
+      /**
+       * Gets attachments connected with exercise
+       *
+       * @return object
+       */
       public function attachments()
       {
           return $this->belongsToMany('Tag');
       }
 
+      /**
+       * Returns array of difficulty levels
+       *
+       * @return $difficulty array
+       */
       public function difficulty()
       {
         $difficulty = array(
@@ -36,6 +70,11 @@
         return $difficulty;
       }
 
+      /**
+       * Sends mail after introducing changes in exercise
+       *
+       * @return object
+       */
       public function sendMail($id, $action) {
           $email = DB::table('students')->where('course_id', '=', $id)->lists('email');
           $course = Course::findOrFail($id);
