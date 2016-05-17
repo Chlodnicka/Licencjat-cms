@@ -92,6 +92,32 @@
           );
           return $positions;
       }
+
+      /**
+       * Gets validation array
+       *
+       * @return $rules array
+       */
+      public function rules() {
+          $rules = array(
+              'firstname' => 'required|alpha_num',
+              'lastname' => 'required|alpha_dash',
+              'email' => 'required|email',
+              'position' => 'required',
+              'phone' => 'numeric|min:9',
+              'university' => array(
+                  'required',
+                  'regex:/^[\pL\s]+$/u'
+              ),
+              'tutorshipHours' => array(
+                  'required',
+                  'regex:/^[\pL\s]+$/u'
+              ),
+              'institute' => 'alpha_num',
+          );
+
+          return $rules;
+      }
   }
 
 
