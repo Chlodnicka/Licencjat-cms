@@ -65,7 +65,10 @@ class OwnerController extends BaseController
     public function update()
     {
         $id = 1;
+
         $owner = Owner::findOrFail($id);
+        $rules = $owner->rules();
+        
         $owner->firstname = Input::get('firstname');
         $owner->lastname = Input::get('lastname');
         $owner->email = Input::get('email');
@@ -75,14 +78,23 @@ class OwnerController extends BaseController
         $owner->tutorshipHours = Input::get('tutorshipHours');
         $owner->content = Input::get('content');
         $owner->institute = Input::get('institute');
-        $owner->save();
-        Session::flash('message', Lang::get('app.owner-updated'));
-        $tree = Tree::findOrFail(1);
-        if ( $tree->active == 1) {
-            return Redirect::route('owner.index');
+
+        $validator = Validator::make(Input::all(), $rules);
+        
+        if ($validator->fails())
+        {
+            return Redirect::route('owner.edit')->withErrors($validator);
         } else {
-            return Redirect::route('homepage');
+            $owner->save();
+            Session::flash('message', Lang::get('app.owner-updated'));
+            $tree = Tree::findOrFail(1);
+            if ( $tree->active == 1) {
+                return Redirect::route('owner.index');
+            } else {
+                return Redirect::route('owner.edit');
+            }
         }
+
     }
 
 }
