@@ -66,9 +66,18 @@ class TagController extends BaseController
     {
         $tag = Tag::findOrFail($id);
         $tag->name = Input::get('name');
-        $tag->save();
-        Session::flash('message', Lang::get('app.tag-updated'));
-        return Redirect::route('tag.view', $tag->id);
+        $rules = $tag->rules();
+        $validator = Validator::make(Input::all(), $rules);
+
+        if ($validator->fails())
+        {
+            return Redirect::route('tag.edit', $tag->id)
+                ->withErrors($validator);
+        } else {
+            $tag->save();
+            Session::flash('message', Lang::get('app.tag-updated'));
+            return Redirect::route('tag.view', $tag->id);
+        }
     }
 
     /**
@@ -80,9 +89,19 @@ class TagController extends BaseController
     {
         $tag = new Tag();
         $tag->name = Input::get('name');
-        $tag->save();
-        Session::flash('message', Lang::get('app.tag-created'));
-        return Redirect::route('tag.view', $tag->id);
+        $rules = $tag->rules();
+        $validator = Validator::make(Input::all(), $rules);
+
+        if ($validator->fails())
+        {
+            return Redirect::route('tag.new')
+                ->withErrors($validator)
+                ->withInput();
+        } else {
+            $tag->save();
+            Session::flash('message', Lang::get('app.tag-crated'));
+            return Redirect::route('tag.view', $tag->id);
+        }
     }
 
     /**

@@ -3,13 +3,6 @@
   <div class="edit owner">
     {{ Form::open(array('route' => array('owner.update', $owner->id))) }}
     <div class="form-cluster">
-      @if ($errors->has())
-        <div class="alert alert-danger">
-          @foreach ($errors->all() as $error)
-            {{ $error }}<br>
-          @endforeach
-        </div>
-      @endif
       <div class="form-group">
         {{ Form::label('firstname', Lang::get('common.firstname'))}}
         {{ Form::text('firstname', $owner->firstname, $attributes = array(

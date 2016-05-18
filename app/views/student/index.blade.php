@@ -6,7 +6,7 @@
   @if(!empty($students))
       <ul>
           @foreach($students as $student)
-            <li>{{ $student->firstname }} {{ $student->lastname }}, {{ $student->email }}</li>
+            <li><a href="{{ URL::route('student.view', $student->id) }}">{{ $student->firstname }} {{ $student->lastname }}, {{ $student->email }}</a></li>
           @endforeach
               <?php echo $students->links(); ?>
       </ul>

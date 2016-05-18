@@ -5,15 +5,17 @@
       <div class="form-cluster">
         <div class="form-group">
           {{ Form::label('name', Lang::get('common.name'))}}
-          {{ Form::text('name') }}
+          {{ Form::text('name',Input::old('name')) }}
+          @if ($errors->has('name')) <p class="help-block">{{ $errors->first('name') }}</p> @endif
         </div>
         <div class="form-group">
           {{ Form::label('lead', Lang::get('common.lead'))}}
-          {{ Form::text('lead') }}
+          {{ Form::text('lead', Input::old('lead')) }}
+          @if ($errors->has('lead')) <p class="help-block">{{ $errors->first('lead') }}</p> @endif
         </div>
         <div class="form-group">
           {{ Form::label('description', Lang::get('common.description'))}}
-          {{ Form::textarea('description', null, array('id'=>'editor')) }}
+          {{ Form::textarea('description', Input::old('description'), array('id'=>'editor')) }}
         </div>
         {{ Form::label('tags', Lang::get('common.tags-category')) }}
         {{ Form::select('tags[]', ($tags), null, ['multiple'=>true,'class' => 'form-control margin']) }}

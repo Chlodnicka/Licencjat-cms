@@ -78,6 +78,7 @@ class OwnerController extends BaseController
         $owner->tutorshipHours = Input::get('tutorshipHours');
         $owner->content = Input::get('content');
         $owner->institute = Input::get('institute');
+        $owner->department = Input::get('department');
 
         $validator = Validator::make(Input::all(), $rules);
         

@@ -121,16 +121,26 @@ class NewsController extends BaseController
             $news->date = Input::get('date');
             $news->content = Input::get('content');
             $news->course_id = Input::get('courses');
-            $news->save();
-            $news->tags()->sync(Input::get('tags'));
 
-            $tree_students = Tree::findOrFail(2);
-            $action = 'update';
-            if( $tree_students->active == 1) {
-                $news->sendMail($news->course_id, $action);
+            $rules = $news->rules();
+            $validator = Validator::make(Input::all(), $rules);
+
+            if ($validator->fails())
+            {
+                return Redirect::route('news.edit', $news->id)->withErrors($validator);
+            } else {
+                $news->save();
+                if(Input::get('tags') != NULL){
+                    $news->tags()->sync(Input::get('tags'));
+                }
+                $tree_students = Tree::findOrFail(2);
+                $action = 'update';
+                if( $tree_students->active == 1) {
+                    $news->sendMail($news->course_id, $action);
+                }
+                Session::flash('message', Lang::get('app.news-updated'));
+                return Redirect::route('news.view', $news->id);
             }
-            Session::flash('message', Lang::get('app.news-updated'));
-            return Redirect::route('news.view', $news->id);
         } else {
             Session::flash('message', Lang::get('common.no-such-site'));
             return Redirect::route('homepage');
@@ -154,16 +164,28 @@ class NewsController extends BaseController
             $news->course_id = Input::get('courses');
             $news->owner_id = 1;
             $news->owner_role_id = 1;
-            $news->save();
-            $news->tags()->sync(Input::get('tags'));
 
-            $tree_students = Tree::findOrFail(2);
-            $action = 'new';
-            if( $tree_students->active == 1) {
-                $news->sendMail($news->course_id, $action);
+            $rules = $news->rules();
+            $validator = Validator::make(Input::all(), $rules);
+            
+            if ($validator->fails())
+            {
+                return Redirect::route('news.new')
+                    ->withErrors($validator)
+                    ->withInput();
+            } else {
+                $news->save();
+                if(Input::get('tags') != NULL){
+                    $news->tags()->sync(Input::get('tags'));
+                }
+                $tree_students = Tree::findOrFail(2);
+                $action = 'update';
+                if( $tree_students->active == 1) {
+                    $news->sendMail($news->course_id, $action);
+                }
+                Session::flash('message', Lang::get('app.news-created'));
+                return Redirect::route('news.view', $news->id);
             }
-            Session::flash('message', Lang::get('app.news-created'));
-            return Redirect::route('news.view', $news->id);
         } else {
             Session::flash('message', Lang::get('common.no-such-site'));
             return Redirect::route('homepage');

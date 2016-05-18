@@ -84,7 +84,19 @@ class ExerciseController extends BaseController
                 'solution' => Input::get('solution_access'),
                 'difficulty' => Input::get('difficulty'),
             );
-            $exercises = DB::table('exercises')->join('exercise_tag', 'exercises.id', '=', 'exercise_tag.exercise_id')->where('solution_access', '=', $searchParams['solution'])->where('difficulty', '=', $searchParams['difficulty'])->where('content', 'LIKE', '%' . $searchParams['content'] . '%')->paginate(6);
+            $searchParams['content'] = htmlspecialchars($searchParams['content']);
+            if($searchParams['content'] == NULL) {
+                $searchParams['content'] = '.*';
+            }
+            if($searchParams['solution'] == NULL && $searchParams['difficulty']) {
+                $exercises = DB::table('exercises')->where('content', 'LIKE', '%' . $searchParams['content'] . '%')->paginate(6);
+            } elseif($searchParams['solution'] == NULL) {
+                $exercises = DB::table('exercises')->where('difficulty', '=', $searchParams['difficulty'])->where('content', 'LIKE', '%' . $searchParams['content'] . '%')->paginate(6);
+            } elseif($searchParams['difficulty'] == NULL) {
+                $exercises = DB::table('exercises')->where('solution_access', '=', $searchParams['solution'])->where('content', 'LIKE', '%' . $searchParams['content'] . '%')->paginate(6);
+            } else {
+                $exercises = DB::table('exercises')->where('solution_access', '=', $searchParams['solution'])->where('difficulty', '=', $searchParams['difficulty'])->where('content', 'LIKE', '%' . $searchParams['content'] . '%')->paginate(6);
+            }
             $exercise_difficulty = new Exercise();
             $difficulty = $exercise_difficulty->difficulty();
 
@@ -257,17 +269,28 @@ class ExerciseController extends BaseController
             $exercise->difficulty = Input::get('difficulty');
             $exercise->lecture_id = Input::get('lectures');
             $exercise->course_id = Input::get('courses');
-            $exercise->save();
 
-            $exercise->tags()->sync(Input::get('tags'));
+            $rules = $exercise->rules();
+            $validator = Validator::make(Input::all(), $rules);
 
-            $tree_students = Tree::findOrFail(2);
-            $action = 'update';
-            if( $tree_students->active == 1) {
-                $exercise->sendMail($exercise->course_id, $action);
+            if ($validator->fails())
+            {
+                return Redirect::route('exercise.edit', $exercise->id)
+                    ->withErrors($validator);
+            } else {
+                $exercise->save();
+                if(Input::get('tags') != NULL){
+                    $exercise->tags()->sync(Input::get('tags'));
+                }
+                $tree_students = Tree::findOrFail(2);
+                $action = 'update';
+                if( $tree_students->active == 1) {
+                    $exercise->sendMail($exercise->course_id, $action);
+                }
+                Session::flash('message', Lang::get('app.exercise_updated'));
+                return Redirect::route('exercise.view', $exercise->id);
             }
-            Session::flash('message', Lang::get('app.exercise_updated'));
-            return Redirect::route('exercise.view', $exercise->id);
+
         } else {
             Session::flash('message', Lang::get('common.no-such-site'));
             return Redirect::route('homepage');
@@ -321,17 +344,28 @@ class ExerciseController extends BaseController
             $exercise->owner_id = 1;
             $exercise->owner_role_id = 1;
 
-            $exercise->save();
+            $rules = $exercise->rules();
+            $validator = Validator::make(Input::all(), $rules);
 
-            $exercise->tags()->sync(Input::get('tags'));
-
-            $tree_students = Tree::findOrFail(2);
-            $action = 'new';
-            if( $tree_students->active == 1) {
-                $exercise->sendMail($exercise->course_id, $action);
+            if ($validator->fails())
+            {
+                return Redirect::route('exercise.new')
+                    ->withErrors($validator)
+                    ->withInput();
+            } else {
+                $exercise->save();
+                if(Input::get('tags') != NULL){
+                    $exercise->tags()->sync(Input::get('tags'));
+                }
+                $tree_students = Tree::findOrFail(2);
+                $action = 'new';
+                if( $tree_students->active == 1) {
+                    $exercise->sendMail($exercise->course_id, $action);
+                }
+                Session::flash('message', Lang::get('app.exercise-created'));
+                return Redirect::route('exercise.view', $exercise->id);
             }
-            Session::flash('message', Lang::get('app.exercise-created'));
-            return Redirect::route('exercise.view', $exercise->id);
+
         } else {
             Session::flash('message', Lang::get('common.no-such-site'));
             return Redirect::route('homepage');

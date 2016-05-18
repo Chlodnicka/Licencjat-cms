@@ -65,6 +65,23 @@
               $message->to($email)->cc('maja.chlodnicka@gmail.com')->subject('Zmiany w kursach'); ;
           });
       }
+
+      /**
+       * Gets validation array
+       *
+       * @return $rules array
+       */
+      public function rules() {
+
+          $rules = array(
+              'title' => 'required|regex:/^[\pL\s]+$/u',
+              'lead' => 'required|regex:/^[\pL\s\d]+$/u',
+              'date' => 'required|date',
+              'courses' => 'required',
+          );
+
+          return $rules;
+      }
   }
 
 

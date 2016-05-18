@@ -7,10 +7,12 @@
         <div class="form-group">
           {{ Form::label('name', Lang::get('common.name'))}}
           {{ Form::text('name', $course->name) }}
+          @if ($errors->has('name')) <p class="help-block">{{ $errors->first('name') }}</p> @endif
         </div>
         <div class="form-group">
           {{ Form::label('lead', Lang::get('common.lead'))}}
           {{ Form::text('lead', $course->lead) }}
+          @if ($errors->has('lead')) <p class="help-block">{{ $errors->first('lead') }}</p> @endif
         </div>
         <div class="form-group">
           {{ Form::label('description', Lang::get('common.description'))}}

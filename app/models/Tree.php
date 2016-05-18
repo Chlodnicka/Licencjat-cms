@@ -26,6 +26,19 @@
               ->get();
           return $tree;
       }
+
+      /**
+       * Gets validation array
+       *
+       * @return $rules array
+       */
+      public function rules() {
+          $rules = array(
+              'name' => 'required|regex:/^[\pL\s]+$/u',
+          );
+
+          return $rules;
+      }
   }
 
 

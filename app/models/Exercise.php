@@ -91,6 +91,41 @@
               $message->to($email)->cc('maja.chlodnicka@gmail.com')->subject('Zmiany w kursach'); ;
           });
       }
+
+      /**
+       * Gets validation array
+       *
+       * @return $rules array
+       */
+      public function rules() {
+
+          $rules = array(
+              'title' => 'required|regex:/^[\pL\s\-\d]+$/u',
+              'difficulty' => 'required',
+              'lectures' => 'required|regex:/^[1-9]+$/u',
+              'courses' => 'required|regex:/^[1-9]+$/u',
+          );
+
+          return $rules;
+      }
+
+      /**
+       * Gets validation array for generating PDF
+       *
+       * @return $rules array
+       */
+      public function rules_generate() {
+
+          $rules = array(
+              'content' => 'required|regex:/^[\pL\s\-\d\.]+$/u',
+              'difficulty' => 'required',
+              'exercise_tags' => 'required',
+              'exercise_lecture' => 'required',
+              'number' => 'numeric',
+          );
+
+          return $rules;
+      }
   }
 
 

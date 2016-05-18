@@ -77,6 +77,22 @@
           });
       }
 
+      /**
+       * Gets validation array
+       *
+       * @return $rules array
+       */
+      public function rules() {
+
+          $rules = array(
+              'title' => 'required|regex:/^[\pL\s\d\-]+$/u',
+              'lead' => 'required|regex:/^[\pL\s\d\.\,\-]+$/u',
+              'courses' => 'required',
+          );
+
+          return $rules;
+      }
+
   }
 
 

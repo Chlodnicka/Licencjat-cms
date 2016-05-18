@@ -23,6 +23,24 @@
       {
           return $this->belongsTo('Course');
       }
+
+      /**
+       * Gets validation array
+       *
+       * @return $rules array
+       */
+      public function rules() {
+
+          $rules = array(
+              'firstname' => 'required|regex:/^[\pL\s]+$/u',
+              'lastname' => 'required|regex:/^[\pL\s]+$/u',
+              'email' => 'required|email',
+              'course_id' => 'required',
+          );
+
+
+          return $rules;
+      }
   }
 
 

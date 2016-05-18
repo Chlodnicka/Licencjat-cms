@@ -262,32 +262,32 @@ Route::post('/search/', ['uses' => 'SearchController@index']);
  * Tree structure routing settings.
  */
 
-Route::get('/tree', ['as' => 'tree.index', 'uses' => 'TreeController@index']);
-Route::get('/tree/', ['uses' => 'TreeController@index']);
 Route::get('/tree/owner/{id}', ['as' => 'tree.owner', 'uses' => 'TreeController@show']);
 Route::get('/tree/owner/{id}/', ['uses' => 'TreeController@show']);
 Route::post('/tree/owner/{id}', ['as' => 'tree.owner', 'uses' => 'TreeController@edit']);
 Route::post('/tree/owner/{id}/', ['uses' => 'TreeController@edit']);
-Route::get('/tree/students/{id}', ['as' => 'tree.students', 'uses' => 'TreeController@show']);
+Route::get('/tree/students/{id}', ['as' => 'tree.student', 'uses' => 'TreeController@show']);
 Route::get('/tree/students/{id}/', ['uses' => 'TreeController@show']);
-Route::post('/tree/students/{id}', ['as' => 'tree.students', 'uses' => 'TreeController@edit']);
+Route::post('/tree/students/{id}', ['as' => 'tree.student', 'uses' => 'TreeController@edit']);
 Route::post('/tree/students/{id}/', ['uses' => 'TreeController@edit']);
-Route::get('/tree/courses/{id}', ['as' => 'tree.courses', 'uses' => 'TreeController@show']);
+Route::get('/tree/courses/{id}', ['as' => 'tree.course', 'uses' => 'TreeController@show']);
 Route::get('/tree/courses/{id}/', ['uses' => 'TreeController@show']);
-Route::post('/tree/courses/{id}', ['as' => 'tree.courses', 'uses' => 'TreeController@edit']);
+Route::post('/tree/courses/{id}', ['as' => 'tree.course', 'uses' => 'TreeController@edit']);
 Route::post('/tree/courses/{id}/', ['uses' => 'TreeController@edit']);
 Route::get('/tree/news/{id}', ['as' => 'tree.news', 'uses' => 'TreeController@show']);
 Route::get('/tree/news/{id}/', ['uses' => 'TreeController@show']);
 Route::post('/tree/news/{id}', ['as' => 'tree.news', 'uses' => 'TreeController@edit']);
 Route::post('/tree/news/{id}/', ['uses' => 'TreeController@edit']);
-Route::get('/tree/lectures/{id}', ['as' => 'tree.lectures', 'uses' => 'TreeController@show']);
+Route::get('/tree/lectures/{id}', ['as' => 'tree.lecture', 'uses' => 'TreeController@show']);
 Route::get('/tree/lectures/{id}/', ['uses' => 'TreeController@show']);
-Route::post('/tree/lectures/{id}', ['as' => 'tree.lectures', 'uses' => 'TreeController@edit']);
+Route::post('/tree/lectures/{id}', ['as' => 'tree.lecture', 'uses' => 'TreeController@edit']);
 Route::post('/tree/lectures/{id}/', ['uses' => 'TreeController@edit']);
-Route::get('/tree/exercises/{id}', ['as' => 'tree.exercises', 'uses' => 'TreeController@show']);
+Route::get('/tree/exercises/{id}', ['as' => 'tree.exercise', 'uses' => 'TreeController@show']);
 Route::get('/tree/exercises/{id}/', ['uses' => 'TreeController@show']);
-Route::post('/tree/exercises/{id}', ['as' => 'tree.exercises', 'uses' => 'TreeController@edit']);
+Route::post('/tree/exercises/{id}', ['as' => 'tree.exercise', 'uses' => 'TreeController@edit']);
 Route::post('/tree/exercises/{id}/', ['uses' => 'TreeController@edit']);
+Route::get('/tree', ['as' => 'tree.index', 'uses' => 'TreeController@index']);
+Route::get('/tree/', ['uses' => 'TreeController@index']);
 
 /**
  * Dynamically loading menu settings

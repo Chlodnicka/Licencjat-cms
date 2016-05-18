@@ -77,14 +77,26 @@ class CourseController extends BaseController
             $course->name = Input::get('name');
             $course->lead = Input::get('lead');
             $course->description = Input::get('description');
-            $course->save();
-            $course->tags()->sync(Input::get('tags'));
-            $tree_students = Tree::findOrFail(2);
-            if ( $tree_students->active == 1) {
-                $course->sendMail($id);
+
+            $rules = $course->rules();
+            $validator = Validator::make(Input::all(), $rules);
+
+            if ($validator->fails())
+            {
+                return Redirect::route('course.edit', $course->id)
+                    ->withErrors($validator);
+            } else {
+                $course->save();
+                if(Input::get('tags') != NULL){
+                    $course->tags()->sync(Input::get('tags'));
+                }
+                $tree_students = Tree::findOrFail(2);
+                if ( $tree_students->active == 1) {
+                    $course->sendMail($id);
+                }
+                Session::flash('message', Lang::get('app.course-updated'));
+                return Redirect::route('course.view', $course->id);
             }
-            Session::flash('message', Lang::get('app.course-updated'));
-            return Redirect::route('course.view', $course->id);
         } else {
             Session::flash('message', Lang::get('common.no-such-site'));
             return Redirect::route('homepage');
@@ -124,10 +136,24 @@ class CourseController extends BaseController
             $course->description = Input::get('description');
             $course->owner_id = 1;
             $course->owner_role_id = 1;
-            $course->save();
-            $course->tags()->sync(Input::get('tags'));
-            Session::flash('message', Lang::get('app.course-created'));
-            return Redirect::route('course.view', $course->id);
+
+            $rules = $course->rules();
+            $validator = Validator::make(Input::all(), $rules);
+
+            if ($validator->fails())
+            {
+                return Redirect::route('course.new')
+                    ->withErrors($validator)
+                    ->withInput();
+            } else {
+                $course->save();
+                if(Input::get('tags') != NULL){
+                    $course->tags()->sync(Input::get('tags'));
+                }
+                Session::flash('message', Lang::get('app.course-created'));
+                return Redirect::route('course.view', $course->id);
+            }
+
         } else {
             Session::flash('message', Lang::get('common.no-such-site'));
             return Redirect::route('homepage');
