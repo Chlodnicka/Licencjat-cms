@@ -115,9 +115,18 @@ class StudentController extends BaseController
             $student->lastname = Input::get('lastname');
             $student->email = Input::get('email');
             $student->course_id = Input::get('courses');
-            $student->save();
-            Session::flash('message', Lang::get('app.student-updated'));
-            return Redirect::route('course.view', $student->course_id);
+
+            $rules = $student->rules();
+            $validator = Validator::make(Input::all(), $rules);
+
+            if ($validator->fails()) {
+                return Redirect::route('student.edit', $student->id)
+                    ->withErrors($validator);
+            } else {
+                $student->save();
+                Session::flash('message', Lang::get('app.student-updated'));
+                return Redirect::route('course.view', $student->course_id);
+            }
         } else {
             return Redirect::route('homepage');
         }
@@ -140,9 +149,19 @@ class StudentController extends BaseController
             $student->role_id = 3;
             $student->owner_id = 1;
             $student->owner_role_id = 1;
-            $student->save();
-            Session::flash('message', Lang::get('app.student-created'));
-            return Redirect::route('course.view', $student->course_id);
+
+            $rules = $student->rules();
+            $validator = Validator::make(Input::all(), $rules);
+
+            if ($validator->fails()) {
+                return Redirect::route('student.edit', $student->id)
+                    ->withErrors($validator)
+                    ->withInput();
+            } else {
+                $student->save();
+                Session::flash('message', Lang::get('app.student-updated'));
+                return Redirect::route('course.view', $student->course_id);
+            }
         } else {
             return Redirect::route('homepage');
         }

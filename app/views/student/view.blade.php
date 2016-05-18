@@ -1,7 +1,7 @@
 @section('content')
   <h1>{{ trans('app.student') }}</h1>
   <div class="action-button">
-    <a href="{{ URL::route('students.delete', $student->id) }}">Usuń</a>
+    <a href="{{ URL::route('student.delete', $student->id) }}">Usuń</a>
   </div>
   @if(!empty($student))
     @if(!empty($student->firstname) && !empty($student->lastname))

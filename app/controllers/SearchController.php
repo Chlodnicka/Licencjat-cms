@@ -27,6 +27,7 @@ class SearchController extends BaseController
     public function index()
     {
         $searchQuery = Input::get('searchQuery');
+        $searchQuery = htmlspecialchars($searchQuery);
         $exercises = DB::table('exercises')->where('content', 'LIKE', '%' . $searchQuery . '%')
             ->orWhere('title', 'LIKE', '%' . $searchQuery . '%')
             ->orWhere('solution', 'LIKE', '%' . $searchQuery . '%')

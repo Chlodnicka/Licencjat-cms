@@ -1,8 +1,13 @@
 @section('content')
-    <h1>exercises! Edit</h1>
-    <div class="exercises tree edit">
-        {{ Form::open(array('route' => array('tree.exercises', $tree->id))) }}
+    <h1>students! Edit</h1>
+    <div class="students tree edit">
+        {{ Form::open(array('route' => array('tree.student', $tree->id))) }}
         <div class="form-cluster">
+            <div class="form-group">
+                {{ Form::label('name', Lang::get('common.title'))}}
+                {{ Form::text('name', $tree->title) }}
+                @if ($errors->has('name')) <p class="help-block">{{ $errors->first('name') }}</p> @endif
+            </div>
             <div class="form-group">
                 {{ Form::label('lead', 'Lead')}}
                 {{ Form::textarea('lead', $tree->lead, array('id'=>'editor')) }}

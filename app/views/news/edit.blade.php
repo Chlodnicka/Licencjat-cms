@@ -7,10 +7,12 @@
         <div class="form-group">
           {{ Form::label('title', Lang::get('common.title'))}}
           {{ Form::text('title', $news->title) }}
+          @if ($errors->has('title')) <p class="help-block">{{ $errors->first('title') }}</p> @endif
         </div>
         <div class="form-group">
           {{ Form::label('lead', Lang::get('common.lead'))}}
           {{ Form::text('lead', $news->lead) }}
+          @if ($errors->has('lead')) <p class="help-block">{{ $errors->first('lead') }}</p> @endif
         </div>
         <div class="form-group">
           {{ Form::label('content', Lang::get('common.content'))}}
@@ -19,9 +21,11 @@
         <div class="form-group">
           {{ Form::label('date', Lang::get('common.date'))}}
           {{ Form::input('date', 'date', $news->date) }}
+          @if ($errors->has('date')) <p class="help-block">{{ $errors->first('date') }}</p> @endif
         </div>
         {{ Form::label('courses',Lang::get('common.select-courses')) }}
         {{ Form::select('courses', $courses, $news->course_id) }}
+        @if ($errors->has('courses')) <p class="help-block">{{ $errors->first('courses') }}</p> @endif
 
         {{ Form::label('tags', Lang::get('common.tags-category')) }}
         {{ Form::select('tags[]', ($tags), $news_tags, ['multiple'=>true,'class' => 'form-control margin']) }}

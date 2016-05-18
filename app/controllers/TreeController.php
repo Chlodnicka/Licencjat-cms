@@ -57,9 +57,20 @@ class TreeController extends BaseController
         $tree = Tree::findOrFail($id);
         $tree->active = Input::get('active');
         $tree->lead = Input::get('lead');
-        $tree->save();
-        Session::flash('message', 'OK');
-        return Redirect::route('tree.'.$tree->name, $tree->id);
+        $tree->title = Input::get('name');
+
+        $rules = $tree->rules();
+        $validator = Validator::make(Input::all(), $rules);
+
+        if ($validator->fails())
+        {
+            return Redirect::route('tree'.$tree->name, $tree->id)->withErrors($validator);
+        } else {
+            $tree->save();
+            Session::flash('message', Lang::get('common.data-saved'));
+            return Redirect::route('tree.'.$tree->name, $tree->id);
+        }
+
     }
 
 }

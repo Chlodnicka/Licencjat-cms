@@ -100,8 +100,8 @@
        */
       public function rules() {
           $rules = array(
-              'firstname' => 'required|alpha_num',
-              'lastname' => 'required|alpha_dash',
+              'firstname' => 'required|regex:/^[\pL\s]+$/u',
+              'lastname' => 'required|regex:/^[\pL\s]+$/u',
               'email' => 'required|email',
               'position' => 'required',
               'phone' => 'numeric|min:9',
@@ -109,11 +109,15 @@
                   'required',
                   'regex:/^[\pL\s]+$/u'
               ),
+              'department' => array(
+                  'required',
+                  'regex:/^[\pL\s]+$/u'
+              ),
               'tutorshipHours' => array(
                   'required',
                   'regex:/^[\pL\s]+$/u'
               ),
-              'institute' => 'alpha_num',
+              'institute' => 'regex:/^[\pL\s]+$/u',
           );
 
           return $rules;

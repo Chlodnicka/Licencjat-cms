@@ -101,6 +101,21 @@
       public static function all_courses() {
           return $courses = Course::all();
       }
+
+      /**
+       * Gets validation array
+       *
+       * @return $rules array
+       */
+      public function rules() {
+
+          $rules = array(
+              'name' => 'required|regex:/^[\pL\s\d\-]+$/u',
+              'lead' => 'required|regex:/^[\pL\s\d\-\.\,]+$/u',
+          );
+
+          return $rules;
+      }
   }
 
 

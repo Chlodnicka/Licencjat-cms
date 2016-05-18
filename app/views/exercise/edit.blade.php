@@ -7,6 +7,7 @@
           <div class="form-group">
             {{ Form::label('title', Lang::get('common.title'))}}
             {{ Form::text('title', $exercise->title) }}
+            @if ($errors->has('title')) <p class="help-block">{{ $errors->first('title') }}</p> @endif
           </div>
           <div class="form-group">
             {{ Form::label('content', Lang::get('common.content'))}}
@@ -22,12 +23,13 @@
           </div>
           {{ Form::label('difficulty',Lang::get('common.difficulty')) }}
           {{ Form::select('difficulty', $difficulty, $exercise->difficulty) }}
+          @if ($errors->has('difficulty')) <p class="help-block">{{ $errors->first('difficulty') }}</p> @endif
           {{ Form::label('courses',Lang::get('common.select-courses')) }}
           {{ Form::select('courses', $courses, $exercise->course_id) }}
-
+          @if ($errors->has('courses')) <p class="help-block">{{ $errors->first('courses') }}</p> @endif
           {{ Form::label('lectures',Lang::get('common.select-lectures')) }}
           {{ Form::select('lectures', [Lang::get('common.first-choose-course')]) }}
-
+          @if ($errors->has('lectures')) <p class="help-block">{{ $errors->first('lectures') }}</p> @endif
           {{ Form::label('tags',Lang::get('common.tags-category')) }}
           {{ Form::select('tags[]', ($tags), null, ['multiple'=>true,'class' => 'form-control margin']) }}
                   <!--tagi-->
