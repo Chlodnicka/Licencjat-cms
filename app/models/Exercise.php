@@ -63,9 +63,10 @@
       public function difficulty()
       {
         $difficulty = array(
-            '1' => 'easy',
-            '2' => 'medium',
-            '3' => 'hard'
+            '0' => 'Wybierz trudność',
+            '1' => 'łatwe',
+            '2' => 'średnie',
+            '3' => 'trudne'
         );
         return $difficulty;
       }
@@ -102,7 +103,6 @@
           $rules = array(
               'title' => 'required|regex:/^[\pL\s\-\d]+$/u',
               'difficulty' => 'required',
-              'lectures' => 'required|regex:/^[1-9]+$/u',
               'courses' => 'required|regex:/^[1-9]+$/u',
           );
 
@@ -117,11 +117,7 @@
       public function rules_generate() {
 
           $rules = array(
-              'content' => 'required|regex:/^[\pL\s\-\d\.]+$/u',
-              'difficulty' => 'required',
-              'exercise_tags' => 'required',
-              'exercise_lecture' => 'required',
-              'number' => 'numeric',
+           //   'content' => 'required|regex:/^[\pL\s\-\d\.]+$/u',
           );
 
           return $rules;

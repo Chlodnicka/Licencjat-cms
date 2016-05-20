@@ -18,7 +18,7 @@
       </div>
       <div class="form-group">
         {{ Form::label('solutionAccess', Lang::get('common.solution-access'))}}
-        {{ Form::checkbox('solution_access', '1', true) }}
+        {{ Form::checkbox('solution_access', '1', null) }}
       </div>
       {{ Form::label('difficulty',Lang::get('common.difficulty')) }}
       {{ Form::select('difficulty', $difficulty) }}

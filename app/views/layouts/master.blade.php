@@ -13,7 +13,7 @@
         <div class="side-menu">
           <div class="side-menu-search">
             <form action="{{ URL::route('search.index') }}" method="post">
-              <input type="text" name="searchQuery" value="seek">
+              <input type="text" name="searchQuery" value="">
               <div class="btn-search"><input type="submit" value=""></div>
             </form>
           </div>

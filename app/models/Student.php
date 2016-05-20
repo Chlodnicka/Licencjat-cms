@@ -35,7 +35,7 @@
               'firstname' => 'required|regex:/^[\pL\s]+$/u',
               'lastname' => 'required|regex:/^[\pL\s]+$/u',
               'email' => 'required|email',
-              'course_id' => 'required',
+              'courses' => 'required',
           );
 
 
