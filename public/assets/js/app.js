@@ -22,7 +22,7 @@ function dropdownLectures() {
             function(data) {
                 var model = $("select[name='lectures']");
                 model.empty();
-
+                model.append("<option value='0'>Brak wykładu</option>");
                 $.each(data, function(index, element) {
                     model.append("<option value='"+ element.id +"'>" + element.title + "</option>");
                 });

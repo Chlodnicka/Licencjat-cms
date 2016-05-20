@@ -4,19 +4,27 @@
     <div class="student-form">
       <form action="{{ URL::route('student.update', $student->id) }}" method="post">
         <div class="form-group">
-          <div><label for="fistname">{{ trans('common.firstname') }}</label><input type="text" name="firstname" id="firstname"></div>
-          <div><label for="lastname">{{ trans('common.lastname') }}</label><input type="text" name="lastname" id="lastname"></div>
+          <div>
+            <label for="fistname">{{ trans('common.firstname') }}</label>
+            <input type="text" name="firstname" id="firstname" value="{{ $student->firstname }}">
+            @if ($errors->has('firstname')) <p class="help-block">{{ $errors->first('firstname') }}</p> @endif
+          </div>
+          <div>
+            <label for="lastname">{{ trans('common.lastname') }}</label>
+            <input type="text" name="lastname" id="lastname" value="{{ $student->lastname }}">
+            @if ($errors->has('lastname')) <p class="help-block">{{ $errors->first('lastname') }}</p> @endif
+          </div>
         </div>
         <div class="form-group">
-          <div><label for="email">{{ trans('common.email') }}</label><input type="email" name="email" id="email"></div>
           <div>
-            <label for="course">{{ trans('app.course') }}</label>
-            <select name="course" id="course"><!--do wymiany!-->
-              <option value="1">Volvo</option>
-              <option value="2">Saab</option>
-              <option value="3">Mercedes</option>
-              <option value="4">Audi</option>
-            </select>
+            <label for="email">{{ trans('common.email') }}</label>
+            <input type="email" name="email" id="email" value="{{ $student->email }}">
+            @if ($errors->has('email')) <p class="help-block">{{ $errors->first('email') }}</p> @endif
+          </div>
+          <div>
+            {{ Form::label('courses', Lang::get('common.select-courses')) }}
+            {{ Form::select('courses', $courses) }}
+            @if ($errors->has('courses')) <p class="help-block">{{ $errors->first('courses') }}</p> @endif
           </div>
         </div>
         <input type="submit" value="{{ trans('common.submit') }}">

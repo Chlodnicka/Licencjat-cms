@@ -52,11 +52,13 @@ class CourseController extends BaseController
         if ( $tree->active == 1) {
             $course = Course::findOrFail($id);
             $courses_lead = Tree::findOrFail(3);
+            $course_tags = $course->tags()->lists('tag_id');
             $tags = Tag::all()->lists('name', 'id');
             $this->layout->content = View::make('course.edit', array(
                 'course' => $course,
                 'tags' => $tags,
                 'courses_lead' => $courses_lead,
+                'course_tags' => $course_tags,
             ));
         } else {
             return Redirect::route('homepage');

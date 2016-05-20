@@ -121,20 +121,22 @@ Route::post('/exercise/new/', ['as'=> 'exercise.create', 'uses' => 'ExerciseCont
 Route::post('/exercise/new/', ['uses' => 'ExerciseController@create']);
 Route::get('/exercise/generate/{id}', ['as' => 'exercise.generate', 'uses' => 'ExerciseController@generate']);
 Route::get('/exercise/generate/{id}/', ['uses' => 'ExerciseController@generate']);
-Route::post('/exercise/generate/{id}', ['as' => 'exercise.generate', 'uses' => 'ExerciseController@generate']);
-Route::post('/exercise/generate/{id}/', ['uses' => 'ExerciseController@generate']);
+Route::post('/exercise/generate/{id}', ['as' => 'exercise.showgenerated', 'uses' => 'ExerciseController@show_generated']);
+Route::post('/exercise/generate/{id}/', ['uses' => 'ExerciseController@show_generated']);
 Route::post('/exercise/generateByInput', ['as' => 'exercise.generateByInput', 'uses' => 'ExerciseController@generateByInput']);
 Route::post('/exercise/generateByInput/', ['uses' => 'ExerciseController@generateByInput']);
 Route::post('/exercise/search', ['as'=>'exercise.search', 'uses' => 'ExerciseController@search']);
 Route::post('/exercise/search/', ['uses' => 'ExerciseController@search']);
+Route::get('/exercise/search', ['as'=>'exercise.search', 'uses' => 'ExerciseController@search']);
+Route::get('/exercise/search/', ['uses' => 'ExerciseController@search']);
 Route::get('/exercise/lecture', ['uses' => 'ExerciseController@index']);
 Route::get('/exercise/lecture/', ['uses' => 'ExerciseController@index']);
 Route::get('/exercise/lecture/{id}', ['as'=>'exercise.indexLecture', 'uses' => 'ExerciseController@indexExerciseByLecture']);
 Route::get('/exercise/lecture/{id}/', ['uses' => 'ExerciseController@indexExerciseByLecture']);
 Route::get('/exercise/difficulty', ['uses' => 'ExerciseController@index']);
 Route::get('/exercise/difficulty/', ['uses' => 'ExerciseController@index']);
-Route::get('/exercise/difficulty/{id}', ['as'=>'exercise.indexDifficulty', 'uses' => 'ExerciseController@indexExerciseByDifficulty']);
-Route::get('/exercise/difficulty/{id}/', ['uses' => 'ExerciseController@indexExerciseByDifficulty']);
+Route::get('/exercise/difficulty/{id}/{course}', ['as'=>'exercise.indexDifficulty', 'uses' => 'ExerciseController@indexExerciseByDifficulty']);
+Route::get('/exercise/difficulty/{id}/{course}/', ['uses' => 'ExerciseController@indexExerciseByDifficulty']);
 Route::get('/exercise/view', ['uses' => 'ExerciseController@index']);
 Route::get('/exercise/view/', ['uses' => 'ExerciseController@index']);
 Route::get('/exercise/view/{id}', ['as' => 'exercise.view', 'uses' => 'ExerciseController@view']);
@@ -256,6 +258,8 @@ Route::post('/tag/delete/{id}/', ['uses' => 'TagController@destroy']);
 
 Route::post('/search', ['as' => 'search.index', 'uses' => 'SearchController@index']);
 Route::post('/search/', ['uses' => 'SearchController@index']);
+Route::get('/search', ['as' => 'search.index', 'uses' => 'SearchController@index']);
+Route::get('/search/', ['uses' => 'SearchController@index']);
 
 
 /*
@@ -294,6 +298,7 @@ Route::get('/tree/', ['uses' => 'TreeController@index']);
  */
 
 View::composer('layouts.master', function($view){
+    DB::setFetchMode(PDO::FETCH_CLASS);
     $tree = Tree::menu();
     $courses = Course::all_courses();
     $coursesSide = $courses;

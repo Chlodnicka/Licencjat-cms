@@ -19,7 +19,7 @@
           {{ Form::textarea('description', $course->description, array('id'=>'editor')) }}
         </div>
         {{ Form::label('tags', Lang::get('common.tags-category')) }}
-        {{ Form::select('tags[]', ($tags), null, ['multiple'=>true,'class' => 'form-control margin']) }}
+        {{ Form::select('tags[]', ($tags), $course_tags, ['multiple'=>true,'class' => 'form-control margin']) }}
         {{ Form::submit(Lang::get('common.submit')) }}
       </div>
       {{ Form::close() }}

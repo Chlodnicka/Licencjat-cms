@@ -72,8 +72,10 @@ class StudentController extends BaseController
         $tree = Tree::findOrFail(2);
         if ( $tree->active == 1 ) {
             $student = Student::findOrFail($id);
+            $courses = Course::all()->lists('name', 'id');
             $this->layout->content = View::make('student.edit', array(
-                'student' => $student
+                'student' => $student,
+                'courses' => $courses,
             ));
         } else {
             return Redirect::route('homepage');
@@ -154,7 +156,7 @@ class StudentController extends BaseController
             $validator = Validator::make(Input::all(), $rules);
 
             if ($validator->fails()) {
-                return Redirect::route('student.edit', $student->id)
+                return Redirect::route('student.new')
                     ->withErrors($validator)
                     ->withInput();
             } else {

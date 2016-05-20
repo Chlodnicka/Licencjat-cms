@@ -28,10 +28,22 @@
           {{ Form::select('courses', $courses, $exercise->course_id) }}
           @if ($errors->has('courses')) <p class="help-block">{{ $errors->first('courses') }}</p> @endif
           {{ Form::label('lectures',Lang::get('common.select-lectures')) }}
-          {{ Form::select('lectures', [Lang::get('common.first-choose-course')]) }}
+          <select name="lectures" id="lectures">
+            <option value="0" @if($exercise->lecture_id == 0)
+                    selected
+                    @endif>Brak wykładu</option>
+            @foreach($lectures as $lecture)
+              <option value="{{ $lecture->id }}"
+                      @if($lecture->id == $exercise->lecture_id)
+                        selected
+                      @endif>
+                {{ $lecture->title }}
+              </option>
+            @endforeach
+          </select>
           @if ($errors->has('lectures')) <p class="help-block">{{ $errors->first('lectures') }}</p> @endif
           {{ Form::label('tags',Lang::get('common.tags-category')) }}
-          {{ Form::select('tags[]', ($tags), null, ['multiple'=>true,'class' => 'form-control margin']) }}
+          {{ Form::select('tags[]', ($tags), $exercise_tags, ['multiple'=>true,'class' => 'form-control margin']) }}
                   <!--tagi-->
           {{ Form::submit(Lang::get('common.submit')) }}
         </div>
