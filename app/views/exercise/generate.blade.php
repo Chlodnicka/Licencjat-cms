@@ -17,18 +17,15 @@
                 </div>
                 {{ Form::label('difficulty',Lang::get('common.difficulty')) }}
                 {{ Form::select('difficulty', $difficulty) }}
-                {{ Form::label('exercise_lecture',Lang::get('common.select-lectures')) }}
-                <select name="exercise_lecture" id="exercise_lecture" multiple>
-                    @foreach($exercise_lectures as $lecture)
-                        <option value="{{ $lecture->id }}">{{ $lecture->title }}</option>
-                    @endforeach
-                </select>
-                {{ Form::label('exercise_tags',Lang::get('common.tags-category')) }}
-                <select name="exercise_tags" id="exercise_tags" multiple>
-                    @foreach($exercise_tags as $tag)
-                        <option value="{{ $tag->tag_id }}">{{ $tag->name }}</option>
-                    @endforeach
-                </select>
+                @if(!empty($exercise_lectures))
+                    {{ Form::label('exercise_lectures',Lang::get('common.select-lectures')) }}
+                    {{ Form::select('exercise_lectures[]', ($exercise_lectures), null, ['multiple'=>true,'class' => 'form-control margin']) }}
+
+                @endif
+                @if(!empty($exercise_tags))
+                    {{ Form::label('exercise_tags',Lang::get('common.tags-category')) }}
+                    {{ Form::select('exercise_tags[]', ($exercise_tags), null, ['multiple'=>true,'class' => 'form-control margin']) }}
+                @endif
                 <!--tagi-->
                 {{ Form::submit(Lang::get('common.submit')) }}
             </div>
