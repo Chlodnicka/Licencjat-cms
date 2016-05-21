@@ -10,6 +10,7 @@
         <a href="{{ URL::route('course.edit', $course->id) }}">{{ trans('common.edit') }}</a>
         <a href="{{ URL::route('course.delete', $course->id) }}">{{ trans('common.delete') }}</a>
         <a href="{{ URL::route('course.new') }}">{{ trans('common.new') }}</a>
+        <a href="{{ URL::route('exercise.generate', $course->id) }}">{{ trans('common.generate') }}</a>
       </div>
       @if (!empty($course->description))
         <div class="richtext">

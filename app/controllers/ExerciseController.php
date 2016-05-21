@@ -125,8 +125,8 @@ class ExerciseController extends BaseController
         $tree_exercise = Tree::findOrFail(6);
         if ( $tree->active == 1 && $tree_exercise->active == 1) {
             $course_id = $id;
-            $exercise_tags = DB::table('exercise_tag')->join('exercises', 'exercises.id', '=', 'exercise_tag.exercise_id')->where('course_id', '=', $id)->distinct()->lists('tag_id');
-            $exercise_lectures = DB::table('exercises')->where('course_id', '=', $id)->whereNotNull('lecture_id')->distinct()->lists('lecture_id');
+            $exercise_tags = DB::table('exercise_tag')->join('exercises', 'exercises.id', '=', 'exercise_tag.exercise_id')->join('tags', 'tags.id', '=', 'exercise_tag.tag_id')->where('course_id', '=', $id)->distinct()->groupBy('tag_id')->lists('name', 'tag_id');
+            $exercise_lectures = DB::table('lectures')->where('course_id', '=', $id)->lists('title', 'id');
             $exercise_difficulty = new Exercise();
             $difficulty = $exercise_difficulty->difficulty();
             $this->layout->content = View::make('exercise.generate', array(
@@ -147,8 +147,9 @@ class ExerciseController extends BaseController
             'number' => Input::get('number'),
             'difficulty' => Input::get('difficulty'),
             'exercise_tags' => Input::get('exercise_tags'),
-            'exercise_lecture' => Input::get('exercise_lecture'),
+            'exercise_lecture' => Input::get('exercise_lectures'),
         );
+        
         $exercise = new Exercise();
         $course_id = $id;
         $rules = $exercise->rules_generate();
@@ -161,16 +162,16 @@ class ExerciseController extends BaseController
         } else {
 
             if($searchParams['content'] == NULL && $searchParams['difficulty'] == 0 && $searchParams['exercise_lecture'] == NULL && $searchParams['exercise_tags'] == NULL) {
-                $exercises = DB::table('exercises')->where('course_id', '=', $id);
+                $exercises = DB::table('exercises')->where('course_id', '=', $id)->limit($searchParams['number'])->get();
             } elseif($searchParams['exercise_tags'] == NULL){
                 if($searchParams['difficulty'] == 0) {
                     if($searchParams['content'] == NULL){
-                        $exercises = DB::table('exercises')->where('course_id', '=', $id)->where('lecture_id', '=', $searchParams['exercise_lecture'])->limit($searchParams['number'])->get();
+                        $exercises = DB::table('exercises')->where('course_id', '=', $id)->whereIn('lecture_id', $searchParams['exercise_lecture'])->limit($searchParams['number'])->get();
                     } elseif($searchParams['exercise_lecture'] == NULL){
                         $exercises = DB::table('exercises')->where('course_id', '=', $id)->where('content', 'LIKE', '%'.$searchParams['content'].'%')->limit($searchParams['number'])->get();
 
                     } else {
-                        $exercises = DB::table('exercises')->where('course_id', '=', $id)->where('lecture_id', '=', $searchParams['exercise_lecture'])->where('content', 'LIKE', '%'.$searchParams['content'].'%')->limit($searchParams['number'])->get();
+                        $exercises = DB::table('exercises')->where('course_id', '=', $id)->whereIn('lecture_id', '=', $searchParams['exercise_lecture'])->where('content', 'LIKE', '%'.$searchParams['content'].'%')->limit($searchParams['number'])->get();
                     }
                 } elseif( $searchParams['exercise_lecture'] == NULL) {
                     if ($searchParams['content'] == NULL) {
@@ -179,29 +180,33 @@ class ExerciseController extends BaseController
                         $exercises = DB::table('exercises')->where('course_id', '=', $id)->where('difficulty', '=', $searchParams['difficulty'])->where('content', 'LIKE', '%'.$searchParams['content'].'%')->limit($searchParams['number'])->get();
                     }
                 } elseif( $searchParams['content'] == NULL) {
-                    $exercises = DB::table('exercises')->where('course_id', '=', $id)->where('difficulty', '=', $searchParams['difficulty'])->where('lecture_id', '=', $searchParams['exercise_lecture'])->limit($searchParams['number'])->get();
+                    $exercises = DB::table('exercises')->where('course_id', '=', $id)->where('difficulty', '=', $searchParams['difficulty'])->whereIn('lecture_id', '=', $searchParams['exercise_lecture'])->limit($searchParams['number'])->get();
                 }
             } elseif ($searchParams['difficulty'] == 0) {
                 if($searchParams['content'] == NULL){
-                    $exercises = DB::table('exercises')->join('exercise_tag', 'exercises.id', '=', 'exercise_tag.exercise_id')->where('course_id', '=', $id)->where('lecture_id', '=', $searchParams['exercise_lecture'])->where('tag_id', '=', $searchParams['exercise_tags'])->limit($searchParams['number'])->get();
+                    if($searchParams['exercise_lecture'] == NULL){
+                        $exercises = DB::table('exercises')->join('exercise_tag', 'exercises.id', '=', 'exercise_tag.exercise_id')->whereIn('tag_id', $searchParams['exercise_tags'])->limit($searchParams['number'])->get();
+                    }else {
+                        $exercises = DB::table('exercises')->join('exercise_tag', 'exercises.id', '=', 'exercise_tag.exercise_id')->where('course_id', '=', $id)->whereIn('lecture_id', '=', $searchParams['exercise_lecture'])->whereIn('tag_id', $searchParams['exercise_tags'])->limit($searchParams['number'])->get();
+                    }
                 } elseif($searchParams['exercise_lecture'] == NULL){
-                    $exercises = DB::table('exercises')->join('exercise_tag', 'exercises.id', '=', 'exercise_tag.exercise_id')->where('course_id', '=', $id)->where('tag_id', '=', $searchParams['exercise_tags'])->where('content', 'LIKE', '%' . $searchParams['content'] . '%')->limit($searchParams['number'])->get();
+                    $exercises = DB::table('exercises')->join('exercise_tag', 'exercises.id', '=', 'exercise_tag.exercise_id')->where('course_id', '=', $id)->whereIn('tag_id', $searchParams['exercise_tags'])->where('content', 'LIKE', '%' . $searchParams['content'] . '%')->limit($searchParams['number'])->get();
                 } else {
-                    $exercises = DB::table('exercises')->join('exercise_tag', 'exercises.id', '=', 'exercise_tag.exercise_id')->where('course_id', '=', $id)->where('lecture_id', '=', $searchParams['exercise_lecture'])->where('tag_id', '=', $searchParams['exercise_tags'])->where('content', 'LIKE', '%' . $searchParams['content'] . '%')->limit($searchParams['number'])->get();
+                    $exercises = DB::table('exercises')->join('exercise_tag', 'exercises.id', '=', 'exercise_tag.exercise_id')->where('course_id', '=', $id)->whereIn('lecture_id', '=', $searchParams['exercise_lecture'])->whereIn('tag_id', $searchParams['exercise_tags'])->where('content', 'LIKE', '%' . $searchParams['content'] . '%')->limit($searchParams['number'])->get();
                 }
             } elseif($searchParams['content'] == NULL) {
                 if($searchParams['exercise_lecture'] == NULL){
-                    $exercises = DB::table('exercises')->join('exercise_tag', 'exercises.id', '=', 'exercise_tag.exercise_id')->where('course_id', '=', $id)->where('difficulty', '=', $searchParams['difficulty'])->where('tag_id', '=', $searchParams['exercise_tags'])->limit($searchParams['number'])->get();
+                    $exercises = DB::table('exercises')->join('exercise_tag', 'exercises.id', '=', 'exercise_tag.exercise_id')->where('course_id', '=', $id)->where('difficulty', '=', $searchParams['difficulty'])->whereIn('tag_id', $searchParams['exercise_tags'])->limit($searchParams['number'])->get();
                 } else {
-                    $exercises = DB::table('exercises')->join('exercise_tag', 'exercises.id', '=', 'exercise_tag.exercise_id')->where('course_id', '=', $id)->where('difficulty', '=', $searchParams['difficulty'])->where('lecture_id', '=', $searchParams['exercise_lecture'])->where('tag_id', '=', $searchParams['exercise_tags'])->limit($searchParams['number'])->get();
+                    $exercises = DB::table('exercises')->join('exercise_tag', 'exercises.id', '=', 'exercise_tag.exercise_id')->where('course_id', '=', $id)->where('difficulty', '=', $searchParams['difficulty'])->whereIn('lecture_id', '=', $searchParams['exercise_lecture'])->whereIn('tag_id', $searchParams['exercise_tags'])->limit($searchParams['number'])->get();
                 }
             } elseif ($searchParams['exercise_lecture'] == NULL){
-                $exercises = DB::table('exercises')->join('exercise_tag', 'exercises.id', '=', 'exercise_tag.exercise_id')->where('course_id', '=', $id)->where('difficulty', '=', $searchParams['difficulty'])->where('tag_id', '=', $searchParams['exercise_tags'])->where('content', 'LIKE', '%' . $searchParams['content'] . '%')->limit($searchParams['number'])->get();
+                $exercises = DB::table('exercises')->join('exercise_tag', 'exercises.id', '=', 'exercise_tag.exercise_id')->where('course_id', '=', $id)->where('difficulty', '=', $searchParams['difficulty'])->whereIn('tag_id', $searchParams['exercise_tags'])->where('content', 'LIKE', '%' . $searchParams['content'] . '%')->limit($searchParams['number'])->get();
             } else {
-                $exercises = DB::table('exercises')->join('exercise_tag', 'exercises.id', '=', 'exercise_tag.exercise_id')->where('course_id', '=', $id)->where('difficulty', '=', $searchParams['difficulty'])->where('lecture_id', '=', $searchParams['exercise_lecture'])->where('tag_id', '=', $searchParams['exercise_tags'])->where('content', 'LIKE', '%' . $searchParams['content'] . '%')->limit($searchParams['number'])->get();
+                $exercises = DB::table('exercises')->join('exercise_tag', 'exercises.id', '=', 'exercise_tag.exercise_id')->where('course_id', '=', $id)->where('difficulty', '=', $searchParams['difficulty'])->whereIn('lecture_id', '=', $searchParams['exercise_lecture'])->whereIn('tag_id', $searchParams['exercise_tags'])->where('content', 'LIKE', '%' . $searchParams['content'] . '%')->limit($searchParams['number'])->get();
             }
-            $exercise_tags = DB::table('exercise_tag')->join('exercises', 'exercises.id', '=', 'exercise_tag.exercise_id')->join('tags', 'tags.id', '=', 'exercise_tag.tag_id')->where('course_id', '=', $id)->distinct()->groupBy('tag_id')->get();
-            $exercise_lectures = DB::table('lectures')->where('course_id', '=', $id)->distinct()->get();
+            $exercise_tags = DB::table('exercise_tag')->join('exercises', 'exercises.id', '=', 'exercise_tag.exercise_id')->join('tags', 'tags.id', '=', 'exercise_tag.tag_id')->where('course_id', '=', $id)->distinct()->groupBy('tag_id')->lists('name', 'tag_id');
+            $exercise_lectures = DB::table('lectures')->where('course_id', '=', $id)->lists('title', 'id');
             $exercise_difficulty = new Exercise();
             $difficulty = $exercise_difficulty->difficulty();
             $this->layout->content = View::make('exercise.generate', array(
