@@ -8,4 +8,10 @@ CKEDITOR.editorConfig = function( config ) {
 	// config.language = 'fr';
     //config.uiColor = '#AADC6E';
     config.skin = 'flat';
+    config.filebrowserBrowseUrl = '/packages/kcfinder/browse.php?opener=ckeditor&type=files';
+    config.filebrowserImageBrowseUrl = '/packages/kcfinder/browse.php?opener=ckeditor&type=images';
+    config.filebrowserFlashBrowseUrl = '/packages/kcfinder/browse.php?opener=ckeditor&type=flash';
+    config.filebrowserUploadUrl = '/packages/kcfinder/upload.php?opener=ckeditor&type=files';
+    config.filebrowserImageUploadUrl = '/packages/kcfinder/upload.php?opener=ckeditor&type=images';
+    config.filebrowserFlashUploadUrl = '/packages/kcfinder/upload.php?opener=ckeditor&type=flash';
 };
