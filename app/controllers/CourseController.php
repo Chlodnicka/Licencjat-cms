@@ -20,6 +20,18 @@ class CourseController extends BaseController
      */
     protected $layout = 'layouts.master';
 
+    public function __construct()
+    {
+        if (Auth::check()) {
+            $userId = Auth::id();
+            $user = User::findOrFail($userId);
+            $role = $user->role_id;
+            if($role == 1) {
+                $this->layout = 'layouts.masterlogin';
+            }
+        }
+    }
+
     /**
      * Index courses action.
      *
@@ -50,16 +62,29 @@ class CourseController extends BaseController
     {
         $tree = Tree::findOrFail(3);
         if ( $tree->active == 1) {
-            $course = Course::findOrFail($id);
-            $courses_lead = Tree::findOrFail(3);
-            $course_tags = $course->tags()->lists('tag_id');
-            $tags = Tag::all()->lists('name', 'id');
-            $this->layout->content = View::make('course.edit', array(
-                'course' => $course,
-                'tags' => $tags,
-                'courses_lead' => $courses_lead,
-                'course_tags' => $course_tags,
-            ));
+
+            if (Auth::check()) {
+                $userId = Auth::id();
+                $user = User::findOrFail($userId);
+                $role = $user->role_id;
+                if($role == 1) {
+                    $course = Course::findOrFail($id);
+                    $courses_lead = Tree::findOrFail(3);
+                    $course_tags = $course->tags()->lists('tag_id');
+                    $tags = Tag::all()->lists('name', 'id');
+                    $this->layout->content = View::make('course.edit', array(
+                        'course' => $course,
+                        'tags' => $tags,
+                        'courses_lead' => $courses_lead,
+                        'course_tags' => $course_tags,
+                    ));
+                } else {
+                    return Redirect::route('course.view', $id);
+                }
+            } else {
+                return Redirect::route('course.view', $id);
+            }
+
         } else {
             return Redirect::route('homepage');
         }

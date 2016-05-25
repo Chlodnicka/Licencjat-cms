@@ -42,6 +42,7 @@ return array(
     "number-of-exercises" => "Ilość zadań w arkuszu",
     "not-worked" => "Wystąpił błąd. Spróbuj ponownie później lub skontaktuj się z dostarczycielem systemu.",
     "no-such-site" => "Taka strona nie istnieje.",
+    "generate" => "Generuj arkusz",
 
 
 

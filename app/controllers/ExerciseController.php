@@ -235,9 +235,9 @@ class ExerciseController extends BaseController
         }
         $answers = Input::get('answers');
         if($answers != 'on'){
-            $pdf = PDF::loadView('exercise.generated', $exercises)->download();
+            $pdf = PDF::loadView('exercise.generated', $exercises)->download('Arkusz.pdf');
         } else {
-            $pdf = PDF::loadView('exercise.generatedAnswers', $exercises)->download();
+            $pdf = PDF::loadView('exercise.generatedAnswers', $exercises)->download('Arkusz-z-odpowiedziami.pdf');
         }
         return $pdf;
     }

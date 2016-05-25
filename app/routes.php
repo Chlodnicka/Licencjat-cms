@@ -293,6 +293,15 @@ Route::post('/tree/exercises/{id}/', ['uses' => 'TreeController@edit']);
 Route::get('/tree', ['as' => 'tree.index', 'uses' => 'TreeController@index']);
 Route::get('/tree/', ['uses' => 'TreeController@index']);
 
+Route::get('/login', ['as'=> 'user.login', 'uses' => 'UserController@showLogin']);
+Route::post('/login', ['as' => 'user.dologin', 'uses' => 'UserController@doLogin']);
+Route::get('/logout', ['as' => 'user.logout', 'uses' => 'UserController@doLogout']);
+
+Route::get('/register', ['as' => 'user.register', 'uses' => 'UserController@showRegister']);
+Route::post('/register', ['as' => 'user.doRegister', 'uses' => 'UserController@doRegister']);
+
+
+
 /**
  * Dynamically loading menu settings
  */
@@ -319,4 +328,17 @@ Route::get('api/dropdown', function(){
     $id = Input::get('courses');
     $lectures = DB::table('lectures')->where('course_id', '=', $id)->get();
     return $lectures;
+});
+
+Route::get('/packages/kcfinder/browse.php', function() {
+    require base_path().'/public/packages/kcfinder/browse.php';
+});
+Route::post('/packages/kcfinder/browse.php', function() {
+    require base_path().'/public/packages/kcfinder/browse.php';
+});
+Route::get('/packages/kcfinder/upload.php', function() {
+    require base_path().'/public/packages/kcfinder/upload.php';
+});
+Route::post('/packages/kcfinder/upload.php', function() {
+    require base_path().'/public/packages/kcfinder/upload.php';
 });
