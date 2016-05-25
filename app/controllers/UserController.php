@@ -12,10 +12,28 @@ class UserController extends BaseController
      */
     protected $layout = 'layouts.master';
 
+    public function __construct() {
+        $this->beforeFilter('csrf', array('on'=>'post'));
+    }
+
     public function showLogin()
     {
-        // show the form
-        $this->layout->content = View::make('user.login');
+        $tree = Tree::findOrFail(2);
+        if($tree->active == 1){
+            $this->layout->content = View::make('user.login');
+        } else {
+            return Redirect::route('homepage');
+        }
+    }
+
+    public function showRegister()
+    {
+        $tree = Tree::findOrFail(2);
+        if($tree->active == 1){
+            $this->layout->content = View::make('user.register');
+        } else {
+            return Redirect::route('homepage');
+        }
     }
 
     public function doLogin()
@@ -25,36 +43,30 @@ class UserController extends BaseController
             'password' => 'required|alphaNum|min:3' // password can only be alphanumeric and has to be greater than 3 characters
         );
 
-// run the validation rules on the inputs from the form
         $validator = Validator::make(Input::all(), $rules);
 
-// if the validator fails, redirect back to the form
         if ($validator->fails()) {
             return Redirect::to('login')
-                ->withErrors($validator) // send back all errors to the login form
-                ->withInput(Input::except('password')); // send back the input (not the password) so that we can repopulate the form
+                ->withErrors($validator)
+                ->withInput(Input::except('password'));
         } else {
 
-            // create our user data for the authentication
             $userdata = array(
                 'email'     => Input::get('email'),
                 'password'  => Input::get('password')
             );
 
-            // attempt to do the login
             if (Auth::attempt($userdata)) {
+                $userId = Auth::id();
+                $user = User::findOrFail($userId);
+                $role = $user->role_id;
+                $tree = Tree::findOrFail(2);
 
-                // validation successful!
-                // redirect them to the secure section or whatever
-                // return Redirect::to('secure');
-                // for now we'll just echo success (even though echoing in a controller is bad)
-                echo 'SUCCESS!';
-
+                if($tree->active != 1 && $role == 2) {
+                    Redirect::route('user.logout');
+                }
             } else {
-
-                // validation not successful, send back to form
                 return Redirect::to('login');
-
             }
 
         }
@@ -62,7 +74,33 @@ class UserController extends BaseController
 
     public function doLogout()
     {
-        Auth::logout(); // log the user out of our application
-        return Redirect::to('login'); // redirect the user to the login screen
+        Auth::logout();
+        return Redirect::to('login');
+    }
+
+    public function doRegister() {
+        $rules = array(
+            'name'=>'required|alpha|min:2',
+            'username'=>'required|alpha|min:2',
+            'email'=>'required|email|unique:users',
+            'password'=>'required|alpha_num|between:6,12|confirmed',
+            'password_confirmation'=>'required|alpha_num|between:6,12'
+        );
+
+        $validator = Validator::make(Input::all(), $rules);
+
+        if ($validator->fails()) {
+            return Redirect::route('user.register')->with('message', 'The following errors occurred')->withErrors($validator)->withInput();
+        } else {
+            $user = new User;
+            $user->name = Input::get('name');
+            $user->username = Input::get('username');
+            $user->email = Input::get('email');
+            $user->password = Hash::make(Input::get('password'));
+            $user->role_id = 2;
+            $user->save();
+
+            return Redirect::route('user.login')->with('message', 'Thanks for registering!');
+        }
     }
 }

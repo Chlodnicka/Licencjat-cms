@@ -293,11 +293,12 @@ Route::post('/tree/exercises/{id}/', ['uses' => 'TreeController@edit']);
 Route::get('/tree', ['as' => 'tree.index', 'uses' => 'TreeController@index']);
 Route::get('/tree/', ['uses' => 'TreeController@index']);
 
-Route::get('/login', array('uses' => 'UserController@showLogin'));
+Route::get('/login', ['as'=> 'user.login', 'uses' => 'UserController@showLogin']);
+Route::post('/login', ['as' => 'user.dologin', 'uses' => 'UserController@doLogin']);
+Route::get('/logout', ['as' => 'user.logout', 'uses' => 'UserController@doLogout']);
 
-Route::post('/login', array('uses' => 'UserController@doLogin'));
-
-Route::get('/logout', array('uses' => 'UserController@doLogout'));
+Route::get('/register', ['as' => 'user.register', 'uses' => 'UserController@showRegister']);
+Route::post('/register', ['as' => 'user.doRegister', 'uses' => 'UserController@doRegister']);
 
 
 
