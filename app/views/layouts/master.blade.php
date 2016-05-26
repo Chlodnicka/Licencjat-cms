@@ -17,7 +17,16 @@
               <div class="btn-search"><input type="submit" value=""></div>
             </form>
           </div>
-          <div class="side-menu-login"></div>
+          <div class="side-menu-login">
+            @if(Auth::check())
+              <a href="{{ URL::route('user.logout') }}">{{ trans('common.logout') }}</a>
+            @else
+              <a href="{{ URL::route('user.login') }}">{{ trans('common.login') }}</a>
+              @if($students->active == 1)
+                <a href="{{ URL::route('user.register') }}">{{ trans('common.register') }}</a>
+              @endif
+            @endif
+          </div>
         </div>
       </div>
 

@@ -6,12 +6,14 @@
     @if (!empty($course->lead))
       <p class="lead">{{$course->lead}}</p>
     @endif
-      <div  class="action-buttons">
-        <a href="{{ URL::route('course.edit', $course->id) }}">{{ trans('common.edit') }}</a>
-        <a href="{{ URL::route('course.delete', $course->id) }}">{{ trans('common.delete') }}</a>
-        <a href="{{ URL::route('course.new') }}">{{ trans('common.new') }}</a>
-        <a href="{{ URL::route('exercise.generate', $course->id) }}">{{ trans('common.generate') }}</a>
-      </div>
+        @if($actions == 1)
+          <div  class="action-buttons">
+            <a href="{{ URL::route('course.edit', $course->id) }}">{{ trans('common.edit') }}</a>
+            <a href="{{ URL::route('course.delete', $course->id) }}">{{ trans('common.delete') }}</a>
+            <a href="{{ URL::route('course.new') }}">{{ trans('common.new') }}</a>
+            <a href="{{ URL::route('exercise.generate', $course->id) }}">{{ trans('common.generate') }}</a>
+          </div>
+        @endif
       @if (!empty($course->description))
         <div class="richtext">
           <div>{{ $course->description }}</div>

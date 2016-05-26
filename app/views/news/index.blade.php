@@ -1,12 +1,14 @@
 @section('content')
   <h1>{{ trans('app.news-list') }}</h1>
-  @if(!empty($news_lead->lead))
-    <p class="lead">{{ $news_lead->lead }}</p>
-  @endif
-  <div class="action-buttons">
-    <a href="{{ URL::route('news.new') }}">{{ trans('common.new') }}</a>
-  </div>
-  @if(!empty($news))
+    @if(!empty($news_lead->lead))
+      <p class="lead">{{ $news_lead->lead }}</p>
+    @endif
+    @if($actions == 1)
+      <div class="action-buttons">
+        <a href="{{ URL::route('news.new') }}">{{ trans('common.new') }}</a>
+      </div>
+    @endif
+    @if(!empty($news))
     <div class="content news">
       @foreach ($news as $newsItem)
         <a href="{{ URL::route('news.view', $newsItem->id) }}">

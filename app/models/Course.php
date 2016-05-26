@@ -42,7 +42,7 @@
        */
       public function students()
       {
-          return $this->hasMany('Student');
+          return $this->belongsToMany('Student');
       }
 
       /**

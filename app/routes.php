@@ -193,10 +193,6 @@ Route::post('/attachment/delete/{id}/', ['uses' => 'AttachmentController@destroy
 /**
 * Student routing settings.
 */
-Route::get('/student/new', ['as' => 'student.new', 'uses' => 'StudentController@newOne']);
-Route::get('/student/new/', ['uses' => 'StudentController@newOne']);
-Route::post('/student/new', ['as' => 'student.create', 'uses' => 'StudentController@create']);
-Route::post('/student/new/', ['uses' => 'StudentController@create']);
 Route::get('/student', ['as' => 'student.index', 'uses' => 'StudentController@index']);
 Route::get('/student', ['uses' => 'StudentController@index']);
 Route::get('/student/index', ['uses' => 'StudentController@index']);
@@ -299,6 +295,9 @@ Route::get('/logout', ['as' => 'user.logout', 'uses' => 'UserController@doLogout
 
 Route::get('/register', ['as' => 'user.register', 'uses' => 'UserController@showRegister']);
 Route::post('/register', ['as' => 'user.doRegister', 'uses' => 'UserController@doRegister']);
+Route::get('/change_password', ['as' => 'user.change_password', 'uses' => 'UserController@passwordChange']);
+Route::post('/change_password', ['as' => 'user.do_change_password', 'uses' => 'UserController@postPasswordChange']);
+
 
 
 
@@ -309,6 +308,7 @@ Route::post('/register', ['as' => 'user.doRegister', 'uses' => 'UserController@d
 View::composer('layouts.master', function($view){
     DB::setFetchMode(PDO::FETCH_CLASS);
     $tree = Tree::menu();
+    $students = Tree::findOrFail(2);
     $courses = Course::all_courses();
     $coursesSide = $courses;
     $owner = Owner::findOrFail(1);
@@ -317,6 +317,23 @@ View::composer('layouts.master', function($view){
         'courses' => $courses,
         'coursesSide' => $coursesSide,
         'owner' => $owner,
+        'students' => $students,
+    ));
+});
+
+View::composer('layouts.masterlogin', function($view){
+    DB::setFetchMode(PDO::FETCH_CLASS);
+    $tree = Tree::menu();
+    $students = Tree::findOrFail(2);
+    $courses = Course::all_courses();
+    $coursesSide = $courses;
+    $owner = Owner::findOrFail(1);
+    $view->with(array(
+        'tree' => $tree,
+        'courses' => $courses,
+        'coursesSide' => $coursesSide,
+        'owner' => $owner,
+        'students' => $students,
     ));
 });
 

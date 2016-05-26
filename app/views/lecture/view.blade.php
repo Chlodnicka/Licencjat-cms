@@ -7,11 +7,13 @@
       @if(!empty($lecture->lead))
         <p class="lead">{{ $lecture->lead }}</p>
       @endif
-      <div class="action-buttons">
-        <a href="{{ URL::route('lecture.new') }}">{{ trans('common.new') }}</a>
-        <a href="{{ URL::route('lecture.edit', $lecture->id) }}">{{ trans('common.edit') }}</a>
-        <a href="{{ URL::route('lecture.delete', $lecture->id) }}">{{ trans('common.delete') }}</a>
-      </div>
+        @if($actions == 1)
+        <div class="action-buttons">
+          <a href="{{ URL::route('lecture.new') }}">{{ trans('common.new') }}</a>
+          <a href="{{ URL::route('lecture.edit', $lecture->id) }}">{{ trans('common.edit') }}</a>
+          <a href="{{ URL::route('lecture.delete', $lecture->id) }}">{{ trans('common.delete') }}</a>
+        </div>
+        @endif
       @if(!empty($lecture->content))
         <div class="richtext">
           {{ $lecture->content }}

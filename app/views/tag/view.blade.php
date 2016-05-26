@@ -1,9 +1,11 @@
 @section('content')
-  <div class="action-buttons">
-    <a href="{{ URL::route('tag.new') }}">{{ trans('common.new') }}</a>
-    <a href="{{ URL::route('tag.edit', $tag->id) }}">{{ trans('common.edit') }}</a>
-    <a href="{{ URL::route('tag.delete', $tag->id) }}">{{ trans('common.delete') }}</a>
-  </div>
+  @if($actions == 1)
+    <div class="action-buttons">
+      <a href="{{ URL::route('tag.new') }}">{{ trans('common.new') }}</a>
+      <a href="{{ URL::route('tag.edit', $tag->id) }}">{{ trans('common.edit') }}</a>
+      <a href="{{ URL::route('tag.delete', $tag->id) }}">{{ trans('common.delete') }}</a>
+    </div>
+  @endif
   @if(!empty($tag))
     <h1>{{ $tag->name }}</h1>
     @if(!empty($courses))

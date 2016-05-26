@@ -4,9 +4,11 @@
   @if (!empty($courses_lead))
     <p class="lead">{{ $courses_lead->lead }}</p>
   @endif
-  <div class="action-buttons">
-    <a href="{{ URL::route('course.new') }}">{{ trans('common.new') }}</a>
-  </div>
+  @if ($actions == 1)
+    <div class="action-buttons">
+      <a href="{{ URL::route('course.new') }}">{{ trans('common.new') }}</a>
+    </div>
+  @endif
   <div class="content course">
     @foreach( $courses as $course)
       <div class="list-item">

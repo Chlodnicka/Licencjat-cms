@@ -19,6 +19,18 @@ class TreeController extends BaseController
      */
     protected $layout = 'layouts.master';
 
+    public function __construct()
+    {
+        if (Auth::check()) {
+            $userId = Auth::id();
+            $user = User::findOrFail($userId);
+            $role = $user->role_id;
+            if ($role == 1) {
+                $this->layout = 'layouts.masterlogin';
+            }
+        }
+    }
+
     /**
      * Index trees action.
      *
@@ -26,10 +38,21 @@ class TreeController extends BaseController
      */
     public function index()
     {
-        $tree = Tree::all();
-        $this->layout->content = View::make('tree.index', array(
-            'tree' => $tree,
-        ));
+        if (Auth::check()) {
+            $userId = Auth::id();
+            $user = User::findOrFail($userId);
+            $role = $user->role_id;
+            if ($role == 1) {
+                $tree = Tree::all();
+                $this->layout->content = View::make('tree.index', array(
+                    'tree' => $tree,
+                ));
+            } else {
+                return Redirect::route('homepage');
+            }
+        } else {
+            return Redirect::route('homepage');
+        }
     }
 
     /**
@@ -40,10 +63,21 @@ class TreeController extends BaseController
      */
     public function show($id)
     {
-        $tree = Tree::findOrFail($id);
-        $this->layout->content = View::make('tree.'.$tree->name, array(
-            'tree' => $tree,
-        ));
+        if (Auth::check()) {
+            $userId = Auth::id();
+            $user = User::findOrFail($userId);
+            $role = $user->role_id;
+            if ($role == 1) {
+                $tree = Tree::findOrFail($id);
+                $this->layout->content = View::make('tree.' . $tree->name, array(
+                    'tree' => $tree,
+                ));
+            } else {
+                return Redirect::route('homepage');
+            }
+        } else {
+            return Redirect::route('homepage');
+        }
     }
 
     /**
@@ -54,26 +88,35 @@ class TreeController extends BaseController
      */
     public function edit($id)
     {
-        $tree = Tree::findOrFail($id);
-        $tree->active = Input::get('active');
-        $tree->lead = Input::get('lead');
-        $tree->title = Input::get('name');
+        if (Auth::check()) {
+            $userId = Auth::id();
+            $user = User::findOrFail($userId);
+            $role = $user->role_id;
+            if ($role == 1) {
+                $tree = Tree::findOrFail($id);
+                $tree->active = Input::get('active');
+                $tree->lead = Input::get('lead');
+                $tree->title = Input::get('name');
 
-        $rules = $tree->rules();
-        $validator = Validator::make(Input::all(), $rules);
+                $rules = $tree->rules();
+                $validator = Validator::make(Input::all(), $rules);
 
-        if ($validator->fails())
-        {
-            return Redirect::route('tree'.$tree->name, $tree->id)->withErrors($validator);
+                if ($validator->fails()) {
+                    return Redirect::route('tree' . $tree->name, $tree->id)->withErrors($validator);
+                } else {
+                    $tree->save();
+                    Session::flash('message', Lang::get('common.data-saved'));
+                    return Redirect::route('tree.' . $tree->name, $tree->id);
+                }
+
+            } else {
+                return Redirect::route('homepage');
+            }
         } else {
-            $tree->save();
-            Session::flash('message', Lang::get('common.data-saved'));
-            return Redirect::route('tree.'.$tree->name, $tree->id);
+            return Redirect::route('homepage');
         }
 
     }
-
 }
-
 
 ?>

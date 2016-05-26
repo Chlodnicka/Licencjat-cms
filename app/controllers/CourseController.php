@@ -41,11 +41,24 @@ class CourseController extends BaseController
     {
         $tree = Tree::findOrFail(3);
         if ( $tree->active == 1) {
+            if (Auth::check()) {
+                $userId = Auth::id();
+                $user = User::findOrFail($userId);
+                $role = $user->role_id;
+                if($role == 1) {
+                    $actions = 1;
+                } else {
+                    $actions = 0;
+                }
+            } else {
+                $actions = 0;
+            }
             $courses = Course::paginate(3);
             $courses_lead = Tree::findOrFail(3);
             $this->layout->content = View::make('course.index', array(
                 'courses' => $courses,
                 'courses_lead' => $courses_lead,
+                'actions' => $actions,
             ));
         } else {
             return Redirect::route('homepage');
@@ -100,30 +113,42 @@ class CourseController extends BaseController
     {
         $tree = Tree::findOrFail(3);
         if ( $tree->active == 1) {
-            $course = Course::findOrFail($id);
-            $course->name = Input::get('name');
-            $course->lead = Input::get('lead');
-            $course->description = Input::get('description');
+            if (Auth::check()) {
+                $userId = Auth::id();
+                $user = User::findOrFail($userId);
+                $role = $user->role_id;
+                if($role == 1) {
+                    $course = Course::findOrFail($id);
+                    $course->name = Input::get('name');
+                    $course->lead = Input::get('lead');
+                    $course->description = Input::get('description');
 
-            $rules = $course->rules();
-            $validator = Validator::make(Input::all(), $rules);
+                    $rules = $course->rules();
+                    $validator = Validator::make(Input::all(), $rules);
 
-            if ($validator->fails())
-            {
-                return Redirect::route('course.edit', $course->id)
-                    ->withErrors($validator);
+                    if ($validator->fails())
+                    {
+                        return Redirect::route('course.edit', $course->id)
+                            ->withErrors($validator);
+                    } else {
+                        $course->save();
+                        if(Input::get('tags') != NULL){
+                            $course->tags()->sync(Input::get('tags'));
+                        }
+                        $tree_students = Tree::findOrFail(2);
+                        if ( $tree_students->active == 1) {
+                            $course->sendMail($id);
+                        }
+                        Session::flash('message', Lang::get('app.course-updated'));
+                        return Redirect::route('course.view', $course->id);
+                    }
+                } else {
+                    return Redirect::route('course.view', $id);
+                }
             } else {
-                $course->save();
-                if(Input::get('tags') != NULL){
-                    $course->tags()->sync(Input::get('tags'));
-                }
-                $tree_students = Tree::findOrFail(2);
-                if ( $tree_students->active == 1) {
-                    $course->sendMail($id);
-                }
-                Session::flash('message', Lang::get('app.course-updated'));
-                return Redirect::route('course.view', $course->id);
+                return Redirect::route('course.view', $id);
             }
+
         } else {
             Session::flash('message', Lang::get('common.no-such-site'));
             return Redirect::route('homepage');
@@ -139,10 +164,21 @@ class CourseController extends BaseController
     {
         $tree = Tree::findOrFail(3);
         if ( $tree->active == 1) {
-            $tags = Tag::all()->lists('name','id');
-            $this->layout->content = View::make('course.new', array(
-                'tags' => $tags,
-            ));
+            if (Auth::check()) {
+                $userId = Auth::id();
+                $user = User::findOrFail($userId);
+                $role = $user->role_id;
+                if($role == 1) {
+                    $tags = Tag::all()->lists('name','id');
+                    $this->layout->content = View::make('course.new', array(
+                        'tags' => $tags,
+                    ));
+                } else {
+                    return Redirect::route('course.index');
+                }
+            } else {
+                return Redirect::route('course.index');
+            }
         } else {
             return Redirect::route('homepage');
         }
@@ -157,28 +193,39 @@ class CourseController extends BaseController
     {
         $tree = Tree::findOrFail(3);
         if ( $tree->active == 1) {
-            $course = new Course();
-            $course->name = Input::get('name');
-            $course->lead = Input::get('lead');
-            $course->description = Input::get('description');
-            $course->owner_id = 1;
-            $course->owner_role_id = 1;
+            if (Auth::check()) {
+                $userId = Auth::id();
+                $user = User::findOrFail($userId);
+                $role = $user->role_id;
+                if($role == 1) {
+                    $course = new Course();
+                    $course->name = Input::get('name');
+                    $course->lead = Input::get('lead');
+                    $course->description = Input::get('description');
+                    $course->owner_id = 1;
+                    $course->owner_role_id = 1;
 
-            $rules = $course->rules();
-            $validator = Validator::make(Input::all(), $rules);
+                    $rules = $course->rules();
+                    $validator = Validator::make(Input::all(), $rules);
 
-            if ($validator->fails())
-            {
-                return Redirect::route('course.new')
-                    ->withErrors($validator)
-                    ->withInput();
-            } else {
-                $course->save();
-                if(Input::get('tags') != NULL){
-                    $course->tags()->sync(Input::get('tags'));
+                    if ($validator->fails())
+                    {
+                        return Redirect::route('course.new')
+                            ->withErrors($validator)
+                            ->withInput();
+                    } else {
+                        $course->save();
+                        if(Input::get('tags') != NULL){
+                            $course->tags()->sync(Input::get('tags'));
+                        }
+                        Session::flash('message', Lang::get('app.course-created'));
+                        return Redirect::route('course.index');
+                    }
+                } else {
+                    return Redirect::route('course.index');
                 }
-                Session::flash('message', Lang::get('app.course-created'));
-                return Redirect::route('course.view', $course->id);
+            } else {
+                return Redirect::route('course.index');
             }
 
         } else {
@@ -197,6 +244,18 @@ class CourseController extends BaseController
     {
         $tree = Tree::findOrFail(3);
         if ( $tree->active == 1) {
+            if (Auth::check()) {
+                $userId = Auth::id();
+                $user = User::findOrFail($userId);
+                $role = $user->role_id;
+                if($role == 1) {
+                    $actions = 1;
+                } else {
+                    $actions = 0;
+                }
+            } else {
+                $actions = 0;
+            }
             $course = Course::findOrFail($id);
             $lectures = Course::find($id)->lectures;
             $tags = Course::find($id)->tags;
@@ -206,6 +265,7 @@ class CourseController extends BaseController
                 'lectures' => $lectures,
                 'exercises' => $exercises,
                 'tags' => $tags,
+                'actions' => $actions,
             ));
         } else {
             return Redirect::route('homepage');
@@ -222,10 +282,21 @@ class CourseController extends BaseController
     {
         $tree = Tree::findOrFail(3);
         if ( $tree->active == 1) {
-            $course = Course::findOrFail($id);
-            $this->layout->content = View::make('course.delete', array(
-                'course' => $course,
-            ));
+            if (Auth::check()) {
+                $userId = Auth::id();
+                $user = User::findOrFail($userId);
+                $role = $user->role_id;
+                if($role == 1) {
+                    $course = Course::findOrFail($id);
+                    $this->layout->content = View::make('course.delete', array(
+                        'course' => $course,
+                    ));
+                } else {
+                    return Redirect::route('course.view', $id);
+                }
+            } else {
+                return Redirect::route('course.view', $id);
+            }
         } else {
             return Redirect::route('homepage');
         }
@@ -241,14 +312,25 @@ class CourseController extends BaseController
     {
         $tree = Tree::findOrFail(3);
         if ( $tree->active == 1) {
-            $course = Course::findOrFail($id);
-            $course->lectures()->delete();
-            $course->exercises()->delete();
-            $course->students()->delete();
-            $course->tags()->detach();
-            $course->delete();
-            Session::flash('message', Lang::get('app.course-destroyed'));
-            return Redirect::route('course.index');
+            if (Auth::check()) {
+                $userId = Auth::id();
+                $user = User::findOrFail($userId);
+                $role = $user->role_id;
+                if($role == 1) {
+                    $course = Course::findOrFail($id);
+                    $course->lectures()->delete();
+                    $course->exercises()->delete();
+                    $course->students()->detach();
+                    $course->tags()->detach();
+                    $course->delete();
+                    Session::flash('message', Lang::get('app.course-destroyed'));
+                    return Redirect::route('course.index');
+                } else {
+                    return Redirect::route('course.view', $id);
+                }
+            } else {
+                return Redirect::route('course.view', $id);
+            }
         } else {
             Session::flash('message', Lang::get('common.no-such-site'));
             return Redirect::route('homepage');

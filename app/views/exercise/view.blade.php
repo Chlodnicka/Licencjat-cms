@@ -5,11 +5,13 @@
   @if(!empty($exercise->course->name))
     <h2>{{ $exercise->course->name }}</h2>
   @endif
+  @if($actions == 1)
   <div class="action-buttons">
     <a href="{{ URL::route('exercise.new') }}">{{ trans('common.new') }}</a>
     <a href="{{ URL::route('exercise.edit', $exercise->id) }}">{{ trans('common.edit') }}</a>
     <a href="{{ URL::route('exercise.delete', $exercise->id) }}">{{ trans('common.delete') }}</a>
   </div>
+  @endif
   <div class="content exercise">
     <div class="properties">
       <p>{{ $exercise->difficulty }} | <!--#{# #$exercise->lecture->title }}--></p>

@@ -26,9 +26,22 @@ class TagController extends BaseController
      */
     public function index()
     {
+        if (Auth::check()) {
+            $userId = Auth::id();
+            $user = User::findOrFail($userId);
+            $role = $user->role_id;
+            if ($role == 1) {
+                $actions = 1;
+            } else {
+                $actions = 0;
+            }
+        } else {
+            $actions = 0;
+        }
         $tags = Tag::paginate(20);
         $this->layout->content = View::make('tag.index', array(
             'tags' => $tags,
+            'actions' => $actions,
         ));
     }
 
@@ -40,10 +53,21 @@ class TagController extends BaseController
      */
     public function edit($id)
     {
-        $tag = Tag::findOrFail($id);
-        $this->layout->content = View::make('tag.edit', array(
-            'tag' => $tag,
-        ));
+        if (Auth::check()) {
+            $userId = Auth::id();
+            $user = User::findOrFail($userId);
+            $role = $user->role_id;
+            if ($role == 1) {
+                $tag = Tag::findOrFail($id);
+                $this->layout->content = View::make('tag.edit', array(
+                    'tag' => $tag,
+                ));
+            } else {
+                return Redirect::route('tag.view', $id);
+            }
+        } else {
+            return Redirect::route('tag.view', $id);
+        }
     }
 
     /**
@@ -53,7 +77,18 @@ class TagController extends BaseController
      */
     public function newOne()
     {
-        $this->layout->content = View::make('tag.new');
+        if (Auth::check()) {
+            $userId = Auth::id();
+            $user = User::findOrFail($userId);
+            $role = $user->role_id;
+            if ($role == 1) {
+                $this->layout->content = View::make('tag.new');
+            } else {
+                return Redirect::route('tag.index');
+            }
+        } else {
+            return Redirect::route('tag.index');
+        }
     }
 
     /**
@@ -64,19 +99,29 @@ class TagController extends BaseController
      */
     public function update($id)
     {
-        $tag = Tag::findOrFail($id);
-        $tag->name = Input::get('name');
-        $rules = $tag->rules();
-        $validator = Validator::make(Input::all(), $rules);
+        if (Auth::check()) {
+            $userId = Auth::id();
+            $user = User::findOrFail($userId);
+            $role = $user->role_id;
+            if ($role == 1) {
+                $tag = Tag::findOrFail($id);
+                $tag->name = Input::get('name');
+                $rules = $tag->rules();
+                $validator = Validator::make(Input::all(), $rules);
 
-        if ($validator->fails())
-        {
-            return Redirect::route('tag.edit', $tag->id)
-                ->withErrors($validator);
+                if ($validator->fails()) {
+                    return Redirect::route('tag.edit', $tag->id)
+                        ->withErrors($validator);
+                } else {
+                    $tag->save();
+                    Session::flash('message', Lang::get('app.tag-updated'));
+                    return Redirect::route('tag.view', $tag->id);
+                }
+            } else {
+                return Redirect::route('tag.view', $id);
+            }
         } else {
-            $tag->save();
-            Session::flash('message', Lang::get('app.tag-updated'));
-            return Redirect::route('tag.view', $tag->id);
+            return Redirect::route('tag.view', $id);
         }
     }
 
@@ -87,20 +132,30 @@ class TagController extends BaseController
      */
     public function create()
     {
-        $tag = new Tag();
-        $tag->name = Input::get('name');
-        $rules = $tag->rules();
-        $validator = Validator::make(Input::all(), $rules);
+        if (Auth::check()) {
+            $userId = Auth::id();
+            $user = User::findOrFail($userId);
+            $role = $user->role_id;
+            if ($role == 1) {
+                $tag = new Tag();
+                $tag->name = Input::get('name');
+                $rules = $tag->rules();
+                $validator = Validator::make(Input::all(), $rules);
 
-        if ($validator->fails())
-        {
-            return Redirect::route('tag.new')
-                ->withErrors($validator)
-                ->withInput();
+                if ($validator->fails()) {
+                    return Redirect::route('tag.new')
+                        ->withErrors($validator)
+                        ->withInput();
+                } else {
+                    $tag->save();
+                    Session::flash('message', Lang::get('app.tag-crated'));
+                    return Redirect::route('tag.view', $tag->id);
+                }
+            } else {
+                return Redirect::route('tag.index');
+            }
         } else {
-            $tag->save();
-            Session::flash('message', Lang::get('app.tag-crated'));
-            return Redirect::route('tag.view', $tag->id);
+            return Redirect::route('tag.index');
         }
     }
 
@@ -112,6 +167,18 @@ class TagController extends BaseController
      */
     public function view($id)
     {
+        if (Auth::check()) {
+            $userId = Auth::id();
+            $user = User::findOrFail($userId);
+            $role = $user->role_id;
+            if ($role == 1) {
+                $actions = 1;
+            } else {
+                $actions = 0;
+            }
+        } else {
+            $actions = 0;
+        }
         $tag = Tag::findOrFail($id);
         //$courses = $tag->courses();
         $courses = Tag::find($id)->courses()->orderBy('name')->get();
@@ -124,6 +191,7 @@ class TagController extends BaseController
             'exercises' => $exercises,
             'lectures' => $lectures,
             'news' => $news,
+            'actions' => $actions,
         ));
     }
 
@@ -135,10 +203,21 @@ class TagController extends BaseController
      */
     public function delete($id)
     {
-        $tag = Tag::findOrFail($id);
-        $this->layout->content = View::make('tag.delete', array(
-            'tag' => $tag
-        ));
+        if (Auth::check()) {
+            $userId = Auth::id();
+            $user = User::findOrFail($userId);
+            $role = $user->role_id;
+            if ($role == 1) {
+                $tag = Tag::findOrFail($id);
+                $this->layout->content = View::make('tag.delete', array(
+                    'tag' => $tag
+                ));
+            } else {
+                return Redirect::route('tag.view', $id);
+            }
+        } else {
+            return Redirect::route('tag.view', $id);
+        }
     }
 
     /**
@@ -149,14 +228,25 @@ class TagController extends BaseController
      */
     public function destroy($id)
     {
-        $tag = Tag::findOrFail($id);
-        $tag->courses()->detach();
-        $tag->lectures()->detach();
-        $tag->exercises()->detach();
-        $tag->news()->detach();
-        $tag->delete();
-        Session::flash('message', Lang::get('app.tag-destroyed'));
-        return Redirect::route('tag.index');
+        if (Auth::check()) {
+            $userId = Auth::id();
+            $user = User::findOrFail($userId);
+            $role = $user->role_id;
+            if ($role == 1) {
+                $tag = Tag::findOrFail($id);
+                $tag->courses()->detach();
+                $tag->lectures()->detach();
+                $tag->exercises()->detach();
+                $tag->news()->detach();
+                $tag->delete();
+                Session::flash('message', Lang::get('app.tag-destroyed'));
+                return Redirect::route('tag.index');
+            } else {
+                return Redirect::route('tag.view', $id);
+            }
+        } else {
+            return Redirect::route('tag.view', $id);
+        }
     }
 }
 
