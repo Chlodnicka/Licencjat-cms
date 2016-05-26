@@ -21,7 +21,7 @@
        */
       public function course()
       {
-          return $this->belongsTo('Course');
+          return $this->belongsToMany('Course');
       }
 
       /**

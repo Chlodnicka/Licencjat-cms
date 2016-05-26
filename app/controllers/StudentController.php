@@ -19,6 +19,18 @@ class StudentController extends BaseController
      */
     protected $layout = 'layouts.master';
 
+    public function __construct()
+    {
+        if (Auth::check()) {
+            $userId = Auth::id();
+            $user = User::findOrFail($userId);
+            $role = $user->role_id;
+            if($role == 1) {
+                $this->layout = 'layouts.masterlogin';
+            }
+        }
+    }
+
     /**
      * Index students action.
      *
@@ -28,13 +40,25 @@ class StudentController extends BaseController
     {
         $tree = Tree::findOrFail(2);
         if ( $tree->active == 1 ) {
-            $students = Student::paginate(10);
-            $course = new Course;
-            $course->name = Lang::get('app.all-courses');
-            $this->layout->content = View::make('student.index', array(
-                'students' => $students,
-                'course' => $course,
-            ));
+            if (Auth::check()) {
+                $userId = Auth::id();
+                $user = User::findOrFail($userId);
+                $role = $user->role_id;
+                if($role == 1) {
+                    $students = Student::paginate(10);
+                    $course = new Course;
+                    $course->name = Lang::get('app.all-courses');
+                    $this->layout->content = View::make('student.index', array(
+                        'students' => $students,
+                        'course' => $course,
+                    ));
+                } else {
+                    $student = DB::table('students')->where('users_id', '=', $userId)->get();
+                    return Redirect::route('student.view', $student[0]->id);
+                }
+            } else {
+                return Redirect::route('homepage');
+            }
         } else {
             return Redirect::route('homepage');
         }
@@ -50,12 +74,24 @@ class StudentController extends BaseController
     {
         $tree = Tree::findOrFail(2);
         if ( $tree->active == 1 ) {
-            $students = DB::table('students')->where('course')->paginate(10);
-            $course = Course::findOrFail($id);
-            $this->layout->content = View::make('student.index', array(
-                'students' => $students,
-                'course' => $course,
-            ));
+            if (Auth::check()) {
+                $userId = Auth::id();
+                $user = User::findOrFail($userId);
+                $role = $user->role_id;
+                if($role == 1) {
+                    $students = DB::table('students')->where('course')->paginate(10);
+                    $course = Course::findOrFail($id);
+                    $this->layout->content = View::make('student.index', array(
+                        'students' => $students,
+                        'course' => $course,
+                    ));
+                } else {
+                    $student = DB::table('students')->where('users_id', '=', $userId)->get();
+                    return Redirect::route('student.view', $student[0]->id);
+                }
+            } else {
+                return Redirect::route('homepage');
+            }
         } else {
             return Redirect::route('homepage');
         }
@@ -71,32 +107,24 @@ class StudentController extends BaseController
     {
         $tree = Tree::findOrFail(2);
         if ( $tree->active == 1 ) {
-            $student = Student::findOrFail($id);
-            $courses = Course::all()->lists('name', 'id');
-            $this->layout->content = View::make('student.edit', array(
-                'student' => $student,
-                'courses' => $courses,
-            ));
-        } else {
-            return Redirect::route('homepage');
-        }
-    }
-
-    /**
-     * New student action.
-     *
-     * @return \Illuminate\View\View
-     */
-    public function newOne()
-    {
-        $tree = Tree::findOrFail(2);
-        if ( $tree->active == 1 ) {
-            $courses = Course::all()->lists('name', 'id');
-            $students_lead = Tree::findOrFail(2);
-            $this->layout->content = View::make('student.new', array(
-                'courses' => $courses,
-                'students_lead' => $students_lead,
-            ));
+            if (Auth::check()) {
+                $userId = Auth::id();
+                $student = DB::table('students')->where('users_id', '=', $userId)->get();
+                if($student[0]->id == $id) {
+                    $student = Student::findOrFail($id);
+                    $courses = Course::all()->lists('name', 'id');
+                    $student_courses = $student->course()->lists('course_id');
+                    $this->layout->content = View::make('student.edit', array(
+                        'student' => $student,
+                        'courses' => $courses,
+                        'student_courses' => $student_courses,
+                    ));
+                } else {
+                    return Redirect::route('homepage');
+                }
+            } else {
+                return Redirect::route('homepage');
+            }
         } else {
             return Redirect::route('homepage');
         }
@@ -112,62 +140,40 @@ class StudentController extends BaseController
     {
         $tree = Tree::findOrFail(2);
         if ( $tree->active == 1 ) {
-            $student = Student::findOrFail($id);
-            $student->firstname = Input::get('firstname');
-            $student->lastname = Input::get('lastname');
-            $student->email = Input::get('email');
-            $student->course_id = Input::get('courses');
+            if (Auth::check()) {
+                $userId = Auth::id();
+                $student = DB::table('students')->where('users_id', '=', $userId)->get();
+                if($student[0]->id == $id) {
+                    $student = Student::findOrFail($id);
+                    $student->firstname = Input::get('firstname');
+                    $student->lastname = Input::get('lastname');
+                    $student->email = Input::get('email');
 
-            $rules = $student->rules();
-            $validator = Validator::make(Input::all(), $rules);
+                    $rules = $student->rules();
+                    $validator = Validator::make(Input::all(), $rules);
 
-            if ($validator->fails()) {
-                return Redirect::route('student.edit', $student->id)
-                    ->withErrors($validator);
+                    if ($validator->fails()) {
+                        return Redirect::route('student.edit', $student->id)
+                            ->withErrors($validator);
+                    } else {
+                        $student->save();
+                        if(Input::get('courses') != NULL){
+                            $student->course()->sync(Input::get('courses'));
+                        }
+                        Session::flash('message', Lang::get('app.student-updated'));
+                        return Redirect::route('student.view', $student->id);
+                    }
+                } else {
+                    return Redirect::route('homepage');
+                }
             } else {
-                $student->save();
-                Session::flash('message', Lang::get('app.student-updated'));
-                return Redirect::route('course.view', $student->course_id);
+                return Redirect::route('homapage');
             }
         } else {
             return Redirect::route('homepage');
         }
     }
 
-    /**
-     * Create student action.
-     *
-     * @return \Illuminate\View\View
-     */
-    public function create()
-    {
-        $tree = Tree::findOrFail(2);
-        if ( $tree->active == 1 ) {
-            $student = new Student();
-            $student->firstname = Input::get('firstname');
-            $student->lastname = Input::get('lastname');
-            $student->email = Input::get('email');
-            $student->course_id = Input::get('courses');
-            $student->role_id = 3;
-            $student->owner_id = 1;
-            $student->owner_role_id = 1;
-
-            $rules = $student->rules();
-            $validator = Validator::make(Input::all(), $rules);
-
-            if ($validator->fails()) {
-                return Redirect::route('student.new')
-                    ->withErrors($validator)
-                    ->withInput();
-            } else {
-                $student->save();
-                Session::flash('message', Lang::get('app.student-updated'));
-                return Redirect::route('course.view', $student->course_id);
-            }
-        } else {
-            return Redirect::route('homepage');
-        }
-    }
 
     /**
      * View student action.
@@ -179,10 +185,24 @@ class StudentController extends BaseController
     {
         $tree = Tree::findOrFail(2);
         if ( $tree->active == 1 ) {
-            $student = Student::findOrFail($id);
-            $this->layout->content = View::make('student.view', array(
-                'student' => $student,
-            ));
+            if (Auth::check()) {
+                $userId = Auth::id();
+                $user = User::findOrFail($userId);
+                $student = DB::table('students')->where('users_id', '=', $userId)->get();
+                if($student[0]->id == $id || $user->role == 1) {
+                    $students = Student::findOrFail($id);
+                    $student_courses = $students->course()->get();
+                    $this->layout->content = View::make('student.view', array(
+                        'students' => $students,
+                        'student_courses' => $student_courses,
+                    ));
+                } else {
+                    return Redirect::route('homepage');
+                }
+            } else {
+                return Redirect::route('homepage');
+            }
+
         } else {
             return Redirect::route('homepage');
         }
@@ -198,10 +218,21 @@ class StudentController extends BaseController
     {
         $tree = Tree::findOrFail(2);
         if ( $tree->active == 1 ) {
-            $student = Student::findOrFail($id);
-            $this->layout->content = View::make('student.delete', array(
-                'student' => $student,
-            ));
+            if (Auth::check()) {
+                $userId = Auth::id();
+                $student = DB::table('students')->where('users_id', '=', $userId)->get();
+                if($student[0]->id == $id ){
+                    $student = Student::findOrFail($id);
+                    $this->layout->content = View::make('student.delete', array(
+                        'student' => $student,
+                    ));
+                } else {
+                    return Redirect::route('homepage');
+                }
+            } else {
+                return Redirect::route('homepage');
+            }
+
         } else {
             return Redirect::route('homepage');
         }
@@ -217,12 +248,23 @@ class StudentController extends BaseController
     {
         $tree = Tree::findOrFail(2);
         if ( $tree->active == 1 ) {
-            $student= Student::findOrFail($id);
-            $student->delete();
+            if (Auth::check()) {
+                $userId = Auth::id();
+                $student = DB::table('students')->where('users_id', '=', $userId)->get();
+                if($student[0]->id == $id ) {
+                    $student= Student::findOrFail($id);
+                    $student->course()->detach();
+                    $student->delete();
 
-            // redirect
-            Session::flash('message', Lang::get('app.student-destroyed'));
-            return Redirect::route('student.index');
+                    // redirect
+                    Session::flash('message', Lang::get('app.student-destroyed'));
+                    return Redirect::route('student.index');
+                } else {
+                    return Redirect::route('homepage');
+                }
+            } else {
+                return Redirect::route('homepage');
+            }
         } else {
             return Redirect::route('homepage');
         }

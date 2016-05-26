@@ -19,6 +19,18 @@ class LectureController extends BaseController
      */
     protected $layout = 'layouts.master';
 
+    public function __construct()
+    {
+        if (Auth::check()) {
+            $userId = Auth::id();
+            $user = User::findOrFail($userId);
+            $role = $user->role_id;
+            if($role == 1) {
+                $this->layout = 'layouts.masterlogin';
+            }
+        }
+    }
+
     /**
      * Index lectures action.
      *
@@ -29,11 +41,24 @@ class LectureController extends BaseController
         $tree = Tree::findOrFail(3);
         $tree_lecture = Tree::findOrFail(5);
         if ( $tree->active == 1 && $tree_lecture->active == 1) {
+            if (Auth::check()) {
+                $userId = Auth::id();
+                $user = User::findOrFail($userId);
+                $role = $user->role_id;
+                if($role == 1) {
+                    $actions = 1;
+                } else {
+                    $actions = 0;
+                }
+            } else {
+                $actions = 0;
+            }
             $lectures = Lecture::paginate(6);
             $lecture_lead = Tree::findOrFail(5);
             $this->layout->content = View::make('lecture.index', array(
                 'lectures' => $lectures,
-                'lecture_lead' => $lecture_lead
+                'lecture_lead' => $lecture_lead,
+                'actions' => $actions,
             ));
         } else {
             return Redirect::route('homepage');
@@ -51,11 +76,24 @@ class LectureController extends BaseController
         $tree = Tree::findOrFail(3);
         $tree_lecture = Tree::findOrFail(5);
         if ( $tree->active == 1 && $tree_lecture->active == 1) {
+            if (Auth::check()) {
+                $userId = Auth::id();
+                $user = User::findOrFail($userId);
+                $role = $user->role_id;
+                if($role == 1) {
+                    $actions = 1;
+                } else {
+                    $actions = 0;
+                }
+            } else {
+                $actions = 0;
+            }
             $lectures = DB::table('lectures')->where('course_id', '=', $id)->paginate(6);
             $lecture_lead = Tree::findOrFail(5);
             $this->layout->content = View::make('lecture.index', array(
                 'lectures' => $lectures,
-                'lecture_lead' => $lecture_lead
+                'lecture_lead' => $lecture_lead,
+                'actions' => $actions,
             ));
         } else {
             return Redirect::route('homepage');
@@ -73,16 +111,27 @@ class LectureController extends BaseController
         $tree = Tree::findOrFail(3);
         $tree_lecture = Tree::findOrFail(5);
         if ( $tree->active == 1 && $tree_lecture->active == 1) {
-            $lecture = Lecture::findOrFail($id);
-            $courses = Course::all()->lists('name', 'id');
-            $tags = Tag::all()->lists('name','id');
-            $lecture_tags = $lecture->tags()->lists('tag_id');
-            $this->layout->content = View::make('lecture.edit', array(
-                'lecture' => $lecture,
-                'courses' => $courses,
-                'tags' => $tags,
-                'lecture_tags' => $lecture_tags,
-            ));
+            if (Auth::check()) {
+                $userId = Auth::id();
+                $user = User::findOrFail($userId);
+                $role = $user->role_id;
+                if($role == 1) {
+                    $lecture = Lecture::findOrFail($id);
+                    $courses = Course::all()->lists('name', 'id');
+                    $tags = Tag::all()->lists('name','id');
+                    $lecture_tags = $lecture->tags()->lists('tag_id');
+                    $this->layout->content = View::make('lecture.edit', array(
+                        'lecture' => $lecture,
+                        'courses' => $courses,
+                        'tags' => $tags,
+                        'lecture_tags' => $lecture_tags,
+                    ));
+                } else {
+                    return Redirect::route('lecture.view', $id);
+                }
+            } else {
+                return Redirect::route('lecture.view', $id);
+            }
         } else {
             return Redirect::route('homepage');
         }
@@ -98,12 +147,23 @@ class LectureController extends BaseController
         $tree = Tree::findOrFail(3);
         $tree_lecture = Tree::findOrFail(5);
         if ( $tree->active == 1 && $tree_lecture->active == 1) {
-            $courses = Course::all()->lists('name', 'id');
-            $tags = Tag::all()->lists('name','id');
-            $this->layout->content = View::make('lecture.new', array(
-                'courses' => $courses,
-                'tags' => $tags,
-            ));
+            if (Auth::check()) {
+                $userId = Auth::id();
+                $user = User::findOrFail($userId);
+                $role = $user->role_id;
+                if($role == 1) {
+                    $courses = Course::all()->lists('name', 'id');
+                    $tags = Tag::all()->lists('name','id');
+                    $this->layout->content = View::make('lecture.new', array(
+                        'courses' => $courses,
+                        'tags' => $tags,
+                    ));
+                } else {
+                    return Redirect::route('lecture.index');
+                }
+            } else {
+                return Redirect::route('lecture.index');
+            }
         } else {
             return Redirect::route('homepage');
         }
@@ -120,31 +180,42 @@ class LectureController extends BaseController
         $tree = Tree::findOrFail(3);
         $tree_lecture = Tree::findOrFail(5);
         if ( $tree->active == 1 && $tree_lecture->active == 1) {
-            $lecture = Lecture::findOrFail($id);
-            $lecture->title = Input::get('title');
-            $lecture->lead = Input::get('lead');
-            $lecture->content = Input::get('content');
-            $lecture->course_id = Input::get('courses');
+            if (Auth::check()) {
+                $userId = Auth::id();
+                $user = User::findOrFail($userId);
+                $role = $user->role_id;
+                if($role == 1) {
+                    $lecture = Lecture::findOrFail($id);
+                    $lecture->title = Input::get('title');
+                    $lecture->lead = Input::get('lead');
+                    $lecture->content = Input::get('content');
+                    $lecture->course_id = Input::get('courses');
 
-            $rules = $lecture->rules();
-            $validator = Validator::make(Input::all(), $rules);
+                    $rules = $lecture->rules();
+                    $validator = Validator::make(Input::all(), $rules);
 
-            if ($validator->fails())
-            {
-                return Redirect::route('lecture.edit', $lecture->id)->withErrors($validator);
+                    if ($validator->fails())
+                    {
+                        return Redirect::route('lecture.edit', $lecture->id)->withErrors($validator);
+                    } else {
+                        $lecture->save();
+                        if(Input::get('tags') != NULL){
+                            $lecture->tags()->sync(Input::get('tags'));
+                        }
+
+                        $tree_students = Tree::findOrFail(2);
+                        $action = 'update';
+                        if( $tree_students->active == 1) {
+                            $lecture->sendMail($lecture->course_id, $action);
+                        }
+                        Session::flash('message', Lang::get('app.lecture-updated'));
+                        return Redirect::route('lecture.view', $lecture->id);
+                    }
+                } else {
+                    return Redirect::route('lecture.view', $id);
+                }
             } else {
-                $lecture->save();
-                if(Input::get('tags') != NULL){
-                    $lecture->tags()->sync(Input::get('tags'));
-                }
-
-                $tree_students = Tree::findOrFail(2);
-                $action = 'update';
-                if( $tree_students->active == 1) {
-                    $lecture->sendMail($lecture->course_id, $action);
-                }
-                Session::flash('message', Lang::get('app.lecture-updated'));
-                return Redirect::route('lecture.view', $lecture->id);
+                return Redirect::route('lecture.view', $id);
             }
 
         } else {
@@ -163,35 +234,46 @@ class LectureController extends BaseController
         $tree = Tree::findOrFail(3);
         $tree_lecture = Tree::findOrFail(5);
         if ( $tree->active == 1 && $tree_lecture->active == 1) {
-            $lecture = new Lecture();
-            $lecture->title = Input::get('title');
-            $lecture->lead = Input::get('lead');
-            $lecture->content = Input::get('content');
-            $lecture->course_id = Input::get('courses');
-            $lecture->owner_id = 1;
-            $lecture->owner_role_id = 1;
+            if (Auth::check()) {
+                $userId = Auth::id();
+                $user = User::findOrFail($userId);
+                $role = $user->role_id;
+                if($role == 1) {
+                    $lecture = new Lecture();
+                    $lecture->title = Input::get('title');
+                    $lecture->lead = Input::get('lead');
+                    $lecture->content = Input::get('content');
+                    $lecture->course_id = Input::get('courses');
+                    $lecture->owner_id = 1;
+                    $lecture->owner_role_id = 1;
 
-            $rules = $lecture->rules();
-            $validator = Validator::make(Input::all(), $rules);
+                    $rules = $lecture->rules();
+                    $validator = Validator::make(Input::all(), $rules);
 
-            if ($validator->fails())
-            {
-                return Redirect::route('lecture.new')
-                    ->withErrors($validator)
-                    ->withInput();
+                    if ($validator->fails())
+                    {
+                        return Redirect::route('lecture.new')
+                            ->withErrors($validator)
+                            ->withInput();
+                    } else {
+                        $lecture->save();
+                        if(Input::get('tags') != NULL){
+                            $lecture->tags()->sync(Input::get('tags'));
+                        }
+
+                        $tree_students = Tree::findOrFail(2);
+                        $action = 'create';
+                        if( $tree_students->active == 1) {
+                            $lecture->sendMail($lecture->course_id, $action);
+                        }
+                        Session::flash('message', Lang::get('app.lecture-created'));
+                        return Redirect::route('lecture.view', $lecture->id);
+                    }
+                } else {
+                    return Redirect::route('lecture.index');
+                }
             } else {
-                $lecture->save();
-                if(Input::get('tags') != NULL){
-                    $lecture->tags()->sync(Input::get('tags'));
-                }
-
-                $tree_students = Tree::findOrFail(2);
-                $action = 'create';
-                if( $tree_students->active == 1) {
-                    $lecture->sendMail($lecture->course_id, $action);
-                }
-                Session::flash('message', Lang::get('app.lecture-created'));
-                return Redirect::route('lecture.view', $lecture->id);
+                return Redirect::route('lecture.index');
             }
         } else {
             Session::flash('message', Lang::get('common.no-such-site'));
@@ -210,9 +292,22 @@ class LectureController extends BaseController
         $tree = Tree::findOrFail(3);
         $tree_lecture = Tree::findOrFail(5);
         if ( $tree->active == 1 && $tree_lecture->active == 1) {
+            if (Auth::check()) {
+                $userId = Auth::id();
+                $user = User::findOrFail($userId);
+                $role = $user->role_id;
+                if($role == 1) {
+                    $actions = 1;
+                } else {
+                    $actions = 0;
+                }
+            } else {
+                $actions = 0;
+            }
             $lecture = Lecture::findOrFail($id);
             $this->layout->content = View::make('lecture.view', array(
                 'lecture' => $lecture,
+                'actions' => $actions,
             ));
         } else {
             return Redirect::route('homepage');
@@ -230,10 +325,21 @@ class LectureController extends BaseController
         $tree = Tree::findOrFail(3);
         $tree_lecture = Tree::findOrFail(5);
         if ( $tree->active == 1 && $tree_lecture->active == 1) {
-            $lecture = Lecture::findOrFail($id);
-            $this->layout->content = View::make('lecture.delete', array(
-                'lecture' => $lecture,
-            ));
+            if (Auth::check()) {
+                $userId = Auth::id();
+                $user = User::findOrFail($userId);
+                $role = $user->role_id;
+                if($role == 1) {
+                    $lecture = Lecture::findOrFail($id);
+                    $this->layout->content = View::make('lecture.delete', array(
+                        'lecture' => $lecture,
+                    ));
+                } else {
+                    return Redirect::route('lecture.view', $id);
+                }
+            } else {
+                return Redirect::route('lecture.view', $id);
+            }
         } else {
             return Redirect::route('homepage');
         }
@@ -250,12 +356,23 @@ class LectureController extends BaseController
         $tree = Tree::findOrFail(3);
         $tree_lecture = Tree::findOrFail(5);
         if ( $tree->active == 1 && $tree_lecture->active == 1) {
-            $lecture = Lecture::findOrFail($id);
-            $course_id = $lecture->course->id;
-            $lecture->tags()->detach();
-            $lecture->delete();
-            Session::flash('message', Lang::get('app.lecture-destroyed'));
-            return Redirect::route('lecture.indexCourse', $course_id);
+            if (Auth::check()) {
+                $userId = Auth::id();
+                $user = User::findOrFail($userId);
+                $role = $user->role_id;
+                if($role == 1) {
+                    $lecture = Lecture::findOrFail($id);
+                    $course_id = $lecture->course->id;
+                    $lecture->tags()->detach();
+                    $lecture->delete();
+                    Session::flash('message', Lang::get('app.lecture-destroyed'));
+                    return Redirect::route('lecture.indexCourse', $course_id);
+                } else {
+                    return Redirect::route('lecture.view', $id);
+                }
+            } else {
+                return Redirect::route('lecture.view', $id);
+            }
         } else {
             Session::flash('message', Lang::get('common.no-such-site'));
             return Redirect::route('homepage');

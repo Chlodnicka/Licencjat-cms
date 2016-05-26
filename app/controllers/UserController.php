@@ -14,7 +14,16 @@ class UserController extends BaseController
 
     public function __construct() {
         $this->beforeFilter('csrf', array('on'=>'post'));
+        if (Auth::check()) {
+            $userId = Auth::id();
+            $user = User::findOrFail($userId);
+            $role = $user->role_id;
+            if($role == 1) {
+                $this->layout = 'layouts.masterlogin';
+            }
+        }
     }
+
 
     public function showLogin()
     {
@@ -79,28 +88,75 @@ class UserController extends BaseController
     }
 
     public function doRegister() {
-        $rules = array(
-            'name'=>'required|alpha|min:2',
-            'username'=>'required|alpha|min:2',
-            'email'=>'required|email|unique:users',
-            'password'=>'required|alpha_num|between:6,12|confirmed',
-            'password_confirmation'=>'required|alpha_num|between:6,12'
-        );
+        $tree = Tree::findOrFail(2);
+        if($tree->active == 1){
+            $rules = array(
+                'username'=>'required|alpha|min:2',
+                'email'=>'required|email|unique:users',
+                'password'=>'required|alpha_num|between:6,12|confirmed',
+                'password_confirmation'=>'required|alpha_num|between:6,12'
+            );
 
-        $validator = Validator::make(Input::all(), $rules);
+            $validator = Validator::make(Input::all(), $rules);
 
-        if ($validator->fails()) {
-            return Redirect::route('user.register')->with('message', 'The following errors occurred')->withErrors($validator)->withInput();
+            if ($validator->fails()) {
+                return Redirect::route('user.register')->with('message', 'The following errors occurred')->withErrors($validator)->withInput();
+            } else {
+                $user = new User;
+                $user->username = Input::get('username');
+                $user->email = Input::get('email');
+                $user->password = Hash::make(Input::get('password'));
+                $user->role_id = 2;
+                $user->save();
+
+                $student = new Student();
+                $student->email = Input::get('email');
+                $student->role_id = 2;
+                $student->owner_id = 1;
+                $student->owner_role_id = 1;
+                $student->users_id = $user->id;
+
+                $student->save();
+
+                return Redirect::route('user.login')->with('message', 'Thanks for registering!');
+            }
         } else {
-            $user = new User;
-            $user->name = Input::get('name');
-            $user->username = Input::get('username');
-            $user->email = Input::get('email');
-            $user->password = Hash::make(Input::get('password'));
-            $user->role_id = 2;
-            $user->save();
+            return Redirect::route('homepage');
+        }
+    }
 
-            return Redirect::route('user.login')->with('message', 'Thanks for registering!');
+    public function passwordChange(){
+        if (Auth::check()) {
+            $this->layout->content = View::make('user.password');
+        } else {
+            return Redirect::route('user.login');
+        }
+    }
+
+    public function postPasswordChange(){
+        if (Auth::check()) {
+            $rules = array(
+                'password' => 'required|alpha_num|between:6,12',
+                'new_password' => 'required|alpha_num|between:6,12|confirmed',
+                'new_password_confirmation' => 'required|alpha_num|between:6,12'
+            );
+            $validator = Validator::make(Input::all(), $rules);
+            if ($validator->passes()) {
+                $userId = Auth::user()->id;
+                $user = User::findOrFail($userId);
+                if(Hash::check(Input::get('password'), $user->password)){
+                    $user->password = Hash::make(Input::get('new_password'));
+                    $user->save();
+                    return Redirect::route('user.change_password');
+                } else {
+                    return Redirect::route('user.change_password')->with('message', 'Bad old password');
+                }
+
+            } else {
+                return Redirect::route('user.change_password')->with('message', 'The following errors occurred')->withErrors($validator)->withInput();
+            }
+        } else {
+            return Redirect::route('user.login');
         }
     }
 }

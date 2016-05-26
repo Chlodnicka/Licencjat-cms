@@ -1,8 +1,10 @@
 @section('content')
   <h1>{{ trans('app.tags-list') }}</h1>
-  <div class="action-buttons">
-    <a href="{{ URL::route('tag.new') }}">{{ trans('common.new') }}</a>
-  </div>
+  @if($actions == 1)
+    <div class="action-buttons">
+      <a href="{{ URL::route('tag.new') }}">{{ trans('common.new') }}</a>
+    </div>
+  @endif
   @if(!empty($tags))
     <div class="tags">
       @foreach( $tags as $tag)

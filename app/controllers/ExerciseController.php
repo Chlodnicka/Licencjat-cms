@@ -19,6 +19,18 @@ class ExerciseController extends BaseController
      */
     protected $layout = 'layouts.master';
 
+    public function __construct()
+    {
+        if (Auth::check()) {
+            $userId = Auth::id();
+            $user = User::findOrFail($userId);
+            $role = $user->role_id;
+            if($role == 1) {
+                $this->layout = 'layouts.masterlogin';
+            }
+        }
+    }
+
     /**
      * Index exercises action.
      *
@@ -29,6 +41,18 @@ class ExerciseController extends BaseController
         $tree = Tree::findOrFail(3);
         $tree_exercise = Tree::findOrFail(6);
         if ( $tree->active == 1 && $tree_exercise->active == 1) {
+            if (Auth::check()) {
+                $userId = Auth::id();
+                $user = User::findOrFail($userId);
+                $role = $user->role_id;
+                if($role == 1) {
+                    $actions = 1;
+                } else {
+                    $actions = 0;
+                }
+            } else {
+                $actions = 0;
+            }
             $exercises = Exercise::paginate(6);
             $exercise_lead = Tree::findOrFail(6);
             $exercise_difficulty = new Exercise();
@@ -37,6 +61,7 @@ class ExerciseController extends BaseController
                 'exercises' => $exercises,
                 'difficulty' => $difficulty,
                 'exercise_lead' => $exercise_lead,
+                'actions' => $actions,
             ));
         } else {
             return Redirect::route('homepage');
@@ -54,6 +79,18 @@ class ExerciseController extends BaseController
         $tree = Tree::findOrFail(3);
         $tree_exercise = Tree::findOrFail(6);
         if ( $tree->active == 1 && $tree_exercise->active == 1) {
+            if (Auth::check()) {
+                $userId = Auth::id();
+                $user = User::findOrFail($userId);
+                $role = $user->role_id;
+                if($role == 1) {
+                    $actions = 1;
+                } else {
+                    $actions = 0;
+                }
+            } else {
+                $actions = 0;
+            }
             $exercises = DB::table('exercises')->where('course_id', "=", $id)->paginate(6);
             $exercise_lead = Tree::findOrFail(6);
             $exercise_difficulty = new Exercise();
@@ -62,6 +99,7 @@ class ExerciseController extends BaseController
                 'exercises' => $exercises,
                 'difficulty' => $difficulty,
                 'exercise_lead' => $exercise_lead,
+                'actions' => $actions
             ));
         } else {
             return Redirect::route('homepage');
@@ -78,6 +116,18 @@ class ExerciseController extends BaseController
         $tree = Tree::findOrFail(3);
         $tree_exercise = Tree::findOrFail(6);
         if ( $tree->active == 1 && $tree_exercise->active == 1) {
+            if (Auth::check()) {
+                $userId = Auth::id();
+                $user = User::findOrFail($userId);
+                $role = $user->role_id;
+                if($role == 1) {
+                    $actions = 1;
+                } else {
+                    $actions = 0;
+                }
+            } else {
+                $actions = 0;
+            }
             $exercise_lead = Tree::findOrFail(6);
             $searchParams = array(
                 'content' => Input::get('content'),
@@ -107,6 +157,7 @@ class ExerciseController extends BaseController
                 'exercises' => $exercises,
                 'difficulty' => $difficulty,
                 'exercise_lead' => $exercise_lead,
+                'actions' => $actions,
             ));
         } else {
             return Redirect::route('homepage');
@@ -124,17 +175,28 @@ class ExerciseController extends BaseController
         $tree = Tree::findOrFail(3);
         $tree_exercise = Tree::findOrFail(6);
         if ( $tree->active == 1 && $tree_exercise->active == 1) {
-            $course_id = $id;
-            $exercise_tags = DB::table('exercise_tag')->join('exercises', 'exercises.id', '=', 'exercise_tag.exercise_id')->join('tags', 'tags.id', '=', 'exercise_tag.tag_id')->where('course_id', '=', $id)->distinct()->groupBy('tag_id')->lists('name', 'tag_id');
-            $exercise_lectures = DB::table('lectures')->where('course_id', '=', $id)->lists('title', 'id');
-            $exercise_difficulty = new Exercise();
-            $difficulty = $exercise_difficulty->difficulty();
-            $this->layout->content = View::make('exercise.generate', array(
-                'difficulty' => $difficulty,
-                'exercise_lectures' => $exercise_lectures,
-                'exercise_tags' =>$exercise_tags,
-                'course_id' => $course_id,
-            ));
+            if (Auth::check()) {
+                $userId = Auth::id();
+                $user = User::findOrFail($userId);
+                $role = $user->role_id;
+                if($role == 1) {
+                    $course_id = $id;
+                    $exercise_tags = DB::table('exercise_tag')->join('exercises', 'exercises.id', '=', 'exercise_tag.exercise_id')->join('tags', 'tags.id', '=', 'exercise_tag.tag_id')->where('course_id', '=', $id)->distinct()->groupBy('tag_id')->lists('name', 'tag_id');
+                    $exercise_lectures = DB::table('lectures')->where('course_id', '=', $id)->lists('title', 'id');
+                    $exercise_difficulty = new Exercise();
+                    $difficulty = $exercise_difficulty->difficulty();
+                    $this->layout->content = View::make('exercise.generate', array(
+                        'difficulty' => $difficulty,
+                        'exercise_lectures' => $exercise_lectures,
+                        'exercise_tags' =>$exercise_tags,
+                        'course_id' => $course_id,
+                    ));
+                } else {
+                    return Redirect::route('exercise.index');
+                }
+            } else {
+                return Redirect::route('exercise.index');
+            }
         } else {
             return Redirect::route('homepage');
         }
@@ -142,80 +204,92 @@ class ExerciseController extends BaseController
 
     public function show_generated($id)
     {
-        $searchParams = array(
-            'content' => Input::get('content'),
-            'number' => Input::get('number'),
-            'difficulty' => Input::get('difficulty'),
-            'exercise_tags' => Input::get('exercise_tags'),
-            'exercise_lecture' => Input::get('exercise_lectures'),
-        );
-        
-        $exercise = new Exercise();
-        $course_id = $id;
-        $rules = $exercise->rules_generate();
+        if (Auth::check()) {
+            $userId = Auth::id();
+            $user = User::findOrFail($userId);
+            $role = $user->role_id;
+            if($role == 1) {
+                $searchParams = array(
+                    'content' => Input::get('content'),
+                    'number' => Input::get('number'),
+                    'difficulty' => Input::get('difficulty'),
+                    'exercise_tags' => Input::get('exercise_tags'),
+                    'exercise_lecture' => Input::get('exercise_lectures'),
+                );
 
-        $validator = Validator::make(Input::all(), $rules);
-        if ($validator->fails()) {
-            return Redirect::route('exercise.generate', $course_id)
-                ->withErrors($validator)
-                ->withInput();
-        } else {
+                $exercise = new Exercise();
+                $course_id = $id;
+                $rules = $exercise->rules_generate();
 
-            if($searchParams['content'] == NULL && $searchParams['difficulty'] == 0 && $searchParams['exercise_lecture'] == NULL && $searchParams['exercise_tags'] == NULL) {
-                $exercises = DB::table('exercises')->where('course_id', '=', $id)->limit($searchParams['number'])->get();
-            } elseif($searchParams['exercise_tags'] == NULL){
-                if($searchParams['difficulty'] == 0) {
-                    if($searchParams['content'] == NULL){
-                        $exercises = DB::table('exercises')->where('course_id', '=', $id)->whereIn('lecture_id', $searchParams['exercise_lecture'])->limit($searchParams['number'])->get();
-                    } elseif($searchParams['exercise_lecture'] == NULL){
-                        $exercises = DB::table('exercises')->where('course_id', '=', $id)->where('content', 'LIKE', '%'.$searchParams['content'].'%')->limit($searchParams['number'])->get();
-
-                    } else {
-                        $exercises = DB::table('exercises')->where('course_id', '=', $id)->whereIn('lecture_id', '=', $searchParams['exercise_lecture'])->where('content', 'LIKE', '%'.$searchParams['content'].'%')->limit($searchParams['number'])->get();
-                    }
-                } elseif( $searchParams['exercise_lecture'] == NULL) {
-                    if ($searchParams['content'] == NULL) {
-                        $exercises = DB::table('exercises')->where('course_id', '=', $id)->where('difficulty', '=', $searchParams['difficulty'])->limit($searchParams['number'])->get();
-                    } else {
-                        $exercises = DB::table('exercises')->where('course_id', '=', $id)->where('difficulty', '=', $searchParams['difficulty'])->where('content', 'LIKE', '%'.$searchParams['content'].'%')->limit($searchParams['number'])->get();
-                    }
-                } elseif( $searchParams['content'] == NULL) {
-                    $exercises = DB::table('exercises')->where('course_id', '=', $id)->where('difficulty', '=', $searchParams['difficulty'])->whereIn('lecture_id', '=', $searchParams['exercise_lecture'])->limit($searchParams['number'])->get();
-                }
-            } elseif ($searchParams['difficulty'] == 0) {
-                if($searchParams['content'] == NULL){
-                    if($searchParams['exercise_lecture'] == NULL){
-                        $exercises = DB::table('exercises')->join('exercise_tag', 'exercises.id', '=', 'exercise_tag.exercise_id')->whereIn('tag_id', $searchParams['exercise_tags'])->limit($searchParams['number'])->get();
-                    }else {
-                        $exercises = DB::table('exercises')->join('exercise_tag', 'exercises.id', '=', 'exercise_tag.exercise_id')->where('course_id', '=', $id)->whereIn('lecture_id', '=', $searchParams['exercise_lecture'])->whereIn('tag_id', $searchParams['exercise_tags'])->limit($searchParams['number'])->get();
-                    }
-                } elseif($searchParams['exercise_lecture'] == NULL){
-                    $exercises = DB::table('exercises')->join('exercise_tag', 'exercises.id', '=', 'exercise_tag.exercise_id')->where('course_id', '=', $id)->whereIn('tag_id', $searchParams['exercise_tags'])->where('content', 'LIKE', '%' . $searchParams['content'] . '%')->limit($searchParams['number'])->get();
+                $validator = Validator::make(Input::all(), $rules);
+                if ($validator->fails()) {
+                    return Redirect::route('exercise.generate', $course_id)
+                        ->withErrors($validator)
+                        ->withInput();
                 } else {
-                    $exercises = DB::table('exercises')->join('exercise_tag', 'exercises.id', '=', 'exercise_tag.exercise_id')->where('course_id', '=', $id)->whereIn('lecture_id', '=', $searchParams['exercise_lecture'])->whereIn('tag_id', $searchParams['exercise_tags'])->where('content', 'LIKE', '%' . $searchParams['content'] . '%')->limit($searchParams['number'])->get();
+
+                    if($searchParams['content'] == NULL && $searchParams['difficulty'] == 0 && $searchParams['exercise_lecture'] == NULL && $searchParams['exercise_tags'] == NULL) {
+                        $exercises = DB::table('exercises')->where('course_id', '=', $id)->limit($searchParams['number'])->get();
+                    } elseif($searchParams['exercise_tags'] == NULL){
+                        if($searchParams['difficulty'] == 0) {
+                            if($searchParams['content'] == NULL){
+                                $exercises = DB::table('exercises')->where('course_id', '=', $id)->whereIn('lecture_id', $searchParams['exercise_lecture'])->limit($searchParams['number'])->get();
+                            } elseif($searchParams['exercise_lecture'] == NULL){
+                                $exercises = DB::table('exercises')->where('course_id', '=', $id)->where('content', 'LIKE', '%'.$searchParams['content'].'%')->limit($searchParams['number'])->get();
+
+                            } else {
+                                $exercises = DB::table('exercises')->where('course_id', '=', $id)->whereIn('lecture_id', '=', $searchParams['exercise_lecture'])->where('content', 'LIKE', '%'.$searchParams['content'].'%')->limit($searchParams['number'])->get();
+                            }
+                        } elseif( $searchParams['exercise_lecture'] == NULL) {
+                            if ($searchParams['content'] == NULL) {
+                                $exercises = DB::table('exercises')->where('course_id', '=', $id)->where('difficulty', '=', $searchParams['difficulty'])->limit($searchParams['number'])->get();
+                            } else {
+                                $exercises = DB::table('exercises')->where('course_id', '=', $id)->where('difficulty', '=', $searchParams['difficulty'])->where('content', 'LIKE', '%'.$searchParams['content'].'%')->limit($searchParams['number'])->get();
+                            }
+                        } elseif( $searchParams['content'] == NULL) {
+                            $exercises = DB::table('exercises')->where('course_id', '=', $id)->where('difficulty', '=', $searchParams['difficulty'])->whereIn('lecture_id', '=', $searchParams['exercise_lecture'])->limit($searchParams['number'])->get();
+                        }
+                    } elseif ($searchParams['difficulty'] == 0) {
+                        if($searchParams['content'] == NULL){
+                            if($searchParams['exercise_lecture'] == NULL){
+                                $exercises = DB::table('exercises')->join('exercise_tag', 'exercises.id', '=', 'exercise_tag.exercise_id')->whereIn('tag_id', $searchParams['exercise_tags'])->limit($searchParams['number'])->get();
+                            }else {
+                                $exercises = DB::table('exercises')->join('exercise_tag', 'exercises.id', '=', 'exercise_tag.exercise_id')->where('course_id', '=', $id)->whereIn('lecture_id', '=', $searchParams['exercise_lecture'])->whereIn('tag_id', $searchParams['exercise_tags'])->limit($searchParams['number'])->get();
+                            }
+                        } elseif($searchParams['exercise_lecture'] == NULL){
+                            $exercises = DB::table('exercises')->join('exercise_tag', 'exercises.id', '=', 'exercise_tag.exercise_id')->where('course_id', '=', $id)->whereIn('tag_id', $searchParams['exercise_tags'])->where('content', 'LIKE', '%' . $searchParams['content'] . '%')->limit($searchParams['number'])->get();
+                        } else {
+                            $exercises = DB::table('exercises')->join('exercise_tag', 'exercises.id', '=', 'exercise_tag.exercise_id')->where('course_id', '=', $id)->whereIn('lecture_id', '=', $searchParams['exercise_lecture'])->whereIn('tag_id', $searchParams['exercise_tags'])->where('content', 'LIKE', '%' . $searchParams['content'] . '%')->limit($searchParams['number'])->get();
+                        }
+                    } elseif($searchParams['content'] == NULL) {
+                        if($searchParams['exercise_lecture'] == NULL){
+                            $exercises = DB::table('exercises')->join('exercise_tag', 'exercises.id', '=', 'exercise_tag.exercise_id')->where('course_id', '=', $id)->where('difficulty', '=', $searchParams['difficulty'])->whereIn('tag_id', $searchParams['exercise_tags'])->limit($searchParams['number'])->get();
+                        } else {
+                            $exercises = DB::table('exercises')->join('exercise_tag', 'exercises.id', '=', 'exercise_tag.exercise_id')->where('course_id', '=', $id)->where('difficulty', '=', $searchParams['difficulty'])->whereIn('lecture_id', '=', $searchParams['exercise_lecture'])->whereIn('tag_id', $searchParams['exercise_tags'])->limit($searchParams['number'])->get();
+                        }
+                    } elseif ($searchParams['exercise_lecture'] == NULL){
+                        $exercises = DB::table('exercises')->join('exercise_tag', 'exercises.id', '=', 'exercise_tag.exercise_id')->where('course_id', '=', $id)->where('difficulty', '=', $searchParams['difficulty'])->whereIn('tag_id', $searchParams['exercise_tags'])->where('content', 'LIKE', '%' . $searchParams['content'] . '%')->limit($searchParams['number'])->get();
+                    } else {
+                        $exercises = DB::table('exercises')->join('exercise_tag', 'exercises.id', '=', 'exercise_tag.exercise_id')->where('course_id', '=', $id)->where('difficulty', '=', $searchParams['difficulty'])->whereIn('lecture_id', '=', $searchParams['exercise_lecture'])->whereIn('tag_id', $searchParams['exercise_tags'])->where('content', 'LIKE', '%' . $searchParams['content'] . '%')->limit($searchParams['number'])->get();
+                    }
+                    $exercise_tags = DB::table('exercise_tag')->join('exercises', 'exercises.id', '=', 'exercise_tag.exercise_id')->join('tags', 'tags.id', '=', 'exercise_tag.tag_id')->where('course_id', '=', $id)->distinct()->groupBy('tag_id')->lists('name', 'tag_id');
+                    $exercise_lectures = DB::table('lectures')->where('course_id', '=', $id)->lists('title', 'id');
+                    $exercise_difficulty = new Exercise();
+                    $difficulty = $exercise_difficulty->difficulty();
+                    $this->layout->content = View::make('exercise.generate', array(
+                        'exercises' => $exercises,
+                        'difficulty' => $difficulty,
+                        'exercise_lectures' => $exercise_lectures,
+                        'exercise_tags' =>$exercise_tags,
+                        'course_id' => $course_id,
+                    ));
+
                 }
-            } elseif($searchParams['content'] == NULL) {
-                if($searchParams['exercise_lecture'] == NULL){
-                    $exercises = DB::table('exercises')->join('exercise_tag', 'exercises.id', '=', 'exercise_tag.exercise_id')->where('course_id', '=', $id)->where('difficulty', '=', $searchParams['difficulty'])->whereIn('tag_id', $searchParams['exercise_tags'])->limit($searchParams['number'])->get();
-                } else {
-                    $exercises = DB::table('exercises')->join('exercise_tag', 'exercises.id', '=', 'exercise_tag.exercise_id')->where('course_id', '=', $id)->where('difficulty', '=', $searchParams['difficulty'])->whereIn('lecture_id', '=', $searchParams['exercise_lecture'])->whereIn('tag_id', $searchParams['exercise_tags'])->limit($searchParams['number'])->get();
-                }
-            } elseif ($searchParams['exercise_lecture'] == NULL){
-                $exercises = DB::table('exercises')->join('exercise_tag', 'exercises.id', '=', 'exercise_tag.exercise_id')->where('course_id', '=', $id)->where('difficulty', '=', $searchParams['difficulty'])->whereIn('tag_id', $searchParams['exercise_tags'])->where('content', 'LIKE', '%' . $searchParams['content'] . '%')->limit($searchParams['number'])->get();
             } else {
-                $exercises = DB::table('exercises')->join('exercise_tag', 'exercises.id', '=', 'exercise_tag.exercise_id')->where('course_id', '=', $id)->where('difficulty', '=', $searchParams['difficulty'])->whereIn('lecture_id', '=', $searchParams['exercise_lecture'])->whereIn('tag_id', $searchParams['exercise_tags'])->where('content', 'LIKE', '%' . $searchParams['content'] . '%')->limit($searchParams['number'])->get();
+                return Redirect::route('exercise.index');
             }
-            $exercise_tags = DB::table('exercise_tag')->join('exercises', 'exercises.id', '=', 'exercise_tag.exercise_id')->join('tags', 'tags.id', '=', 'exercise_tag.tag_id')->where('course_id', '=', $id)->distinct()->groupBy('tag_id')->lists('name', 'tag_id');
-            $exercise_lectures = DB::table('lectures')->where('course_id', '=', $id)->lists('title', 'id');
-            $exercise_difficulty = new Exercise();
-            $difficulty = $exercise_difficulty->difficulty();
-            $this->layout->content = View::make('exercise.generate', array(
-                'exercises' => $exercises,
-                'difficulty' => $difficulty,
-                'exercise_lectures' => $exercise_lectures,
-                'exercise_tags' =>$exercise_tags,
-                'course_id' => $course_id,
-            ));
+        } else {
+            return Redirect::route('exercise.index');
         }
     }
 
@@ -225,21 +299,32 @@ class ExerciseController extends BaseController
      * @return \Illuminate\View\View
      */
     public function generateByInput(){
-        $exercises_checked = Input::get('exercises');
-        $checked = array_map( create_function('$value', 'return (int)$value;'),
-            $exercises_checked);
+        if (Auth::check()) {
+            $userId = Auth::id();
+            $user = User::findOrFail($userId);
+            $role = $user->role_id;
+            if($role == 1) {
+                $exercises_checked = Input::get('exercises');
+                $checked = array_map( create_function('$value', 'return (int)$value;'),
+                    $exercises_checked);
 
-        if(is_array($checked))
-        {
-            $exercises['exercises'] = DB::table('exercises')->whereIn('id', $checked)->get();
-        }
-        $answers = Input::get('answers');
-        if($answers != 'on'){
-            $pdf = PDF::loadView('exercise.generated', $exercises)->download('Arkusz.pdf');
+                if(is_array($checked))
+                {
+                    $exercises['exercises'] = DB::table('exercises')->whereIn('id', $checked)->get();
+                }
+                $answers = Input::get('answers');
+                if($answers != 'on'){
+                    $pdf = PDF::loadView('exercise.generated', $exercises)->download('Arkusz.pdf');
+                } else {
+                    $pdf = PDF::loadView('exercise.generatedAnswers', $exercises)->download('Arkusz-z-odpowiedziami.pdf');
+                }
+                return $pdf;
+            } else {
+                return Redirect::route('exercise.index');
+            }
         } else {
-            $pdf = PDF::loadView('exercise.generatedAnswers', $exercises)->download('Arkusz-z-odpowiedziami.pdf');
+            return Redirect::route('exercise.index');
         }
-        return $pdf;
     }
 
     /**
@@ -253,6 +338,18 @@ class ExerciseController extends BaseController
         $tree = Tree::findOrFail(3);
         $tree_exercise = Tree::findOrFail(6);
         if ( $tree->active == 1 && $tree_exercise->active == 1) {
+            if (Auth::check()) {
+                $userId = Auth::id();
+                $user = User::findOrFail($userId);
+                $role = $user->role_id;
+                if($role == 1) {
+                    $actions = 1;
+                } else {
+                    $actions = 0;
+                }
+            } else {
+                $actions = 0;
+            }
             $exercise_lead = Tree::findOrFail(6);
             $exercises = DB::table('exercises')->where('lecture_id', '=', $id)->paginate(6);
             $exercise_difficulty = new Exercise();
@@ -261,6 +358,7 @@ class ExerciseController extends BaseController
                 'exercises' => $exercises,
                 'difficulty' => $difficulty,
                 'exercise_lead' => $exercise_lead,
+                'actions' => $actions,
             ));
         } else {
             return Redirect::route('homepage');
@@ -278,6 +376,18 @@ class ExerciseController extends BaseController
         $tree = Tree::findOrFail(3);
         $tree_exercise = Tree::findOrFail(6);
         if ( $tree->active == 1 && $tree_exercise->active == 1) {
+            if (Auth::check()) {
+                $userId = Auth::id();
+                $user = User::findOrFail($userId);
+                $role = $user->role_id;
+                if($role == 1) {
+                    $actions = 1;
+                } else {
+                    $actions = 0;
+                }
+            } else {
+                $actions = 0;
+            }
             $exercise_lead = Tree::findOrFail(6);
             $exercises = DB::table('exercises')->where('difficulty', '=', $id)->where('course_id', '=', $course)->paginate(6);
             $exercise_difficulty = new Exercise();
@@ -286,6 +396,7 @@ class ExerciseController extends BaseController
                 'exercises' => $exercises,
                 'difficulty' => $difficulty,
                 'exercise_lead' => $exercise_lead,
+                'actions' => $actions,
             ));
         } else {
             return Redirect::route('homepage');
@@ -303,21 +414,32 @@ class ExerciseController extends BaseController
         $tree = Tree::findOrFail(3);
         $tree_exercise = Tree::findOrFail(6);
         if ( $tree->active == 1 && $tree_exercise->active == 1) {
-            $exercise = Exercise::findOrFail($id);
-            $courses = Course::all()->lists('name', 'id');
-            $lectures = DB::table('lectures')->where('course_id', '=', $exercise->course_id)->get();
-            $tags = Tag::all()->lists('name','id');
-            $exercise_tags = $exercise->tags()->lists('tag_id');
-            $exercise_difficulty = new Exercise();
-            $difficulty = $exercise_difficulty->difficulty();
-            $this->layout->content = View::make('exercise.edit', array(
-                'exercise' => $exercise,
-                'courses' => $courses,
-                'tags' => $tags,
-                'exercise_tags' => $exercise_tags,
-                'lectures' => $lectures,
-                'difficulty' => $difficulty,
-            ));
+            if (Auth::check()) {
+                $userId = Auth::id();
+                $user = User::findOrFail($userId);
+                $role = $user->role_id;
+                if($role == 1) {
+                    $exercise = Exercise::findOrFail($id);
+                    $courses = Course::all()->lists('name', 'id');
+                    $lectures = DB::table('lectures')->where('course_id', '=', $exercise->course_id)->get();
+                    $tags = Tag::all()->lists('name','id');
+                    $exercise_tags = $exercise->tags()->lists('tag_id');
+                    $exercise_difficulty = new Exercise();
+                    $difficulty = $exercise_difficulty->difficulty();
+                    $this->layout->content = View::make('exercise.edit', array(
+                        'exercise' => $exercise,
+                        'courses' => $courses,
+                        'tags' => $tags,
+                        'exercise_tags' => $exercise_tags,
+                        'lectures' => $lectures,
+                        'difficulty' => $difficulty,
+                    ));
+                } else {
+                    return Redirect::route('exercise.view', $id);
+                }
+            } else {
+                return Redirect::route('exercise.view', $id);
+            }
         } else {
             return Redirect::route('homepage');
         }
@@ -334,34 +456,45 @@ class ExerciseController extends BaseController
         $tree = Tree::findOrFail(3);
         $tree_exercise = Tree::findOrFail(6);
         if ( $tree->active == 1 && $tree_exercise->active == 1) {
-            $exercise = Exercise::findOrFail($id);
-            $exercise->title = Input::get('title');
-            $exercise->content = Input::get('content');
-            $exercise->solution = Input::get('solution');
-            $exercise->solution_access = Input::get('solution_access');
-            $exercise->difficulty = Input::get('difficulty');
-            $exercise->lecture_id = Input::get('lectures');
-            $exercise->course_id = Input::get('courses');
+            if (Auth::check()) {
+                $userId = Auth::id();
+                $user = User::findOrFail($userId);
+                $role = $user->role_id;
+                if($role == 1) {
+                    $exercise = Exercise::findOrFail($id);
+                    $exercise->title = Input::get('title');
+                    $exercise->content = Input::get('content');
+                    $exercise->solution = Input::get('solution');
+                    $exercise->solution_access = Input::get('solution_access');
+                    $exercise->difficulty = Input::get('difficulty');
+                    $exercise->lecture_id = Input::get('lectures');
+                    $exercise->course_id = Input::get('courses');
 
-            $rules = $exercise->rules();
-            $validator = Validator::make(Input::all(), $rules);
+                    $rules = $exercise->rules();
+                    $validator = Validator::make(Input::all(), $rules);
 
-            if ($validator->fails())
-            {
-                return Redirect::route('exercise.edit', $exercise->id)
-                    ->withErrors($validator);
+                    if ($validator->fails())
+                    {
+                        return Redirect::route('exercise.edit', $exercise->id)
+                            ->withErrors($validator);
+                    } else {
+                        $exercise->save();
+                        if(Input::get('tags') != NULL){
+                            $exercise->tags()->sync(Input::get('tags'));
+                        }
+                        $tree_students = Tree::findOrFail(2);
+                        $action = 'update';
+                        if( $tree_students->active == 1) {
+                            $exercise->sendMail($exercise->course_id, $action);
+                        }
+                        Session::flash('message', Lang::get('app.exercise_updated'));
+                        return Redirect::route('exercise.view', $exercise->id);
+                    }
+                } else {
+                    return Redirect::route('exercise.view', $id);
+                }
             } else {
-                $exercise->save();
-                if(Input::get('tags') != NULL){
-                    $exercise->tags()->sync(Input::get('tags'));
-                }
-                $tree_students = Tree::findOrFail(2);
-                $action = 'update';
-                if( $tree_students->active == 1) {
-                    $exercise->sendMail($exercise->course_id, $action);
-                }
-                Session::flash('message', Lang::get('app.exercise_updated'));
-                return Redirect::route('exercise.view', $exercise->id);
+                return Redirect::route('exercise.view', $id);
             }
 
         } else {
@@ -380,17 +513,28 @@ class ExerciseController extends BaseController
         $tree = Tree::findOrFail(3);
         $tree_exercise = Tree::findOrFail(6);
         if ( $tree->active == 1 && $tree_exercise->active == 1) {
-            $courses = Course::all()->lists('name', 'id');
-            $lectures = Lecture::all()->lists('title', 'id');
-            $tags = Tag::all()->lists('name','id');
-            $exercise = new Exercise();
-            $difficulty = $exercise->difficulty();
-            $this->layout->content = View::make('exercise.new', array(
-                'courses' => $courses,
-                'lectures' => $lectures,
-                'tags' => $tags,
-                'difficulty' => $difficulty,
-            ));
+            if (Auth::check()) {
+                $userId = Auth::id();
+                $user = User::findOrFail($userId);
+                $role = $user->role_id;
+                if($role == 1) {
+                    $courses = Course::all()->lists('name', 'id');
+                    $lectures = Lecture::all()->lists('title', 'id');
+                    $tags = Tag::all()->lists('name','id');
+                    $exercise = new Exercise();
+                    $difficulty = $exercise->difficulty();
+                    $this->layout->content = View::make('exercise.new', array(
+                        'courses' => $courses,
+                        'lectures' => $lectures,
+                        'tags' => $tags,
+                        'difficulty' => $difficulty,
+                    ));
+                } else {
+                    return Redirect::route('exercise.index');
+                }
+            } else {
+                return Redirect::route('exercise.index');
+            }
         } else {
             return Redirect::route('homepage');
         }
@@ -406,37 +550,48 @@ class ExerciseController extends BaseController
         $tree = Tree::findOrFail(3);
         $tree_exercise = Tree::findOrFail(6);
         if ( $tree->active == 1 && $tree_exercise->active == 1) {
-            $exercise = new Exercise();
-            $exercise->title = Input::get('title');
-            $exercise->content = Input::get('content');
-            $exercise->solution = Input::get('solution');
-            $exercise->solution_access = Input::get('solution_access');
-            $exercise->difficulty = Input::get('difficulty');
-            $exercise->lecture_id = Input::get('lectures');
-            $exercise->course_id = Input::get('courses');
-            $exercise->owner_id = 1;
-            $exercise->owner_role_id = 1;
+            if (Auth::check()) {
+                $userId = Auth::id();
+                $user = User::findOrFail($userId);
+                $role = $user->role_id;
+                if($role == 1) {
+                    $exercise = new Exercise();
+                    $exercise->title = Input::get('title');
+                    $exercise->content = Input::get('content');
+                    $exercise->solution = Input::get('solution');
+                    $exercise->solution_access = Input::get('solution_access');
+                    $exercise->difficulty = Input::get('difficulty');
+                    $exercise->lecture_id = Input::get('lectures');
+                    $exercise->course_id = Input::get('courses');
+                    $exercise->owner_id = 1;
+                    $exercise->owner_role_id = 1;
 
-            $rules = $exercise->rules();
-            $validator = Validator::make(Input::all(), $rules);
+                    $rules = $exercise->rules();
+                    $validator = Validator::make(Input::all(), $rules);
 
-            if ($validator->fails())
-            {
-                return Redirect::route('exercise.new')
-                    ->withErrors($validator)
-                    ->withInput();
+                    if ($validator->fails())
+                    {
+                        return Redirect::route('exercise.new')
+                            ->withErrors($validator)
+                            ->withInput();
+                    } else {
+                        $exercise->save();
+                        if(Input::get('tags') != NULL){
+                            $exercise->tags()->sync(Input::get('tags'));
+                        }
+                        $tree_students = Tree::findOrFail(2);
+                        $action = 'new';
+                        if( $tree_students->active == 1) {
+                            $exercise->sendMail($exercise->course_id, $action);
+                        }
+                        Session::flash('message', Lang::get('app.exercise-created'));
+                        return Redirect::route('exercise.view', $exercise->id);
+                    }
+                } else {
+                    return Redirect::route('exercise.index');
+                }
             } else {
-                $exercise->save();
-                if(Input::get('tags') != NULL){
-                    $exercise->tags()->sync(Input::get('tags'));
-                }
-                $tree_students = Tree::findOrFail(2);
-                $action = 'new';
-                if( $tree_students->active == 1) {
-                    $exercise->sendMail($exercise->course_id, $action);
-                }
-                Session::flash('message', Lang::get('app.exercise-created'));
-                return Redirect::route('exercise.view', $exercise->id);
+                return Redirect::route('exercise.index');
             }
 
         } else {
@@ -456,9 +611,22 @@ class ExerciseController extends BaseController
         $tree = Tree::findOrFail(3);
         $tree_exercise = Tree::findOrFail(6);
         if ( $tree->active == 1 && $tree_exercise->active == 1) {
+            if (Auth::check()) {
+                $userId = Auth::id();
+                $user = User::findOrFail($userId);
+                $role = $user->role_id;
+                if($role == 1) {
+                    $actions = 1;
+                } else {
+                    $actions = 0;
+                }
+            } else {
+                $actions = 0;
+            }
             $exercise = Exercise::findOrFail($id);
             $this->layout->content = View::make('exercise.view', array(
                 'exercise' => $exercise,
+                'actions' => $actions,
             ));
         } else {
             return Redirect::route('homepage');
@@ -476,10 +644,21 @@ class ExerciseController extends BaseController
         $tree = Tree::findOrFail(3);
         $tree_exercise = Tree::findOrFail(6);
         if ( $tree->active == 1 && $tree_exercise->active == 1) {
-            $exercise = Exercise::findOrFail($id);
-            $this->layout->content = View::make('exercise.delete', array(
-                'exercise' => $exercise,
-            ));
+            if (Auth::check()) {
+                $userId = Auth::id();
+                $user = User::findOrFail($userId);
+                $role = $user->role_id;
+                if($role == 1) {
+                    $exercise = Exercise::findOrFail($id);
+                    $this->layout->content = View::make('exercise.delete', array(
+                        'exercise' => $exercise,
+                    ));
+                } else {
+                    return Redirect::route('exercise.view', $id);
+                }
+            } else {
+                return Redirect::route('exercise.view', $id);
+            }
         } else {
             return Redirect::route('homepage');
         }
@@ -495,12 +674,23 @@ class ExerciseController extends BaseController
         $tree = Tree::findOrFail(3);
         $tree_exercise = Tree::findOrFail(6);
         if ( $tree->active == 1 && $tree_exercise->active == 1) {
-            $exercise = Exercise::findOrFail($id);
-            $course_id = $exercise->course->id;
-            $exercise->tags()->detach();
-            $exercise->delete();
-            Session::flash('message', Lang::get('app.exercise-destroyed'));
-            return Redirect::route('exercise.indexCourse', $course_id);
+            if (Auth::check()) {
+                $userId = Auth::id();
+                $user = User::findOrFail($userId);
+                $role = $user->role_id;
+                if($role == 1) {
+                    $exercise = Exercise::findOrFail($id);
+                    $course_id = $exercise->course->id;
+                    $exercise->tags()->detach();
+                    $exercise->delete();
+                    Session::flash('message', Lang::get('app.exercise-destroyed'));
+                    return Redirect::route('exercise.indexCourse', $course_id);
+                } else {
+                    return Redirect::route('exercise.view', $id);
+                }
+            } else {
+                return Redirect::route('exercise.view', $id);
+            }
         } else {
             Session::flash('message', Lang::get('common.no-such-site'));
             return Redirect::route('homepage');

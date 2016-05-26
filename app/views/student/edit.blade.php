@@ -23,7 +23,7 @@
           </div>
           <div>
             {{ Form::label('courses', Lang::get('common.select-courses')) }}
-            {{ Form::select('courses', $courses) }}
+            {{ Form::select('courses[]', ($courses), $student_courses, ['multiple'=>true,'class' => 'form-control margin']) }}
             @if ($errors->has('courses')) <p class="help-block">{{ $errors->first('courses') }}</p> @endif
           </div>
         </div>
