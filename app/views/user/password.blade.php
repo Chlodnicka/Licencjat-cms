@@ -1,7 +1,10 @@
 @section('content')
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header title">{{ trans('common.change-password') }}</h1>
+        </div>
+    </div>
     {{ Form::open(array('route' => array('user.change_password'))) }}
-    <h3 class="">Change Password</h3>
-    <h6>Please change your password below.</h6>
     <ul>
         @foreach($errors->all() as $error)
             <li>{{ $error }}</li>

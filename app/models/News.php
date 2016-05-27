@@ -41,7 +41,17 @@
        */
       public function attachments()
       {
-          return $this->belongsToMany('Tag');
+          return $this->belongsToMany('Attachment');
+      }
+
+      /**
+       * Gets main attachment connected with news item
+       *
+       * @return object
+       */
+      public function attachment()
+      {
+          return $this->hasMany('Attachment');
       }
 
       /**

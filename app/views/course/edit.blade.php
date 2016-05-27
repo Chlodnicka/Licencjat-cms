@@ -1,5 +1,9 @@
 @section('content')
-  <h1>{{ trans('app.edit-course') }} {{ $course->name }}</h1>
+  <div class="row">
+    <div class="col-lg-12">
+      <h1 class="page-header">{{ trans('app.course-edit') }} {{ $course->name }}</h1>
+    </div>
+  </div>
   @if (!empty($course))
     <div class="edit course">
       {{ Form::open(array('route' => array('course.update', $course->id))) }}

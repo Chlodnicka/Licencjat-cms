@@ -1,5 +1,9 @@
 @section('content')
-  <h1>{{ trans('app.exercise-new') }}</h1>
+  <div class="row">
+    <div class="col-lg-12">
+      <h1 class="page-header title">{{ trans('app.exercise-new') }}</h1>
+    </div>
+  </div>
   <div class="new exercise">
     {{ Form::open(array('route' => array('exercise.create'))) }}
     <div class="form-cluster">

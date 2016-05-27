@@ -1,6 +1,11 @@
 @section('content')
+  <div class="row">
+    <div class="col-lg-12">
+      <h1 class="page-header title">{{ trans('app.owner-information') }}</h1>
+    </div>
+  </div>
 <div class="single-page">
-  <h1>{{ trans('app.owner-information') }}</h1>
+
   @if($actions == 1)
     <div class="action-buttons">
       <a href="{{ URL::route('owner.edit') }}">{{ trans('common.edit') }}</a>

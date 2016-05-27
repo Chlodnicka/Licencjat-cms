@@ -194,6 +194,27 @@ class NewsController extends BaseController
                     {
                         return Redirect::route('news.edit', $news->id)->withErrors($validator);
                     } else {
+                      //  if(Input::file('image') != NULL) {
+                            $image = Input::file('image');
+
+                            $destinationPath = 'uploads/';
+                            $filename = $image->getClientOriginalName();
+                            $url = $destinationPath . $filename;
+
+                            $file = new Attachment();
+                            $file->url = $url;
+                            $file->name = $filename;
+                            $file->description = Input::get('img-description');
+                            $file->title = Input::get('img-title');
+
+
+                            Input::file('image')->move($destinationPath, $filename);
+
+                            $file->save();
+                            $news->attachment_id = $file->id;
+                      //  } else {
+                        //    $news->attachment_id = NULL;
+                        //}
                         $news->save();
                         if(Input::get('tags') != NULL){
                             $news->tags()->sync(Input::get('tags'));

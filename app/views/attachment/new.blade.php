@@ -1,5 +1,9 @@
 @section('content')
-  <h1>Attachment! New</h1>
+  <div class="row">
+    <div class="col-lg-12">
+      <h1 class="page-header">{{ trans('app.attachment-new') }}</h1>
+    </div>
+  </div>
   {{ Form::open(array('action' => 'AttachmentController@create', 'files'=>true)) }}
   {{ Form::label('image', 'Upload Image')}}
   {{ Form::file('image') }}

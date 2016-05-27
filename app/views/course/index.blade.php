@@ -1,6 +1,10 @@
 @section('content')
 <div class="list">
-  <h1>{{ trans('app.list-of-courses') }}</h1>
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">{{ trans('app.list-of-courses') }}</h1>
+        </div>
+    </div>
   @if (!empty($courses_lead))
     <p class="lead">{{ $courses_lead->lead }}</p>
   @endif

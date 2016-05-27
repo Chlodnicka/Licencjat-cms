@@ -1,5 +1,9 @@
 @section('content')
-  <h1>{{ trans('app.tags-list') }}</h1>
+  <div class="row">
+    <div class="col-lg-12">
+      <h1 class="page-header title">{{ trans('app.tags-list') }}</h1>
+    </div>
+  </div>
   @if($actions == 1)
     <div class="action-buttons">
       <a href="{{ URL::route('tag.new') }}">{{ trans('common.new') }}</a>

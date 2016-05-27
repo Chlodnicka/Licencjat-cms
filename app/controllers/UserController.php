@@ -70,9 +70,11 @@ class UserController extends BaseController
                 $user = User::findOrFail($userId);
                 $role = $user->role_id;
                 $tree = Tree::findOrFail(2);
-
                 if($tree->active != 1 && $role == 2) {
-                    Redirect::route('user.logout');
+                    return Redirect::route('user.logout');
+                }
+                if($role == 1) {
+                    return Redirect::route('dashboard');
                 }
             } else {
                 return Redirect::to('login');

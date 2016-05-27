@@ -1,5 +1,9 @@
 @section('content')
-    <h1>{{ trans('app.exercise-generate') }}</h1>
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header title">{{ trans('app.exercise-generate') }}</h1>
+        </div>
+    </div>
     <div class="exercises">
         <div class="filter-box">
             <h2>{{ trans('common.filter') }}</h2>

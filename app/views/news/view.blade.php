@@ -1,4 +1,11 @@
 @section('content')
+    @if(!empty($news->title))
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header title">{{ $news->title }}</h1>
+            </div>
+        </div>
+    @endif
 <div class="content news single-page">
   @if(!empty($news))
         @if($actions == 1)
@@ -8,9 +15,6 @@
               <a href="{{ URL::route('news.delete', $news->id) }}">{{ trans('common.delete') }}</a>
             </div>
         @endif
-    @if(!empty($news->title))
-      <h1 class="title">{{ $news->title }}</h1>
-    @endif
     @if(!empty($news->lead))
       <p class="lead">{{ $news->lead }}</p>
     @endif
