@@ -194,7 +194,7 @@ class NewsController extends BaseController
                     {
                         return Redirect::route('news.edit', $news->id)->withErrors($validator);
                     } else {
-                      //  if(Input::file('image') != NULL) {
+                        if(Input::file('image') != NULL) {
                             $image = Input::file('image');
 
                             $destinationPath = 'uploads/';
@@ -212,9 +212,7 @@ class NewsController extends BaseController
 
                             $file->save();
                             $news->attachment_id = $file->id;
-                      //  } else {
-                        //    $news->attachment_id = NULL;
-                        //}
+                        }
                         $news->save();
                         if(Input::get('tags') != NULL){
                             $news->tags()->sync(Input::get('tags'));
@@ -271,6 +269,24 @@ class NewsController extends BaseController
                             ->withErrors($validator)
                             ->withInput();
                     } else {
+                            $image = Input::file('image');
+
+                            $destinationPath = 'uploads/';
+                            $filename = $image->getClientOriginalName();
+                            $url = $destinationPath . $filename;
+
+                            $file = new Attachment();
+                            $file->url = $url;
+                            $file->name = $filename;
+                            $file->description = Input::get('img-description');
+                            $file->title = Input::get('img-title');
+
+
+                            Input::file('image')->move($destinationPath, $filename);
+
+                            $file->save();
+                            var_dump('asdf');
+                            $news->attachment_id = $file->id;
                         $news->save();
                         if(Input::get('tags') != NULL){
                             $news->tags()->sync(Input::get('tags'));
@@ -318,9 +334,11 @@ class NewsController extends BaseController
                 $actions = 0;
             }
             $news = News::findOrFail($id);
+            $attachment = DB::table('attachments')->where('id', '=', $news->attachment_id)->get();
             $this->layout->content = View::make('news.view',array(
                 'news' => $news,
                 'actions' => $actions,
+                'attachment' => $attachment,
             ));
         } else {
             return Redirect::route('homepage');

@@ -5,7 +5,7 @@
     </div>
   </div>
   <div class="new news">
-    {{ Form::open(array('route' => array('news.create', 'files'=>true))) }}
+    {{ Form::open(array('route' => array('news.create'), 'files'=>true)) }}
     <div class="form-cluster">
 
       <div class="form-group">

@@ -21,6 +21,9 @@
     @if(!empty($news->date))
       <p class="date">{{ $news->date }}</p>
     @endif
+    @foreach($attachment as $item)
+                {{ HTML::image($item->url) }}
+    @endforeach
     @if(!empty($news->content))
       <div class="richtext">
         {{ $news->content }}
