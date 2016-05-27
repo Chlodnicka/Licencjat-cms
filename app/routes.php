@@ -7,6 +7,7 @@
 /**
 * Main page routing settings.
 */
+Route::get('/', ['as' => 'dashboard', 'uses' => 'HomeController@showMainPageLogged']);
 Route::get('/', ['as' => 'homepage', 'uses' => 'HomeController@showMainPage']);
 
 
@@ -323,7 +324,7 @@ View::composer('layouts.master', function($view){
 
 View::composer('layouts.masterlogin', function($view){
     DB::setFetchMode(PDO::FETCH_CLASS);
-    $tree = Tree::menu();
+    $tree = Tree::menuLogged();
     $students = Tree::findOrFail(2);
     $courses = Course::all_courses();
     $coursesSide = $courses;

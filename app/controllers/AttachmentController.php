@@ -97,11 +97,7 @@ class AttachmentController extends BaseController
 
     public function create()
     {
-        if (Auth::check()) {
-            $userId = Auth::id();
-            $user = User::findOrFail($userId);
-            $role = $user->role_id;
-            if($role == 1) {
+
                 $image = Input::file('image');
 
                 $destinationPath = 'uploads/';
@@ -118,12 +114,7 @@ class AttachmentController extends BaseController
                 Input::file('image')->move($destinationPath, $filename);
                 $file->save();
                 return Redirect::route('attachment.view', $file->id);
-            } else {
-                return Redirect::route('attachment.index');
-            }
-        } else {
-            return Redirect::route('attachment.index');
-        }
+
     }
 
     public function view($id)

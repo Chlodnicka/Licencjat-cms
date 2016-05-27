@@ -19,6 +19,18 @@ class TagController extends BaseController
      */
     protected $layout = 'layouts.master';
 
+    public function __construct()
+    {
+        if (Auth::check()) {
+            $userId = Auth::id();
+            $user = User::findOrFail($userId);
+            $role = $user->role_id;
+            if($role == 1) {
+                $this->layout = 'layouts.masterlogin';
+            }
+        }
+    }
+
     /**
      * Index tags action.
      *

@@ -1,5 +1,9 @@
 @section('content')
-    <h1>exercises! Edit</h1>
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header title">{{ trans('app.plugin-exercise') }}</h1>
+        </div>
+    </div>
     <div class="exercises tree edit">
         {{ Form::open(array('route' => array('tree.exercise', $tree->id))) }}
         <div class="form-cluster">

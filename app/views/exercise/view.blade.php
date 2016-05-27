@@ -1,6 +1,11 @@
 @section('content')
   @if(!empty($exercise->title))
     <h1>{{ $exercise->title }}</h1>
+    <div class="row">
+      <div class="col-lg-12">
+        <h1 class="page-header title">{{ $course->name }}</h1>
+      </div>
+    </div>
   @endif
   @if(!empty($exercise->course->name))
     <h2>{{ $exercise->course->name }}</h2>

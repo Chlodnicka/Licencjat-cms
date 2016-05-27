@@ -1,4 +1,9 @@
 @section('content')
+  <div class="row">
+    <div class="col-lg-12">
+      <h1 class="page-header title">{{ $tag->name }}</h1>
+    </div>
+  </div>
   @if($actions == 1)
     <div class="action-buttons">
       <a href="{{ URL::route('tag.new') }}">{{ trans('common.new') }}</a>
@@ -7,7 +12,6 @@
     </div>
   @endif
   @if(!empty($tag))
-    <h1>{{ $tag->name }}</h1>
     @if(!empty($courses))
       <p class="category-tag">{{ trans('app.courses') }}</p>
       <ul>

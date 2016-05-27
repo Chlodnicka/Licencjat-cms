@@ -1,5 +1,9 @@
 @section('content')
-    <h1>owner! Edit</h1>
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header title">{{ trans('app.plugin-owner') }}</h1>
+        </div>
+    </div>
     <div class="owner tree edit">
         {{ Form::open(array('route' => array('tree.owner', $tree->id))) }}
         <div class="form-cluster">

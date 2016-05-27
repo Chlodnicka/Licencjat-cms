@@ -1,5 +1,9 @@
 @section('content')
-  <h1>{{ trans('app.lecture-delete') }} {{ $lecture->title }}</h1>
+  <div class="row">
+    <div class="col-lg-12">
+      <h1 class="page-header title">{{ trans('app.lecture-delete') }} {{ $lecture->title }}</h1>
+    </div>
+  </div>
   @if(!empty($lecture))
     <div class="delete lecture">
       <p class="lead">{{ trans('app.lecture-delete-message') }}</p>

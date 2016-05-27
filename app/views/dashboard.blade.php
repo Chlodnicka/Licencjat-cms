@@ -1,9 +1,5 @@
 @section('content')
-    <div class="row">
-        <div class="col-lg-12">
-            <h1 class="page-header title">{{ trans('app.plugin-tree') }}</h1>
-        </div>
-    </div>
+    <h1>Tree! Index</h1>
     <div class="tree">
         @foreach( $tree as $treeItem)
             <div class="tree-item">

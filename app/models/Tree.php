@@ -15,7 +15,7 @@
   class Tree extends Eloquent
   {
       /**
-       * Gets tree for dynamically loaded menu and footer
+       * Gets tree for dynamically loaded menu and footer for guest and logged student
        *
        * @return object
        */
@@ -26,6 +26,18 @@
               ->get();
           return $tree;
       }
+
+      /**
+       * Gets tree for dynamically loaded menu for logged admin
+       *
+       * @return object
+       */
+      public static function menuLogged() {
+          $tree = Tree::all();
+          return $tree;
+      }
+
+
 
       /**
        * Gets validation array

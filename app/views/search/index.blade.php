@@ -1,7 +1,11 @@
 
 @section('content')
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header title">{{ trans('app.search-results') }}</h1>
+        </div>
+    </div>
     <div class="search list">
-        <h1>{{ trans('app.search-results') }}</h1>
         <div class="search-list">
             @if($number_of_items != 0)
                 @foreach($search_results as $search_result)

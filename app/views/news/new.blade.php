@@ -1,7 +1,11 @@
 @section('content')
-  <h1>{{ trans('app.news-new') }}</h1>
+  <div class="row">
+    <div class="col-lg-12">
+      <h1 class="page-header title">{{ trans('app.news-new') }}</h1>
+    </div>
+  </div>
   <div class="new news">
-    {{ Form::open(array('route' => array('news.create'))) }}
+    {{ Form::open(array('route' => array('news.create', 'files'=>true))) }}
     <div class="form-cluster">
 
       <div class="form-group">
@@ -13,6 +17,14 @@
         {{ Form::label('lead', Lang::get('common.lead'))}}
         {{ Form::text('lead', Input::old('lead')) }}
         @if ($errors->has('lead')) <p class="help-block">{{ $errors->first('lead') }}</p> @endif
+      </div>
+      <div class="form-group">
+        {{ Form::label('image', 'Upload Image')}}
+        {{ Form::file('image') }}
+        {{ Form::label('img-description', 'Tekst alternatywny / opis')}}
+        {{ Form::text('img-description') }}
+        {{ Form::label('img-title', 'Tytuł')}}
+        {{ Form::text('img-title') }}
       </div>
       <div class="form-group">
         {{ Form::label('content', Lang::get('common.content'))}}
