@@ -189,7 +189,7 @@ class StudentController extends BaseController
                 $userId = Auth::id();
                 $user = User::findOrFail($userId);
                 $student = DB::table('students')->where('users_id', '=', $userId)->get();
-                if($student[0]->id == $id || $user->role == 1) {
+                if( $user->role_id == 1 || $student[0]->id == $id ) {
                     $students = Student::findOrFail($id);
                     $student_courses = $students->course()->get();
                     $this->layout->content = View::make('student.view', array(

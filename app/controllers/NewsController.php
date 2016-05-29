@@ -53,6 +53,7 @@ class NewsController extends BaseController
             }
             $news = News::paginate(6);
             $news_lead = Tree::findOrFail(4);
+            
             $this->layout->content = View::make('news.index', array(
                 'news' => $news,
                 'news_lead' => $news_lead,

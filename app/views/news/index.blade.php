@@ -9,7 +9,7 @@
     @endif
     @if($actions == 1)
       <div class="action-buttons">
-        <a href="{{ URL::route('news.new') }}">{{ trans('common.new') }}</a>
+        <a class="btn btn-primary" href="{{ URL::route('news.new') }}">{{ trans('common.new') }}</a>
       </div>
     @endif
     @if(!empty($news))
@@ -18,7 +18,10 @@
         <a href="{{ URL::route('news.view', $newsItem->id) }}">
           <div class="box-item">
             <div class="box-img">
-              <img src="http://placehold.it/400x400">
+              <?php $attachment = DB::table('attachments')->where('id', '=', $newsItem->attachment_id)->get();?>
+              @foreach($attachment as $item)
+                {{ HTML::image($item->url) }}
+              @endforeach
             </div>
             @if(!empty($newsItem->title))
               <h2 class="title">{{ $newsItem->title }}</h2>
@@ -29,7 +32,7 @@
             @if(!empty($newsItem->lead))
               <p class="item-lead">{{ $newsItem->lead }}</p>
             @endif
-            <a href="{{ URL::route('news.view', $newsItem->id) }}" class="btn btn-more">{{ trans('common.see-more') }} <i class="fa fa-long-arrow-right"></i></a>
+            <a href="{{ URL::route('news.view', $newsItem->id) }}" class="btn btn-default">{{ trans('common.see-more') }} <i class="fa fa-long-arrow-right"></i></a>
           </div>
         </a>
         @endforeach

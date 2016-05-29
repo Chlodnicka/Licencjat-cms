@@ -4,7 +4,7 @@
 @import "mixins";
 
 
-body {
+.default {
     margin: 0;
     background: #fff;
     color: $brandBlack;
@@ -17,6 +17,9 @@ body {
         text-decoration: none;
         //font-weight: 700;
       }
+    }
+    .alert {
+      margin-top: 20px;
     }
     .clearfix:after {
        content: " "; /* Older browser do not support empty content */
@@ -581,6 +584,141 @@ body {
     }
     .btn-delete {
       background-color: $brandRed;
+    }
+  }
+}
+
+.admin {
+  #wrapper {
+    background-color: $brandBlue;
+  }
+  font-family: $sans-serif;
+  .alert {
+    margin-top: 20px;
+  }
+  .clearfix:after {
+    content: " "; /* Older browser do not support empty content */
+    visibility: hidden;
+    display: block;
+    height: 0;
+    clear: both;
+  }
+  .navbar-default {
+    background-color: $brandBlue;
+    color: white;
+    a {
+      color: white;
+      &:hover, &:active, &:focus {
+        color: white;
+        background-color: $brandOrange;
+      }
+    }
+  }
+
+  .nav .open>a, .nav .open>a:focus, .nav .open>a:hover {
+    background-color: $brandOrange;
+  }
+
+  .dropdown-menu {
+    margin: 0;
+    border-radius: 0;
+    padding: 0;
+    box-shadow: none;
+    background-color: $brandOrange;
+    color: white;
+    //border: 1px solid $brandBlue;
+    border: 0;
+    li a {
+      color: white;
+      padding: 10px;
+      &:hover, &:active, &:focus {
+        color: white;
+        background-color: $brandBlue;
+      }
+    }
+    .divider {
+      margin: 0;
+    }
+  }
+
+  .btn {
+    border-radius: 0;
+    padding: 7px 25px;
+    text-transform: uppercase;
+  }
+
+  .btn-primary {
+    background-color: $brandBlueMedium;
+    border: 1px solid $brandBlueMedium;
+  }
+
+  .btn-danger {
+    background-color: $brandRed;
+    border: 1px solid $brandRed;
+  }
+
+  .list-item {
+    padding-bottom: 20px;
+    border-bottom: 1px solid #eee;
+    margin-top: 20px;
+    &:first-of-type {
+      border-top: 1px solid #eee;
+    }
+  }
+
+  .lead {
+    font-size: 20px;
+    font-weight: 300;
+  }
+
+  .custom-search-form {
+    input, span {
+      display: table-cell;
+    }
+    span {
+      width: 40px;
+      max-width: 40px;
+      input {
+        width: 100%;
+        border-bottom-right-radius: 5px !important;
+        border-top-right-radius: 5px !important;
+      }
+    }
+    input {
+      width: calc(100% - 40px);
+    }
+    .btn {
+      padding: 6px 0;
+    }
+  }
+
+  .pagination {
+    width: 100%;
+    text-align: center;
+    ul{
+      padding: 0;
+      margin-top: 50px;
+      margin-bottom: 0;
+      list-style-type: none;
+      li {
+        display: inline-block;
+        margin: 2px;
+        span, a {
+          padding: 15px 20px;
+          display: block;
+          background-color: $brandBlue;
+          color: white;
+        }
+        a {
+          &:hover, &:active, &:focus {
+            background-color: $brandBlueMedium;
+            color: white;
+          }
+        }
+      }
+      li.active > span {
+        background-color: $brandBlueMedium;
+      }
     }
   }
 }

@@ -9,7 +9,7 @@
   @endif
   @if($actions == 1)
   <div class="action-buttons">
-    <a href="{{ URL::route('exercise.new') }}">{{ trans('common.new') }}</a>
+    <a class="btn btn-primary" href="{{ URL::route('exercise.new') }}">{{ trans('common.new') }}</a>
   </div>
   @endif
   <div class="exercises index">
@@ -42,7 +42,7 @@
           @if(!empty($exercise->content))
             <p class="item-lead">{{ $exercise->content }}</p>
             @endif
-          <a href="{{ URL::route('exercise.view', $exercise->id) }}" class="btn btn-more">{{ trans('common.see-more') }} <i class="fa fa-long-arrow-right"></i></a>
+          <a href="{{ URL::route('exercise.view', $exercise->id) }}" class="btn btn-default">{{ trans('common.see-more') }} <i class="fa fa-long-arrow-right"></i></a>
         </div>
         <div class="clearfix"></div>
       @endforeach

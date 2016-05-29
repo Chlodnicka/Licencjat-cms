@@ -8,26 +8,26 @@
 
   @if($actions == 1)
     <div class="action-buttons">
-      <a href="{{ URL::route('owner.edit') }}">{{ trans('common.edit') }}</a>
+      <a class="btn btn-primary" href="{{ URL::route('owner.edit') }}">{{ trans('common.edit') }}</a>
     </div>
   @endif
   <div class="info">
     <div class="personal">
       <h2 class="name">{{ $position }} {{ $owner->firstname }} {{ $owner->lastname }}</h2>
       @if(!empty($owner->institute))
-        <p class="institute">{{ $owner->institute }}</p>
+        <p class="institute">{{ trans('app.institute') }}: {{ $owner->institute }}</p>
       @endif
       @if(!empty($owner->department))
-        <p class="department">{{ $owner->department }}</p>
+        <p class="department">{{ trans('app.department') }}: {{ $owner->department }}</p>
       @endif
-      @if(!empty($owner->uniwersity))
-        <p class="university">{{ $owner->university }}</p>
+      @if(!empty($owner->university))
+        <p class="university">{{ trans('app.university') }}: {{ $owner->university }}</p>
       @endif
       @if(!empty($owner->email))
-        <p class="email"><a href="mailto:{{ $owner->email }}">{{ $owner->email }}</a></p>
+        <p class="email"><a href="mailto:{{ $owner->email }}">{{ trans('app.email') }}: {{ $owner->email }}</a></p>
       @endif
       @if(!empty($owner->phone))
-        <p class="phone"><a href="tel:+48 {{ $owner->phone }}">+48 {{ $owner->phone }}</a></p>
+        <p class="phone"><a href="tel:+48 {{ $owner->phone }}">{{ trans('app.phone') }}: +48 {{ $owner->phone }}</a></p>
       @endif
     </div>
     @if(!empty($owner->tutorshipHours))

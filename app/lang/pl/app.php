@@ -2,6 +2,21 @@
 
     return array(
         /*
+         * App general
+         */
+        "dashboard" => "Dashboard",
+        "plugin-owner" => "Plugin Kontakt",
+        "plugin-courses" => "Plugin Kursy",
+        "plugin-students" => "Plugin Studenci",
+        "plugin-lectures" => "Plugin Wykłady",
+        "plugin-news" => "Plugin Aktualności",
+        "plugin-exercise" => "Plugin Zadania",
+        "institute" => "Instytut / Katedra",
+        "department" => "Wydział",
+        "university" => "Uniwersytet",
+        "email" => "Email",
+        "phone" => "Telefon",
+        /*
          * Courses translations
          */
         "courses" => "Kursy",
@@ -72,6 +87,7 @@
         "tag-edit" => "Edycja tagu",
         "tag" => "tag",
         "tag-new" => "Utwórz nowy tag",
+        "tags" => "Tagi",
 
         /*
          * Exercises translations
@@ -92,6 +108,14 @@
         "exercises-generated-with-answers" => "Arkusz z odpowiedziami",
         "filter" => "Filtruj",
 
+        /*
+         * Attachment translations
+         */
+
+        "attachment-index" => "Lista załączników",
+        "attachment-edit" => "Edytuj załącznik",
+        "attachment-delete" => "Usuń załącznik",
+        "attachment-new" => "Dodaj n                                  owy załącznik",
     );
 
 ?>
