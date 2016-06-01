@@ -109,6 +109,9 @@
           position: relative;
           top: 4px;
           &-search {
+            width: calc(100% - 320px);
+            display: inline-block;
+            padding-right: 40px;
             form {
               position: relative;
               input {
@@ -116,7 +119,7 @@
                 vertical-align: middle;
                 margin: 0;
                 margin-right: -5px;
-                width: 97%;
+                width: 95%;
                 border-radius: 20px;
               }
               .btn-search {
@@ -135,20 +138,35 @@
               }
             }
           }
+          &-login {
+            display: inline-block;
+            text-align: right;
+            vertical-align: middle;
+            a {
+              display: inline-block;
+              padding: 10px 20px;
+              background-color: $brandOrange;
+              color: white;
+              margin-left: 10px;
+              -webkit-border-radius:4px;
+              -moz-border-radius:4px;
+              border-radius:4px;
+            }
+          }
         }
       }
       nav {
         width: 100%;
-        max-width: 1170px;
-        margin: 0 auto;
+        border-top: 1px solid $brandGray;
         position: relative;
         .main-menu {
         }
         div {
           display: block;
+          max-width: 1170px;
+          margin: 0 auto;
           vertical-align: middle;
           background-color: $brandBlue;
-
           ul {
             list-style-type: none;
             padding: 0;
@@ -586,6 +604,7 @@
       background-color: $brandRed;
     }
   }
+
 }
 
 .admin {
@@ -664,11 +683,93 @@
     &:first-of-type {
       border-top: 1px solid #eee;
     }
+    .title, .item-lead {
+      color: $brandBlue;
+    }
+  }
+
+  a.itemurl {
+    &:hover, &:active, &:focus {
+      .title, .item-lead, .date, .btn {
+        text-decoration: none;
+      }
+    }
   }
 
   .lead {
     font-size: 20px;
     font-weight: 300;
+  }
+
+  img {
+    max-width: 100%;
+  }
+
+  .nav-tabs>.active > a,  .nav-tabs>li > a:hover {
+    -webkit-border-radius:0;
+    -moz-border-radius:0;
+    border-radius: 0;
+  }
+
+  #page-wrapper{
+    a {
+      color: $brandBlue;
+      &:hover, &:active, &:focus {
+        color: $brandOrange;
+      }
+    }
+    .action-button > a, .action-buttons > a {
+      color: white;
+    }
+    .action-buttons > .btn-default {
+      background-color: $brandOrange;
+      border-color: $brandOrange;
+    }
+    a.btn-primary {
+      color: white;
+    }
+    .pagination > ul > li> a {
+      color: white;
+      &:hover, &:focus, &:active {
+        text-decoration: none;
+      }
+    }
+  }
+
+
+
+
+  form {
+    label {
+      width: 150px;
+      vertical-align: middle;
+    }
+    input, select {
+      padding: 10px;
+      &:hover, &:active, &:focus {
+        outline: 0;
+        //border: 1px solid $brandOrange;
+      }
+
+    }
+    input[type="submit"] {
+      display: block;
+      text-transform: uppercase;
+      background-color: $brandOrange;
+      padding: 10px 35px;
+      border: 0;
+      outline: 0;
+      color: white;
+      margin-top: 30px
+    }
+    label[for="tutorshipHours"], label[for="content"], label[for="lead"], label[for="description"] {
+      vertical-align: top;
+      margin-top: 5px;
+    }
+    #cke_editor {
+      width: calc(100% - 160px);
+      display: inline-block;
+    }
   }
 
   .custom-search-form {
@@ -682,13 +783,21 @@
         width: 100%;
         border-bottom-right-radius: 5px !important;
         border-top-right-radius: 5px !important;
+        display: inline-block;
+        text-transform: uppercase;
+        background-color: #eee;
+        padding: 7px 0;
+        border: 0;
+        outline: 0;
+        color: $brandBlue;
+        margin-top: 0;
       }
     }
     input {
       width: calc(100% - 40px);
     }
     .btn {
-      padding: 6px 0;
+      padding: 7px 0;
     }
   }
 
@@ -721,4 +830,56 @@
       }
     }
   }
+  .edit-list {
+    list-style-type: none;
+    //border-top: 1px solid #eee;
+    padding: 0;
+    font-size: 16px;
+    font-weight: 400;
+    li {
+      border-bottom: 1px solid #eee;
+      padding: 20px 0;
+      position: relative;
+      i.fa-pencil-square-o{
+        position: absolute;
+        right: 0;
+        font-size: 24px;
+      }
+    }
+    ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      li {
+        padding: 20px 40px;
+        position: relative;
+        i.fa-pencil-square-o {
+          position: absolute;
+          right: 0;
+          font-size: 24px;
+        }
+      }
+    }
+  }
+  a > .fa-long-arrow-left {
+    margin-right: 10px;
+  }
+  a > .fa-long-arrow-right {
+    margin-left: 10px;
+  }
+  .action-buttons, .action-button {
+    margin-bottom:  20px;
+  }
+  #page-wrapper {
+    padding-bottom: 50px;
+  }
+  .richtext {
+    font-weight: 300;
+    font-size: 16px;
+  }
+}
+
+blockquote {
+  border-left: 5px solid $brandOrange;
+  padding-left: 10px;
 }

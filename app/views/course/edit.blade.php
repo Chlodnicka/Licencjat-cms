@@ -4,6 +4,9 @@
       <h1 class="page-header">{{ trans('app.course-edit') }} {{ $course->name }}</h1>
     </div>
   </div>
+  <div class="action-buttons">
+    <a href="{{ URL::route('course.view', $course->id) }}" class="btn btn-default btn-back"><i class="fa fa-long-arrow-left"></i>  {{ trans('common.back') }} </a>
+  </div>
   @if (!empty($course))
     <div class="edit course">
       {{ Form::open(array('route' => array('course.update', $course->id))) }}

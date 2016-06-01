@@ -8,6 +8,7 @@
 
   @if($actions == 1)
     <div class="action-buttons">
+      <a href="{{ URL::route('dashboard') }}" class="btn btn-default btn-back"><i class="fa fa-long-arrow-left"></i>  {{ trans('common.back') }} </a>
       <a class="btn btn-primary" href="{{ URL::route('owner.edit') }}">{{ trans('common.edit') }}</a>
     </div>
   @endif

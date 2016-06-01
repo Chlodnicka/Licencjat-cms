@@ -7,19 +7,20 @@
               </div>
           </div>
     @endif
+        @if($actions == 1)
+            <div  class="action-buttons">
+                <a href="{{ URL::route('course.index') }}" class="btn btn-default btn-back"><i class="fa fa-long-arrow-left"></i>  {{ trans('common.back') }} </a>
+                <a class="btn btn-primary" href="{{ URL::route('course.edit', $course->id) }}">{{ trans('common.edit') }}</a>
+                <a class="btn btn-primary" href="{{ URL::route('course.new') }}">{{ trans('common.new') }}</a>
+                @if (count($exercises) != 0)
+                    <a class="btn btn-primary" href="{{ URL::route('exercise.generate', $course->id) }}">{{ trans('common.generate') }}</a>
+                @endif
+                <a class="btn btn-danger" href="{{ URL::route('course.delete', $course->id) }}">{{ trans('common.delete') }}</a>
+            </div>
+        @endif
     @if (!empty($course->lead))
       <p class="lead">{{$course->lead}}</p>
     @endif
-        @if($actions == 1)
-          <div  class="action-buttons">
-            <a class="btn btn-primary" href="{{ URL::route('course.edit', $course->id) }}">{{ trans('common.edit') }}</a>
-            <a class="btn btn-danger" href="{{ URL::route('course.delete', $course->id) }}">{{ trans('common.delete') }}</a>
-            <a class="btn btn-primary" href="{{ URL::route('course.new') }}">{{ trans('common.new') }}</a>
-              @if (count($exercises) != 0)
-                <a class="btn btn-primary" href="{{ URL::route('exercise.generate', $course->id) }}">{{ trans('common.generate') }}</a>
-              @endif
-          </div>
-        @endif
       @if (!empty($course->description))
         <div class="richtext">
           <div>{{ $course->description }}</div>
@@ -50,6 +51,8 @@
           <a href="{{ URL::route('exercise.indexCourse', $course->id) }}" class="btn btn-default">{{ trans('common.see-more') }} <i class="fa fa-long-arrow-right"></i></a>
         </div>
       @endif
-    <a href="{{ URL::route('course.index') }}" class="btn btn-primary"><i class="fa fa-long-arrow-left"></i>{{ trans('common.back') }}</a>
+        @if($actions != 1)
+            <a href="{{ URL::route('course.index') }}" class="btn btn-primary"><i class="fa fa-long-arrow-left"></i>{{ trans('common.back') }}</a>
+        @endif
   </div>
 @stop

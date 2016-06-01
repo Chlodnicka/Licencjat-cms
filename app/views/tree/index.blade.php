@@ -5,18 +5,38 @@
         </div>
     </div>
     <div class="tree">
-        @foreach( $tree as $treeItem)
-            @if($treeItem->name != 'lectures' || $treeItem->name != 'exercises')
-                @if($treeItem->name == 'courses' )
-                    <li><a href="{{ URL::route('tree.'.$treeItem->name, $treeItem->id) }}">{{ $treeItem->title }}</a></li>
+        <ul id="structure" class="edit-list ">
+            @foreach( $tree as $treeItem)
+                @if($treeItem->id == 3 )
+                    <li>
+                        <a href="{{ URL::route('tree.'.$treeItem->name, $treeItem->id) }}">{{ $treeItem->title }}</a>
+                        <a href="{{ URL::route('tree.'.$treeItem->name, $treeItem->id) }}">
+                            <i class="fa fa-pencil-square-o "></i>
+                        </a>
+                    </li>
                     <ul>
-                        <li><a href="{{ URL::route('tree.lectures', 5) }}">{{ trans('app.lectures') }}</a></li>
-                        <li><a href="{{ URL::route('tree.exercise', 6) }}">{{ trans('app.exercise') }}</a></li>
+                        <li>
+                            <i class="fa fa-long-arrow-right"></i>
+                            <a href="{{ URL::route('tree.lecture', 5) }}">{{ trans('app.lectures') }}</a>
+                            <a href="{{ URL::route('tree.'.$treeItem->name, $treeItem->id) }}">
+                                <i class="fa fa-pencil-square-o "></i>
+                            </a>
+                        </li>
+                        <li><i class="fa fa-long-arrow-right"></i>
+                            <a href="{{ URL::route('tree.exercise', 6) }}">{{ trans('app.exercises') }}</a>
+                            <a href="{{ URL::route('tree.'.$treeItem->name, $treeItem->id) }}">
+                                <i class="fa fa-pencil-square-o "></i>
+                            </a>
+                        </li>
                     </ul>
-                @else
-                    <li><a href="{{ URL::route('tree.'.$treeItem->name, $treeItem->id) }}">{{ $treeItem->title }}</a></li>
+                @elseif($treeItem->id != 5  && $treeItem->id != 6)
+                    <li><a href="{{ URL::route('tree.'.$treeItem->name, $treeItem->id) }}">{{ $treeItem->title }}</a>
+                        <a href="{{ URL::route('tree.'.$treeItem->name, $treeItem->id) }}">
+                            <i class="fa fa-pencil-square-o "></i>
+                        </a>
+                    </li>
                 @endif
-            @endif
-        @endforeach
+            @endforeach
+        </ul>
     </div>
 @stop

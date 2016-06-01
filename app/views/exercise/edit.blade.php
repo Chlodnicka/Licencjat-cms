@@ -1,11 +1,14 @@
 @section('content')
   <div class="row">
     <div class="col-lg-12">
-      <h1 class="page-header title">{{ trans('app.exercise-edit') }}</h1>
+      <h1 class="page-header title">{{ trans('app.exercise-edit') }} {{ $exercise->title }}</h1>
     </div>
   </div>
   @if(!empty($exercise))
     <div class="edit exercise">
+        <div class="action-buttons">
+          <a href="{{ URL::route('exercise.view', $exercise->id) }}" class="btn btn-default"><i class="fa fa-long-arrow-left"></i>{{ trans('common.back') }}</a>
+        </div>
         {{ Form::open(array('route' => array('exercise.update', $exercise->id))) }}
         <div class="form-cluster">
           <div class="form-group">

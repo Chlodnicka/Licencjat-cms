@@ -5,6 +5,9 @@
         </div>
     </div>
     <div class="exercises tree edit">
+        <div class="action-buttons">
+            <a href="{{ URL::route('tree.index') }}" class="btn btn-default"><i class="fa fa-long-arrow-left"></i>{{ trans('common.back') }}</a>
+        </div>
         {{ Form::open(array('route' => array('tree.exercise', $tree->id))) }}
         <div class="form-cluster">
             <div class="form-group">

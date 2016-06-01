@@ -6,16 +6,18 @@
       </div>
     </div>
   @endif
+  @if($actions == 1)
+    <div class="action-buttons">
+      <a href="{{ URL::route('exercise.index') }}" class="btn btn-default"><i class="fa fa-long-arrow-left"></i>{{ trans('common.back') }}</a>
+      <a class="btn btn-primary" href="{{ URL::route('exercise.new') }}">{{ trans('common.new') }}</a>
+      <a class="btn btn-primary" href="{{ URL::route('exercise.edit', $exercise->id) }}">{{ trans('common.edit') }}</a>
+      <a class="btn btn-danger" href="{{ URL::route('exercise.delete', $exercise->id) }}">{{ trans('common.delete') }}</a>
+    </div>
+  @endif
   @if(!empty($exercise->course->name))
     <h2>{{ $exercise->course->name }}</h2>
   @endif
-  @if($actions == 1)
-  <div class="action-buttons">
-    <a class="btn btn-primary" href="{{ URL::route('exercise.new') }}">{{ trans('common.new') }}</a>
-    <a class="btn btn-primary" href="{{ URL::route('exercise.edit', $exercise->id) }}">{{ trans('common.edit') }}</a>
-    <a class="btn btn-danger" href="{{ URL::route('exercise.delete', $exercise->id) }}">{{ trans('common.delete') }}</a>
-  </div>
-  @endif
+
   <div class="content exercise">
     <div class="properties">
 
@@ -40,6 +42,8 @@
     @else
       <p class="no-solution">{{ trans('app.no-solution') }}</p>
     @endif
-    <a href="{{ URL::route('exercise.indexCourse', $exercise->course->id) }}" class="btn btn-primary"><i class="fa fa-long-arrow-left"></i>{{ trans('common.back') }}</a>
+    @if($actions != 1)
+      <a href="{{ URL::route('exercise.indexCourse', $exercise->course->id) }}" class="btn btn-primary"><i class="fa fa-long-arrow-left"></i>{{ trans('common.back') }}</a>
+    @endif
   </div>
 @stop

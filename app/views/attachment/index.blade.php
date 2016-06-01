@@ -5,6 +5,7 @@
     </div>
   </div>
     <div class="action-buttons">
+      <a href="{{ URL::route('dashboard') }}" class="btn btn-default"><i class="fa fa-long-arrow-left"></i>{{ trans('common.back') }}</a>
       <a class="btn btn-primary" href="{{ URL::route('attachment.new') }}">{{ trans('common.new') }}</a>
     </div>
   @foreach($attachments as $attachment)

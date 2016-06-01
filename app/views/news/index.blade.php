@@ -4,19 +4,20 @@
       <h1 class="page-header title">{{ trans('app.news-list') }}</h1>
     </div>
   </div>
-    @if(!empty($news_lead->lead))
+    @if(!empty($news_lead->lead) && $actions != 1)
       <p class="lead">{{ $news_lead->lead }}</p>
     @endif
     @if($actions == 1)
       <div class="action-buttons">
-        <a class="btn btn-primary" href="{{ URL::route('news.new') }}">{{ trans('common.new') }}</a>
+          <a href="{{ URL::route('dashboard') }}" class="btn btn-default"><i class="fa fa-long-arrow-left"></i>{{ trans('common.back') }}</a>
+
+          <a class="btn btn-primary" href="{{ URL::route('news.new') }}">{{ trans('common.new') }}</a>
       </div>
     @endif
     @if(!empty($news))
     <div class="content news">
       @foreach ($news as $newsItem)
-        <a href="{{ URL::route('news.view', $newsItem->id) }}">
-          <div class="box-item">
+          <div class="box-item list-item">
             <div class="box-img">
               <?php $attachment = DB::table('attachments')->where('id', '=', $newsItem->attachment_id)->get();?>
               @foreach($attachment as $item)
@@ -34,7 +35,6 @@
             @endif
             <a href="{{ URL::route('news.view', $newsItem->id) }}" class="btn btn-default">{{ trans('common.see-more') }} <i class="fa fa-long-arrow-right"></i></a>
           </div>
-        </a>
         @endforeach
           <?php echo $news->links(); ?>
     </div>

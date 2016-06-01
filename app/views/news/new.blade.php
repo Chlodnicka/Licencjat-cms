@@ -5,6 +5,9 @@
     </div>
   </div>
   <div class="new news">
+    <div class="action-buttons">
+      <a href="{{ URL::route('news.index') }}" class="btn btn-default btn-back"><i class="fa fa-long-arrow-left"></i>  {{ trans('common.back') }} </a>
+    </div>
     {{ Form::open(array('route' => array('news.create'), 'files'=>true)) }}
     <div class="form-cluster">
 

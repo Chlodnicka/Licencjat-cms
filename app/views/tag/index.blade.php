@@ -6,7 +6,8 @@
   </div>
   @if($actions == 1)
     <div class="action-buttons">
-      <a href="{{ URL::route('tag.new') }}">{{ trans('common.new') }}</a>
+      <a href="{{ URL::route('dashboard') }}" class="btn btn-default"><i class="fa fa-long-arrow-left"></i>{{ trans('common.back') }}</a>
+      <a class="btn btn-primary" href="{{ URL::route('tag.new') }}">{{ trans('common.new') }}</a>
     </div>
   @endif
   @if(!empty($tags))

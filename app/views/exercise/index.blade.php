@@ -4,14 +4,16 @@
       <h1 class="page-header title">{{ trans('app.exercises-list') }}</h1>
     </div>
   </div>
+  @if($actions == 1)
+    <div class="action-buttons">
+      <a href="{{ URL::route('dashboard') }}" class="btn btn-default"><i class="fa fa-long-arrow-left"></i>{{ trans('common.back') }}</a>
+      <a class="btn btn-primary" href="{{ URL::route('exercise.new') }}">{{ trans('common.new') }}</a>
+    </div>
+  @endif
   @if(!empty($exercise_lead->lead))
     <p class="lead">{{ $exercise_lead->lead }}</p>
   @endif
-  @if($actions == 1)
-  <div class="action-buttons">
-    <a class="btn btn-primary" href="{{ URL::route('exercise.new') }}">{{ trans('common.new') }}</a>
-  </div>
-  @endif
+
   <div class="exercises index">
     <div class="filter-box">
       <h2>{{ trans('app.filter') }}</h2>

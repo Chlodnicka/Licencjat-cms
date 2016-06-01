@@ -60,7 +60,7 @@
                     <ul class="dropdown-menu dropdown-user">
                         <li><a href="{{ URL::route('owner.edit') }}"><i class="fa fa-user fa-fw"></i> {{ trans('common.user-profile') }}</a>
                         </li>
-                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> {{ trans('common.settings') }}</a>
+                        <li><a href="{{ URL::route('user.change_password') }}"><i class="fa fa-gear fa-fw"></i> {{ trans('common.change_password') }}</a>
                         </li>
                         <li class="divider"></li>
                         <li>
@@ -79,7 +79,7 @@
 
             <div class="navbar-default sidebar" role="navigation">
                 <div class="sidebar-nav navbar-collapse">
-                    <ul class="nav" id="side-menu">
+                    <ul class="nav in" id="side-menu">
                         <li class="sidebar-search">
                             <div class="input-group custom-search-form">
 

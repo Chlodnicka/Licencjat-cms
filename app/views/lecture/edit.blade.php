@@ -1,11 +1,14 @@
 @section('content')
   <div class="row">
     <div class="col-lg-12">
-      <h1 class="page-header title">{{ trans('app.lecture-edit') }} {{ $lecture->name }}</h1>
+      <h1 class="page-header title">{{ trans('app.lecture-edit') }} {{ $lecture->title }}</h1>
     </div>
   </div>
   @if(!empty($lecture))
     <div class="edit lecture">
+      <div class="action-buttons">
+        <a href="{{ URL::route('lecture.view', $lecture->id) }}" class="btn btn-default"><i class="fa fa-long-arrow-left"></i>{{ trans('common.back') }}</a>
+      </div>
       {{ Form::open(array('route' => array('lecture.update', $lecture->id))) }}
       <div class="form-cluster">
         <div class="form-group">
