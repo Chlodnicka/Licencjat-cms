@@ -21,6 +21,7 @@
     @if(!empty($news->date))
       <p class="date">{{ $news->date }}</p>
     @endif
+
     @if(!empty($news->content))
       <div class="richtext">
         {{ $news->content }}
