@@ -5,6 +5,9 @@
         </div>
     </div>
     <div class="lectures tree edit">
+        <div class="action-buttons">
+            <a href="{{ URL::route('tree.index') }}" class="btn btn-default"><i class="fa fa-long-arrow-left"></i>{{ trans('common.back') }}</a>
+        </div>
         {{ Form::open(array('route' => array('tree.lecture', $tree->id))) }}
         <div class="form-cluster">
             <div class="form-group">
@@ -18,9 +21,14 @@
             </div>
             <div class="form-group">
                 {{ Form::label('active', 'Dostępność pluginu')}}
-                {{ Form::checkbox('active', $tree->active, true) }}
+                <input type="checkbox" name="active" id="active" value="1"
+                       @if($tree->active == 1)
+                       checked="checked"
+                @else
+
+                        @endif>
             </div>
-            {{ Form::submit('Submit') }}
+            {{ Form::submit(Lang::get('common.submit')) }}
         </div>
         {{ Form::close() }}
     </div>

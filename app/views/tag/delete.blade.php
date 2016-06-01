@@ -5,11 +5,14 @@
     </div>
   </div>
   @if(!empty($tag))
+
     <div class="delete">
       <p class="lead">{{ trans('app.tag-delete-message') }}</p>
-      <a href="#" class="btn btn-back">{{ trans('common.back') }}</a>
+      <div class="action-buttons">
+        <a href="{{ URL::route('tag.view', $tag->id) }}" class="btn btn-default"><i class="fa fa-long-arrow-left"></i>{{ trans('common.back') }}</a>
+      </div>
       <form action="{{ URL::route('tag.destroy', $tag->id) }}" method="post">
-        <input type="submit" class="btn btn-delete" value="{{ trans('common.delete') }}">
+        <input type="submit" class="btn btn-danger" value="{{ trans('common.delete') }}">
       </form>
     </div>
   @else

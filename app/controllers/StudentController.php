@@ -188,13 +188,14 @@ class StudentController extends BaseController
             if (Auth::check()) {
                 $userId = Auth::id();
                 $user = User::findOrFail($userId);
-                $student = DB::table('students')->where('users_id', '=', $userId)->get();
-                if($student[0]->id == $id || $user->role == 1) {
+                $student = Student::findOrFail($id);
+                if( $user->role_id == 1 || $student->id == $id ) {
                     $students = Student::findOrFail($id);
                     $student_courses = $students->course()->get();
                     $this->layout->content = View::make('student.view', array(
                         'students' => $students,
                         'student_courses' => $student_courses,
+                        'student' => $student
                     ));
                 } else {
                     return Redirect::route('homepage');

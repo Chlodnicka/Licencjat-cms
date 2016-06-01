@@ -5,6 +5,9 @@
     </div>
   </div>
   @if(!empty($tag))
+    <div class="action-buttons">
+      <a href="{{ URL::route('tag.view', $tag->id) }}" class="btn btn-default"><i class="fa fa-long-arrow-left"></i>{{ trans('common.back') }}</a>
+    </div>
     <form action="{{ URL::route('tag.update', $tag->id) }}" method="post">
       <label for="name">{{ trans('app.tag') }}</label>
       <input type="text" id="name" name="name" value="{{ $tag->name }}">

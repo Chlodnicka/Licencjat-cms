@@ -4,6 +4,9 @@
       <h1 class="page-header title">{{ trans('app.owner-edit') }}</h1>
     </div>
   </div>
+  <div class="action-buttons">
+    <a href="{{ URL::route('dashboard') }}" class="btn btn-default btn-back"><i class="fa fa-long-arrow-left"></i>  {{ trans('common.back') }} </a>
+  </div>
   <div class="edit owner">
     {{ Form::open(array('route' => array('owner.update', $owner->id))) }}
     <div class="form-cluster">

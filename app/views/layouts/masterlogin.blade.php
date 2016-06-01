@@ -10,8 +10,9 @@
     <link href="{{ URL::asset('/assets/css/sb-admin-2.css') }}" rel="stylesheet">
     <link href="{{ URL::asset('/assets/css/morris.css') }}" rel="stylesheet">
     <link href="{{ URL::asset('/assets/css/font-awesome.min.css') }}" rel="stylesheet">
+    <link href="{{ URL::asset('/assets/css/default.min.css') }}" rel="stylesheet">
 </head>
-<body>
+<body class="admin">
     <div id="wrapper">
         <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
             <div class="navbar-header">
@@ -21,7 +22,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">SB Admin v2.0</a>
+                <a class="navbar-brand" href="{{ URL::route('dashboard') }}">{{ trans('common.app-title') }} - {{ $owner->firstname }} {{ $owner->lastname }}</a>
             </div>
             <!-- /.navbar-header -->
 
@@ -45,7 +46,7 @@
                         <li class="divider"></li>
                         <li>
                             <a class="text-center" href="{{ URL::route('student.index') }}">
-                                <strong>Read All Messages</strong>
+                                <strong>{{ trans('common.see-all-students') }}</strong>
                                 <i class="fa fa-angle-right"></i>
                             </a>
                         </li>
@@ -57,9 +58,9 @@
                         <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
-                        <li><a href="{{ URL::route('owner.edit') }}"><i class="fa fa-user fa-fw"></i> User Profile</a>
+                        <li><a href="{{ URL::route('owner.edit') }}"><i class="fa fa-user fa-fw"></i> {{ trans('common.user-profile') }}</a>
                         </li>
-                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+                        <li><a href="{{ URL::route('user.change_password') }}"><i class="fa fa-gear fa-fw"></i> {{ trans('common.change_password') }}</a>
                         </li>
                         <li class="divider"></li>
                         <li>
@@ -70,41 +71,42 @@
                             @endif
                         </li>
                     </ul>
-                    <!-- /.dropdown-user -->
+
                 </li>
-                <!-- /.dropdown -->
+
             </ul>
-            <!-- /.navbar-top-links -->
+
 
             <div class="navbar-default sidebar" role="navigation">
                 <div class="sidebar-nav navbar-collapse">
-                    <ul class="nav" id="side-menu">
+                    <ul class="nav in" id="side-menu">
                         <li class="sidebar-search">
                             <div class="input-group custom-search-form">
 
                                     <form action="{{ URL::route('search.index') }}" method="post">
-                                        <input type="text" name="searchQuery" value="" class="form-control" placeholder="Search...">
+                                        <input type="text" name="searchQuery" value="" class="form-control" placeholder="{{ trans('common.search') }}">
                                         <span class="input-group-btn">
-                                            <input class="btn btn-default" type="submit">
-                                                <i class="fa fa-search"></i>
+                                            <input class="btn btn-default" type="submit" value="">
+                                                <i class="fa fa-search" aria-hidden="true"></i>
                                             </input>
                                         </span>
                                     </form>
 
                             </div>
-                            <!-- /input-group -->
                         </li>
                         @include('layouts.menuLogin')
                     </ul>
                 </div>
-                <!-- /.sidebar-collapse -->
             </div>
-            <!-- /.navbar-static-side -->
         </nav>
         <div id="page-wrapper">
             @if (Session::has('message'))
-                <div class="session-alert">
-                    <p>{{ Session::get('message') }}</p>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="alert alert-success">
+                            <p>{{ Session::get('message') }}</p>
+                        </div>
+                    </div>
                 </div>
             @endif
             @yield('content')

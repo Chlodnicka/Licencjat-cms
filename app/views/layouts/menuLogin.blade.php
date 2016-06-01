@@ -1,9 +1,9 @@
 <li>
-    <a href="{{ URL::route('homepage') }}"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+    <a href="{{ URL::route('homepage') }}"><i class="fa fa-dashboard fa-fw"></i> {{ trans('app.dashboard') }}</a>
 </li>
 <li>
-    <a href="#"><i class="fa fa-edit fa-fw"></i>Edycja treści<span class="fa arrow"></span></a>
-    <ul class="nav nav-second-level">
+    <a href="#"><i class="fa fa-edit fa-fw"></i> {{ trans('common.edit-content') }}<span class="fa arrow"></span></a>
+    <ul class="nav nav-second-level collapse">
         @foreach($tree as $item)
             @if($item->id != 2)
                 @if($item->active == 1)
@@ -16,11 +16,11 @@
     </ul>
 </li>
 <li>
-    <a href="{{ URL::route('tree.index') }}"><i class="fa fa-sitemap fa-fw"></i> Struktura treści</a>
+    <a href="{{ URL::route('tree.index') }}"><i class="fa fa-sitemap fa-fw"></i> {{ trans('common.content-structure') }}</a>
 </li>
 <li>
-    <a href="{{ URL::route('attachment.index') }}"><i class="fa fa-bar-chart-o fa-fw"></i>Multimedia i załączniki</a>
+    <a href="{{ URL::route('attachment.index') }}"><i class="fa fa-bar-chart-o fa-fw"></i> {{ trans('common.multimedia') }}</a>
 </li>
 <li>
-    <a href="{{ URL::route('tag.index') }}"><i class="fa fa-bar-chart-o fa-fw"></i>Tagi</a>
+    <a href="{{ URL::route('tag.index') }}"><i class="fa fa-bar-chart-o fa-fw"></i> {{ trans('app.tags') }}</a>
 </li>

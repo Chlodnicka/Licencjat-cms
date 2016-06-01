@@ -53,6 +53,7 @@ class NewsController extends BaseController
             }
             $news = News::paginate(6);
             $news_lead = Tree::findOrFail(4);
+            
             $this->layout->content = View::make('news.index', array(
                 'news' => $news,
                 'news_lead' => $news_lead,
@@ -269,7 +270,6 @@ class NewsController extends BaseController
                             ->withErrors($validator)
                             ->withInput();
                     } else {
-                        if(Input::file('image') != NULL) {
                             $image = Input::file('image');
 
                             $destinationPath = 'uploads/';
@@ -286,8 +286,8 @@ class NewsController extends BaseController
                             Input::file('image')->move($destinationPath, $filename);
 
                             $file->save();
+                            var_dump('asdf');
                             $news->attachment_id = $file->id;
-                        }
                         $news->save();
                         if(Input::get('tags') != NULL){
                             $news->tags()->sync(Input::get('tags'));
@@ -335,11 +335,11 @@ class NewsController extends BaseController
                 $actions = 0;
             }
             $news = News::findOrFail($id);
-            $attachments = $news->attachment();
+            $attachment = DB::table('attachments')->where('id', '=', $news->attachment_id)->get();
             $this->layout->content = View::make('news.view',array(
                 'news' => $news,
                 'actions' => $actions,
-                'attachments' => $attachments,
+                'attachment' => $attachment,
             ));
         } else {
             return Redirect::route('homepage');
@@ -407,7 +407,6 @@ class NewsController extends BaseController
             return Redirect::route('homepage');
         }
     }
-
 
 }
 

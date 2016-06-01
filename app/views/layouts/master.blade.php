@@ -6,7 +6,7 @@
 	 <title>@yield('title') {{ trans('common.homepage') }}</title>
    <link href="{{ URL::asset('/assets/css/default.min.css') }}" rel="stylesheet">
   </head>
-  <body>
+  <body  class="default">
     <header>
       <div class="top-nav">
         <div class="logo"><a href="/"><p>kursy i materiały</p></a></div>
@@ -39,7 +39,7 @@
 
     <article>
       @if (Session::has('message'))
-        <div class="session-alert">
+        <div class="alert alert-success">
           <p>{{ Session::get('message') }}</p>
         </div>
       @endif

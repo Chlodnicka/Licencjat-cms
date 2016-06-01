@@ -11,11 +11,11 @@
         @endforeach
     </ul>
 
-    {{ Form::password('password', array('class'=>'input-block-level', 'placeholder'=>'Old Password')) }}
-    {{ Form::password('new_password', array('class'=>'input-block-level', 'placeholder'=>'New Password')) }}
-    {{ Form::password('new_password_confirmation', array('class'=>'input-block-level', 'placeholder'=>'Confirm New Password')) }}
+    {{ Form::password('password', array('class'=>'input-block-level', 'placeholder'=>Lang::get('common.old-password'))) }}
+    {{ Form::password('new_password', array('class'=>'input-block-level', 'placeholder'=>Lang::get('common.new-password'))) }}
+    {{ Form::password('new_password_confirmation', array('class'=>'input-block-level', 'placeholder'=>Lang::get('common.confirm-password'))) }}
 
 
-    {{ Form::submit('Change', array('class'=>'k-button'))}}
+    {{ Form::submit(Lang::get('common.change-password'), array('class'=>'k-button'))}}
     {{ Form::close() }}
 @stop

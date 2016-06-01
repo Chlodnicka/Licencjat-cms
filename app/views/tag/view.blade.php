@@ -6,9 +6,10 @@
   </div>
   @if($actions == 1)
     <div class="action-buttons">
-      <a href="{{ URL::route('tag.new') }}">{{ trans('common.new') }}</a>
-      <a href="{{ URL::route('tag.edit', $tag->id) }}">{{ trans('common.edit') }}</a>
-      <a href="{{ URL::route('tag.delete', $tag->id) }}">{{ trans('common.delete') }}</a>
+      <a href="{{ URL::route('tag.index') }}" class="btn btn-default"><i class="fa fa-long-arrow-left"></i>{{ trans('common.back') }}</a>
+      <a  class="btn btn-primary" href="{{ URL::route('tag.new') }}">{{ trans('common.new') }}</a>
+      <a  class="btn btn-primary" href="{{ URL::route('tag.edit', $tag->id) }}">{{ trans('common.edit') }}</a>
+      <a  class="btn btn-danger" href="{{ URL::route('tag.delete', $tag->id) }}">{{ trans('common.delete') }}</a>
     </div>
   @endif
   @if(!empty($tag))

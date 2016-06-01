@@ -5,6 +5,9 @@
         </div>
     </div>
     <div class="exercises">
+            <div class="action-buttons">
+                <a href="{{ URL::route('course.view', $course_id) }}" class="btn btn-default"><i class="fa fa-long-arrow-left"></i>{{ trans('common.back') }}</a>
+            </div>
         <div class="filter-box">
             <h2>{{ trans('common.filter') }}</h2>
             {{ Form::open(array('route' => array('exercise.generate', $course_id))) }}

@@ -2,9 +2,25 @@
 
     return array(
         /*
+         * App general
+         */
+        "dashboard" => "Dashboard",
+        "plugin-owner" => "Plugin Kontakt",
+        "plugin-courses" => "Plugin Kursy",
+        "plugin-students" => "Plugin Studenci",
+        "plugin-lectures" => "Plugin Wykłady",
+        "plugin-news" => "Plugin Aktualności",
+        "plugin-exercise" => "Plugin Zadania",
+        "institute" => "Instytut / Katedra",
+        "department" => "Wydział",
+        "university" => "Uniwersytet",
+        "email" => "Email",
+        "phone" => "Telefon",
+        /*
          * Courses translations
          */
         "courses" => "Kursy",
+        "course-edit"=> "Edytuj kurs",
         "course" => "Kurs",
         "list-of-courses" => "Lista kursów",
         "course-delete-message" => "Czy na pewno chcesz usunąć kurs? Wraz z nim zostaną usunięte wszystkie materiały z nim powiązane: wyklady i zadania.",
@@ -18,6 +34,7 @@
         "course-created" => "Kurs został utworzony poprawnie.",
         "course-destroyed" => "Kurs został usunięty.",
         "all-courses" => "Wszystkie kursy",
+        "lecture-updated" => "Wykład zaktualizowano pomyślnie",
 
         /*
          * Lectures translations
@@ -37,6 +54,7 @@
         "news-list" => "Aktualności",
         "no-such-news-item" => "Dana aktualność nie istnieje",
         "news-new" => "Utwórz nową aktualność",
+        "news-delete" => "Usuń aktualność",
         "news-edit" => "Edytuj aktualność ",
         "news-delete-message" => "Czy na pewno chcesz usunąć wiadomość? Nie będziesz miał możliwości przywrócenia jej.",
 
@@ -46,6 +64,7 @@
         "owner-information" => "Informacje",
         "owner-edit" => "Edytuj informacje",
         "tutorship-hours" => "Godziny konsultacji",
+        "owner-updated" => "Dane zostały zapisane",
 
         /*
          * Search translations
@@ -62,6 +81,7 @@
         "student-delete" => "Usuń konto",
         "student-delete-message" => "Czy na pewno chcesz usunąć konto? Nie będziesz miał możliwości przywrócenia go.",
         "student-new" => "Rejestracja",
+        "students" => "Student",
 
         /*
          * Tags translations
@@ -72,6 +92,9 @@
         "tag-edit" => "Edycja tagu",
         "tag" => "tag",
         "tag-new" => "Utwórz nowy tag",
+        "tags" => "Tagi",
+        "tags-list" => "Lista tagów",
+        "tag-updated" => "Dane zostały zaktualizowane",
 
         /*
          * Exercises translations
@@ -91,7 +114,17 @@
         "exercises-generated" => "Arkusz zadań",
         "exercises-generated-with-answers" => "Arkusz z odpowiedziami",
         "filter" => "Filtruj",
+        "exercise_updated" => "Zadanie zaktualizowano pomyślnie",
 
+        /*
+         * Attachment translations
+         */
+
+        "attachment-index" => "Lista załączników",
+        "attachment-edit" => "Edytuj załącznik",
+        "attachment-delete" => "Usuń załącznik",
+        "attachment-new" => "Dodaj nowy załącznik",
+        "attachment" => "Załącznik",
     );
 
 ?>

@@ -14,7 +14,7 @@
                             <span>{{ $search_result['type'] }}</span>
                             <h2 class="title">{{ $search_result['name'] }}</h2>
                             <p class="item-lead">{{ $search_result['lead'] }}</p>
-                            <a href="{{ URL::route($search_result['type'].'.view', $search_result['id']) }}">{{ trans('common.see-more') }}</a>
+                            <a class="btn btn-default" href="{{ URL::route($search_result['type'].'.view', $search_result['id']) }}">{{ trans('common.see-more') }}</a>
                         </div>
                         <div class="clearfix"></div>
                     @endif

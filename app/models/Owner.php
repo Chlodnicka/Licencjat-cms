@@ -115,7 +115,7 @@
               ),
               'tutorshipHours' => array(
                   'required',
-                  'regex:/^[\pL\s]+$/u'
+                  'regex:/^[\pL\s\-\.\:\d]+$/u'
               ),
               'institute' => 'regex:/^[\pL\s]+$/u',
           );

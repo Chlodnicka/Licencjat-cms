@@ -7,7 +7,7 @@
                     <a href="{{ URL::route('news.view', $newsItem->id) }}">
                     <div class="box-item">
                         <div class="box-img">
-                            <img src="http://placehold.it/400x400">
+                            
                         </div>
                             <h2 class="title">{{ $newsItem->title }}</h2>
                             <p class="date">{{ $newsItem->date }}</p>

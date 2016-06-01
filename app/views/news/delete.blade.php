@@ -4,12 +4,15 @@
       <h1 class="page-header title">{{ trans('app.news-delete') }} {{ $news->title }}</h1>
     </div>
   </div>
+
   @if(!empty($news))
     <div class="delete news">
       <p class="lead">{{ trans('app.news-delete-message') }}</p>
-      <a href="#" class="btn btn-back">{{ trans('common.back') }}</a>
+      <div class="action-buttons">
+        <a href="{{ URL::route('news.view', $news->id) }}" class="btn btn-default"><i class="fa fa-long-arrow-left"></i>{{ trans('common.back') }}</a>
+      </div>
       <form action="{{ URL::route('news.destroy', $news->id) }}" method="post">
-        <input type="submit" class="btn btn-delete" value="{{ trans('common.delete') }}">
+        <input type="submit" class="btn btn-danger" value="{{ trans('common.delete') }}">
       </form>
     </div>
   @else

@@ -5,6 +5,9 @@
     </div>
   </div>
   <div class="new course">
+    <div class="action-buttons">
+      <a href="{{ URL::route('course.index') }}" class="btn btn-default btn-back"><i class="fa fa-long-arrow-left"></i>  {{ trans('common.back') }} </a>
+    </div>
     {{ Form::open(array('route' => array('course.create'))) }}
       <div class="form-cluster">
         <div class="form-group">
