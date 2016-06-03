@@ -329,12 +329,14 @@ View::composer('layouts.masterlogin', function($view){
     $courses = Course::all_courses();
     $coursesSide = $courses;
     $owner = Owner::findOrFail(1);
+    $students_list = Student::get_students();
     $view->with(array(
         'tree' => $tree,
         'courses' => $courses,
         'coursesSide' => $coursesSide,
         'owner' => $owner,
         'students' => $students,
+        'students_list' => $students_list,
     ));
 });
 

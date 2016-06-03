@@ -27,6 +27,7 @@ return array(
     "powered" => "powered by",
     "sitemap" => "Mapa serwisu",
     "see-more" => "Zobacz więcej",
+    "is-active" => "Plugin jest dostępny",
     "new" => "Nowy",
     "delete" => "Usuń",
     "edit" => "Edytuj",

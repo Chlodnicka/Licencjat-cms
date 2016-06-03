@@ -20,7 +20,7 @@
       <div class="list-item">
         <h2 class="title">{{ $lecture->title }}</h2>
         <p class="item-lead">{{ $lecture->lead }}</p>
-        <a href="{{ URL::route('lecture.view', $lecture->id) }}" class="btn btn-default">{{ trans('common.see-more') }} <i class="fa fa-long-arrow-right"></i></a>
+        <a href="{{ URL::route('lecture.view', $lecture->id) }}" class="btn btn-primary">{{ trans('common.see-more') }} <i class="fa fa-long-arrow-right"></i></a>
       </div>
       <div class="clearfix"></div>
       @endforeach

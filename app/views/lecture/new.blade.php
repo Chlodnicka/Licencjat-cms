@@ -8,7 +8,7 @@
       <div class="action-buttons">
         <a href="{{ URL::route('lecture.index') }}" class="btn btn-default"><i class="fa fa-long-arrow-left"></i>{{ trans('common.back') }}</a>
       </div>
-    {{ Form::open(array('route' => array('lecture.create'))) }}
+    {{ Form::open(array('route' => array('lecture.create'), 'files' => true)) }}
     <div class="form-cluster">
       <div class="form-group">
         {{ Form::label('title', Lang::get('common.title'))}}
@@ -19,6 +19,18 @@
         {{ Form::label('lead', Lang::get('common.lead'))}}
         {{ Form::text('lead', Input::old('lead')) }}
         @if ($errors->has('lead')) <p class="help-block">{{ $errors->first('lead') }}</p> @endif
+      </div>
+      <div class="form-group">
+        {{ Form::label('attachment', Lang::get('app.upload-attach'))}}
+        {{ Form::file('attachment') }}
+      </div>
+      <div class="form-group">
+        {{ Form::label('attachment-description', Lang::get('app.attach-description'))}}
+        {{ Form::text('attachment-description') }}
+      </div>
+      <div class="form-group">
+        {{ Form::label('attachment-title', Lang::get('app.attach-title'))}}
+        {{ Form::text('attachment-title') }}
       </div>
       <div class="form-group">
         {{ Form::label('content', Lang::get('common.content'))}}

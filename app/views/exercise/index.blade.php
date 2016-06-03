@@ -24,8 +24,7 @@
           {{ Form::text('content') }}
         </div>
         <div class="form-group">
-          {{ Form::label('solutionAccess', Lang::get('common.solution-access'))}}
-          {{ Form::checkbox('solution_access', '1') }}
+          <input id="solution_access" type="checkbox" name="solution_access" checked="checked" value="1"><label for="solution_access"><span>{{ trans('common.solution-access') }}</span></label>
         </div>
         {{ Form::label('difficulty', Lang::get('common.difficulty')) }}
         {{ Form::select('difficulty', $difficulty) }}
@@ -44,7 +43,7 @@
           @if(!empty($exercise->content))
             <p class="item-lead">{{ $exercise->content }}</p>
             @endif
-          <a href="{{ URL::route('exercise.view', $exercise->id) }}" class="btn btn-default">{{ trans('common.see-more') }} <i class="fa fa-long-arrow-right"></i></a>
+          <a href="{{ URL::route('exercise.view', $exercise->id) }}" class="btn btn-primary more">{{ trans('common.see-more') }} <i class="fa fa-long-arrow-right"></i></a>
         </div>
         <div class="clearfix"></div>
       @endforeach

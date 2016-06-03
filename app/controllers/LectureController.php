@@ -198,6 +198,31 @@ class LectureController extends BaseController
                     {
                         return Redirect::route('lecture.edit', $lecture->id)->withErrors($validator);
                     } else {
+                        $attachment = Input::file('attachment');
+                        $attachment_set = Input::get('attachment-isset');
+                        if($attachment !== NULL && $attachment_set == 1) {
+                            $destinationPath = 'uploads/';
+                            $extension = $attachment->getClientOriginalName();
+                            $comma = strpos($extension, '.');
+                            $extension = substr($extension, $comma);
+                            $filename = Str::random(60) . $extension;
+                            $url = $destinationPath . $filename;
+
+                            $file = new Attachment();
+                            $file->url = $url;
+                            $file->name = $filename;
+                            $file->description = Input::get('attachment-description');
+                            $file->title = Input::get('attachment-title');
+
+
+                            Input::file('image')->move($destinationPath, $filename);
+
+                            $file->save();
+                            $lecture->attachment_id = $file->id;
+                        }
+                        if($attachment_set != 1) {
+                            $lecture->attachment_id = NULL;
+                        }
                         $lecture->save();
                         if(Input::get('tags') != NULL){
                             $lecture->tags()->sync(Input::get('tags'));
@@ -256,6 +281,24 @@ class LectureController extends BaseController
                             ->withErrors($validator)
                             ->withInput();
                     } else {
+                        $attachment = Input::file('attachment');
+                        if($attachment != NULL) {
+                            $destinationPath = 'uploads/';
+                            $filename = $attachment->getClientOriginalName();
+                            $url = $destinationPath . $filename;
+
+                            $file = new Attachment();
+                            $file->url = $url;
+                            $file->name = $filename;
+                            $file->description = Input::get('attachment-description');
+                            $file->title = Input::get('attachment-title');
+                            
+                            Input::file('attachment')->move($destinationPath, $filename);
+
+                            $file->save();
+                            $lecture->attachment_id = $file->id;
+                        }
+
                         $lecture->save();
                         if(Input::get('tags') != NULL){
                             $lecture->tags()->sync(Input::get('tags'));

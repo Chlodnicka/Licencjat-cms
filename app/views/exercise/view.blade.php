@@ -43,7 +43,7 @@
       <p class="no-solution">{{ trans('app.no-solution') }}</p>
     @endif
     @if($actions != 1)
-      <a href="{{ URL::route('exercise.indexCourse', $exercise->course->id) }}" class="btn btn-primary"><i class="fa fa-long-arrow-left"></i>{{ trans('common.back') }}</a>
+      <a href="{{ URL::route('exercise.indexCourse', $exercise->course->id) }}" class="btn btn-primary"><i class="fa fa-long-arrow-left back"></i>{{ trans('common.back') }}</a>
     @endif
   </div>
 @stop

@@ -27,12 +27,7 @@ class UserController extends BaseController
 
     public function showLogin()
     {
-        $tree = Tree::findOrFail(2);
-        if($tree->active == 1){
             $this->layout->content = View::make('user.login');
-        } else {
-            return Redirect::route('homepage');
-        }
     }
 
     public function showRegister()

@@ -32,18 +32,19 @@
                         <i class="fa fa-envelope fa-fw"></i> <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-messages">
+                        @foreach($students_list as $student_item)
                         <li>
-                            <a href="#">
+                            <a href="{{ URL::route('student.view', $student_item->id) }}">
                                 <div>
-                                    <strong>John Smith</strong>
-                                    <span class="pull-right text-muted">
-                                        <em>Yesterday</em>
+                                    <strong>{{ $student_item->email }}</strong>
+                                    <span class="text-muted">
+                                        <em>{{ $student_item->created_at }}</em>
                                     </span>
                                 </div>
-                                <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
                             </a>
                         </li>
                         <li class="divider"></li>
+                        @endforeach
                         <li>
                             <a class="text-center" href="{{ URL::route('student.index') }}">
                                 <strong>{{ trans('common.see-all-students') }}</strong>

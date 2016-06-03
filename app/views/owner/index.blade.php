@@ -30,6 +30,11 @@
       @if(!empty($owner->phone))
         <p class="phone"><a href="tel:+48 {{ $owner->phone }}">{{ trans('app.phone') }}: +48 {{ $owner->phone }}</a></p>
       @endif
+      @if(!empty($owner->attachment_id))
+        @foreach($attachment as $item)
+          {{ HTML::image($item->url) }}
+        @endforeach
+      @endif
     </div>
     @if(!empty($owner->tutorshipHours))
     <div class="tutorship">

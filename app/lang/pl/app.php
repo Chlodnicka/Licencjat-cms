@@ -125,6 +125,9 @@
         "attachment-delete" => "Usuń załącznik",
         "attachment-new" => "Dodaj nowy załącznik",
         "attachment" => "Załącznik",
+        "upload-attach" => "Wgraj załącznik",
+        "attach-description" => "Opis załącznika",
+        "attach-title" => "Tytuł załącznika",
     );
 
 ?>

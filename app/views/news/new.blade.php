@@ -22,11 +22,15 @@
         @if ($errors->has('lead')) <p class="help-block">{{ $errors->first('lead') }}</p> @endif
       </div>
       <div class="form-group">
-        {{ Form::label('image', 'Upload Image')}}
+        {{ Form::label('image', Lang::get('app.upload-img'))}}
         {{ Form::file('image') }}
-        {{ Form::label('img-description', 'Tekst alternatywny / opis')}}
+      </div>
+      <div class="form-group">
+        {{ Form::label('img-description', Lang::get('app.img-description'))}}
         {{ Form::text('img-description') }}
-        {{ Form::label('img-title', 'Tytuł')}}
+      </div>
+      <div class="form-group">
+        {{ Form::label('img-title', Lang::get('common.img-title'))}}
         {{ Form::text('img-title') }}
       </div>
       <div class="form-group">
@@ -41,8 +45,11 @@
       {{ Form::label('courses', Lang::get('common.select-courses')) }}
       {{ Form::select('courses', $courses) }}
       @if ($errors->has('courses')) <p class="help-block">{{ $errors->first('courses') }}</p> @endif
-      {{ Form::label('tags', Lang::get('common.tags-category')) }}
-      {{ Form::select('tags[]', ($tags), null, ['multiple'=>true,'class' => 'form-control margin']) }}
+              <div class="form-group">
+                {{ Form::label('tags', Lang::get('common.tags-category')) }}
+                {{ Form::select('tags[]', ($tags), null, ['multiple'=>true,'class' => 'form-control margin']) }}
+              </div>
+
               <!--tagi-->
       {{ Form::submit(Lang::get('common.submit')) }}
     </div>

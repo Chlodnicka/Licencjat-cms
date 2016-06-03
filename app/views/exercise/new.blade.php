@@ -24,20 +24,28 @@
         {{ Form::textarea('solution', Input::old('solution'), array('id'=>'editor')) }}}
       </div>
       <div class="form-group">
-        {{ Form::label('solutionAccess', Lang::get('common.solution-access'))}}
-        {{ Form::checkbox('solution_access', '1', null) }}
+        <input id="solution_access" type="checkbox" name="solution_access" checked="checked" value="1"><label for="solution_access"><span>{{ trans('common.solution-access') }}</span></label>
       </div>
-      {{ Form::label('difficulty',Lang::get('common.difficulty')) }}
-      {{ Form::select('difficulty', $difficulty) }}
-      @if ($errors->has('difficulty')) <p class="help-block">{{ $errors->first('difficulty') }}</p> @endif
-      {{ Form::label('courses', Lang::get('common.select-courses')) }}
-      {{ Form::select('courses', $courses) }}
-      @if ($errors->has('courses')) <p class="help-block">{{ $errors->first('courses') }}</p> @endif
-      {{ Form::label('lectures', Lang::get('common.select-lectures')) }}
-      {{ Form::select('lectures', [Lang::get('common.first-choose-course')]) }}
-      @if ($errors->has('lectures')) <p class="help-block">{{ $errors->first('lectures') }}</p> @endif
-      {{ Form::label('tags', Lang::get('common.tags-category')) }}
-      {{ Form::select('tags[]', ($tags), null, ['multiple'=>true,'class' => 'form-control margin']) }}
+      <div class="form-group">
+        {{ Form::label('difficulty',Lang::get('common.difficulty')) }}
+        {{ Form::select('difficulty', $difficulty) }}
+        @if ($errors->has('difficulty')) <p class="help-block">{{ $errors->first('difficulty') }}</p> @endif
+      </div>
+      <div class="form-group">
+        {{ Form::label('courses', Lang::get('common.select-courses')) }}
+        {{ Form::select('courses', $courses) }}
+        @if ($errors->has('courses')) <p class="help-block">{{ $errors->first('courses') }}</p> @endif
+      </div>
+      <div class="form-group">
+        {{ Form::label('lectures', Lang::get('common.select-lectures')) }}
+        {{ Form::select('lectures', [Lang::get('common.first-choose-course')]) }}
+        @if ($errors->has('lectures')) <p class="help-block">{{ $errors->first('lectures') }}</p> @endif
+      </div>
+      <div class="form-group">
+        {{ Form::label('tags', Lang::get('common.tags-category')) }}
+        {{ Form::select('tags[]', ($tags), null, ['multiple'=>true,'class' => 'form-control margin']) }}
+      </div>
+
               <!--tagi-->
       {{ Form::submit(Lang::get('common.submit')) }}
     </div>

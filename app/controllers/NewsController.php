@@ -118,11 +118,14 @@ class NewsController extends BaseController
                     $courses = Course::all()->lists('name', 'id');
                     $tags = Tag::all()->lists('name','id');
                     $news_tags = $news->tags()->lists('tag_id');
+                    $attachment = DB::table('attachments')->where('id', '=', $news->attachment_id)->get();
+
                     $this->layout->content = View::make('news.edit', array(
                         'news' => $news,
                         'courses' => $courses,
                         'tags' => $tags,
                         'news_tags' => $news_tags,
+                        'attachment' => $attachment,
                     ));
                 } else {
                     return Redirect::route('news.view', $id);
@@ -195,11 +198,14 @@ class NewsController extends BaseController
                     {
                         return Redirect::route('news.edit', $news->id)->withErrors($validator);
                     } else {
-                        if(Input::file('image') != NULL) {
-                            $image = Input::file('image');
-
+                        $image = Input::file('image');
+                        $img_set = Input::get('img-isset');
+                        if($image !== NULL && $img_set == 1) {
                             $destinationPath = 'uploads/';
-                            $filename = $image->getClientOriginalName();
+                            $extension = $image->getClientOriginalName();
+                            $comma = strpos($extension, '.');
+                            $extension = substr($extension, $comma);
+                            $filename = Str::random(60) . $extension;
                             $url = $destinationPath . $filename;
 
                             $file = new Attachment();
@@ -213,6 +219,9 @@ class NewsController extends BaseController
 
                             $file->save();
                             $news->attachment_id = $file->id;
+                        }
+                        if($img_set != 1) {
+                            $news->attachment_id = NULL;
                         }
                         $news->save();
                         if(Input::get('tags') != NULL){
@@ -270,8 +279,9 @@ class NewsController extends BaseController
                             ->withErrors($validator)
                             ->withInput();
                     } else {
-                            $image = Input::file('image');
 
+                        $image = Input::file('image');
+                        if($image != NULL) {
                             $destinationPath = 'uploads/';
                             $filename = $image->getClientOriginalName();
                             $url = $destinationPath . $filename;
@@ -286,8 +296,8 @@ class NewsController extends BaseController
                             Input::file('image')->move($destinationPath, $filename);
 
                             $file->save();
-                            var_dump('asdf');
                             $news->attachment_id = $file->id;
+                        }
                         $news->save();
                         if(Input::get('tags') != NULL){
                             $news->tags()->sync(Input::get('tags'));

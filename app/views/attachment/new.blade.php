@@ -10,10 +10,15 @@
   {{ Form::open(array('action' => 'AttachmentController@create', 'files'=>true)) }}
   {{ Form::label('image', Lang::get('common.upload-file'))}}
   {{ Form::file('image') }}
-  {{ Form::label('description', Lang::get('common.alternative-text'))}}
-  {{ Form::text('description') }}
-  {{ Form::label('title', Lang::get('common.title'))}}
-  {{ Form::text('title') }}
+  <div class="form-group">
+    {{ Form::label('description', Lang::get('common.alternative-text'))}}
+    {{ Form::text('description') }}
+  </div>
+  <div class="form-group">
+    {{ Form::label('title', Lang::get('common.title'))}}
+    {{ Form::text('title') }}
+  </div>
+
   {{ Form::submit(Lang::get('common.submit')) }}
   {{ Form::close() }}
 @stop

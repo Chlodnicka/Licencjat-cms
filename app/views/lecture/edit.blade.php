@@ -22,13 +22,34 @@
           @if ($errors->has('lead')) <p class="help-block">{{ $errors->first('lead') }}</p> @endif
         </div>
         <div class="form-group">
+          {{ Form::label('attachment', Lang::get('app.upload-attach'))}}
+          {{ Form::file('attachment') }}
+          <input id="img-isset" type="checkbox" name="img-isset" checked="checked" value="1"><label for="img-isset"><span>{{ trans('common.img-isset') }}</span></label>
+
+        </div>
+        <div class="form-group">
+          {{ Form::label('attachment-description', Lang::get('app.attach-description'))}}
+          {{ Form::text('attachment-description') }}
+        </div>
+        <div class="form-group">
+          {{ Form::label('attachment-title', Lang::get('app.attach-title'))}}
+          {{ Form::text('attachment-title') }}
+        </div>
+
+        <div class="form-group">
           {{ Form::label('content', Lang::get('common.content'))}}
           {{ Form::textarea('content', $lecture->content, array('id'=>'editor')) }}
         </div>
-        {{ Form::label('courses', Lang::get('common.select-course')) }}
-        {{ Form::select('courses', $courses, $lecture->course_id) }}
-        {{ Form::label('tags', Lang::get('common.tags-category')) }}
-        {{ Form::select('tags[]', ($tags), ($lecture_tags), ['multiple'=>true,'class' => 'form-control margin']) }}
+        <div class="form-group">
+          {{ Form::label('courses', Lang::get('common.select-course')) }}
+          {{ Form::select('courses', $courses, $lecture->course_id) }}
+        </div>
+        <div class="form-group">
+          {{ Form::label('tags', Lang::get('common.tags-category')) }}
+          {{ Form::select('tags[]', ($tags), ($lecture_tags), ['multiple'=>true,'class' => 'form-control margin']) }}
+        </div>
+
+
                 <!--tagi-->
         {{ Form::submit(Lang::get('common.submit')) }}
       </div>
