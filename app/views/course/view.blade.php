@@ -1,5 +1,5 @@
 @section('content')
-  <div class="content course">
+  <div class="content course single-page">
     @if (!empty($course->name))
           <div class="row">
               <div class="col-lg-12">
@@ -52,7 +52,7 @@
         </div>
       @endif
         @if($actions != 1)
-            <a href="{{ URL::route('course.index') }}" class="btn btn-primary"><i class="fa fa-long-arrow-left"></i>{{ trans('common.back') }}</a>
+            <a href="{{ URL::route('course.index') }}" class="btn btn-primary back-btn"><i class="fa fa-long-arrow-left back"></i>{{ trans('common.back') }}</a>
         @endif
   </div>
 @stop

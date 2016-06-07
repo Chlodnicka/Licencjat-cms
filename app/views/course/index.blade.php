@@ -23,7 +23,7 @@
         @if (!empty($course->lead))
           <p class="item-lead">{{$course->lead}}</p>
           @endif
-          <a href="{{ URL::route('course.view', $course->id) }}" class="btn btn-primary">{{ trans('common.see-more') }} <i class="fa fa-long-arrow-right"></i></a>
+          <a href="{{ URL::route('course.view', $course->id) }}" class="btn btn-primary more">{{ trans('common.see-more') }} <i class="fa fa-long-arrow-right"></i></a>
       </div>
       <div class="clearfix"></div>
     @endforeach

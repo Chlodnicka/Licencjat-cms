@@ -22,17 +22,24 @@
                     {{ Form::number('number', true) }}
                     @if ($errors->has('number')) <p class="help-block">{{ $errors->first('number') }}</p> @endif
                 </div>
-                {{ Form::label('difficulty',Lang::get('common.difficulty')) }}
-                {{ Form::select('difficulty', $difficulty) }}
-                @if(!empty($exercise_lectures))
-                    {{ Form::label('exercise_lectures',Lang::get('common.select-lectures')) }}
-                    {{ Form::select('exercise_lectures[]', ($exercise_lectures), null, ['multiple'=>true,'class' => 'form-control margin']) }}
+                <div class="form-group">
+                    {{ Form::label('difficulty',Lang::get('common.difficulty')) }}
+                    {{ Form::select('difficulty', $difficulty) }}
+                </div>
+                <div class="form-group">
+                    @if(!empty($exercise_lectures))
+                        {{ Form::label('exercise_lectures',Lang::get('common.select-lectures')) }}
+                        {{ Form::select('exercise_lectures[]', ($exercise_lectures), null, ['multiple'=>true,'class' => 'form-control margin']) }}
 
-                @endif
-                @if(!empty($exercise_tags))
-                    {{ Form::label('exercise_tags',Lang::get('common.tags-category')) }}
-                    {{ Form::select('exercise_tags[]', ($exercise_tags), null, ['multiple'=>true,'class' => 'form-control margin']) }}
-                @endif
+                    @endif
+                </div>
+                <div class="form-group">
+                    @if(!empty($exercise_tags))
+                        {{ Form::label('exercise_tags',Lang::get('common.tags-category')) }}
+                        {{ Form::select('exercise_tags[]', ($exercise_tags), null, ['multiple'=>true,'class' => 'form-control margin']) }}
+                    @endif
+                </div>
+
                 <!--tagi-->
                 {{ Form::submit(Lang::get('common.submit')) }}
             </div>
@@ -41,16 +48,21 @@
         <div class="exercises-to-Pdf">
             @if(!empty($exercises))
                 {{ Form::open(array('route' => array('exercise.generateByInput'))) }}
-                <label for="answers">{{ trans('app.generate-with-answers') }}</label>
-                <input name="answers" id="answers" type="checkbox" checked="checked">
+                <div class="form-group">
+                    <input id="answers" type="checkbox" name="answers"
+                    checked="checked"><label for="answers"><span>{{ trans('app.generate-with-answers') }}</span></label>
+                </div>
                 @foreach( $exercises as $exercise)
                     <input name="exercises[]" id="exercise{{ $exercise->id }}" type="checkbox" value="{{ $exercise->id }}" checked="checked" />
-                    <label for="exercise{{ $exercise->id }}">
-                        <div class="list-item">
-                            <h2 class="title">{{ $exercise->title }}</h2>
-                            <p class="item-lead">{{ $exercise->content }}</p>
-                            <a href="{{ URL::route('exercise.view', $exercise->id) }}" class="btn btn-more">{{ trans('common.see-more') }} <i class="fa fa-long-arrow-right"></i></a>
-                        </div>
+                    <label class="list-item" for="exercise{{ $exercise->id }}">
+                        <span>
+                            <div class="">
+                                <h2 class="title">{{ $exercise->title }}</h2>
+                                <p class="item-lead">{{ $exercise->content }}</p>
+                                <a href="{{ URL::route('exercise.view', $exercise->id) }}" class="btn btn-primary">{{ trans('common.see-more') }} <i class="fa fa-long-arrow-right"></i></a>
+                            </div>
+                        </span>
+
                     </label>
                     <div class="clearfix"></div>
                 @endforeach

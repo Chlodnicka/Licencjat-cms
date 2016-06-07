@@ -1,13 +1,14 @@
 @section('content')
   @if(!empty($lecture))
-    @if(!empty($lecture->title))
-      <div class="row">
-        <div class="col-lg-12">
-          <h1 class="page-header title">{{ $lecture->title }}</h1>
-        </div>
-      </div>
-    @endif
+
     <div class="lecture single-page">
+      @if(!empty($lecture->title))
+        <div class="row">
+          <div class="col-lg-12">
+            <h1 class="page-header title">{{ $lecture->title }}</h1>
+          </div>
+        </div>
+      @endif
       @if($actions == 1)
         <div class="action-buttons">
           <a href="{{ URL::route('lecture.indexCourse', $lecture->course->id) }}" class="btn btn-default"><i class="fa fa-long-arrow-left"></i>{{ trans('common.back') }}</a>
@@ -26,7 +27,7 @@
         </div>
       @endif
         @if($actions != 1)
-          <a href="{{ URL::route('lecture.indexCourse', $lecture->course->id) }}" class="btn btn-primary"><i class="fa fa-long-arrow-left"></i>{{ trans('common.back') }}</a>
+          <a href="{{ URL::route('lecture.indexCourse', $lecture->course->id) }}" class="btn btn-primary "><i class="fa fa-long-arrow-left back"></i>{{ trans('common.back') }}</a>
         @endif
           <a href="{{URL::route('exercise.index')}}" class="btn btn-primary">{{ trans('app.go-to-exercises') }}<i class="fa fa-long-arrow-right"></i></a>
     </div>

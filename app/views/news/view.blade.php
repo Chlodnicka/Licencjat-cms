@@ -1,13 +1,14 @@
 @section('content')
-    @if(!empty($news->title))
-        <div class="row">
-            <div class="col-lg-12">
-                <h1 class="page-header title">{{ $news->title }}</h1>
-            </div>
-        </div>
-    @endif
+
 <div class="content news single-page">
   @if(!empty($news))
+        @if(!empty($news->title))
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header title">{{ $news->title }}</h1>
+                </div>
+            </div>
+        @endif
         @if($actions == 1)
             <div class="action-buttons">
 
@@ -33,7 +34,9 @@
     @endif
             @if($actions != 1)
         <p class="author">{{ $news->author->firstname }} {{ $news->author->lastname }}</p>
-    @endif
+                <a href="{{ URL::route('news.index') }}" class="btn btn-primary"><i class="fa fa-long-arrow-left back"></i>{{ trans('common.back') }}</a>
+
+            @endif
   @else
     <p class="no-result">{{ trans('app.no-such-news-item') }}</p>
   @endif

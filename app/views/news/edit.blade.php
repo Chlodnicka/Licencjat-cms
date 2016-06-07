@@ -9,7 +9,7 @@
   </div>
   @if(!empty($news))
     <div class="edit news">
-      {{ Form::open(array('route' => array('news.update', $news->id))) }}
+      {{ Form::open(array('route' => array('news.update', $news->id), 'files'=>true)) }}
       <div class="form-cluster">
         <div class="form-group">
           {{ Form::label('title', Lang::get('common.title'))}}
@@ -24,6 +24,27 @@
         <div class="form-group">
           {{ Form::label('content', Lang::get('common.content'))}}
           {{ Form::textarea('content', $news->content, array('id'=>'editor')) }}
+        </div>
+
+        <div class="form-group">
+          <?php $attachment = DB::table('attachments')->where('id', '=', $news->attachment_id)->get();?>
+          {{ Form::label('image', Lang::get('app.upload-img'))}}
+          @foreach($attachment as $item)
+            <p>{{ trans('common.attached-file') }}</p>
+            {{ HTML::image($item->url) }}
+          @endforeach
+          <input name="image" type="file" id="image">
+        </div>
+        <div class="form-group">
+          <input id="img-isset" type="checkbox" name="img-isset" checked="checked" value="1"><label for="img-isset"><span>{{ trans('common.img-isset') }}</span></label>
+        </div>
+        <div class="form-group">
+          {{ Form::label('img-description', Lang::get('app.img-description'))}}
+          {{ Form::text('img-description') }}
+        </div>
+        <div class="form-group">
+          {{ Form::label('img-title', Lang::get('common.img-title'))}}
+          {{ Form::text('img-title') }}
         </div>
         <div class="form-group">
           {{ Form::label('date', Lang::get('common.date'))}}

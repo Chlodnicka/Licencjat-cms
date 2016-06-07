@@ -1,21 +1,22 @@
 @section('content')
-  <div class="row">
-    <div class="col-lg-12">
-      <h1 class="page-header title">{{ trans('app.news-list') }}</h1>
-    </div>
-  </div>
-    @if(!empty($news_lead->lead) && $actions != 1)
-      <p class="lead">{{ $news_lead->lead }}</p>
-    @endif
-    @if($actions == 1)
-      <div class="action-buttons">
-          <a href="{{ URL::route('dashboard') }}" class="btn btn-default"><i class="fa fa-long-arrow-left"></i>{{ trans('common.back') }}</a>
 
-          <a class="btn btn-primary" href="{{ URL::route('news.new') }}">{{ trans('common.new') }}</a>
-      </div>
-    @endif
     @if(!empty($news))
-    <div class="content news">
+    <div class="content news single-page">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header title">{{ trans('app.news-list') }}</h1>
+            </div>
+        </div>
+        @if(!empty($news_lead->lead) && $actions != 1)
+            <p class="lead">{{ $news_lead->lead }}</p>
+        @endif
+        @if($actions == 1)
+            <div class="action-buttons">
+                <a href="{{ URL::route('dashboard') }}" class="btn btn-default"><i class="fa fa-long-arrow-left"></i>{{ trans('common.back') }}</a>
+
+                <a class="btn btn-primary" href="{{ URL::route('news.new') }}">{{ trans('common.new') }}</a>
+            </div>
+        @endif
       @foreach ($news as $newsItem)
           <div class="box-item list-item">
             <div class="box-img">

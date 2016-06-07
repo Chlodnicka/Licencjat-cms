@@ -20,13 +20,13 @@
                 {{ Form::textarea('lead', $tree->lead, array('id'=>'editor')) }}
             </div>
             <div class="form-group">
-                {{ Form::label('active', 'Dostępność pluginu')}}
-                <input type="checkbox" name="active" id="active" value="1"
-                       @if($tree->active == 1)
-                            checked="checked"
-                       @else
 
-                        @endif>
+                <div class="form-group">
+                    <input id="active" type="checkbox" name="active" @if($tree->active == 1)
+                    checked="checked"
+                           @endif value="1"><label for="active"><span>{{ trans('common.is-active') }}</span></label>
+                </div>
+
             </div>
             {{ Form::submit(Lang::get('common.submit')) }}
         </div>

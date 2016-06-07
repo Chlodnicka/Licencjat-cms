@@ -5,7 +5,15 @@
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <title>{{ trans('common.homepage') }}</title>
 </head>
+
 <body>
+<style>
+    @font-face {
+        font-family: 'DejaVu Sans';
+        src: {{ URL::to('/') . 'assets/fonts/DejaVuSans.tff' }};
+    }
+    body { font-family: 'DejaVu Sans'; }
+</style>
     <h1>{{ trans('app.exercises-generated') }}</h1>
     <div class="exercises">
         @foreach( $exercises as $exercise)

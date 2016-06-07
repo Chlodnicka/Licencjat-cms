@@ -41,6 +41,15 @@
 
           return $rules;
       }
+
+      /*
+       * Gets 3 last subscribed students
+       */
+
+      public static function get_students() {
+          $students = DB::table('students')->orderBy('id', 'desc')->limit(3)->get();
+          return $students;
+      }
   }
 
 

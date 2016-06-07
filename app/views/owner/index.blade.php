@@ -1,11 +1,10 @@
 @section('content')
+<div class="single-page">
   <div class="row">
     <div class="col-lg-12">
       <h1 class="page-header title">{{ trans('app.owner-information') }}</h1>
     </div>
   </div>
-<div class="single-page">
-
   @if($actions == 1)
     <div class="action-buttons">
       <a href="{{ URL::route('dashboard') }}" class="btn btn-default btn-back"><i class="fa fa-long-arrow-left"></i>  {{ trans('common.back') }} </a>
@@ -29,6 +28,11 @@
       @endif
       @if(!empty($owner->phone))
         <p class="phone"><a href="tel:+48 {{ $owner->phone }}">{{ trans('app.phone') }}: +48 {{ $owner->phone }}</a></p>
+      @endif
+      @if(!empty($owner->attachment_id))
+        @foreach($attachment as $item)
+          {{ HTML::image($item->url) }}
+        @endforeach
       @endif
     </div>
     @if(!empty($owner->tutorshipHours))

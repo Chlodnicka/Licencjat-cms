@@ -56,10 +56,12 @@ class OwnerController extends BaseController
             $owner = Owner::find(1);
             $positions = $owner->position();
             $position = $positions[$owner->position];
+            $attachment = DB::table('attachments')->where('id', '=', $owner->attachment_id)->get();
             $this->layout->content = View::make('owner.index', array(
                 'owner' => $owner,
                 'position' => $position,
                 'actions' => $actions,
+                'attachment' => $attachment,
             ));
         } else {
             return Redirect::route('homepage');
@@ -81,9 +83,11 @@ class OwnerController extends BaseController
                 $id = 1;
                 $owner = Owner::findOrFail($id);
                 $positions = $owner->position();
+                $attachment = DB::table('attachments')->where('id', '=', $owner->attachment_id)->get();
                 $this->layout->content = View::make('owner.edit', array (
                     'owner' => $owner,
                     'positions' => $positions,
+                    'attachment' => $attachment,
                 ));
             } else {
                 return Redirect::route('owner.index');
@@ -127,6 +131,33 @@ class OwnerController extends BaseController
                 {
                     return Redirect::route('owner.edit')->withErrors($validator);
                 } else {
+                    $image = Input::file('image');
+                    $img_set = Input::get('img-isset');
+                    var_dump($image);
+                    var_dump($img_set);
+                    if($image !== NULL && $img_set == 1) {
+                        $destinationPath = 'uploads/';
+                        $extension = $image->getClientOriginalName();
+                        $comma = strpos($extension, '.');
+                        $extension = substr($extension, $comma);
+                        $filename = Str::random(60) . $extension;
+                        $url = $destinationPath . $filename;
+
+                        $file = new Attachment();
+                        $file->url = $url;
+                        $file->name = $filename;
+                        $file->description = Input::get('img-description');
+                        $file->title = Input::get('img-title');
+
+
+                        Input::file('image')->move($destinationPath, $filename);
+
+                        $file->save();
+                        $owner->attachment_id = $file->id;
+                    }
+                    if($img_set != 1) {
+                        $owner->attachment_id = NULL;
+                    }
                     $owner->save();
                     Session::flash('message', Lang::get('app.owner-updated'));
                     $tree = Tree::findOrFail(1);

@@ -5,7 +5,7 @@
   display: inline-block;
   margin: 0 auto;
   text-transform: uppercase;
-  border-radius: 20px;
+ // border-radius: 20px;
   i {
     padding-left: 10px;
   }
@@ -44,21 +44,20 @@
 }
 
 @mixin box {
-  width: 33%;
-  max-width: 300px;
+  width: calc((100% / 2) - 84px);
   min-width: 250px;
   display: inline-block;
+  min-height: 160px;
   vertical-align: top;
-  margin: 10px 30px ;
-  border: 1px solid #eeeeee;
-  border-radius: 4px;
-  padding: 20px;
+  border-left: 5px solid #ED6C21;
+  padding: 20px 40px 0 20px;
+  margin-bottom: 30px;
   .box-img {
     margin: -20px -20px 0 -20px;
     img {
       max-width: 100%;
-      border-top-left-radius: 4px;
-      border-top-right-radius: 4px;
+     // border-top-left-radius: 4px;
+     // border-top-right-radius: 4px;
     }
   }
   .title {
@@ -69,6 +68,9 @@
   }
   .date {
     color: $brandBlue;
+  }
+  .item-lead {
+    height: 34px;
   }
   .btn {
     @include btn-more;

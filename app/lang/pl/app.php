@@ -57,6 +57,7 @@
         "news-delete" => "Usuń aktualność",
         "news-edit" => "Edytuj aktualność ",
         "news-delete-message" => "Czy na pewno chcesz usunąć wiadomość? Nie będziesz miał możliwości przywrócenia jej.",
+        "news-updated" => "Aktualność została zapisana",
 
         /*
          * Owner translations
@@ -82,6 +83,7 @@
         "student-delete-message" => "Czy na pewno chcesz usunąć konto? Nie będziesz miał możliwości przywrócenia go.",
         "student-new" => "Rejestracja",
         "students" => "Student",
+        "student-edit" => "Edytuj swoje dane",
 
         /*
          * Tags translations
@@ -125,6 +127,11 @@
         "attachment-delete" => "Usuń załącznik",
         "attachment-new" => "Dodaj nowy załącznik",
         "attachment" => "Załącznik",
+        "upload-attach" => "Wgraj załącznik",
+        "attach-description" => "Opis załącznika",
+        "attach-title" => "Tytuł załącznika",
+        "upload-img" => "Wgraj plik",
+
     );
 
 ?>

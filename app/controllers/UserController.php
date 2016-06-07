@@ -27,12 +27,7 @@ class UserController extends BaseController
 
     public function showLogin()
     {
-        $tree = Tree::findOrFail(2);
-        if($tree->active == 1){
             $this->layout->content = View::make('user.login');
-        } else {
-            return Redirect::route('homepage');
-        }
     }
 
     public function showRegister()
@@ -75,9 +70,11 @@ class UserController extends BaseController
                 }
                 if($role == 1) {
                     return Redirect::route('dashboard');
+                } elseif ($role == 2) {
+                    return Redirect::route('student.index');
                 }
             } else {
-                return Redirect::to('login');
+                return Redirect::route('user.login');
             }
 
         }

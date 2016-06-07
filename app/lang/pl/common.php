@@ -27,6 +27,7 @@ return array(
     "powered" => "powered by",
     "sitemap" => "Mapa serwisu",
     "see-more" => "Zobacz więcej",
+    "is-active" => "Plugin jest dostępny",
     "new" => "Nowy",
     "delete" => "Usuń",
     "edit" => "Edytuj",
@@ -65,6 +66,8 @@ return array(
     "not-worked" => "Wystąpił błąd. Spróbuj ponownie później lub skontaktuj się z dostarczycielem systemu.",
     "no-such-site" => "Taka strona nie istnieje.",
     "generate" => "Generuj arkusz",
+    "img-isset" => "Nie usuwaj pliku",
+    "attached-file" => "Aktualnie załączony plik",
 
 
 

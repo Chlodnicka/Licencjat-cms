@@ -6,6 +6,13 @@
     <title>{{ trans('common.homepage') }}</title>
 </head>
 <body>
+<style>
+    @font-face {
+        font-family: 'DejaVu Sans';
+        src: {{ URL::to('/') . 'assets/fonts/DejaVuSans.tff' }};
+    }
+    body { font-family: DejaVu Sans; }
+</style>
     <h1>{{ trans('app.exercises-generated-with-answers') }}</h1>
     <div class="exercises">
         @foreach( $exercises as $exercise)
