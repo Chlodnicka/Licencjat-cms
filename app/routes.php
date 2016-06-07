@@ -300,7 +300,12 @@ Route::get('/change_password', ['as' => 'user.change_password', 'uses' => 'UserC
 Route::post('/change_password', ['as' => 'user.do_change_password', 'uses' => 'UserController@postPasswordChange']);
 
 
+//file browser list
 
+Route::any('/imglist', ['as'=>'imglist', 'middleware'=>'auth', 'uses'=>'FileBrowserontroller@imageList']);
+//Image upload
+
+Route::any('/upload', ['middleware' => 'auth', 'uses' =>'FileBrowserontroller@index']);
 
 /**
  * Dynamically loading menu settings

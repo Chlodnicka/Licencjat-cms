@@ -70,9 +70,11 @@ class UserController extends BaseController
                 }
                 if($role == 1) {
                     return Redirect::route('dashboard');
+                } elseif ($role == 2) {
+                    return Redirect::route('student.index');
                 }
             } else {
-                return Redirect::to('login');
+                return Redirect::route('user.login');
             }
 
         }

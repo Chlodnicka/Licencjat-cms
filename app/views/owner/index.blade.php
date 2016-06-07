@@ -1,11 +1,10 @@
 @section('content')
+<div class="single-page">
   <div class="row">
     <div class="col-lg-12">
       <h1 class="page-header title">{{ trans('app.owner-information') }}</h1>
     </div>
   </div>
-<div class="single-page">
-
   @if($actions == 1)
     <div class="action-buttons">
       <a href="{{ URL::route('dashboard') }}" class="btn btn-default btn-back"><i class="fa fa-long-arrow-left"></i>  {{ trans('common.back') }} </a>

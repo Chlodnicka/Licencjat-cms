@@ -19,7 +19,12 @@
         @if ($errors->has('firstname')) <p class="help-block">{{ $errors->first('firstname') }}</p> @endif
       </div>
       <div class="form-group">
+
         {{ Form::label('image', Lang::get('app.upload-img'))}}
+        @foreach($attachment as $item)
+          <p>{{ trans('common.attached-file') }}</p>
+          {{ HTML::image($item->url) }}
+        @endforeach
         <input name="image" type="file" id="image">
       </div>
 

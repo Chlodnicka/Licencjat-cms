@@ -83,9 +83,11 @@ class OwnerController extends BaseController
                 $id = 1;
                 $owner = Owner::findOrFail($id);
                 $positions = $owner->position();
+                $attachment = DB::table('attachments')->where('id', '=', $owner->attachment_id)->get();
                 $this->layout->content = View::make('owner.edit', array (
                     'owner' => $owner,
                     'positions' => $positions,
+                    'attachment' => $attachment,
                 ));
             } else {
                 return Redirect::route('owner.index');

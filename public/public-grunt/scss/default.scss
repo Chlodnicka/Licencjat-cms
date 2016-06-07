@@ -28,23 +28,29 @@
       padding: 0 0 0 10px !important;
     }
   }
-
-  input[type="checkbox"] {
-    //display:none;
-  }
-  input[type="checkbox"] + label span {
-    display:inline-block;
-    width:19px;
-    height:19px;
-    margin:-1px 4px 0 0;
-    vertical-align:middle;
-    border: 1px solid $brandGray;
-    cursor:pointer;
+  .btn-danger {
+    background-color: $brandRed !important;
+    border: 1px solid $brandRed;
   }
 
-  input[type="checkbox"]:checked + label span {
-    background:url('../img/checkbox.png') -19px top no-repeat;
+  .form-group {
+    label {
+      min-width: 160px;
+      display: inline-block;
+    }
+    label[for="courses"] {
+      vertical-align: top;
+    }
   }
+
+
+  .filter-box {
+    label {
+      width: auto;
+      min-width: 60px;
+    }
+  }
+
   .back-btn {
     margin:  0 auto !important;
     display: block !important;
@@ -144,6 +150,7 @@
           vertical-align: middle;
           position: relative;
           top: 4px;
+          text-align: right;
           &-search {
             width: calc(100% - 320px);
             display: inline-block;
@@ -285,15 +292,21 @@
       }
       .home {
         .news {
-          margin: 0;
+          padding: 0 20px;
           .news-item {
             width: 100%;
-            border-left: 5px solid $brandGray;
+            border-left: 5px solid $brandOrange;
             margin: 20px 0;
             padding: 0 10px 10px 10px;
             .btn {
               @include btn-more;
               float: none;
+            }
+            .title {
+              color: $brandBlue;
+            }
+            .date {
+              color: $brandBlue;
             }
           }
           .content-news {
@@ -305,13 +318,16 @@
             }
           }
         }
+        .courses{
+          padding: 0 20px;
+        }
         .content-course {
           display: table;
           width: 100%;
           .course-item {
             display: table-cell;
             width: 50%;
-            padding: 20px;
+            padding: 0;
             min-width: 300px;
             .item-lead {
               color: $brandBlue;
@@ -336,6 +352,7 @@
       h1, h2, h3, h4, h5, h6 {
         font-family: $sans-serif;
         text-align: left;
+        color: $brandBlue;
       }
       h1 {
         font-size: 36px;
@@ -361,7 +378,7 @@
       }
       .news {
         text-align: left;
-        margin: 0 -30px;
+       // margin: 0 -30px;
         .title {
           margin-bottom: 10px;
         }
@@ -419,7 +436,7 @@
       }
       .exercises {
         width: 70%;
-        display: inline-block;
+        //display: inline-block;
         .btn {
           @include btn;
           float: none;
@@ -439,7 +456,7 @@
             cursor: pointer;
             @include hover;
           }
-          input[type="checkbox"] {
+         /* input[type="checkbox"] {
            // display: none;
           }
           input[type="checkbox"] + label:before {
@@ -456,7 +473,7 @@
             background:url('../img/checkbox-checked.png') -19px top no-repeat;
             background-position: center center;
             background-size: contain;
-          }
+          }*/
         }
       }
       .exercise {
@@ -516,7 +533,7 @@
       }
       .list {
         width: 70%;
-        display: inline-block;
+        margin: 0 auto;
         .lead {
           width: 100%;
         }
@@ -687,13 +704,14 @@ input[type="file"]::-webkit-file-upload-button {
 }
 input[type="file"] {
   padding: 10px 0 !important;
+  line-height: 7px;
 }
 input[type="file"]::before {
   content: 'Wybierz plik';
   display: inline-block;
   background: $brandOrange;
   border-radius: 3px;
-  padding: 10px;
+  padding: 10px 5px;
   outline: none;
   white-space: nowrap;
   -webkit-user-select: none;
@@ -721,6 +739,8 @@ input[type="file"]:active::before {
   }
   label.list-item {
     position: relative;
+    margin-top: 0 !important;
+    padding-top: 20px;
     &:before {
       position: absolute;
       top: calc(50% - 8px);
@@ -728,6 +748,14 @@ input[type="file"]:active::before {
   }
 }
 
+label span {
+  margin-left: 30px;
+}
+
+span.fa {
+  margin: 0;
+  color: white;
+}
 .admin {
   #wrapper {
     background-color: $brandBlue;
@@ -1003,6 +1031,16 @@ input[type="file"]:active::before {
     display: block;
     float: none !important;
   }
+  .dropdown-messages {
+    span.text-muted {
+      margin-top: 0 !important;
+    }
+  }
+  .form-group {
+    img {
+      max-width: 300px;
+    }
+  }
 }
 
 blockquote {
@@ -1031,10 +1069,12 @@ blockquote {
     }
 
     span {
-      margin-left: 30px;
+     // margin-left: 30px;
       margin-top: -17px;
       display: inline-block;
       font-size: 14px;
       color: $brandBlue;
     }
-
+img {
+  max-width: 100%;
+}

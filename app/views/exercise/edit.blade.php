@@ -59,8 +59,6 @@
             {{ Form::select('tags[]', ($tags), $exercise_tags, ['multiple'=>true,'class' => 'form-control margin']) }}
           </div>
 
-
-                  <!--tagi-->
           {{ Form::submit(Lang::get('common.submit')) }}
         </div>
         {{ Form::close() }}
