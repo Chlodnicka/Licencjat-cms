@@ -291,33 +291,46 @@
         }
       }
       .home {
-        .news {
+        .news-and-information {
           padding: 0 20px;
-          .news-item {
-            width: 100%;
-            border-left: 5px solid $brandOrange;
-            margin: 20px 0;
-            padding: 0 10px 10px 10px;
-            .btn {
-              @include btn-more;
-              float: none;
+          .news {
+            display: inline-block;
+            width: calc(60% - 60px);
+            margin-right: 20px;
+            vertical-align: top;
+            .news-item {
+              width: 100%;
+              border-left: 5px solid $brandOrange;
+              margin: 20px 0;
+              padding: 0 10px 10px 10px;
+              .btn {
+                @include btn-more;
+                float: none;
+              }
+              .title {
+                color: $brandBlue;
+              }
+              .date {
+                color: $brandBlue;
+              }
             }
-            .title {
-              color: $brandBlue;
-            }
-            .date {
-              color: $brandBlue;
+            .content-news {
+              //margin: 0 -30px;
+              width: 100%;
+              display: table;
+              .box-item {
+                @include box();
+              }
             }
           }
-          .content-news {
-             //margin: 0 -30px;
-            width: 100%;
-            display: table;
-            .box-item {
-              @include box();
-            }
+          .information {
+            display: inline-block;
+            vertical-align: top;
+            width: calc(40% - 60px);
+            margin-left: 20px;
           }
         }
+
         .courses{
           padding: 0 20px;
         }
@@ -520,15 +533,34 @@
         max-width: 700px;
         padding: 20px;
         margin: 0 auto;
+        .btn-back {
+          i {
+            padding: 0 20px 0 0;
+          }
+        }
         input[type="submit"] {
           background-color: $brandBlue;
           text-transform: uppercase;
           color: white;
           border: none;
           display: block;
-          margin: 20px auto;
+          //margin: 20px auto;
           cursor: pointer;
           @include hover;
+        }
+      }
+      .student-delete {
+        form {
+          display: inline-block;
+          vertical-align: top;
+          .btn-danger {
+            border-radius: 0 !important;
+            width: auto !important;
+            padding: 11.5px 25px;
+            margin: 0 !important;
+            min-width: auto !important;
+            font-size: 16px;
+          }
         }
       }
       .list {
@@ -591,9 +623,10 @@
   }
     footer {
       width: 100%;
-      border-top: 1px solid $brandOrange;
+//      border-top: 1px solid $brandOrange;
+      background-color: $brandBlue;
       h4, h4 a {
-        color: $brandBlue;
+        color: $brandWhite;
       }
       .container {
         padding: 20px;
@@ -610,14 +643,15 @@
             padding: 0;
             margin: 0;
             list-style-type: none;
-            li {
-
+            li a{
+              color: $brandWhite;
             }
           }
         }
       }
       .copyrights {
         width: 33%;
+        color: $brandWhite;
       }
     }
     form {
@@ -1077,4 +1111,28 @@ blockquote {
     }
 img {
   max-width: 100%;
+}
+
+.display {
+  display: block;
+}
+
+.single-page .attachment {
+  display: block;
+  margin: 20px 0;
+  a {
+    color: $brandOrange;
+    font-size: 16px;
+  }
+}
+
+.file-browser {
+  max-width: 100%;
+  h2 {
+    color: $brandBlue;
+  }
+  div {
+    width: calc((100% / 4) - 30px);
+    display: inline-block;
+  }
 }

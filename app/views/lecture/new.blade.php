@@ -21,16 +21,16 @@
         @if ($errors->has('lead')) <p class="help-block">{{ $errors->first('lead') }}</p> @endif
       </div>
       <div class="form-group">
-        {{ Form::label('attachment', Lang::get('app.upload-attach'))}}
-        {{ Form::file('attachment') }}
+        {{ Form::label('image', Lang::get('app.upload-img'))}}
+        {{ Form::file('image') }}
       </div>
       <div class="form-group">
-        {{ Form::label('attachment-description', Lang::get('app.attach-description'))}}
-        {{ Form::text('attachment-description') }}
+        {{ Form::label('img-description', Lang::get('app.attach-description'))}}
+        {{ Form::text('img-description') }}
       </div>
       <div class="form-group">
-        {{ Form::label('attachment-title', Lang::get('app.attach-title'))}}
-        {{ Form::text('attachment-title') }}
+        {{ Form::label('img-title', Lang::get('app.attach-title'))}}
+        {{ Form::text('img-title') }}
       </div>
       <div class="form-group">
         {{ Form::label('content', Lang::get('common.content'))}}

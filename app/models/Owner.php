@@ -65,14 +65,25 @@
       }
 
       /**
-       * Gets attachments connected with owner
+       * Gets tags connected with owner
        *
        * @return object
        */
-      public function attachments()
+      public function tags()
       {
           return $this->belongsToMany('Tag');
       }
+
+      /**
+       * Gets main attachment connected with news item
+       *
+       * @return object
+       */
+      public function attachment()
+      {
+          return $this->hasMany('Attachment');
+      }
+
 
       /**
        * Gets possible positions for owner

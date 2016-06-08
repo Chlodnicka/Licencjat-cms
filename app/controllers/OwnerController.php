@@ -133,8 +133,6 @@ class OwnerController extends BaseController
                 } else {
                     $image = Input::file('image');
                     $img_set = Input::get('img-isset');
-                    var_dump($image);
-                    var_dump($img_set);
                     if($image !== NULL && $img_set == 1) {
                         $destinationPath = 'uploads/';
                         $extension = $image->getClientOriginalName();

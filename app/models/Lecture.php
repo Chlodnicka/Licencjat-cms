@@ -46,6 +46,17 @@
       }
 
       /**
+       * Gets main attachment connected with lecture item
+       *
+       * @return object
+       */
+      public function attachment()
+      {
+          return $this->hasMany('Attachment');
+      }
+
+
+      /**
        * Gets exercises connected with exercise
        *
        * @return object

@@ -124,7 +124,14 @@
     <script src="{{ URL::asset('/assets/js/sb-admin-2.js') }}"></script>
     <script src="{{ URL::asset('/packages/ckeditor/ckeditor.js') }}"></script>
     <script type="text/javascript">
-        CKEDITOR.replace( 'editor' );
+        CKEDITOR.replace( 'editor', {
+            filebrowserBrowseUrl : "{{route('files.index',['_token' => csrf_token() ])}}",
+            filebrowserImageBrowseUrl : "{{route('files.index',['_token' => csrf_token() ])}}",
+            filebrowserFlashBrowseUrl : "{{route('files.index',['_token' => csrf_token() ])}}",
+            filebrowserUploadUrl : "{{route('files.upload',['_token' => csrf_token() ])}}",
+            filebrowserImageUploadUrl : "{{route('files.upload',['_token' => csrf_token() ])}}",
+            filebrowserFlashUploadUrl : "{{route('files.upload',['_token' => csrf_token() ])}}",
+        });
         CKEDITOR.add;
     </script>
     <script>

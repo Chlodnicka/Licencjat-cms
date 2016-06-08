@@ -1,6 +1,7 @@
 $(document).ready( function () {
     dropdown();
     dropdownLectures();
+    dropdown_admin();
 });
 
 function dropdown() {
@@ -27,5 +28,13 @@ function dropdownLectures() {
                     model.append("<option value='"+ element.id +"'>" + element.title + "</option>");
                 });
             });
+    });
+}
+
+function dropdown_admin() {
+    $('#side-menu .dropdown').on('click', function (e) {
+        if(!($(e.target).hasClass('side-item'))){
+            $('#side-menu .dropdown > ul').toggleClass('display');
+        }
     });
 }

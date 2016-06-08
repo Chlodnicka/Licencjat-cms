@@ -290,6 +290,17 @@ Route::post('/tree/exercises/{id}/', ['uses' => 'TreeController@edit']);
 Route::get('/tree', ['as' => 'tree.index', 'uses' => 'TreeController@index']);
 Route::get('/tree/', ['uses' => 'TreeController@index']);
 
+
+Route::group(array('before' => 'csrf'), function()
+{
+    Route::get('/files/index', ['as' => 'files.index', 'uses' => 'FilesBrowserController@imageList']);
+    Route::post('/files/index', ['as' => 'files.indexPost', 'uses' => 'FilesBrowserController@imageList']);
+    Route::get('/files/upload', ['as' => 'files.upload', 'uses' => 'FilesBrowserController@upload']);
+    Route::post('/files/upload', ['as' => 'files.uploadPost', 'uses' => 'FilesBrowserController@upload']);
+
+});
+
+
 Route::get('/login', ['as'=> 'user.login', 'uses' => 'UserController@showLogin']);
 Route::post('/login', ['as' => 'user.dologin', 'uses' => 'UserController@doLogin']);
 Route::get('/logout', ['as' => 'user.logout', 'uses' => 'UserController@doLogout']);
