@@ -25,7 +25,7 @@
       <p class="date">{{ $news->date }}</p>
     @endif
     @foreach($attachment as $item)
-                {{ HTML::image($item->url) }}
+                {{ HTML::image($item->url, $item->description) }}
     @endforeach
     @if(!empty($news->content))
       <div class="richtext">

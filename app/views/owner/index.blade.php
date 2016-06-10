@@ -31,7 +31,7 @@
       @endif
       @if(!empty($owner->attachment_id))
         @foreach($attachment as $item)
-          {{ HTML::image($item->url) }}
+          {{ HTML::image($item->url, $item->description) }}
         @endforeach
       @endif
     </div>
@@ -42,11 +42,6 @@
     </div>
     @endif
   </div>
-  @if(!empty($owner->photo))
-    <div class="photo">
-      <img src="{{ $owner->photo }}">
-    </div>
-  @endif
   @if(!empty($owner->content))
     <div class="description">
       <h2>{{ trans('common.description') }}</h2>

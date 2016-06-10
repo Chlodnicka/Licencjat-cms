@@ -68,6 +68,7 @@ return array(
     "generate" => "Generuj arkusz",
     "img-isset" => "Nie usuwaj pliku",
     "attached-file" => "Aktualnie załączony plik",
+    "img-title" => "Tytuł pliku"
 
 
 

@@ -87,9 +87,8 @@
                                     <form action="{{ URL::route('search.index') }}" method="post">
                                         <input type="text" name="searchQuery" value="" class="form-control" placeholder="{{ trans('common.search') }}">
                                         <span class="input-group-btn">
-                                            <input class="btn btn-default" type="submit" value="">
-                                                <i class="fa fa-search" aria-hidden="true"></i>
-                                            </input>
+                                            <input style="height: 34px" class="btn btn-default" type="submit" value="">
+                                            <i class="fa fa-search"></i>
                                         </span>
                                     </form>
 

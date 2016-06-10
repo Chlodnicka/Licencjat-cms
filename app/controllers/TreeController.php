@@ -102,7 +102,7 @@ class TreeController extends BaseController
                 $validator = Validator::make(Input::all(), $rules);
 
                 if ($validator->fails()) {
-                    return Redirect::route('tree' . $tree->name, $tree->id)->withErrors($validator);
+                    return Redirect::route('tree.' . $tree->name, $tree->id)->withErrors($validator);
                 } else {
                     $tree->save();
                     Session::flash('message', Lang::get('common.data-saved'));

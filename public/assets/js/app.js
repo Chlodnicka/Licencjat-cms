@@ -2,6 +2,7 @@ $(document).ready( function () {
     dropdown();
     dropdownLectures();
     dropdown_admin();
+    menu();
 });
 
 function dropdown() {
@@ -35,6 +36,14 @@ function dropdown_admin() {
     $('#side-menu .dropdown').on('click', function (e) {
         if(!($(e.target).hasClass('side-item'))){
             $('#side-menu .dropdown > ul').toggleClass('display');
+        }
+    });
+}
+
+function menu() {
+    $('.menu-button').on('click', function (e) {
+        if(!($(e.target).hasClass('side-item'))){
+            $('.main-menu').toggleClass('display');
         }
     });
 }

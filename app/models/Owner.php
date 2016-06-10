@@ -99,7 +99,7 @@
               '4' => 'dr',
               '5' => 'dr inż.',
               '6' => 'dr hab.',
-              '7' => 'prof.'
+              '7' => 'prof. dr hab.'
           );
           return $positions;
       }
@@ -118,11 +118,11 @@
               'phone' => 'numeric|min:9',
               'university' => array(
                   'required',
-                  'regex:/^[\pL\s]+$/u'
+                  'regex:/^[\pL\s\,]+$/u'
               ),
               'department' => array(
                   'required',
-                  'regex:/^[\pL\s]+$/u'
+                  'regex:/^[\pL\s\,]+$/u'
               ),
               'tutorshipHours' => array(
                   'required',

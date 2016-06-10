@@ -85,7 +85,7 @@
 
           $rules = array(
               'title' => 'required|regex:/^[\pL\s]+$/u',
-              'lead' => 'required|regex:/^[\pL\s\d\.\-\:\;]+$/u',
+              'lead' => 'regex:/^[\pL\s\d\.\-\:\;]+$/u',
               'date' => 'required|date',
               'courses' => 'required',
           );

@@ -32,7 +32,11 @@
 
       <nav>
           <div class="main-menu">
+            <div class="responsive-menu">
+              <button class="menu-button">Menu</button>
+            </div>
               @include('layouts.menu')
+
           </div>
       </nav>
     </header>
@@ -47,7 +51,6 @@
     </article>
 
     <footer>
-      <div class="container">
         <div class="sitemap">
           <div>
             <h4><a href="">{{ trans('common.sitemap') }}</a></h4>
@@ -62,7 +65,6 @@
           <p class="content">{{ trans('common.copy') }} {{ $owner->firstname }} {{ $owner->lastname }}</p>
           <p class="powered">{{ trans('common.powered') }} </p>
         </div>
-      </div>
     </footer>
     <script src="{{ URL::asset('/assets/js/jquery-2.2.3.min.js') }}"></script>
     <script src="{{ URL::asset('/assets/js/jquery.validate.min.js') }}"></script>

@@ -167,7 +167,7 @@
               }
               .btn-search {
                 position: absolute;
-                top: 1px;
+                top: 0;
                 right: 0;
                 width: 35px;
                 input[type=submit] {
@@ -200,11 +200,66 @@
             }
           }
         }
+        @media(max-width: 980px) {
+          .side-menu{
+            display: block;
+            margin: 20px 0;
+            width: 100%;
+            &-login {
+              text-align: center;
+              margin-top: 20px;
+              vertical-align: middle;
+              display: block;
+            }
+            &-search {
+              width: 90%;
+              display: block;
+              margin: 0 auto;
+              padding: 0;
+            }
+
+          }
+          .logo {
+            text-align: center;
+            margin: 0 auto;
+            display: block;
+          }
+        }
       }
       nav {
         width: 100%;
         border-top: 1px solid $brandGray;
         position: relative;
+        .menu-button {
+          display: none;
+        }
+        @media (max-width: 980px) {
+          .menu-button {
+            display: block;
+            width: 100%;
+            background-color: $brandBlue;
+            color: white;
+            border: 0;
+            outline: 0;
+            font-size: 20px;
+            text-transform: uppercase;
+            font-family: $sans-serif;
+            padding: 20px;
+          }
+          .main-menu ul {
+            display: none;
+          }
+          .display > ul{
+            display: block;
+            margin: 0;
+            li {
+              display: block;
+              width: 100% !important;
+              text-align: center;
+              margin: 0 !important;
+            }
+          }
+        }
         .main-menu {
         }
         div {
@@ -253,6 +308,17 @@
       margin: 0 auto;
       margin-top: 150px;
       margin-bottom: 50px;
+      @media (max-width: 1170px) {
+        max-width: 100%;
+        padding: 0;
+        width: auto;
+      }
+      @media (max-width: 980px) {
+        margin-top: 300px;
+      }
+      @media (max-width: 350px) {
+        margin-top: 360px;
+      }
       .new, .edit, .delete {
         margin: 0 !important;
         input {
@@ -347,6 +413,24 @@
               height: 51px;
             }
           }
+        }
+        @media (max-width: 980px) {
+          .content-course {
+            display: block;
+            .course-item {
+              display: block;
+              width: 100%;
+            }
+          }
+          .news, .information {
+            display: block !important;
+            width: 100% !important;
+            margin: 0 !important;
+            &-item {
+              width: calc(100% - 20px) !important;
+            }
+          }
+
         }
       }
 
@@ -601,6 +685,17 @@
       }
       .single-page {
         @include single-page;
+        @media (max-width: 1170px) {
+          padding: 0 20px;
+          .lectures, .exercises {
+            width: 100%;
+          }
+        }
+      @media(max-width: 1170px) {
+        .list {
+          width: 100%;
+        }
+      }
       }
     }
   .register {
@@ -622,9 +717,10 @@
       }
   }
     footer {
-      width: 100%;
+      width: calc(100% - 80px);
 //      border-top: 1px solid $brandOrange;
       background-color: $brandBlue;
+      padding: 20px 40px;
       h4, h4 a {
         color: $brandWhite;
       }
@@ -652,6 +748,15 @@
       .copyrights {
         width: 33%;
         color: $brandWhite;
+      }
+      @media (max-width: 980px) {
+        .sitemap, .copyrights {
+          width: 100%;
+          div {
+            width: 100%;
+          }
+        }
+
       }
     }
     form {
@@ -791,6 +896,16 @@ span.fa {
   color: white;
 }
 .admin {
+  .navbar-default .navbar-toggle {
+    background-color: transparent;
+    border: 0;
+    top: 15px;
+  }
+  .navbar-top-links .dropdown-user {
+    @media (max-width: 780px) {
+      left: 0;
+    }
+  }
   #wrapper {
     background-color: $brandBlue;
   }
@@ -917,6 +1032,9 @@ span.fa {
         text-decoration: none;
       }
     }
+    .input-group-btn {
+
+    }
   }
 
 
@@ -962,18 +1080,26 @@ span.fa {
     span {
       width: 40px;
       max-width: 40px;
+
       input {
         width: 100%;
         border-bottom-right-radius: 5px !important;
         border-top-right-radius: 5px !important;
+        background-image: url("../img/lupa.png");
         display: inline-block;
         text-transform: uppercase;
-        background-color: #eee;
+        background-color: #fff;
         padding: 7px 0;
-        border: 0;
+        border-top: 1px solid #ccc;
+        border-bottom: 1px solid #ccc;
+        border-right: 1px solid #ccc;
         outline: 0;
         color: $brandBlue;
         margin-top: 0;
+        height: 34px;
+        background-size: 16px auto;
+        background-repeat: no-repeat;
+        background-position: center center;
       }
     }
     input {

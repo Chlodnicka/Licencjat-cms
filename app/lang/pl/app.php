@@ -46,6 +46,7 @@
         "lecture-edit" => "Edycja wykładu ",
         "lecture-delete-message" => "Czy na pewno chcesz usunąć wykład? Nie będziesz miał możliwości przywrócenia go.",
         "lecture-delete" => "Usuń wykład ",
+        "lecture-created" => "Utworzono nowy wykład",
 
         /*
          * News translations
@@ -84,6 +85,7 @@
         "student-new" => "Rejestracja",
         "students" => "Student",
         "student-edit" => "Edytuj swoje dane",
+        "student-updated" => "Dane zostały zapisane",
 
         /*
          * Tags translations
@@ -117,6 +119,9 @@
         "exercises-generated-with-answers" => "Arkusz z odpowiedziami",
         "filter" => "Filtruj",
         "exercise_updated" => "Zadanie zaktualizowano pomyślnie",
+        "exercise-destroyed" => "Zadanie zostało usunięte",
+        "exercise-created" => "Zadanie zostało utworzone",
+        "img-description" => "Tekst alternatywny",
 
         /*
          * Attachment translations

@@ -11,6 +11,6 @@
     <a class="btn btn-danger" href="{{ URL::route('attachment.delete', $attachment->id) }}">{{ trans('common.delete') }}</a>
   </div>
   <p>{{ $attachment->description }}</p>
-  {{ HTML::image($attachment->url) }}
+  {{ HTML::image($attachment->url, $attachment->description) }}
   <p>{{ $attachment->name }}</p>
 @stop

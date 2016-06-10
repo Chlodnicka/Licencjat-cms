@@ -41,12 +41,10 @@
         <div class="exercises">
           <h2>{{ trans('app.exercises') }}</h2><!--dopisać index w zaleźności od wykładu, przypiwania itd!-- BW!-->
           <ul>
-              @foreach($lectures as $lecture)
-                  <a href="{{ URL::route('exercise.indexLecture', $lecture->id) }}"><li>{{ $lecture->title }}</li></a>
+              @foreach($exercises as $exercise)
+                  <a href="{{ URL::route('exercise.view', $exercise->id) }}"><li>{{ $exercise->title }}</li></a>
               @endforeach
-              <a href="{{ URL::route('exercise.indexDifficulty', array(1, $course->id)) }}"><li>Łatwe</li></a>
-              <a href="{{ URL::route('exercise.indexDifficulty', array(2, $course->id)) }}"><li>Srednie</li></a>
-              <a href="{{ URL::route('exercise.indexDifficulty', array(3, $course->id)) }}"><li>Trudne</li></a>
+
           </ul>
           <a href="{{ URL::route('exercise.indexCourse', $course->id) }}" class="btn btn-default">{{ trans('common.see-more') }} <i class="fa fa-long-arrow-right"></i></a>
         </div>
