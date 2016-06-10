@@ -33,13 +33,15 @@
         <p>{{ $exercise->content }}</p>
       </div>
     @endif
-    @if(!empty($exercise->solution))
-      <div class="exercise-solution dropdown">
-        <h3>{{ trans('app.exercise-solution') }} <i class="fa fa-chevron-down"></i></h3>
-        <p>{{ $exercise->solution }}</p>
-      </div>
-    @else
-      <p class="no-solution">{{ trans('app.no-solution') }}</p>
+    @if($exercise->solution_access == 1)
+        @if(!empty($exercise->solution))
+          <div class="exercise-solution dropdown">
+            <h3>{{ trans('app.exercise-solution') }} <i class="fa fa-chevron-down"></i></h3>
+            <p>{{ $exercise->solution }}</p>
+          </div>
+        @else
+          <p class="no-solution">{{ trans('app.no-solution') }}</p>
+        @endif
     @endif
     @if($actions != 1)
       <a href="{{ URL::route('exercise.indexCourse', $exercise->course->id) }}" class="btn btn-primary"><i class="fa fa-long-arrow-left back"></i>{{ trans('common.back') }}</a>

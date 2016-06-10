@@ -45,6 +45,8 @@ class HomeController extends BaseController {
 				$tree_owner = Tree::findOrFail(1);
 				if ( $tree_owner->active == 1) {
 					$owner = Owner::findOrFail(1);
+					$positions = $owner->position();
+					$position = $positions[$owner->position];
 				}
 				$tree_news = Tree::findOrFail(4);
 				if ( $tree_news->active == 1) {
@@ -58,12 +60,15 @@ class HomeController extends BaseController {
 					'courses' => $courses,
 					'news' => $news,
 					'owner' => $owner,
+					'position' => $position,
 				));
 			}
 		} else {
 			$tree_owner = Tree::findOrFail(1);
 			if ( $tree_owner->active == 1) {
 				$owner = Owner::findOrFail(1);
+				$positions = $owner->position();
+				$position = $positions[$owner->position];
 			}
 			$tree_news = Tree::findOrFail(4);
 			if ( $tree_news->active == 1) {
@@ -77,6 +82,7 @@ class HomeController extends BaseController {
 				'courses' => $courses,
 				'news' => $news,
 				'owner' => $owner,
+				'position' => $position,
 			));
 		}
 	}

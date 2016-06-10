@@ -62,7 +62,7 @@
       public function rules() {
 
           $rules = array(
-              'name' => 'required|regex:/^[\pL\s\d\-]+$/u',
+              'name' => 'required|regex:/^[\pL\s\d\-\,\:\;\.]+$/u',
           );
 
           return $rules;

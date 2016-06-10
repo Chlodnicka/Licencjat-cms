@@ -22,6 +22,15 @@
       @endif
 
       @if(!empty($lecture->content))
+          <div class="attachment">
+              @foreach($attachment as $item)
+                  @if(!empty($item->title))
+                    {{ link_to($item->url, $item->title) }}
+                  @else
+                      {{ link_to($item->url, $item->name) }}
+                  @endif
+              @endforeach
+          </div>
         <div class="richtext">
           {{ $lecture->content }}
         </div>

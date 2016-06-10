@@ -120,11 +120,13 @@ class LectureController extends BaseController
                     $courses = Course::all()->lists('name', 'id');
                     $tags = Tag::all()->lists('name','id');
                     $lecture_tags = $lecture->tags()->lists('tag_id');
+                    $attachment = DB::table('attachments')->where('id', '=', $lecture->attachment_id)->get();
                     $this->layout->content = View::make('lecture.edit', array(
                         'lecture' => $lecture,
                         'courses' => $courses,
                         'tags' => $tags,
                         'lecture_tags' => $lecture_tags,
+                        'attachment' => $attachment,
                     ));
                 } else {
                     return Redirect::route('lecture.view', $id);
@@ -198,11 +200,11 @@ class LectureController extends BaseController
                     {
                         return Redirect::route('lecture.edit', $lecture->id)->withErrors($validator);
                     } else {
-                        $attachment = Input::file('attachment');
-                        $attachment_set = Input::get('attachment-isset');
-                        if($attachment !== NULL && $attachment_set == 1) {
+                        $image = Input::file('image');
+                        $img_set = Input::get('img-isset');
+                        if($image !== NULL && $img_set == 1) {
                             $destinationPath = 'uploads/';
-                            $extension = $attachment->getClientOriginalName();
+                            $extension = $image->getClientOriginalName();
                             $comma = strpos($extension, '.');
                             $extension = substr($extension, $comma);
                             $filename = Str::random(60) . $extension;
@@ -211,8 +213,8 @@ class LectureController extends BaseController
                             $file = new Attachment();
                             $file->url = $url;
                             $file->name = $filename;
-                            $file->description = Input::get('attachment-description');
-                            $file->title = Input::get('attachment-title');
+                            $file->description = Input::get('img-description');
+                            $file->title = Input::get('img-title');
 
 
                             Input::file('image')->move($destinationPath, $filename);
@@ -220,7 +222,7 @@ class LectureController extends BaseController
                             $file->save();
                             $lecture->attachment_id = $file->id;
                         }
-                        if($attachment_set != 1) {
+                        if($img_set != 1) {
                             $lecture->attachment_id = NULL;
                         }
                         $lecture->save();
@@ -281,24 +283,24 @@ class LectureController extends BaseController
                             ->withErrors($validator)
                             ->withInput();
                     } else {
-                        $attachment = Input::file('attachment');
-                        if($attachment != NULL) {
+                        $image = Input::file('image');
+                        if($image != NULL) {
                             $destinationPath = 'uploads/';
-                            $filename = $attachment->getClientOriginalName();
+                            $filename = $image->getClientOriginalName();
                             $url = $destinationPath . $filename;
 
                             $file = new Attachment();
                             $file->url = $url;
                             $file->name = $filename;
-                            $file->description = Input::get('attachment-description');
-                            $file->title = Input::get('attachment-title');
-                            
-                            Input::file('attachment')->move($destinationPath, $filename);
+                            $file->description = Input::get('img-description');
+                            $file->title = Input::get('img-title');
+
+
+                            Input::file('image')->move($destinationPath, $filename);
 
                             $file->save();
                             $lecture->attachment_id = $file->id;
                         }
-
                         $lecture->save();
                         if(Input::get('tags') != NULL){
                             $lecture->tags()->sync(Input::get('tags'));
@@ -348,9 +350,11 @@ class LectureController extends BaseController
                 $actions = 0;
             }
             $lecture = Lecture::findOrFail($id);
+            $attachment = DB::table('attachments')->where('id', '=', $lecture->attachment_id)->get();
             $this->layout->content = View::make('lecture.view', array(
                 'lecture' => $lecture,
                 'actions' => $actions,
+                'attachment' => $attachment,
             ));
         } else {
             return Redirect::route('homepage');

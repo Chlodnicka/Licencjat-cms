@@ -10,6 +10,6 @@
     </div>
   @foreach($attachments as $attachment)
     <a href="{{ URL::route('attachment.view', $attachment->id) }}"><p>{{ $attachment->title }}</p>
-    {{ HTML::image($attachment->url) }}</a>
+    {{ HTML::image($attachment->url, $attachment->description) }}</a>
   @endforeach
 @stop

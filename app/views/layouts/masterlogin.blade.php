@@ -87,9 +87,8 @@
                                     <form action="{{ URL::route('search.index') }}" method="post">
                                         <input type="text" name="searchQuery" value="" class="form-control" placeholder="{{ trans('common.search') }}">
                                         <span class="input-group-btn">
-                                            <input class="btn btn-default" type="submit" value="">
-                                                <i class="fa fa-search" aria-hidden="true"></i>
-                                            </input>
+                                            <input style="height: 34px" class="btn btn-default" type="submit" value="">
+                                            <i class="fa fa-search"></i>
                                         </span>
                                     </form>
 
@@ -124,7 +123,14 @@
     <script src="{{ URL::asset('/assets/js/sb-admin-2.js') }}"></script>
     <script src="{{ URL::asset('/packages/ckeditor/ckeditor.js') }}"></script>
     <script type="text/javascript">
-        CKEDITOR.replace( 'editor' );
+        CKEDITOR.replace( 'editor', {
+            filebrowserBrowseUrl : "{{route('files.index',['_token' => csrf_token() ])}}",
+            filebrowserImageBrowseUrl : "{{route('files.index',['_token' => csrf_token() ])}}",
+            filebrowserFlashBrowseUrl : "{{route('files.index',['_token' => csrf_token() ])}}",
+            filebrowserUploadUrl : "{{route('files.upload',['_token' => csrf_token() ])}}",
+            filebrowserImageUploadUrl : "{{route('files.upload',['_token' => csrf_token() ])}}",
+            filebrowserFlashUploadUrl : "{{route('files.upload',['_token' => csrf_token() ])}}",
+        });
         CKEDITOR.add;
     </script>
     <script>

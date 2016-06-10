@@ -22,7 +22,7 @@
             <div class="box-img">
               <?php $attachment = DB::table('attachments')->where('id', '=', $newsItem->attachment_id)->get();?>
               @foreach($attachment as $item)
-                {{ HTML::image($item->url) }}
+                {{ HTML::image($item->url, $item->description) }}
               @endforeach
             </div>
             @if(!empty($newsItem->title))

@@ -257,9 +257,9 @@ class CourseController extends BaseController
                 $actions = 0;
             }
             $course = Course::findOrFail($id);
-            $lectures = Course::find($id)->lectures;
+            $lectures = Course::find($id)->lectures->take(5);
             $tags = Course::find($id)->tags;
-            $exercises = Course::find($id)->exercises;
+            $exercises = Course::find($id)->exercises->take(5);
             $this->layout->content = View::make('course.view', array(
                 'course' => $course,
                 'lectures' => $lectures,
