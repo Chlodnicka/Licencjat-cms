@@ -14,7 +14,10 @@
     }
     body { font-family: 'DejaVu Sans'; }
 </style>
-    <h1>{{ trans('app.exercises-generated') }}</h1>
+    <div>
+        {{ $exercises->desc }}
+    </div>
+
     <div class="exercises">
         @foreach( $exercises as $exercise)
         <div class="list-item">

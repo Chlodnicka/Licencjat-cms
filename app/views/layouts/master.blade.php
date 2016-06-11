@@ -2,6 +2,7 @@
         "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="PL-pl">
   <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	 <meta http-equiv="content-type" content="text/html; charset=utf-8">
 	 <title>@yield('title') {{ trans('common.homepage') }}</title>
    <link href="{{ URL::asset('/assets/css/default.min.css') }}" rel="stylesheet">
@@ -9,7 +10,7 @@
   <body  class="default">
     <header>
       <div class="top-nav">
-        <div class="logo"><a href="/"><p>kursy i materiały</p></a></div>
+        <div class="logo"><a href="{{ URL::route('homepage') }}"><p>{{ trans('common.app-title') }}</p></a></div>
         <div class="side-menu">
           <div class="side-menu-search">
             <form action="{{ URL::route('search.index') }}" method="post">

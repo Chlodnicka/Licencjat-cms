@@ -68,7 +68,11 @@ return array(
     "generate" => "Generuj arkusz",
     "img-isset" => "Nie usuwaj pliku",
     "attached-file" => "Aktualnie załączony plik",
-    "img-title" => "Tytuł pliku"
+    "img-title" => "Tytuł pliku",
+    "easy" => "Łatwe",
+    "medium" => "Średnie",
+    "hard" => "Trudne",
+    "exercise-access" => "Zadanie dostępne tylko dla administratora",
 
 
 

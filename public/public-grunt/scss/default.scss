@@ -333,7 +333,7 @@
           vertical-align: top;
           margin-top: 7px;
         }
-        #cke_editor {
+        #cke_editor, #cke_solution {
           display: inline-block;
         }
         input[type='submit'] {
@@ -902,7 +902,7 @@ span.fa {
     top: 15px;
   }
   .navbar-top-links .dropdown-user {
-    @media (max-width: 780px) {
+    @media (max-width: 767px) {
       left: 0;
     }
   }
@@ -1063,11 +1063,11 @@ span.fa {
       color: white;
       margin-top: 30px
     }
-    label[for="tutorshipHours"], label[for="content"], label[for="lead"], label[for="description"] {
+    label[for="tutorshipHours"], label[for="content"], label[for="lead"], label[for="description"], label[for="solution"] {
       vertical-align: top;
       margin-top: 5px;
     }
-    #cke_editor {
+    #cke_editor, #cke_solution {
       width: calc(100% - 160px);
       display: inline-block;
     }

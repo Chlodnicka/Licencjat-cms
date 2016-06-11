@@ -44,17 +44,18 @@ class TagController extends BaseController
             $role = $user->role_id;
             if ($role == 1) {
                 $actions = 1;
+                $tags = Tag::paginate(20);
+                $this->layout->content = View::make('tag.index', array(
+                    'tags' => $tags,
+                    'actions' => $actions,
+                ));
             } else {
-                $actions = 0;
+                return Redirect::route('homepage');
             }
         } else {
-            $actions = 0;
+            return Redirect::route('homepage');
         }
-        $tags = Tag::paginate(20);
-        $this->layout->content = View::make('tag.index', array(
-            'tags' => $tags,
-            'actions' => $actions,
-        ));
+
     }
 
     /**
@@ -96,10 +97,10 @@ class TagController extends BaseController
             if ($role == 1) {
                 $this->layout->content = View::make('tag.new');
             } else {
-                return Redirect::route('tag.index');
+                return Redirect::route('homepage');
             }
         } else {
-            return Redirect::route('tag.index');
+            return Redirect::route('homepage');
         }
     }
 
@@ -164,10 +165,10 @@ class TagController extends BaseController
                     return Redirect::route('tag.view', $tag->id);
                 }
             } else {
-                return Redirect::route('tag.index');
+                return Redirect::route('homepage');
             }
         } else {
-            return Redirect::route('tag.index');
+            return Redirect::route('homepage');
         }
     }
 

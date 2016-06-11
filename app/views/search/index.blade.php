@@ -11,7 +11,7 @@
                 @foreach($search_results as $search_result)
                     @if(!empty($search_result['type']))
                         <div class="list-item">
-                            <span>{{ $search_result['type'] }}</span>
+                            <p style="margin-top: 20px">{{ $search_result['type_name'] }}</p>
                             <h2 class="title">{{ $search_result['name'] }}</h2>
                             <p class="item-lead">{{ $search_result['lead'] }}</p>
                             <a class="btn btn-default" href="{{ URL::route($search_result['type'].'.view', $search_result['id']) }}">{{ trans('common.see-more') }}</a>

@@ -77,6 +77,7 @@ class SearchController extends BaseController
             foreach($courses as $course) {
                 $search_results[$i] = $course;
                 $search_results[$i]['type'] = 'course';
+                $search_results[$i]['type_name'] = 'Kursy';
                 $i++;
             }
         }
@@ -85,6 +86,7 @@ class SearchController extends BaseController
             foreach($exercises as $exercise) {
                 $search_results[$i] = $exercise;
                 $search_results[$i]['type'] = 'exercise';
+                $search_results[$i]['type_name'] = 'Zadania';
                 $i++;
             }
         }
@@ -92,6 +94,7 @@ class SearchController extends BaseController
             foreach($lectures as $lecture) {
                 $search_results[$i] = $lecture;
                 $search_results[$i]['type'] = 'lecture';
+                $search_results[$i]['type_name'] = 'Wykłady';
                 $i++;
             }
         }
@@ -99,6 +102,7 @@ class SearchController extends BaseController
             foreach($news as $news_item) {
                 $search_results[$i] = $news_item;
                 $search_results[$i]['type'] = 'news';
+                $search_results[$i]['type_name'] = 'Aktualności';
                 $i++;
             }
         }

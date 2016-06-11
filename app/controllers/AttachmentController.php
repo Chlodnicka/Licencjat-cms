@@ -66,10 +66,10 @@ class AttachmentController extends BaseController
             if($role == 1) {
                 $this->layout->content = View::make('attachment.new');
             } else {
-                return Redirect::route('attachment.index');
+                return Redirect::route('homepage');
             }
         } else {
-            return Redirect::route('attachment.index');
+            return Redirect::route('homepage');
         }
     }
 
@@ -88,16 +88,20 @@ class AttachmentController extends BaseController
                 $file->save();
                 return Redirect::route('attachment.view', $file->id);
             } else {
-                return Redirect::route('attachment.view', $id);
+                return Redirect::route('homepage');
             }
         } else {
-            return Redirect::route('attachment.view', $id);
+            return Redirect::route('homepage');
         }
     }
 
     public function create()
     {
-
+        if (Auth::check()) {
+            $userId = Auth::id();
+            $user = User::findOrFail($userId);
+            $role = $user->role_id;
+            if($role == 1) {
                 $image = Input::file('image');
 
                 $destinationPath = 'uploads/';
@@ -114,7 +118,12 @@ class AttachmentController extends BaseController
                 Input::file('image')->move($destinationPath, $filename);
                 $file->save();
                 return Redirect::route('attachment.view', $file->id);
-
+            } else {
+                return Redirect::route('homepage');
+            }
+        } else {
+            return Redirect::route('homepage');
+        }
     }
 
     public function view($id)
@@ -129,10 +138,10 @@ class AttachmentController extends BaseController
                     'attachment' => $attachment,
                 ));
             } else {
-                return Redirect::route('attachment.index');
+                return Redirect::route('homepage');
             }
         } else {
-            return Redirect::route('attachment.index');
+            return Redirect::route('homepage');
         }
     }
 
@@ -148,10 +157,10 @@ class AttachmentController extends BaseController
                     'attachment' => $attachment
                 ));
             } else {
-                return Redirect::route('attachment.view', $id);
+                return Redirect::route('homepage');
             }
         } else {
-            return Redirect::route('attachment.view', $id);
+            return Redirect::route('homepage');
         }
     }
 
