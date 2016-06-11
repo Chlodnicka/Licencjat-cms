@@ -2,6 +2,7 @@
         "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="PL-pl">
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <title>@yield('title') {{ trans('common.homepage') }}</title>
     <link href="{{ URL::asset('/assets/css/bootstrap.min.css') }}" rel="stylesheet">
@@ -113,7 +114,6 @@
         </div>
     </div>
     <script src="{{ URL::asset('/assets/js/jquery-2.2.3.min.js') }}"></script>
-    <script src="{{ URL::asset('/assets/js/jquery.validate.min.js') }}"></script>
     <script src="{{ URL::asset('/assets/js/app.js') }}"></script>
     <script src="{{ URL::asset('/assets/js/bootstrap.min.js') }}"></script>
     <script src="{{ URL::asset('/assets/js/metisMenu.min.js') }}"></script>
@@ -131,10 +131,8 @@
             filebrowserImageUploadUrl : "{{route('files.upload',['_token' => csrf_token() ])}}",
             filebrowserFlashUploadUrl : "{{route('files.upload',['_token' => csrf_token() ])}}",
         });
+        CKEDITOR.replace('solution');
         CKEDITOR.add;
-    </script>
-    <script>
-        $("form").validate();
     </script>
 </body>
 </html>

@@ -47,13 +47,18 @@ class ExerciseController extends BaseController
                 $role = $user->role_id;
                 if($role == 1) {
                     $actions = 1;
+                    $exercises = Exercise::paginate(6);
+
                 } else {
                     $actions = 0;
+                    $exercises = DB::table('exercises')->whereNull('access')->paginate(6);
                 }
             } else {
                 $actions = 0;
+                $exercises = DB::table('exercises')->whereNull('access')->paginate(6);
             }
-            $exercises = Exercise::paginate(6);
+
+
             $exercise_lead = Tree::findOrFail(6);
             $exercise_difficulty = new Exercise();
             $difficulty = $exercise_difficulty->difficulty();
@@ -85,13 +90,16 @@ class ExerciseController extends BaseController
                 $role = $user->role_id;
                 if($role == 1) {
                     $actions = 1;
+                    $exercises = DB::table('exercises')->where('course_id', "=", $id)->paginate(6);
                 } else {
                     $actions = 0;
+                    $exercises = DB::table('exercises')->whereNull('access')->where('course_id', "=", $id)->paginate(6);
                 }
             } else {
                 $actions = 0;
+                $exercises = DB::table('exercises')->whereNull('access')->where('course_id', "=", $id)->paginate(6);
             }
-            $exercises = DB::table('exercises')->where('course_id', "=", $id)->paginate(6);
+
             $exercise_lead = Tree::findOrFail(6);
             $exercise_difficulty = new Exercise();
             $difficulty = $exercise_difficulty->difficulty();
@@ -134,22 +142,61 @@ class ExerciseController extends BaseController
                 'solution' => Input::get('solution_access'),
                 'difficulty' => Input::get('difficulty'),
             );
-            $searchParams['content'] = htmlspecialchars($searchParams['content']);
-            if($searchParams['content'] == NULL & $searchParams['solution'] == NULL && $searchParams['difficulty'] == 0) {
-                $exercises = Exercise::paginate(6);
-            } elseif($searchParams['content'] == NULL & $searchParams['solution'] == NULL) {
-                $exercises = DB::table('exercises')->where('difficulty', '=', $searchParams['difficulty'])->paginate(6);
-            } elseif($searchParams['content'] == NULL & $searchParams['difficulty'] == 0) {
-                $exercises = DB::table('exercises')->where('solution_access', '=', $searchParams['solution'])->paginate(6);
-            } else if($searchParams['solution'] == NULL && $searchParams['difficulty'] == 0) {
-                $exercises = DB::table('exercises')->where('content', 'LIKE', '%' . $searchParams['content'] . '%')->paginate(6);
-            } elseif($searchParams['solution'] == NULL) {
-                $exercises = DB::table('exercises')->where('difficulty', '=', $searchParams['difficulty'])->where('content', 'LIKE', '%' . $searchParams['content'] . '%')->paginate(6);
-            } elseif($searchParams['difficulty'] == 0) {
-                $exercises = DB::table('exercises')->where('solution_access', '=', $searchParams['solution'])->where('content', 'LIKE', '%' . $searchParams['content'] . '%')->paginate(6);
+            if(Auth::check()){
+                if($role == 1) {
+                    $searchParams['content'] = htmlspecialchars($searchParams['content']);
+                    if($searchParams['content'] == NULL & $searchParams['solution'] == NULL && $searchParams['difficulty'] == 0) {
+                        $exercises = Exercise::paginate(6);
+                    } elseif($searchParams['content'] == NULL & $searchParams['solution'] == NULL) {
+                        $exercises = DB::table('exercises')->where('difficulty', '=', $searchParams['difficulty'])->paginate(6);
+                    } elseif($searchParams['content'] == NULL & $searchParams['difficulty'] == 0) {
+                        $exercises = DB::table('exercises')->where('solution_access', '=', $searchParams['solution'])->paginate(6);
+                    } else if($searchParams['solution'] == NULL && $searchParams['difficulty'] == 0) {
+                        $exercises = DB::table('exercises')->where('content', 'LIKE', '%' . $searchParams['content'] . '%')->paginate(6);
+                    } elseif($searchParams['solution'] == NULL) {
+                        $exercises = DB::table('exercises')->where('difficulty', '=', $searchParams['difficulty'])->where('content', 'LIKE', '%' . $searchParams['content'] . '%')->paginate(6);
+                    } elseif($searchParams['difficulty'] == 0) {
+                        $exercises = DB::table('exercises')->where('solution_access', '=', $searchParams['solution'])->where('content', 'LIKE', '%' . $searchParams['content'] . '%')->paginate(6);
+                    } else {
+                        $exercises = DB::table('exercises')->where('solution_access', '=', $searchParams['solution'])->where('difficulty', '=', $searchParams['difficulty'])->where('content', 'LIKE', '%' . $searchParams['content'] . '%')->paginate(6);
+                    }
+                } else {
+                    $searchParams['content'] = htmlspecialchars($searchParams['content']);
+                    if($searchParams['content'] == NULL & $searchParams['solution'] == NULL && $searchParams['difficulty'] == 0) {
+                        $exercises = DB::table('exercises')->whereNull('access')->paginate(6);
+                    } elseif($searchParams['content'] == NULL & $searchParams['solution'] == NULL) {
+                        $exercises = DB::table('exercises')->where('difficulty', '=', $searchParams['difficulty'])->whereNull('access')->paginate(6);
+                    } elseif($searchParams['content'] == NULL & $searchParams['difficulty'] == 0) {
+                        $exercises = DB::table('exercises')->where('solution_access', '=', $searchParams['solution'])->whereNull('access')->paginate(6);
+                    } else if($searchParams['solution'] == NULL && $searchParams['difficulty'] == 0) {
+                        $exercises = DB::table('exercises')->where('content', 'LIKE', '%' . $searchParams['content'] . '%')->whereNull('access')->paginate(6);
+                    } elseif($searchParams['solution'] == NULL) {
+                        $exercises = DB::table('exercises')->where('difficulty', '=', $searchParams['difficulty'])->whereNull('access')->where('content', 'LIKE', '%' . $searchParams['content'] . '%')->paginate(6);
+                    } elseif($searchParams['difficulty'] == 0) {
+                        $exercises = DB::table('exercises')->where('solution_access', '=', $searchParams['solution'])->whereNull('access')->where('content', 'LIKE', '%' . $searchParams['content'] . '%')->paginate(6);
+                    } else {
+                        $exercises = DB::table('exercises')->where('solution_access', '=', $searchParams['solution'])->whereNull('access')->where('difficulty', '=', $searchParams['difficulty'])->where('content', 'LIKE', '%' . $searchParams['content'] . '%')->paginate(6);
+                    }
+                }
             } else {
-                $exercises = DB::table('exercises')->where('solution_access', '=', $searchParams['solution'])->where('difficulty', '=', $searchParams['difficulty'])->where('content', 'LIKE', '%' . $searchParams['content'] . '%')->paginate(6);
+                $searchParams['content'] = htmlspecialchars($searchParams['content']);
+                if($searchParams['content'] == NULL & $searchParams['solution'] == NULL && $searchParams['difficulty'] == 0) {
+                    $exercises = DB::table('exercises')->whereNull('access')->paginate(6);
+                } elseif($searchParams['content'] == NULL & $searchParams['solution'] == NULL) {
+                    $exercises = DB::table('exercises')->where('difficulty', '=', $searchParams['difficulty'])->whereNull('access')->paginate(6);
+                } elseif($searchParams['content'] == NULL & $searchParams['difficulty'] == 0) {
+                    $exercises = DB::table('exercises')->where('solution_access', '=', $searchParams['solution'])->whereNull('access')->paginate(6);
+                } else if($searchParams['solution'] == NULL && $searchParams['difficulty'] == 0) {
+                    $exercises = DB::table('exercises')->where('content', 'LIKE', '%' . $searchParams['content'] . '%')->whereNull('access')->paginate(6);
+                } elseif($searchParams['solution'] == NULL) {
+                    $exercises = DB::table('exercises')->where('difficulty', '=', $searchParams['difficulty'])->whereNull('access')->where('content', 'LIKE', '%' . $searchParams['content'] . '%')->paginate(6);
+                } elseif($searchParams['difficulty'] == 0) {
+                    $exercises = DB::table('exercises')->where('solution_access', '=', $searchParams['solution'])->whereNull('access')->where('content', 'LIKE', '%' . $searchParams['content'] . '%')->paginate(6);
+                } else {
+                    $exercises = DB::table('exercises')->where('solution_access', '=', $searchParams['solution'])->whereNull('access')->where('difficulty', '=', $searchParams['difficulty'])->where('content', 'LIKE', '%' . $searchParams['content'] . '%')->paginate(6);
+                }
             }
+
             $exercise_difficulty = new Exercise();
             $difficulty = $exercise_difficulty->difficulty();
 
@@ -313,6 +360,7 @@ class ExerciseController extends BaseController
                     $exercises['exercises'] = DB::table('exercises')->whereIn('id', $checked)->get();
                 }
                 $answers = Input::get('answers');
+                $exercises['desc'] = Input::get('content');
                 if($answers != 'on'){
                     $pdf = PDF::loadView('exercise.generated', $exercises)->download('Arkusz.pdf');
                 } else {
@@ -351,6 +399,7 @@ class ExerciseController extends BaseController
                 $actions = 0;
             }
             $exercise_lead = Tree::findOrFail(6);
+
             $exercises = DB::table('exercises')->where('lecture_id', '=', $id)->paginate(6);
             $exercise_difficulty = new Exercise();
             $difficulty = $exercise_difficulty->difficulty();
@@ -469,6 +518,7 @@ class ExerciseController extends BaseController
                     $exercise->difficulty = Input::get('difficulty');
                     $exercise->lecture_id = Input::get('lectures');
                     $exercise->course_id = Input::get('courses');
+                    $exercise->access = Input::get('access');
 
                     $rules = $exercise->rules();
                     $validator = Validator::make(Input::all(), $rules);
@@ -563,6 +613,7 @@ class ExerciseController extends BaseController
                     $exercise->difficulty = Input::get('difficulty');
                     $exercise->lecture_id = Input::get('lectures');
                     $exercise->course_id = Input::get('courses');
+                    $exercise->access = Input::get('access');
                     $exercise->owner_id = 1;
                     $exercise->owner_role_id = 1;
 
@@ -624,10 +675,24 @@ class ExerciseController extends BaseController
                 $actions = 0;
             }
             $exercise = Exercise::findOrFail($id);
-            $this->layout->content = View::make('exercise.view', array(
-                'exercise' => $exercise,
-                'actions' => $actions,
-            ));
+            if($exercise->access == NULL) {
+                $this->layout->content = View::make('exercise.view', array(
+                    'exercise' => $exercise,
+                    'actions' => $actions,
+                ));
+            } elseif (Auth::check()){
+                if($role == 1) {
+                    $this->layout->content = View::make('exercise.view', array(
+                        'exercise' => $exercise,
+                        'actions' => $actions,
+                    ));
+                } else {
+                    return Redirect::route('exercise.index');
+                }
+            } else {
+                return Redirect::route('exercise.index');
+            }
+
         } else {
             return Redirect::route('homepage');
         }

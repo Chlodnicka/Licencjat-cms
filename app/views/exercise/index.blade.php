@@ -41,9 +41,6 @@
           @if(!empty($exercise->title))
             <h2 class="title">{{ $exercise->title }}</h2>
           @endif
-          @if(!empty($exercise->content))
-            <p class="item-lead">{{ $exercise->content }}</p>
-            @endif
           <a href="{{ URL::route('exercise.view', $exercise->id) }}" class="btn btn-primary more">{{ trans('common.see-more') }} <i class="fa fa-long-arrow-right"></i></a>
         </div>
         <div class="clearfix"></div>

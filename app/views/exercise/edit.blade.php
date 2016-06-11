@@ -17,15 +17,18 @@
             @if ($errors->has('title')) <p class="help-block">{{ $errors->first('title') }}</p> @endif
           </div>
           <div class="form-group">
+            <input id="access" type="checkbox" name="access" @if($exercise->access == 1) checked="checked" @endif value="1"><label for="access"><span>{{ trans('common.exercise-access') }}</span></label>
+          </div>
+          <div class="form-group">
             {{ Form::label('content', Lang::get('common.content'))}}
             {{ Form::textarea('content', $exercise->content, array('id'=>'editor')) }}
           </div>
           <div class="form-group">
             {{ Form::label('solution', Lang::get('common.solution'))}}
-            {{ Form::textarea('solution', $exercise->solution, array('id'=>'editor')) }}
+            {{ Form::textarea('solution', $exercise->solution, array('id'=>'solution')) }}
           </div>
           <div class="form-group">
-            <input id="solution_access" type="checkbox" name="solution_access" checked="checked" value="1"><label for="solution_access"><span>{{ trans('common.solution-access') }}</span></label>
+            <input id="solution_access" type="checkbox" name="solution_access" @if($exercise->solution_access == 1) checked="checked" @endif value="1"><label for="solution_access"><span>{{ trans('common.solution-access') }}</span></label>
           </div>
           <div class="form-group">
             {{ Form::label('difficulty',Lang::get('common.difficulty')) }}

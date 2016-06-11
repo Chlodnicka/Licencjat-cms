@@ -52,6 +52,10 @@
                     <input id="answers" type="checkbox" name="answers"
                     checked="checked"><label for="answers"><span>{{ trans('app.generate-with-answers') }}</span></label>
                 </div>
+                <div class="form-group">
+                    {{ Form::label('content', Lang::get('common.content'))}}
+                    {{ Form::textarea('content', Input::old('content'), array('id'=>'editor')) }}
+                </div>
                 @foreach( $exercises as $exercise)
                     <input name="exercises[]" id="exercise{{ $exercise->id }}" type="checkbox" value="{{ $exercise->id }}" checked="checked" />
                     <label class="list-item" for="exercise{{ $exercise->id }}">

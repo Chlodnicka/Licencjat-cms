@@ -20,7 +20,15 @@
     @endif
     <div class="properties">
 
-      <p>@if(!empty($exercise->difficulty)){{ $exercise->difficulty }}@endif @if(!empty($exercise->lecture->title))| {{ $exercise->lecture->title }}@endif</p>
+      <p>@if(!empty($exercise->difficulty))
+             @if($exercise->difficulty == 1)
+                {{ trans('common.easy') }}
+              @elseif($exercise->difficulty == 2)
+                 {{ trans('common.medium') }}
+              @elseif($exercise->difficulty == 3)
+                  {{ trans('common.hard') }}
+              @endif
+          @endif @if(!empty($exercise->lecture->title))| {{ $exercise->lecture->title }}@endif</p>
       <div class="tags">
         @foreach($exercise->tags as $item)
           <p class="tag-item"><a href="/">{{ $item->name }}</a></p>
