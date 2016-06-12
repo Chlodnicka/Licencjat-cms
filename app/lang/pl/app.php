@@ -35,6 +35,7 @@
         "course-destroyed" => "Kurs został usunięty.",
         "all-courses" => "Wszystkie kursy",
         "lecture-updated" => "Wykład zaktualizowano pomyślnie",
+        "lecture-destroyed" => "Wykład został usunięty",
 
         /*
          * Lectures translations

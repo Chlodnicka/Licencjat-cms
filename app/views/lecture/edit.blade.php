@@ -12,7 +12,7 @@
       {{ Form::open(array('route' => array('lecture.update', $lecture->id), 'files' => true)) }}
       <div class="form-cluster">
         <div class="form-group">
-          {{ Form::label('title', Lang::get('common.title'))}}
+          {{ Form::label('title', Lang::get('common.title').'*')}}
           {{ Form::text('title', $lecture->title) }}
           @if ($errors->has('title')) <p class="help-block">{{ $errors->first('title') }}</p> @endif
         </div>
@@ -51,12 +51,13 @@
           {{ Form::textarea('content', $lecture->content, array('id'=>'editor')) }}
         </div>
         <div class="form-group">
-          {{ Form::label('courses', Lang::get('common.select-course')) }}
+          {{ Form::label('courses', Lang::get('common.select-course').'*') }}
           {{ Form::select('courses', $courses, $lecture->course_id) }}
         </div>
         <div class="form-group">
           {{ Form::label('tags', Lang::get('common.tags-category')) }}
           {{ Form::select('tags[]', ($tags), ($lecture_tags), ['multiple'=>true,'class' => 'form-control margin']) }}
+          <p>Aby zaznaczyć więcej niż jedną pozycję przytrzymaj CTRL</p>
         </div>
 
 

@@ -2,12 +2,13 @@
 
     <h2 class="form-signup-heading">{{ trans('common.register-yourself') }}</h2>
 
-    <ul>
-        @foreach($errors->all() as $error)
-            <li>{{ $error }}</li>
-        @endforeach
-    </ul>
     <div class="register">
+
+        <ul>
+            @foreach($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
         {{ Form::open(array('route' => array('user.doRegister'))) }}
         {{ Form::text('username', null, array('class'=>'input-block-level', 'placeholder'=>Lang::get('common.username'))) }}
         {{ Form::text('email', null, array('class'=>'input-block-level', 'placeholder'=>Lang::get('common.email'))) }}

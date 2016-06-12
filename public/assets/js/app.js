@@ -3,6 +3,7 @@ $(document).ready( function () {
     dropdownLectures();
     dropdown_admin();
     menu();
+   // on_change();
 });
 
 function dropdown() {

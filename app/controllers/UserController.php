@@ -52,6 +52,7 @@ class UserController extends BaseController
         if ($validator->fails()) {
             return Redirect::to('login')
                 ->withErrors($validator)
+                ->with('message','Podczas logowania wystąpił błąd. Spróbuj jeszcze raz lub skontaktuj się z administratorem strony.')
                 ->withInput(Input::except('password'));
         } else {
 
@@ -71,10 +72,10 @@ class UserController extends BaseController
                 if($role == 1) {
                     return Redirect::route('dashboard');
                 } elseif ($role == 2) {
-                    return Redirect::route('student.index');
+                    return Redirect::route('student.index')->with('message', 'Zostałeś poprawnie zalogowany');
                 }
             } else {
-                return Redirect::route('user.login');
+                return Redirect::route('user.login')->with('message','Podczas logowania wystąpił błąd. Spróbuj jeszcze raz lub skontaktuj się z administratorem strony.');
             }
 
         }
@@ -83,7 +84,7 @@ class UserController extends BaseController
     public function doLogout()
     {
         Auth::logout();
-        return Redirect::to('login');
+        return Redirect::to('login')->with('message', 'Zostałeś poprawnie wylogowany');
     }
 
     public function doRegister() {
@@ -99,7 +100,7 @@ class UserController extends BaseController
             $validator = Validator::make(Input::all(), $rules);
 
             if ($validator->fails()) {
-                return Redirect::route('user.register')->with('message', 'The following errors occurred')->withErrors($validator)->withInput();
+                return Redirect::route('user.register')->with('message', 'W formularzu wystąpiły błędy')->withErrors($validator)->withInput();
             } else {
                 $user = new User;
                 $user->username = Input::get('username');
@@ -117,7 +118,7 @@ class UserController extends BaseController
 
                 $student->save();
 
-                return Redirect::route('user.login')->with('message', 'Thanks for registering!');
+                return Redirect::route('user.login')->with('message', 'Dziękuję za rejestrację!');
             }
         } else {
             return Redirect::route('homepage');
@@ -146,13 +147,13 @@ class UserController extends BaseController
                 if(Hash::check(Input::get('password'), $user->password)){
                     $user->password = Hash::make(Input::get('new_password'));
                     $user->save();
-                    return Redirect::route('user.change_password');
+                    return Redirect::route('user.change_password')->with('message', 'Hasło zostało zmienione.');
                 } else {
-                    return Redirect::route('user.change_password')->with('message', 'Bad old password');
+                    return Redirect::route('user.change_password')->with('message', 'Niepoprawne stare hasło');
                 }
 
             } else {
-                return Redirect::route('user.change_password')->with('message', 'The following errors occurred')->withErrors($validator)->withInput();
+                return Redirect::route('user.change_password')->with('message', 'W formularzu wystąpiły błędy')->withErrors($validator)->withInput();
             }
         } else {
             return Redirect::route('user.login');

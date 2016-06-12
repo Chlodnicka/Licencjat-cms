@@ -11,7 +11,7 @@
         {{ Form::open(array('route' => array('tree.owner', $tree->id))) }}
         <div class="form-cluster">
             <div class="form-group">
-                {{ Form::label('name', Lang::get('common.title'))}}
+                {{ Form::label('name', Lang::get('common.title').'*')}}
                 {{ Form::text('name', $tree->title) }}
                 @if ($errors->has('name')) <p class="help-block">{{ $errors->first('name') }}</p> @endif
             </div>

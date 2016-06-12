@@ -573,6 +573,21 @@
           }*/
         }
       }
+      .tags {
+
+        text-align: left;
+        p {
+          display: inline-block;
+          margin-right: 10px;
+          padding: 10px 20px;
+          font-weight: 400;
+          font-size: 14px;
+          background-color: $brandOrange;
+          a {
+            color: white;
+          }
+        }
+      }
       .exercise {
         width: 70%;
         .properties p {

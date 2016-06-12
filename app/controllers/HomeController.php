@@ -47,14 +47,21 @@ class HomeController extends BaseController {
 					$owner = Owner::findOrFail(1);
 					$positions = $owner->position();
 					$position = $positions[$owner->position];
+				} else {
+					$owner = 1;
+					$position = 1;
 				}
 				$tree_news = Tree::findOrFail(4);
 				if ( $tree_news->active == 1) {
 					$news = News::orderby('updated_at', 'desc')->take(3)->get();
+				} else {
+					$news = 1;
 				}
 				$tree_courses = Tree::findOrFail(3);
 				if ( $tree_courses->active == 1) {
 					$courses = Course::take(2)->get();
+				} else {
+					$courses = 1;
 				}
 				$this->layout->content = View::make('home', array(
 					'courses' => $courses,
@@ -69,14 +76,21 @@ class HomeController extends BaseController {
 				$owner = Owner::findOrFail(1);
 				$positions = $owner->position();
 				$position = $positions[$owner->position];
+			}  else {
+				$owner = 1;
+				$position = 1;
 			}
 			$tree_news = Tree::findOrFail(4);
 			if ( $tree_news->active == 1) {
 				$news = News::orderby('updated_at', 'desc')->take(3)->get();
+			}  else {
+				$news = 1;
 			}
 			$tree_courses = Tree::findOrFail(3);
 			if ( $tree_courses->active == 1) {
 				$courses = Course::take(2)->get();
+			}  else {
+				$courses = 1;
 			}
 			$this->layout->content = View::make('home', array(
 				'courses' => $courses,

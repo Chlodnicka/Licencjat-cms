@@ -10,7 +10,7 @@
     <div class="login">
         {{ Form::open(array('url' => 'login')) }}
         {{ Form::label('email', Lang::get('common.email')) }}
-        {{ Form::text('email', Input::old('email'), array('placeholder' => 'awesome@awesome.com')) }}
+        {{ Form::text('email', Input::old('email'), array('placeholder' => 'adres@email.com')) }}
         {{ Form::label('password', Lang::get('common.password')) }}
         {{ Form::password('password') }}
 

@@ -31,7 +31,7 @@
           @endif @if(!empty($exercise->lecture->title))| {{ $exercise->lecture->title }}@endif</p>
       <div class="tags">
         @foreach($exercise->tags as $item)
-          <p class="tag-item"><a href="/">{{ $item->name }}</a></p>
+          <p class="tag-item"><a href="{{ URL::route('tag.view', $item->id) }}">{{ $item->name }}</a></p>
         @endforeach
       </div>
     </div>

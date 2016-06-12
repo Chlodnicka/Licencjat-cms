@@ -115,7 +115,7 @@ class NewsController extends BaseController
                 if($role == 1) {
 
                     $news = News::findOrFail($id);
-                    $courses = Course::all()->lists('name', 'id');
+                    $courses = Course::all();
                     $tags = Tag::all()->lists('name','id');
                     $news_tags = $news->tags()->lists('tag_id');
                     $attachment = DB::table('attachments')->where('id', '=', $news->attachment_id)->get();

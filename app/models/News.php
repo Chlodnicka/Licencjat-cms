@@ -60,10 +60,16 @@
        * @return object
        */
       public function sendMail($id, $action) {
-          $email = DB::table('students')->where('course_id', '=', $id)->lists('email');
-          $course = Course::findOrFail($id);
           $course_data = array();
-          $course_data['name'] = $course->name;
+          if($id == 0) {
+              $email = DB::table('students')->lists('email');
+              $course_data['name'] = 'Wszystkie kursy';
+          } else {
+              $email = DB::table('students')->where('course_id', '=', $id)->lists('email');
+              $course = Course::findOrFail($id);
+              $course_data['name'] = $course->name;
+          }
+
           if($action == 'new') {
               $course_data['message'] = 'Dodano nową wiadomość';
           } else if ($action == 'update') {
@@ -87,7 +93,6 @@
               'title' => 'required|regex:/^[\pL\s]+$/u',
               'lead' => 'regex:/^[\pL\s\d\.\-\:\;]+$/u',
               'date' => 'required|date',
-              'courses' => 'required',
           );
 
           return $rules;

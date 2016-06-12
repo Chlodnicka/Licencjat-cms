@@ -30,13 +30,14 @@
                     @if(!empty($exercise_lectures))
                         {{ Form::label('exercise_lectures',Lang::get('common.select-lectures')) }}
                         {{ Form::select('exercise_lectures[]', ($exercise_lectures), null, ['multiple'=>true,'class' => 'form-control margin']) }}
-
+                        <p>Aby zaznaczyć więcej niż jedną pozycję przytrzymaj CTRL</p>
                     @endif
                 </div>
                 <div class="form-group">
                     @if(!empty($exercise_tags))
                         {{ Form::label('exercise_tags',Lang::get('common.tags-category')) }}
                         {{ Form::select('exercise_tags[]', ($exercise_tags), null, ['multiple'=>true,'class' => 'form-control margin']) }}
+                        <p>Aby zaznaczyć więcej niż jedną pozycję przytrzymaj CTRL</p>
                     @endif
                 </div>
 

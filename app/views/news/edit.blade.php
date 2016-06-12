@@ -12,7 +12,7 @@
       {{ Form::open(array('route' => array('news.update', $news->id), 'files'=>true)) }}
       <div class="form-cluster">
         <div class="form-group">
-          {{ Form::label('title', Lang::get('common.title'))}}
+          {{ Form::label('title', Lang::get('common.title').'*')}}
           {{ Form::text('title', $news->title) }}
           @if ($errors->has('title')) <p class="help-block">{{ $errors->first('title') }}</p> @endif
         </div>
@@ -47,16 +47,28 @@
           {{ Form::text('img-title') }}
         </div>
         <div class="form-group">
-          {{ Form::label('date', Lang::get('common.date'))}}
+          {{ Form::label('date', Lang::get('common.date').'*')}}
           {{ Form::input('date', 'date', $news->date) }}
           @if ($errors->has('date')) <p class="help-block">{{ $errors->first('date') }}</p> @endif
         </div>
         {{ Form::label('courses',Lang::get('common.select-courses')) }}
-        {{ Form::select('courses', $courses, $news->course_id) }}
+        <select name="courses" id="courses">
+          <option value="0" @if($news->courses_id == 0 || $news->courses_id == NULL)
+          selected @endif>Brak kursu</option>
+          <?php foreach($courses as $course) :?>
+          <option value="{{ $course->id }}"
+                  @if($course->id == $news->courses_id)
+                  selected
+                  @endif>
+            {{ $course->name }}
+          </option>
+          <?php endforeach ;?>
+        </select>
         @if ($errors->has('courses')) <p class="help-block">{{ $errors->first('courses') }}</p> @endif
 
         {{ Form::label('tags', Lang::get('common.tags-category')) }}
         {{ Form::select('tags[]', ($tags), $news_tags, ['multiple'=>true,'class' => 'form-control margin']) }}
+        <p>Aby zaznaczyć więcej niż jedną pozycję przytrzymaj CTRL</p>
                 <!--tagi-->
         {{ Form::submit(Lang::get('common.submit')) }}
       </div>

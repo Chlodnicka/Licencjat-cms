@@ -24,6 +24,11 @@
     @if(!empty($news->date))
       <p class="date">{{ $news->date }}</p>
     @endif
+            <div class="tags">
+                @foreach($news->tags as $item)
+                    <p class="tag-item"><a href="{{ URL::route('tag.view', $item->id) }}">{{ $item->name }}</a></p>
+                @endforeach
+            </div>
     @foreach($attachment as $item)
                 {{ HTML::image($item->url, $item->description) }}
     @endforeach
