@@ -104,9 +104,42 @@ class TreeController extends BaseController
                 if ($validator->fails()) {
                     return Redirect::route('tree.' . $tree->name, $tree->id)->withErrors($validator);
                 } else {
-                    $tree->save();
-                    Session::flash('message', Lang::get('common.data-saved'));
-                    return Redirect::route('tree.' . $tree->name, $tree->id);
+                    $lecture_tree = Tree::findOrFail(5);
+                    $exercise_tree = Tree::findOrFail(6);
+                    if ($tree->id == 3) {
+                        $tree->save();
+                        if ($tree->active == 1) {
+                            $lecture_tree->active = 1;
+                            $exercise_tree->active = 1;
+                        } else {
+                            $lecture_tree->active = NULL;
+                            $exercise_tree->active = NULL;
+                        }
+                        $lecture_tree->save();
+                        $exercise_tree->save();
+                        Session::flash('message', Lang::get('common.data-saved'));
+                        return Redirect::route('tree.' . $tree->name, $tree->id);
+                    } elseif ( $tree->id == 5 || $tree->id == 6) {
+                       $tree_course = Tree::findOrFail(3);
+                        if($tree_course->active != NULL) {
+                            $lecture_tree->active = 1;
+                            $exercise_tree->active = 1;
+                            $lecture_tree->save();
+                            $exercise_tree->save();
+                            return Redirect::route('tree.index')->with('message','Sekcja Kursy jest włączona, nie możesz wyłączyć podsekcji Wykładów lub Zadań bez dezaktywacji sekcji Kursów.');
+
+                        } else {
+                            $lecture_tree->active = NULL;
+                            $exercise_tree->active = NULL;
+                            $lecture_tree->save();
+                            $exercise_tree->save();
+                            return Redirect::route('tree.index')->with('message','Sekcja Kursy została wyłączona, nie możesz włączyć podsekcji Wykładów lub Zadań bez aktywacji sekcji Kursów.');
+                        }
+                    }else {
+                        $tree->save();
+                        Session::flash('message', Lang::get('common.data-saved'));
+                        return Redirect::route('tree.' . $tree->name, $tree->id);
+                    }
                 }
 
             } else {

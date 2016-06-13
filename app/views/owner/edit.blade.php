@@ -11,7 +11,7 @@
     {{ Form::open(array('route' => array('owner.update', $owner->id), 'files'=>true)) }}
     <div class="form-cluster">
       <div class="form-group">
-        {{ Form::label('firstname', Lang::get('common.firstname'))}}
+        {{ Form::label('firstname', Lang::get('common.firstname').'*')}}
         {{ Form::text('firstname', $owner->firstname, $attributes = array(
           'data-rule-required' => 'true',
           'data-msg-required' => Lang::get('common.your-name'),
@@ -31,7 +31,7 @@
         <input id="img-isset" type="checkbox" name="img-isset" checked="checked" value="1"><label for="img-isset"><span>{{ trans('common.img-isset') }}</span></label>
       </div>
       <div class="form-group">
-        {{ Form::label('lastname',  Lang::get('common.lastname'))}}
+        {{ Form::label('lastname',  Lang::get('common.lastname').'*')}}
         {{ Form::text('lastname', $owner->lastname, $attributes = array(
           'data-rule-required' => 'true',
           'data-msg-required' => Lang::get('common.your-lastname'),
@@ -39,7 +39,7 @@
         @if ($errors->has('lastname')) <p class="help-block">{{ $errors->first('lastname') }}</p> @endif
       </div>
       <div class="form-group">
-        {{ Form::label('email',  Lang::get('common.email'))}}
+        {{ Form::label('email',  Lang::get('common.email').'*')}}
         {{ Form::text('email', $owner->email, $attributes = array(
           'data-rule-required' => 'true',
           'data-msg-required' => Lang::get('common.your-email'),
@@ -54,12 +54,12 @@
         @if ($errors->has('phone')) <p class="help-block">{{ $errors->first('phone') }}</p> @endif
       </div>
       <div class="form-group">
-        {{ Form::label('university', Lang::get('common.university'))}}
+        {{ Form::label('university', Lang::get('common.university').'*')}}
         {{ Form::text('university', $owner->university) }}
         @if ($errors->has('university')) <p class="help-block">{{ $errors->first('university') }}</p> @endif
       </div>
       <div class="form-group">
-        {{ Form::label('department',  Lang::get('common.department'))}}
+        {{ Form::label('department',  Lang::get('common.department').'*')}}
         {{ Form::text('department', $owner->department) }}
         @if ($errors->has('department')) <p class="help-block">{{ $errors->first('department') }}</p> @endif
       </div>
@@ -69,7 +69,7 @@
         @if ($errors->has('institute')) <p class="help-block">{{ $errors->first('institute') }}</p> @endif
       </div>
       <div class="form-group">
-        {{ Form::label('tutorshipHours',  Lang::get('common.tutorship-hours'))}}<!--trzzeba to jakoś inaczaj ogarnąć -->
+        {{ Form::label('tutorshipHours',  Lang::get('common.tutorship-hours').'*')}}<!--trzzeba to jakoś inaczaj ogarnąć -->
         {{ Form::textarea('tutorshipHours', $owner->tutorshipHours) }}
         @if ($errors->has('tutorshipHours')) <p class="help-block">{{ $errors->first('tutorshipHours') }}</p> @endif
       </div>

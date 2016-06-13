@@ -1,5 +1,5 @@
 @section('content')
 
-    <p>Błąd 500</p>
+    <p class="error">Błąd 500</p>
 
 @stop

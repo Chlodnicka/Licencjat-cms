@@ -20,7 +20,11 @@
       @if(!empty($lecture->lead))
         <p class="lead">{{ $lecture->lead }}</p>
       @endif
-
+          <div class="tags">
+              @foreach($lecture->tags as $item)
+                  <p class="tag-item"><a href="{{ URL::route('tag.view', $item->id) }}">{{ $item->name }}</a></p>
+              @endforeach
+          </div>
       @if(!empty($lecture->content))
           <div class="attachment">
               @foreach($attachment as $item)

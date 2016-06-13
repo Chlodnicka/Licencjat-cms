@@ -24,10 +24,10 @@ return array(
 	"between"              => array(
 		"numeric" => "The :attribute must be between :min and :max.",
 		"file"    => "The :attribute must be between :min and :max kilobytes.",
-		"string"  => "The :attribute must be between :min and :max characters.",
+		"string"  => "Hasło musi mieć pomiędzy :min a :max znaków.",
 		"array"   => "The :attribute must have between :min and :max items.",
 	),
-	"confirmed"            => "The :attribute confirmation does not match.",
+	"confirmed"            => "Podane hasła nie są zgodne",
 	"date"                 => "The :attribute is not a valid date.",
 	"date_format"          => "The :attribute does not match the format :format.",
 	"different"            => "The :attribute and :other must be different.",

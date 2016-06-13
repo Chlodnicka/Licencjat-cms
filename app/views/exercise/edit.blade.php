@@ -12,7 +12,7 @@
         {{ Form::open(array('route' => array('exercise.update', $exercise->id))) }}
         <div class="form-cluster">
           <div class="form-group">
-            {{ Form::label('title', Lang::get('common.title'))}}
+            {{ Form::label('title', Lang::get('common.title').'*')}}
             {{ Form::text('title', $exercise->title) }}
             @if ($errors->has('title')) <p class="help-block">{{ $errors->first('title') }}</p> @endif
           </div>
@@ -31,12 +31,12 @@
             <input id="solution_access" type="checkbox" name="solution_access" @if($exercise->solution_access == 1) checked="checked" @endif value="1"><label for="solution_access"><span>{{ trans('common.solution-access') }}</span></label>
           </div>
           <div class="form-group">
-            {{ Form::label('difficulty',Lang::get('common.difficulty')) }}
+            {{ Form::label('difficulty',Lang::get('common.difficulty').'*') }}
             {{ Form::select('difficulty', $difficulty, $exercise->difficulty) }}
             @if ($errors->has('difficulty')) <p class="help-block">{{ $errors->first('difficulty') }}</p> @endif
           </div>
           <div class="form-group">
-            {{ Form::label('courses',Lang::get('common.select-courses')) }}
+            {{ Form::label('courses',Lang::get('common.select-courses'.'*')) }}
             {{ Form::select('courses', $courses, $exercise->course_id) }}
             @if ($errors->has('courses')) <p class="help-block">{{ $errors->first('courses') }}</p> @endif
           </div>
@@ -60,6 +60,7 @@
           <div class="form-group">
             {{ Form::label('tags',Lang::get('common.tags-category')) }}
             {{ Form::select('tags[]', ($tags), $exercise_tags, ['multiple'=>true,'class' => 'form-control margin']) }}
+            <p>Aby zaznaczyć więcej niż jedną pozycję przytrzymaj CTRL</p>
           </div>
 
           {{ Form::submit(Lang::get('common.submit')) }}

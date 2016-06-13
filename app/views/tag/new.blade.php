@@ -8,7 +8,7 @@
     <a href="{{ URL::route('tag.index') }}" class="btn btn-default"><i class="fa fa-long-arrow-left"></i>{{ trans('common.back') }}</a>
   </div>
   <form action="{{ URL::route('tag.create') }}" method="post">
-    <label for="name">{{ trans('app.tag') }}</label>
+    <label for="name">{{ trans('app.tag').'*' }}</label>
     <input type="text" id="name" name="name" value="{{ Input::old('name') }}">
     @if ($errors->has('name')) <p class="help-block">{{ $errors->first('name') }}</p> @endif
     <input type="submit" class="btn btn-submit" value="{{ trans('common.submit') }}">

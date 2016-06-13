@@ -66,7 +66,7 @@ return array(
     "not-worked" => "Wystąpił błąd. Spróbuj ponownie później lub skontaktuj się z dostarczycielem systemu.",
     "no-such-site" => "Taka strona nie istnieje.",
     "generate" => "Generuj arkusz",
-    "img-isset" => "Nie usuwaj pliku",
+    "img-isset" => "Nie chcę usuwać aktualnie załączonego pliku. (Odznacz pole, jeśli plik ma zostać usunięty)",
     "attached-file" => "Aktualnie załączony plik",
     "img-title" => "Tytuł pliku",
     "easy" => "Łatwe",

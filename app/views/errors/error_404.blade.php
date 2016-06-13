@@ -1,5 +1,5 @@
 @section('content')
 
-    <p>Błąd 404</p>
+    <p class="error">Błąd 404</p>
 
 @stop

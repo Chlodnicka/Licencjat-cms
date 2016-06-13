@@ -12,7 +12,7 @@
     <div class="form-cluster">
 
       <div class="form-group">
-        {{ Form::label('title', Lang::get('common.title'))}}
+        {{ Form::label('title', Lang::get('common.title').'*')}}
         {{ Form::text('title', Input::old('title') ) }}
         @if ($errors->has('title')) <p class="help-block">{{ $errors->first('title') }}</p> @endif
       </div>
@@ -38,16 +38,24 @@
         {{ Form::textarea('content', Input::old('content'), array('id'=>'editor')) }}
       </div>
       <div class="form-group">
-        {{ Form::label('date', Lang::get('common.date'))}}
+        {{ Form::label('date', Lang::get('common.date').'*')}}
         {{ Form::input('date', 'date', Input::old('date')) }}
         @if ($errors->has('date')) <p class="help-block">{{ $errors->first('date') }}</p> @endif
       </div>
       {{ Form::label('courses', Lang::get('common.select-courses')) }}
-      {{ Form::select('courses', $courses) }}
+        <select name="courses" id="courses">
+      <option value="0">Brak wykładu</option>
+      @foreach($courses as $course)
+        <option value="{{ $course->id }}">
+          {{ $course->name }}
+        </option>
+        @endforeach
+        </select>
       @if ($errors->has('courses')) <p class="help-block">{{ $errors->first('courses') }}</p> @endif
               <div class="form-group">
                 {{ Form::label('tags', Lang::get('common.tags-category')) }}
                 {{ Form::select('tags[]', ($tags), null, ['multiple'=>true,'class' => 'form-control margin']) }}
+                <p>Aby zaznaczyć więcej niż jedną pozycję przytrzymaj CTRL</p>
               </div>
 
               <!--tagi-->

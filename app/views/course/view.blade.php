@@ -21,6 +21,11 @@
     @if (!empty($course->lead))
       <p class="lead">{{$course->lead}}</p>
     @endif
+        <div class="tags">
+            @foreach($course->tags as $item)
+                <p class="tag-item"><a href="{{ URL::route('tag.view', $item->id) }}">{{ $item->name }}</a></p>
+            @endforeach
+        </div>
       @if (!empty($course->description))
         <div class="richtext">
           <div>{{ $course->description }}</div>
