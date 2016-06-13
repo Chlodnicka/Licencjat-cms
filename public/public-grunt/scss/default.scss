@@ -18,6 +18,15 @@
         //font-weight: 700;
       }
     }
+  .error {
+    font-size: 150px;
+    font-family: $sans-serif;
+    font-weight: 600;
+    margin: 0;
+    padding: 50px;
+    color: $brandBlue;
+    text-align: center;
+  }
   .btn-primary {
     background-color: $brandBlueMedium !important;
     border: 1px solid $brandBlueMedium;
@@ -1276,4 +1285,13 @@ img {
     width: calc((100% / 4) - 30px);
     display: inline-block;
   }
+}
+
+.error {
+  font-size: 150px;
+  font-family: $sans-serif;
+  font-weight: 600;
+  padding: 100px;
+  color: $brandBlue;
+  text-align: center;
 }

@@ -5,12 +5,13 @@
       <h1 class="page-header title">{{ trans('app.students') }}</h1>
     </div>
   </div>
-  <div class="action-button">
-    <a class="btn btn-primary" href="{{ URL::route('student.edit', $students->id) }}">{{ trans('common.edit') }}</a>
-    <a class="btn btn-primary" href="{{ URL::route('user.change_password') }}">{{ trans('common.change_password') }}</a>
-    <a class="btn btn-danger" href="{{ URL::route('student.delete', $students->id) }}">{{ trans('common.delete') }}</a>
-
-  </div>
+  @if($actions == 1)
+    <div class="action-button">
+      <a class="btn btn-primary" href="{{ URL::route('student.edit', $students->id) }}">{{ trans('common.edit') }}</a>
+      <a class="btn btn-primary" href="{{ URL::route('user.change_password') }}">{{ trans('common.change_password') }}</a>
+      <a class="btn btn-danger" href="{{ URL::route('student.delete', $students->id) }}">{{ trans('common.delete') }}</a>
+    </div>
+  @endif
   @if(!empty($students))
     @if(!empty($students->firstname) && !empty($students->lastname))
       <h2>{{ $students->firstname }} {{ $students->lastname }}</h2>

@@ -3,7 +3,7 @@ $(document).ready( function () {
     dropdownLectures();
     dropdown_admin();
     menu();
-   // on_change();
+    //on_change();
 });
 
 function dropdown() {
@@ -46,5 +46,13 @@ function menu() {
         if(!($(e.target).hasClass('side-item'))){
             $('.main-menu').toggleClass('display');
         }
+    });
+}
+
+function on_change() {
+    $('input:not([type="submit"])').on('change', function(){
+            $(window).bind('beforeunload', function () {
+                return 'Are you sure you want to leave?';
+            });
     });
 }
