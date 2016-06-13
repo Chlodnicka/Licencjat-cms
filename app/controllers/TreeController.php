@@ -124,13 +124,22 @@ class TreeController extends BaseController
                         if($tree_course->active != NULL) {
                             $lecture_tree->active = 1;
                             $exercise_tree->active = 1;
+                            $lecture_tree->lead = Input::get('lead');
+                            $lecture_tree->title = Input::get('name');
+                            $exercise_tree->title = Input::get('name');
+                            $exercise_tree->lead = Input::get('lead');
                             $lecture_tree->save();
                             $exercise_tree->save();
+                            
                             return Redirect::route('tree.index')->with('message','Sekcja Kursy jest włączona, nie możesz wyłączyć podsekcji Wykładów lub Zadań bez dezaktywacji sekcji Kursów.');
 
                         } else {
                             $lecture_tree->active = NULL;
                             $exercise_tree->active = NULL;
+                            $lecture_tree->lead = Input::get('lead');
+                            $lecture_tree->title = Input::get('name');
+                            $exercise_tree->title = Input::get('name');
+                            $exercise_tree->lead = Input::get('lead');
                             $lecture_tree->save();
                             $exercise_tree->save();
                             return Redirect::route('tree.index')->with('message','Sekcja Kursy została wyłączona, nie możesz włączyć podsekcji Wykładów lub Zadań bez aktywacji sekcji Kursów.');
