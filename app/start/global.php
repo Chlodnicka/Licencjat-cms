@@ -49,10 +49,10 @@ Log::useFiles(storage_path().'/logs/laravel.log');
 App::error(function(Exception $exception, $code)
 {
 	Log::error($exception);
-//	$data = array($code, $exception);
-//	return App::make("ErrorController")->callAction("error", $data);
+	$data = array($code, $exception);
+	return App::make("ErrorController")->callAction("error", $data);
 });
-/*
+
 App::error(function(Illuminate\Database\Eloquent\ModelNotFoundException $exception) {
 
 	// Log the error
@@ -65,7 +65,7 @@ App::missing(function($exception)
 {
 	return App::make("ErrorController")->callAction("missing", []);
 });
-*/
+
 /*
 |--------------------------------------------------------------------------
 | Maintenance Mode Handler
