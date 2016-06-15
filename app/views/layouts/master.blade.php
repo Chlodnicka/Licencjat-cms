@@ -56,6 +56,7 @@
           <div>
             <h4><a href="">{{ trans('common.sitemap') }}</a></h4>
             @include('layouts.menu')
+            <a href="{{ URL::route('about.service') }}">O serwisie</a>
           </div>
           <div>
             <h4><a href="">{{ trans('app.courses') }}</a></h4>

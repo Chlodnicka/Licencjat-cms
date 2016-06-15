@@ -318,6 +318,8 @@ Route::any('/imglist', ['as'=>'imglist', 'middleware'=>'auth', 'uses'=>'FileBrow
 
 Route::any('/upload', ['middleware' => 'auth', 'uses' =>'FileBrowserontroller@index']);
 
+Route::get('/o-serwisie', ['as' => 'about.service', 'uses' => 'HomeController@aboutService']);
+
 /**
  * Dynamically loading menu settings
  */

@@ -121,4 +121,8 @@ class HomeController extends BaseController {
 		}
 	}
 
+	public function aboutService() {
+		$this->layout->content = View::make('about');
+	}
+
 }
