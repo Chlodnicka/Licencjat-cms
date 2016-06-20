@@ -12,19 +12,31 @@
         font-family: 'DejaVu Sans';
         src: {{ URL::to('/') . 'assets/fonts/DejaVuSans.tff' }};
     }
-    body { font-family: 'DejaVu Sans'; }
+    body { font-family: 'DejaVu Sans', serif; }
+    span, p {
+        display: inline;
+    }
+    .item-lead {
+        display: block;
+    }
+    img {
+        max-width:80%;
+        height: auto;
+        display: block;
+        float: none;
+    }
 </style>
     <div>
-        {{ $exercises->desc }}
+        {{ $desc }}
     </div>
 
     <div class="exercises">
+        <?php $i = 1;?>
         @foreach( $exercises as $exercise)
         <div class="list-item">
-            <h2 class="title">{{ $exercise->title }}</h2>
-            <p class="item-lead">{{ $exercise->content }}</p>
+            <p class="item-lead"><span><?php echo $i;?>. </span><span>{{ $exercise->content }}</span></p>
         </div>
-        <div class="clearfix"></div>
+            <?php $i++;?>
         @endforeach
     </div>
 </body>

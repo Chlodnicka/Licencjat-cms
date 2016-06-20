@@ -687,10 +687,10 @@ class ExerciseController extends BaseController
                         'actions' => $actions,
                     ));
                 } else {
-                    return Redirect::route('exercise.index');
+                    return Redirect::route('exercise.index')->with('message','Zadanie niedostępne');
                 }
             } else {
-                return Redirect::route('exercise.index');
+                return Redirect::route('exercise.index')->with('message','Zadanie niedostępne');
             }
 
         } else {

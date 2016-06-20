@@ -108,7 +108,7 @@
         "exercise-new" => "Utwórz nowe zadanie",
         "exercise-content" => "Treść zadania",
         "exercise-solution" => "Rozwiązanie zadania",
-        "no-solution" => "Brak rozwiązania",
+        "no-solution" => "Rozwiązanie niedostępne",
         "exercise-delete" => "Usuń zadanie",
         "exercise-delete-message" => "Czy na pewno chcesz usunąć to zadanie? Nie będziesz miał możliwości przywrócenia go.",
         "no-such-exercise" => "Dane zadanie nie istnieje",

@@ -12,22 +12,31 @@
         src: {{ URL::to('/') . 'assets/fonts/DejaVuSans.tff' }};
     }
     body { font-family: DejaVu Sans; }
+    span, span > p {
+        display: inline;
+    }
+    .item-lead {
+        display: block;
+    }
+    img {
+        max-width:100%;
+        height: auto;
+    }
 </style>
     <div>
         {{ $desc }}
     </div>
     <div class="exercises">
+        <?php $i = 1;?>
         @foreach( $exercises as $exercise)
         <div class="list-item">
-            <h2 class="title">{{ $exercise->title }}</h2>
-            <p>{{ trans('common.content') }}</p>
-            <p class="item-lead">{{ $exercise->content }}</p>
+            <p class="item-lead"><span><?php echo $i;?>. </span><span>{{ $exercise->content }}</span></p>
             @if($exercise->solution != NULL)
                 <p>{{ trans('common.solution') }}</p>
-                <p class="item-lead">{{ $exercise->solution }}</p>
+                <p class="item-lead"><span>{{ $exercise->solution }}</span></p>
             @endif
         </div>
-        <div class="clearfix"></div>
+            <?php $i++;?>
         @endforeach
     </div>
 </body>
