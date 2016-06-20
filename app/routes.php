@@ -313,10 +313,10 @@ Route::post('/change_password', ['as' => 'user.do_change_password', 'uses' => 'U
 
 //file browser list
 
-Route::any('/imglist', ['as'=>'imglist', 'middleware'=>'auth', 'uses'=>'FileBrowserontroller@imageList']);
+Route::any('/imglist', ['as'=>'imglist', 'middleware'=>'auth', 'uses'=>'FilesBrowserController@imageList']);
 //Image upload
 
-Route::any('/upload', ['middleware' => 'auth', 'uses' =>'FileBrowserontroller@index']);
+Route::any('/upload', ['middleware' => 'auth', 'uses' =>'FilesBrowserController@index']);
 
 Route::get('/o-serwisie', ['as' => 'about.service', 'uses' => 'HomeController@aboutService']);
 
