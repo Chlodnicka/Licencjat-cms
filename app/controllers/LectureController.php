@@ -202,20 +202,21 @@ class LectureController extends BaseController
                     } else {
                         $image = Input::file('image');
                         $img_set = Input::get('img-isset');
-                        if($image !== NULL && $img_set == 1) {
+                        $img_desc = Input::get('img-description');
+                        $img_title = Input::get('img-title');
+                        if($image != NULL && $img_set == 1) {
                             $destinationPath = 'uploads/';
-                            $extension = $image->getClientOriginalName();
-                            $comma = strpos($extension, '.');
-                            $extension = substr($extension, $comma);
-                            $filename = Str::random(60) . $extension;
+                            $name = $image->getClientOriginalName();
+                            $comma = strpos($name, '.');
+                            $extension = substr($name, $comma);
+                            $filename =  Str::random(10) . $name;
                             $url = $destinationPath . $filename;
 
                             $file = new Attachment();
                             $file->url = $url;
                             $file->name = $filename;
-                            $file->description = Input::get('img-description');
-                            $file->title = Input::get('img-title');
-
+                            $file->description = $img_desc;
+                            $file->title = $img_title;
 
                             Input::file('image')->move($destinationPath, $filename);
 

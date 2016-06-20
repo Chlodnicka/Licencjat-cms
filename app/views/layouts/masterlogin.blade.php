@@ -28,6 +28,7 @@
             <!-- /.navbar-header -->
 
             <ul class="nav navbar-top-links navbar-right">
+                @if($students->active == 1)
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                         <i class="fa fa-users fa-fw"></i> <i class="fa fa-caret-down"></i>
@@ -55,6 +56,7 @@
                     </ul>
                     <!-- /.dropdown-messages -->
                 </li>
+                @endif
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                         <i class="fa fa-gear fa-fw"></i>  <i class="fa fa-caret-down"></i>

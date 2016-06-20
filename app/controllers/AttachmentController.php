@@ -26,9 +26,19 @@ class AttachmentController extends BaseController
             $user = User::findOrFail($userId);
             $role = $user->role_id;
             if($role == 1) {
-                $attachments = Attachment::all();
-                $this->layout->content = View::make('attachment.index', array(
-                    'attachments' => $attachments
+               // $attachments = Attachment::all();
+                //$this->layout->content = View::make('attachment.index', array(
+                  //  'attachments' => $attachments
+                //));
+                $images = [];
+                $files = \File::files(public_path() . '/uploads');
+                foreach ($files as $file) {
+                    $images[] = pathinfo($file);
+                }
+                $attachment = Attachment::all();
+                $this->layout->content = View::make('files.attachments', array(
+                    'files' => $images,
+                    'attachments' => $attachment,
                 ));
             } else {
                 return Redirect::route('homepage');
