@@ -14,7 +14,12 @@
                 <a class="btn btn-primary" href="{{ URL::route('course.new') }}">{{ trans('common.new') }}</a>
                 @if (count($exercises) != 0)
                     <a class="btn btn-primary" href="{{ URL::route('exercise.generate', $course->id) }}">{{ trans('common.generate') }}</a>
+
                 @endif
+
+                    <a class="btn btn-primary" href="{{ URL::route('exercise.new') }}"> Nowe zadanie </a>
+                    <a class="btn btn-primary" href="{{ URL::route('lecture.new') }}">Nowy wykład</a>
+
                 <a class="btn btn-danger" href="{{ URL::route('course.delete', $course->id) }}">{{ trans('common.delete') }}</a>
             </div>
         @endif

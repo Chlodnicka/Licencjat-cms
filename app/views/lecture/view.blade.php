@@ -42,7 +42,7 @@
         @if($actions != 1)
           <a href="{{ URL::route('lecture.indexCourse', $lecture->course->id) }}" class="btn btn-primary "><i class="fa fa-long-arrow-left back"></i>{{ trans('common.back') }}</a>
         @endif
-          <a href="{{URL::route('exercise.index')}}" class="btn btn-primary">{{ trans('app.go-to-exercises') }}<i class="fa fa-long-arrow-right"></i></a>
+          <a href="{{URL::route('exercise.indexCourse', $lecture->course->id)}}" class="btn btn-primary">{{ trans('app.go-to-exercises') }}<i class="fa fa-long-arrow-right"></i></a>
     </div>
   @else
     <p class="no-result">{{ trans('no-such-lecture') }}</p>

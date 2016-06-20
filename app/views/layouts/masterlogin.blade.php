@@ -131,7 +131,14 @@
             filebrowserImageUploadUrl : "{{route('files.upload',['_token' => csrf_token() ])}}",
             filebrowserFlashUploadUrl : "{{route('files.upload',['_token' => csrf_token() ])}}",
         });
-        CKEDITOR.replace('solution');
+        CKEDITOR.replace('solution', {
+            filebrowserBrowseUrl : "{{route('files.index',['_token' => csrf_token() ])}}",
+            filebrowserImageBrowseUrl : "{{route('files.index',['_token' => csrf_token() ])}}",
+            filebrowserFlashBrowseUrl : "{{route('files.index',['_token' => csrf_token() ])}}",
+            filebrowserUploadUrl : "{{route('files.upload',['_token' => csrf_token() ])}}",
+            filebrowserImageUploadUrl : "{{route('files.upload',['_token' => csrf_token() ])}}",
+            filebrowserFlashUploadUrl : "{{route('files.upload',['_token' => csrf_token() ])}}",
+        });
         CKEDITOR.add;
     </script>
 </body>
