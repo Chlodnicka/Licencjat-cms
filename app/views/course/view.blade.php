@@ -51,10 +51,24 @@
         <div class="exercises">
           <h2>{{ trans('app.exercises') }}</h2><!--dopisać index w zaleźności od wykładu, przypiwania itd!-- BW!-->
           <ul>
-              @foreach($exercises as $exercise)
-                  <a href="{{ URL::route('exercise.view', $exercise->id) }}"><li>{{ $exercise->title }}</li></a>
-              @endforeach
 
+              @if(count($exercises_lectures) != 0)
+                      @foreach($exercises_lectures as $lectures_item)
+                        <a href="{{ URL::route('exercise.indexLecture', $lectures_item->id) }}"><li>{{ $lectures_item->title }}</li></a>
+                    @endforeach
+                  @endif
+                  @if(count($exercises_tags) != 0)
+                      @foreach($exercises_tags as $tags_item)
+                          <a href="{{ URL::route('exercise.indexTags', $tags_item->id) }}"><li>{{ $tags_item->name }}</li></a>
+                      @endforeach
+                  @endif
+              @if(count($exercises_lectures) == 0 && count($exercises_tags) == 0)
+                  <?php $i = 1;?>
+                  @foreach($exercises as $exercise)
+                      <a href="{{ URL::route('exercise.view', $exercise->id) }}"><li>Zadanie {{ $i }}</li></a>
+                      <?php $i++;?>
+                  @endforeach
+              @endif
           </ul>
           <a href="{{ URL::route('exercise.indexCourse', $course->id) }}" class="btn btn-default">{{ trans('common.see-more') }} <i class="fa fa-long-arrow-right"></i></a>
         </div>

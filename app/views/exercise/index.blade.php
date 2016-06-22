@@ -36,14 +36,16 @@
     </div>
 
     @if(!empty($exercises))
+      <?php $i = 1;?>
       @foreach( $exercises as $exercise)
         <div class="list-item">
           @if(!empty($exercise->title))
-            <h2 class="title">{{ $exercise->title }}</h2>
+            <h2 class="title">Zadanie {{ $i }}</h2>
           @endif
           <a href="{{ URL::route('exercise.view', $exercise->id) }}" class="btn btn-primary more">{{ trans('common.see-more') }} <i class="fa fa-long-arrow-right"></i></a>
         </div>
         <div class="clearfix"></div>
+        <?php $i++?>
       @endforeach
       <?php echo $exercises->links(); ?>
     @endif

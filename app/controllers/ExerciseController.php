@@ -415,6 +415,45 @@ class ExerciseController extends BaseController
     }
 
     /**
+     * Index exercise by lecture id action.
+     *
+     * @param  $id Id of lecture
+     * @return \Illuminate\View\View
+     */
+    public function indexExerciseByTag($id)
+    {
+        $tree = Tree::findOrFail(3);
+        $tree_exercise = Tree::findOrFail(6);
+        if ( $tree->active == 1 && $tree_exercise->active == 1) {
+            if (Auth::check()) {
+                $userId = Auth::id();
+                $user = User::findOrFail($userId);
+                $role = $user->role_id;
+                if($role == 1) {
+                    $actions = 1;
+                } else {
+                    $actions = 0;
+                }
+            } else {
+                $actions = 0;
+            }
+            $exercise_lead = Tree::findOrFail(6);
+
+            $exercises = DB::table('exercises')->join('exercise_tag', 'exercises.id', '=', 'exercise_tag.exercise_id')->where('tag_id', '=', $id)->paginate(6);
+            $exercise_difficulty = new Exercise();
+            $difficulty = $exercise_difficulty->difficulty();
+            $this->layout->content = View::make('exercise.index', array(
+                'exercises' => $exercises,
+                'difficulty' => $difficulty,
+                'exercise_lead' => $exercise_lead,
+                'actions' => $actions,
+            ));
+        } else {
+            return Redirect::route('homepage');
+        }
+    }
+
+    /**
      * Index exercise by difficulty id action.
      *
      * @param  $id Id of difficulty level

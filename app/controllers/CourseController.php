@@ -260,12 +260,16 @@ class CourseController extends BaseController
             $lectures = Course::find($id)->lectures->take(5);
             $tags = Course::find($id)->tags;
             $exercises = Course::find($id)->exercises->take(5);
+            $exercise_tags = DB::table('exercise_tag')->select('tags.name', 'tags.id')->join('exercises', 'exercises.id', '=', 'exercise_tag.exercise_id')->join('tags', 'tags.id', '=', 'exercise_tag.tag_id')->where('course_id', '=', $id)->distinct()->get();
+            $exercise_lectures = DB::table('exercises')->select('lectures.title', 'lectures.id')->join('lectures', 'exercises.lecture_id', '=', 'lectures.id')->where('exercises.course_id', '=', $id)->distinct()->get();
             $this->layout->content = View::make('course.view', array(
                 'course' => $course,
                 'lectures' => $lectures,
                 'exercises' => $exercises,
                 'tags' => $tags,
                 'actions' => $actions,
+                'exercises_lectures' => $exercise_lectures,
+                'exercises_tags' => $exercise_tags,
             ));
         } else {
             return Redirect::route('homepage');

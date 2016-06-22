@@ -54,12 +54,12 @@
     <footer>
         <div class="sitemap">
           <div>
-            <h4><a href="">{{ trans('common.sitemap') }}</a></h4>
+            <h4>{{ trans('common.sitemap') }}</h4>
             @include('layouts.menu')
             <a href="{{ URL::route('about.service') }}">O serwisie</a>
           </div>
           <div>
-            <h4><a href="">{{ trans('app.courses') }}</a></h4>
+            <h4><a href="{{ URL::route('course.index') }}">{{ trans('app.courses') }}</a></h4>
             @include('layouts.courses')
           </div>
         </div>
