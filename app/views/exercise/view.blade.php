@@ -20,15 +20,7 @@
     @endif
     <div class="properties">
 
-      <p>@if(!empty($exercise->difficulty))
-             @if($exercise->difficulty == 1)
-                {{ trans('common.easy') }}
-              @elseif($exercise->difficulty == 2)
-                 {{ trans('common.medium') }}
-              @elseif($exercise->difficulty == 3)
-                  {{ trans('common.hard') }}
-              @endif
-          @endif @if(!empty($exercise->lecture->title))| {{ $exercise->lecture->title }}@endif</p>
+      <p>@if(!empty($exercise->lecture->title)) {{ $exercise->lecture->title }} @endif</p>
       <div class="tags">
         @foreach($exercise->tags as $item)
           <p class="tag-item"><a href="{{ URL::route('tag.view', $item->id) }}">{{ $item->name }}</a></p>
@@ -58,7 +50,7 @@
                     <div class="drop">{{ $exercise->solution }}</div>
                   </div>
                 @else
-                  <p class="no-solution">{{ trans('app.no-solution') }}</p>
+                  <p class="no-solution"><b >{{ trans('app.no-solution') }}</b></p>
                 @endif
             @endif
     @endif
