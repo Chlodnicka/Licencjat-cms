@@ -2,19 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3fea5540-92ca-4549-898f-5a825a40f25c" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/ExerciseController.php" afterPath="$PROJECT_DIR$/app/controllers/ExerciseController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/LectureController.php" afterPath="$PROJECT_DIR$/app/controllers/LectureController.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/course/index.blade.php" afterPath="$PROJECT_DIR$/app/views/course/index.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/course/view.blade.php" afterPath="$PROJECT_DIR$/app/views/course/view.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/exercise/index.blade.php" afterPath="$PROJECT_DIR$/app/views/exercise/index.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/exercise/view.blade.php" afterPath="$PROJECT_DIR$/app/views/exercise/view.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/layouts/master.blade.php" afterPath="$PROJECT_DIR$/app/views/layouts/master.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/lecture/index.blade.php" afterPath="$PROJECT_DIR$/app/views/lecture/index.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/lecture/view.blade.php" afterPath="$PROJECT_DIR$/app/views/lecture/view.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/assets/css/default.min.css" afterPath="$PROJECT_DIR$/public/assets/css/default.min.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/assets/css/default.min.css.map" afterPath="$PROJECT_DIR$/public/assets/css/default.min.css.map" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/public-grunt/scss/default.scss" afterPath="$PROJECT_DIR$/public/public-grunt/scss/default.scss" />
     </list>
     <ignored path="system.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -56,21 +45,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.blade.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="index.blade.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/views/course/index.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="34">
-              <caret line="2" column="1" selection-start-line="2" selection-start-column="1" selection-end-line="2" selection-end-column="1" />
+            <state relative-caret-position="119">
+              <caret line="7" column="10" selection-start-line="7" selection-start-column="10" selection-end-line="7" selection-end-column="10" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ExerciseController.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="ExerciseController.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/controllers/ExerciseController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="512">
-              <caret line="501" column="34" selection-start-line="501" selection-start-column="34" selection-end-line="501" selection-end-column="34" />
+            <state relative-caret-position="1117">
+              <caret line="214" column="35" selection-start-line="214" selection-start-column="35" selection-end-line="214" selection-end-column="35" />
               <folding />
             </state>
           </provider>
@@ -192,9 +181,9 @@
         <option value="$PROJECT_DIR$/app/views/lecture/index.blade.php" />
         <option value="$PROJECT_DIR$/app/views/exercise/view.blade.php" />
         <option value="$PROJECT_DIR$/app/views/exercise/index.blade.php" />
-        <option value="$PROJECT_DIR$/app/controllers/ExerciseController.php" />
         <option value="$PROJECT_DIR$/public/public-grunt/scss/default.scss" />
         <option value="$PROJECT_DIR$/app/views/course/index.blade.php" />
+        <option value="$PROJECT_DIR$/app/controllers/ExerciseController.php" />
       </list>
     </option>
   </component>
@@ -509,12 +498,12 @@
       <workItem from="1466235279442" duration="11284000" />
       <workItem from="1466428386783" duration="3693000" />
       <workItem from="1466442704452" duration="4654000" />
-      <workItem from="1467117951364" duration="3160000" />
+      <workItem from="1467117951364" duration="3823000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="451207000" />
+    <option name="totallyTimeSpent" value="451870000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -922,14 +911,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/ExerciseController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="512">
-          <caret line="501" column="34" selection-start-line="501" selection-start-column="34" selection-end-line="501" selection-end-column="34" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/public-grunt/scss/default.scss">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="529">
@@ -940,8 +921,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/views/course/index.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="1" selection-start-line="2" selection-start-column="1" selection-end-line="2" selection-end-column="1" />
+        <state relative-caret-position="119">
+          <caret line="7" column="10" selection-start-line="7" selection-start-column="10" selection-end-line="7" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/ExerciseController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1117">
+          <caret line="214" column="35" selection-start-line="214" selection-start-column="35" selection-end-line="214" selection-end-column="35" />
           <folding />
         </state>
       </provider>

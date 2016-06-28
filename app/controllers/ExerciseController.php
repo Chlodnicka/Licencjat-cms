@@ -205,12 +205,14 @@ class ExerciseController extends BaseController
 
             $exercise_difficulty = new Exercise();
             $difficulty = $exercise_difficulty->difficulty();
+            $bread = 0;
 
             $this->layout->content = View::make('exercise.index', array(
                 'exercises' => $exercises,
                 'difficulty' => $difficulty,
                 'exercise_lead' => $exercise_lead,
                 'actions' => $actions,
+                'search' => $bread,
             ));
         } else {
             return Redirect::route('homepage');
