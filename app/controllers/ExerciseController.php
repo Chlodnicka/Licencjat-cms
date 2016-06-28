@@ -212,7 +212,7 @@ class ExerciseController extends BaseController
                 'difficulty' => $difficulty,
                 'exercise_lead' => $exercise_lead,
                 'actions' => $actions,
-                'search' => $bread,
+                'bread' => $bread,
             ));
         } else {
             return Redirect::route('homepage');
