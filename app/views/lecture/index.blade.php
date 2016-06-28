@@ -1,6 +1,19 @@
 @section('content')
 
 <div class="list">
+    <div class="breadcrumbs">
+        @if($bread == 1)
+            <span><a href="{{ URL::route('course.index') }}">Kursy</a></span>
+            <span><i class="fa fa-angle-right"></i> </span>
+            <span><a href="{{ URL::route('course.view', $course->id) }}">Kurs {{ $course->name }}</a></span>
+            <span><i class="fa fa-angle-right"></i> </span>
+            <span><a href="{{ URL::route('lecture.indexCourse', $course->id) }}">Wykłady kursu {{ $course->name }}</a></span>
+        @elseif($bread == 0)
+            <span><a href="{{ URL::route('course.index') }}">Kursy</a></span>
+            <span><i class="fa fa-angle-right"></i> </span>
+            <span><a href="{{ URL::route('lecture.index') }}">Lista wszystkich wykładów</a></span>
+        @endif
+    </div>
     <div class="row">
         <div class="col-lg-12">
             <h1 class="page-header title">{{ trans('app.list-of-lectures') }}</h1>

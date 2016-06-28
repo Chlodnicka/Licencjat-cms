@@ -464,22 +464,24 @@
         font-size: 36px;
       }
       h2 {
-        font-size: 32px;
+        font-size: 29px;
       }
       h3 {
-        font-size: 28px;
-      }
-      h4 {
         font-size: 24px;
       }
-      h5 {
+      h4 {
         font-size: 20px;
+      }
+      h5 {
+        font-size: 16px;
+        font-weight: bold;
       }
       h6 {
         font-size: 16px;
+
       }
       p {
-        font-size: 14px;
+        font-size: 16px;
         text-align: left;
       }
       .news {
@@ -1319,4 +1321,8 @@ img {
 
 .no-solution {
   margin-top: 40px;
+}
+
+.breadcrumbs {
+  text-align: left;
 }

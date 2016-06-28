@@ -1,5 +1,14 @@
 @section('content')
   <div class="content exercise single-page">
+      <div class="breadcrumbs">
+          <span><a href="{{ URL::route('course.index') }}">Kursy</a></span>
+          <span><i class="fa fa-angle-right"></i> </span>
+          <span><a href="{{ URL::route('course.view', $exercise->course->id) }}">Kurs {{ $exercise->course->name }}</a></span>
+          <span><i class="fa fa-angle-right"></i> </span>
+          <span><a href="{{ URL::route('exercise.indexCourse', $exercise->course->id) }}">Wykłady kursu {{ $exercise->course->name }}</a></span>
+          <span><i class="fa fa-angle-right"></i> </span>
+          <span><a href="{{ URL::route('exercise.view', $exercise->id) }}">Kurs {{ $exercise->title }}</a></span>
+      </div>
     @if(!empty($exercise->title))
       <div class="row">
         <div class="col-lg-12">

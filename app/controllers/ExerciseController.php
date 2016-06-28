@@ -62,11 +62,13 @@ class ExerciseController extends BaseController
             $exercise_lead = Tree::findOrFail(6);
             $exercise_difficulty = new Exercise();
             $difficulty = $exercise_difficulty->difficulty();
+            $bread = 0;
             $this->layout->content = View::make('exercise.index', array(
                 'exercises' => $exercises,
                 'difficulty' => $difficulty,
                 'exercise_lead' => $exercise_lead,
                 'actions' => $actions,
+                'bread' => $bread,
             ));
         } else {
             return Redirect::route('homepage');
@@ -103,11 +105,15 @@ class ExerciseController extends BaseController
             $exercise_lead = Tree::findOrFail(6);
             $exercise_difficulty = new Exercise();
             $difficulty = $exercise_difficulty->difficulty();
+            $course = Course::findOrFail($id);
+            $bread = 1;
             $this->layout->content = View::make('exercise.index', array(
                 'exercises' => $exercises,
                 'difficulty' => $difficulty,
                 'exercise_lead' => $exercise_lead,
-                'actions' => $actions
+                'actions' => $actions,
+                'bread' => $bread,
+                'course' => $course,
             ));
         } else {
             return Redirect::route('homepage');
@@ -401,13 +407,18 @@ class ExerciseController extends BaseController
             $exercise_lead = Tree::findOrFail(6);
 
             $exercises = DB::table('exercises')->where('lecture_id', '=', $id)->paginate(6);
+            $lecture = Lecture::findOrFail($id);
             $exercise_difficulty = new Exercise();
             $difficulty = $exercise_difficulty->difficulty();
+            $bread = 1;
+            $course = Course::findOrFail($lecture->course_id);
             $this->layout->content = View::make('exercise.index', array(
                 'exercises' => $exercises,
                 'difficulty' => $difficulty,
                 'exercise_lead' => $exercise_lead,
                 'actions' => $actions,
+                'course' => $course,
+                'bread' => $bread,
             ));
         } else {
             return Redirect::route('homepage');
@@ -442,11 +453,13 @@ class ExerciseController extends BaseController
             $exercises = DB::table('exercises')->join('exercise_tag', 'exercises.id', '=', 'exercise_tag.exercise_id')->where('tag_id', '=', $id)->paginate(6);
             $exercise_difficulty = new Exercise();
             $difficulty = $exercise_difficulty->difficulty();
+            $bread = 0;
             $this->layout->content = View::make('exercise.index', array(
                 'exercises' => $exercises,
                 'difficulty' => $difficulty,
                 'exercise_lead' => $exercise_lead,
                 'actions' => $actions,
+                'bread' => $bread,
             ));
         } else {
             return Redirect::route('homepage');
@@ -480,11 +493,13 @@ class ExerciseController extends BaseController
             $exercises = DB::table('exercises')->where('difficulty', '=', $id)->where('course_id', '=', $course)->paginate(6);
             $exercise_difficulty = new Exercise();
             $difficulty = $exercise_difficulty->difficulty();
+            $bread = 0;
             $this->layout->content = View::make('exercise.index', array(
                 'exercises' => $exercises,
                 'difficulty' => $difficulty,
                 'exercise_lead' => $exercise_lead,
                 'actions' => $actions,
+                'bread' => $bread,
             ));
         } else {
             return Redirect::route('homepage');

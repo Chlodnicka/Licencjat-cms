@@ -4,7 +4,7 @@
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	 <meta http-equiv="content-type" content="text/html; charset=utf-8">
-	 <title>@yield('title') {{ trans('common.homepage') }}</title>
+	 <title>@yield('title') Strona akademicka</title>
    <link href="{{ URL::asset('/assets/css/default.min.css') }}" rel="stylesheet">
   </head>
   <body  class="default">
@@ -54,7 +54,7 @@
     <footer>
         <div class="sitemap">
           <div>
-            <h4>{{ trans('common.sitemap') }}</h4>
+            <h4>Serwis</h4>
             @include('layouts.menu')
             <a href="{{ URL::route('about.service') }}">O serwisie</a>
           </div>
@@ -64,8 +64,7 @@
           </div>
         </div>
         <div class="copyrights">
-          <p class="content">{{ trans('common.copy') }} {{ $owner->firstname }} {{ $owner->lastname }}</p>
-          <p class="powered">{{ trans('common.powered') }} </p>
+          <p class="content">{{ trans('common.copy') }} Maja Chłodnicka</p>
         </div>
     </footer>
     <script src="{{ URL::asset('/assets/js/jquery-2.2.3.min.js') }}"></script>
