@@ -55,10 +55,12 @@ class LectureController extends BaseController
             }
             $lectures = Lecture::paginate(6);
             $lecture_lead = Tree::findOrFail(5);
+            $bread = 0;
             $this->layout->content = View::make('lecture.index', array(
                 'lectures' => $lectures,
                 'lecture_lead' => $lecture_lead,
                 'actions' => $actions,
+                'bread' => $bread,
             ));
         } else {
             return Redirect::route('homepage');
@@ -89,11 +91,15 @@ class LectureController extends BaseController
                 $actions = 0;
             }
             $lectures = DB::table('lectures')->where('course_id', '=', $id)->paginate(6);
+            $course = Course::findOrFail($id);
             $lecture_lead = Tree::findOrFail(5);
+            $bread = 1;
             $this->layout->content = View::make('lecture.index', array(
                 'lectures' => $lectures,
                 'lecture_lead' => $lecture_lead,
                 'actions' => $actions,
+                'course' => $course,
+                'bread' => $bread,
             ));
         } else {
             return Redirect::route('homepage');

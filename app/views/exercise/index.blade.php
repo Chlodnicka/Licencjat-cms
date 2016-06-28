@@ -1,5 +1,16 @@
 @section('content')
   <div class="exercises index single-page">
+    @if($bread == 1)
+      <span><a href="{{ URL::route('course.index') }}">Kursy</a></span>
+      <span><i class="fa fa-angle-right"></i> </span>
+      <span><a href="{{ URL::route('course.view', $course->id) }}">Kurs {{ $course->name }}</a></span>
+      <span><i class="fa fa-angle-right"></i> </span>
+      <span><a href="{{ URL::route('exercise.indexCourse', $course->id) }}">Zadania kursu {{ $course->name }}</a></span>
+    @elseif($bread == 0)
+      <span><a href="{{ URL::route('course.index') }}">Kursy</a></span>
+      <span><i class="fa fa-angle-right"></i> </span>
+      <span><a href="{{ URL::route('exercise.index') }}">Lista wszystkich zadań</a></span>
+    @endif
     <div class="row">
       <div class="col-lg-12">
         <h1 class="page-header title">{{ trans('app.exercises-list') }}</h1>

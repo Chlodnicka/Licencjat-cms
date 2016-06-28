@@ -2,6 +2,15 @@
   @if(!empty($lecture))
 
     <div class="lecture single-page">
+        <div class="breadcrumbs">
+            <span><a href="{{ URL::route('course.index') }}">Kursy</a></span>
+            <span><i class="fa fa-angle-right"></i> </span>
+            <span><a href="{{ URL::route('course.view', $lecture->course->id) }}">Kurs {{ $lecture->course->name }}</a></span>
+            <span><i class="fa fa-angle-right"></i> </span>
+            <span><a href="{{ URL::route('lecture.indexCourse', $lecture->course->id) }}">Wykłady kursu {{ $lecture->course->name }}</a></span>
+            <span><i class="fa fa-angle-right"></i> </span>
+            <span><a href="{{ URL::route('lecture.view', $lecture->id) }}">Kurs {{ $lecture->title }}</a></span>
+        </div>
       @if(!empty($lecture->title))
         <div class="row">
           <div class="col-lg-12">

@@ -1,5 +1,10 @@
 @section('content')
   <div class="content course single-page">
+      <div class="breadcrumbs">
+          <span><a href="{{ URL::route('course.index') }}">Kursy</a></span>
+          <span><i class="fa fa-angle-right"></i> </span>
+          <span><a href="{{ URL::route('course.view', $course->id) }}">Kurs {{ $course->name }}</a></span>
+      </div>
     @if (!empty($course->name))
           <div class="row">
               <div class="col-lg-12">
